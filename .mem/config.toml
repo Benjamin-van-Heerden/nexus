@@ -1,0 +1,34 @@
+[project]
+# Project name displayed in onboard context
+name = "nexus"
+
+# Project description to help AI agents understand the codebase
+description = """
+Add your project description here.
+"""
+
+# Template slugs to load from ~/.config/mem/templates/
+generic_templates = ["python", "general"]
+
+# Files to include in onboard output
+[[files]]
+path = "README.md"
+description = "Project overview and setup instructions"
+
+# Directories whose tree structure is included in onboard output
+# [[tree_dirs]]
+# path = "src"
+# description = "Source code"
+
+[worktree]
+# Paths to symlink into worktrees instead of copying (e.g. large data dirs) - will be automatically added to .gitignore - necessary for symlinks to work with version control
+symlink_paths = [".mem/docs/data", ".claude"]
+
+[branches]
+# Name of the production/main branch
+main = "main"
+# Name of the staging/test branch
+test = "test"
+# Branches that should not auto-switch to dev on onboard. Maps child branch to parent branch for rebasing (e.g. company_xyz = "main")
+# [branches.noswitch_branches]
+# company_xyz = "main"
