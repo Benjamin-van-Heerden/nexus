@@ -1,0 +1,13 @@
+[learn]
+window_size = 8  # weeks to look back for topic selection
+
+[learn.weights]
+c = 1
+elixir = 2
+python = 4
+"js-ts" = 1
+rust = 4
+
+[self-improvement.goals]
+exercise_sessions_per_week = 4
+reading_sessions_per_week = 5

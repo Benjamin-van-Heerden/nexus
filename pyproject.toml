@@ -1,9 +1,10 @@
 [project]
-name = "learn-balance"
+name = "nexus"
 version = "0.1.0"
-description = "Add your description here"
+description = "Personal learning and self-improvement CLI"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
     "typer>=0.24.1",
+    "tomli-w>=1.2.0",
 ]

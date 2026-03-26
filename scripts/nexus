@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+# Get the nexus project root (one level up from scripts/)
+PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+# Avoid uv warning when running from another project's venv
+unset VIRTUAL_ENV
+
+# Run main.py with uv using the project directory for dependencies
+uv run --project "$PROJECT_DIR" python "$PROJECT_DIR/main.py" "$@"

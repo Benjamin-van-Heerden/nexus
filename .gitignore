@@ -1,1 +1,4 @@
 .venv/
+
+# mem docs data (vector DB and hashes)
+.mem/docs/data/

@@ -1,5 +1,0 @@
-#!/user/bin/bash
-
-cd ~/Documents/nexus/learn/python/learn-function
-
-uv run main.py $1
