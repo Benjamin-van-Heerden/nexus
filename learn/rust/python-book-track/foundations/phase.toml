@@ -1,0 +1,32 @@
+name = "Foundations"
+current_goal = "Introduction and Motivation"
+
+[[goals]]
+name = "Introduction and Motivation"
+status = "todo"
+reference = "../../reference/python-book/src/ch01-introduction-and-motivation.md"
+
+[[goals]]
+name = "Getting Started"
+status = "todo"
+reference = "../../reference/python-book/src/ch02-getting-started.md"
+
+[[goals]]
+name = "Built-in Types and Variables"
+status = "todo"
+reference = "../../reference/python-book/src/ch03-built-in-types-and-variables.md"
+
+[[goals]]
+name = "Control Flow"
+status = "todo"
+reference = "../../reference/python-book/src/ch04-control-flow.md"
+
+[[goals]]
+name = "Data Structures and Collections"
+status = "todo"
+reference = "../../reference/python-book/src/ch05-data-structures-and-collections.md"
+
+[[goals]]
+name = "Enums and Pattern Matching"
+status = "todo"
+reference = "../../reference/python-book/src/ch06-enums-and-pattern-matching.md"

@@ -1,0 +1,21 @@
+name = "Advanced Topics and Migration"
+
+[[goals]]
+name = "Concurrency"
+status = "todo"
+reference = "../../reference/python-book/src/ch13-concurrency.md"
+
+[[goals]]
+name = "Unsafe Rust and FFI"
+status = "todo"
+reference = "../../reference/python-book/src/ch14-unsafe-rust-and-ffi.md"
+
+[[goals]]
+name = "Migration Patterns"
+status = "todo"
+reference = "../../reference/python-book/src/ch15-migration-patterns.md"
+
+[[goals]]
+name = "Best Practices"
+status = "todo"
+reference = "../../reference/python-book/src/ch16-best-practices.md"

@@ -1,0 +1,45 @@
+name = "Rust for Python Developers"
+current_phase = "foundations"
+reference = "../reference/python-book/src"
+
+[practical]
+description = """
+Create a .rs file in the project/ directory or a relevant subdirectory.
+Use cargo to build and test. Exercises should be runnable with `cargo run`
+or testable with `cargo test`. Always tell the user the absolute file path.
+Practical exercises are the most important type — they should make up the
+bulk of the learning. Focus on hands-on implementation that reinforces
+the concepts from the current goal.
+"""
+
+[theoretical]
+description = """
+Create a markdown file in the phase's theoretical/ directory.
+Select relevant material from the goal's reference and compose a focused
+reading assignment. Summarize key concepts, highlight important patterns,
+and ask the user to explain them back in their own words.
+"""
+
+[quiz]
+description = """
+Create a markdown file in the phase's quiz/ directory.
+Compose 3-5 questions based on recent goals and tasks. Mix multiple choice
+and short answer. Include placeholder positions for answers that the user
+fills in. At least one quiz should be assigned per week.
+"""
+
+[[phases]]
+name = "foundations"
+status = "in_progress"
+
+[[phases]]
+name = "core-concepts"
+status = "todo"
+
+[[phases]]
+name = "advanced-topics"
+status = "todo"
+
+[[phases]]
+name = "capstone"
+status = "todo"

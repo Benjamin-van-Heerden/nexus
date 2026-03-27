@@ -1,0 +1,12 @@
+window_size = 8
+current_topic = "rust"
+history = [
+    { week = "2026-03-22", topic = "rust" },
+]
+
+[weights]
+c = 1
+elixir = 2
+python = 4
+js-ts = 1
+rust = 4

@@ -1,0 +1,6 @@
+name = "Capstone Project: CLI Task Manager"
+
+[[goals]]
+name = "CLI Task Manager"
+status = "todo"
+reference = "../../reference/python-book/src/ch17-capstone-project.md"
