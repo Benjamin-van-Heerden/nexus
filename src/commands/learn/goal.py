@@ -25,7 +25,9 @@ def complete():
     # Check for open tasks
     open_tasks = [t for t in goal.tasks if t.status != "completed"]
     if open_tasks:
-        typer.echo(f"Cannot complete goal '{goal.name}' — {len(open_tasks)} open task(s):")
+        typer.echo(
+            f"Cannot complete goal '{goal.name}' — {len(open_tasks)} open task(s):"
+        )
         for t in open_tasks:
             typer.echo(f"  [ ] [{t.type}] {t.name}")
         raise typer.Exit(1)
@@ -37,7 +39,7 @@ def complete():
     current_idx = goal_names.index(goal.name)
     next_goal = None
 
-    for g in phase_cfg.goals[current_idx + 1:]:
+    for g in phase_cfg.goals[current_idx + 1 :]:
         if g.status != "completed":
             next_goal = g
             break
@@ -57,7 +59,9 @@ def complete():
 @app.command()
 def new(
     name: str = typer.Argument(help="Goal name"),
-    reference: str = typer.Option("", help="Reference document path (relative to phase dir)"),
+    reference: str = typer.Option(
+        "", help="Reference document path (relative to phase dir)"
+    ),
 ):
     """Add a new goal to the active phase."""
     ctx = get_active_context()
@@ -168,7 +172,9 @@ def status():
         typer.echo(f"Reference: {goal.reference}")
 
     if goal.tasks:
-        typer.echo(f"\nTasks ({sum(1 for t in goal.tasks if t.status == 'completed')}/{len(goal.tasks)} completed):")
+        typer.echo(
+            f"\nTasks ({sum(1 for t in goal.tasks if t.status == 'completed')}/{len(goal.tasks)} completed):"
+        )
         for task in goal.tasks:
             marker = "[x]" if task.status == "completed" else "[ ]"
             typer.echo(f"  {marker} [{task.type}] {task.name}")

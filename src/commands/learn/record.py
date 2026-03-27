@@ -9,7 +9,9 @@ from src.utils.learn import get_active_context, get_records_dir
 
 def record(
     description: str = typer.Argument(help="Description of what was done"),
-    duration: str = typer.Option("", help="How long the session took (e.g. '20min', '1h')"),
+    duration: str = typer.Option(
+        "", help="How long the session took (e.g. '20min', '1h')"
+    ),
     status: str = typer.Option("completed", help="Status: completed, partial, stuck"),
 ):
     """Log a learning session record for the active phase."""

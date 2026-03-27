@@ -12,8 +12,6 @@ from src.utils.learn import (
     get_current_goal,
     get_phase_dir,
     get_records_dir,
-    get_subtopic_dir,
-    get_topic_dir,
 )
 from src.utils.path_resolution import resolve, resolve_str
 
@@ -86,7 +84,9 @@ def onboard():
         print("GOALS")
         print("-" * 60)
         for goal in phase_cfg.goals:
-            marker = {"todo": "[ ]", "in_progress": "[~]", "completed": "[x]"}[goal.status]
+            marker = {"todo": "[ ]", "in_progress": "[~]", "completed": "[x]"}[
+                goal.status
+            ]
             current = " ← current" if goal.name == phase_cfg.current_goal else ""
             task_count = len(goal.tasks)
             done_count = sum(1 for t in goal.tasks if t.status == "completed")
@@ -111,7 +111,9 @@ def onboard():
             print(f"Reference: {ref_abs}")
 
         if current_goal.tasks:
-            print(f"\nTasks ({sum(1 for t in current_goal.tasks if t.status == 'completed')}/{len(current_goal.tasks)} completed):")
+            print(
+                f"\nTasks ({sum(1 for t in current_goal.tasks if t.status == 'completed')}/{len(current_goal.tasks)} completed):"
+            )
             for task in current_goal.tasks:
                 marker = "[x]" if task.status == "completed" else "[ ]"
                 print(f"  {marker} [{task.type}] {task.name}")
@@ -156,20 +158,24 @@ def onboard():
             print()
 
     # --- Exercise type descriptions ---
-    if subtopic_cfg.practical.description or subtopic_cfg.theoretical.description or subtopic_cfg.quiz.description:
+    if (
+        subtopic_cfg.practical.description
+        or subtopic_cfg.theoretical.description
+        or subtopic_cfg.quiz.description
+    ):
         print("-" * 60)
         print("EXERCISE TYPE INSTRUCTIONS")
         print("-" * 60)
         if subtopic_cfg.practical.description:
-            print(f"\n  [PRACTICAL]")
+            print("\n  [PRACTICAL]")
             for line in subtopic_cfg.practical.description.strip().splitlines():
                 print(f"    {line.strip()}")
         if subtopic_cfg.theoretical.description:
-            print(f"\n  [THEORETICAL]")
+            print("\n  [THEORETICAL]")
             for line in subtopic_cfg.theoretical.description.strip().splitlines():
                 print(f"    {line.strip()}")
         if subtopic_cfg.quiz.description:
-            print(f"\n  [QUIZ]")
+            print("\n  [QUIZ]")
             for line in subtopic_cfg.quiz.description.strip().splitlines():
                 print(f"    {line.strip()}")
         print()
@@ -179,7 +185,9 @@ def onboard():
     print("PATHS")
     print("-" * 60)
     print(f"Phase directory:      {resolve_str(phase_base)}/")
-    print(f"Practical exercises:  {resolve_str(f'learn/{topic_name}/{subtopic_name}/practical')}/")
+    print(
+        f"Practical exercises:  {resolve_str(f'learn/{topic_name}/{subtopic_name}/practical')}/"
+    )
     print(f"Theoretical reading:  {resolve_str(f'{phase_base}/theoretical')}/")
     print(f"Quizzes:              {resolve_str(f'{phase_base}/quiz')}/")
     print(f"Records:              {resolve_str(f'{phase_base}/records')}/")

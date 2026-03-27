@@ -6,14 +6,12 @@ import tomli_w
 import typer
 
 from src.models.learn.subtopic import ExerciseTypeConfig, SubtopicConfig
-from src.models.learn.topic import TopicConfig
 from src.utils.learn import (
     get_subtopic_dir,
     get_topic_dir,
     load_learn_config,
     load_topic_config,
 )
-from src.utils.paths import get_learn_dir
 from src.utils.path_resolution import resolve_str
 
 app = typer.Typer()
@@ -48,7 +46,9 @@ the learning — reading, exercises, projects? -->
 @app.command()
 def new(
     name: str = typer.Argument(help="Subtopic name (used as directory name)"),
-    topic: str = typer.Option("", help="Topic to create under (defaults to current topic)"),
+    topic: str = typer.Option(
+        "", help="Topic to create under (defaults to current topic)"
+    ),
 ):
     """Create a new subtopic. Generates a subtopic_info.md to kick off planning."""
     config = load_learn_config()
@@ -76,15 +76,23 @@ def new(
     # Create subtopic.toml
     subtopic_cfg = SubtopicConfig(
         name=name,
-        practical=ExerciseTypeConfig(description="Describe how practical exercises work for this subtopic."),
-        theoretical=ExerciseTypeConfig(description="Describe how theoretical reading works for this subtopic."),
-        quiz=ExerciseTypeConfig(description="Describe how quizzes work for this subtopic."),
+        practical=ExerciseTypeConfig(
+            description="Describe how practical exercises work for this subtopic."
+        ),
+        theoretical=ExerciseTypeConfig(
+            description="Describe how theoretical reading works for this subtopic."
+        ),
+        quiz=ExerciseTypeConfig(
+            description="Describe how quizzes work for this subtopic."
+        ),
     )
     with open(subtopic_dir / "subtopic.toml", "wb") as f:
         tomli_w.dump(subtopic_cfg.model_dump(mode="json"), f)
 
     # Create subtopic_info.md with deliberation template
-    (subtopic_dir / "subtopic_info.md").write_text(SUBTOPIC_INFO_TEMPLATE.format(name=name))
+    (subtopic_dir / "subtopic_info.md").write_text(
+        SUBTOPIC_INFO_TEMPLATE.format(name=name)
+    )
 
     info_path = resolve_str(f"learn/{topic_name}/{name}/subtopic_info.md")
     toml_path = resolve_str(f"learn/{topic_name}/{name}/subtopic.toml")
@@ -94,10 +102,12 @@ def new(
     typer.echo("Next steps:")
     typer.echo(f"  1. Review and fill in the learning plan: {info_path}")
     typer.echo(f"  2. Update exercise type descriptions in: {toml_path}")
-    typer.echo(f"  3. Create phases with: nexus learn phase new \"phase-name\"")
-    typer.echo(f"  4. Set as active: nexus learn subtopic set \"{name}\"")
+    typer.echo('  3. Create phases with: nexus learn phase new "phase-name"')
+    typer.echo(f'  4. Set as active: nexus learn subtopic set "{name}"')
     typer.echo()
-    typer.echo("Take time to deliberate on what and how you want to learn before proceeding.")
+    typer.echo(
+        "Take time to deliberate on what and how you want to learn before proceeding."
+    )
 
 
 @app.command(name="set")
@@ -145,7 +155,8 @@ def list_subtopics(
     topic_cfg = load_topic_config(topic_name)
 
     subtopics = [
-        d.name for d in topic_dir.iterdir()
+        d.name
+        for d in topic_dir.iterdir()
         if d.is_dir() and (d / "subtopic.toml").exists()
     ]
 
@@ -175,7 +186,10 @@ def delete(
         typer.echo(f"Subtopic '{name}' does not exist under {topic_name}/")
         raise typer.Exit(1)
 
-    typer.confirm(f"This will delete subtopic '{name}' and all its contents. Continue?", abort=True)
+    typer.confirm(
+        f"This will delete subtopic '{name}' and all its contents. Continue?",
+        abort=True,
+    )
 
     shutil.rmtree(subtopic_dir)
 

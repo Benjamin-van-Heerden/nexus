@@ -11,7 +11,9 @@ app = typer.Typer()
 @app.command()
 def new(
     description: str = typer.Argument(help="Task description"),
-    type: str = typer.Option("practical", help="Task type: practical, theoretical, quiz"),
+    type: str = typer.Option(
+        "practical", help="Task type: practical, theoretical, quiz"
+    ),
 ):
     """Add a new task to the current goal."""
     if type not in ("practical", "theoretical", "quiz"):
@@ -26,7 +28,7 @@ def new(
     topic_name, _, subtopic_name, _, phase_name, phase_cfg = ctx
     goal = get_current_goal(phase_cfg)
     if not goal:
-        typer.echo("No current goal set. Set one with `nexus learn goal set \"name\"`")
+        typer.echo('No current goal set. Set one with `nexus learn goal set "name"`')
         raise typer.Exit(1)
 
     goal.tasks.append(Task(name=description, type=type))
@@ -35,7 +37,9 @@ def new(
 
 
 @app.command()
-def complete(description: str = typer.Argument(help="Task description to mark complete")):
+def complete(
+    description: str = typer.Argument(help="Task description to mark complete"),
+):
     """Mark a task as completed."""
     ctx = get_active_context()
     if not ctx:

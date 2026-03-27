@@ -12,13 +12,13 @@ Usage:
 
 import typer
 
-from src.commands.learn.topic import app as topic_app
-from src.commands.learn.subtopic import app as subtopic_app
-from src.commands.learn.phase import app as phase_app
 from src.commands.learn.goal import app as goal_app
-from src.commands.learn.task import app as task_app
 from src.commands.learn.onboard import onboard
+from src.commands.learn.phase import app as phase_app
 from src.commands.learn.record import record
+from src.commands.learn.subtopic import app as subtopic_app
+from src.commands.learn.task import app as task_app
+from src.commands.learn.topic import app as topic_app
 
 app = typer.Typer()
 

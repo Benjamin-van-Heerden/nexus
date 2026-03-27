@@ -12,8 +12,8 @@ import typer
 from src.models.learn.learn import TopicEntry
 from src.models.learn.topic import TopicConfig
 from src.utils.learn import load_learn_config, save_learn_config
-from src.utils.paths import get_learn_dir
 from src.utils.path_resolution import resolve_str
+from src.utils.paths import get_learn_dir
 
 app = typer.Typer()
 
@@ -24,7 +24,9 @@ def get_week_start(d: date) -> date:
     return d - timedelta(days=days_since_sunday)
 
 
-def pick_topic(weights: dict[str, int], history: list[TopicEntry], window_size: int) -> str:
+def pick_topic(
+    weights: dict[str, int], history: list[TopicEntry], window_size: int
+) -> str:
     """Pick next topic based on proportional weighting within a sliding window."""
     recent = history[-window_size:] if history else []
     total_weight = sum(weights.values())
@@ -132,12 +134,14 @@ def weights():
     config = load_learn_config()
 
     total_weight = sum(config.weights.values())
-    recent = config.history[-config.window_size:] if config.history else []
+    recent = config.history[-config.window_size :] if config.history else []
     total_recent = len(recent)
     counts = Counter(entry.topic for entry in recent)
 
     typer.echo(f"Window: last {config.window_size} weeks ({total_recent} selections)\n")
-    typer.echo(f"{'Topic':<12} {'Weight':<8} {'Target':<10} {'Actual':<10} {'Count':<6}")
+    typer.echo(
+        f"{'Topic':<12} {'Weight':<8} {'Target':<10} {'Actual':<10} {'Count':<6}"
+    )
     typer.echo("-" * 46)
 
     for topic_name, weight in sorted(config.weights.items()):
@@ -170,12 +174,15 @@ def new(
 
     # Create topic.toml
     import tomli_w
+
     topic_cfg = TopicConfig(name=name)
     with open(topic_dir / "topic.toml", "wb") as f:
         tomli_w.dump(topic_cfg.model_dump(mode="json"), f)
 
     # Create topic_info.md
-    (topic_dir / "topic_info.md").write_text(f"# {name.title()}\n\nDescribe this topic and your background with it.\n")
+    (topic_dir / "topic_info.md").write_text(
+        f"# {name.title()}\n\nDescribe this topic and your background with it.\n"
+    )
 
     # Add weight to learn.toml
     config = load_learn_config()
@@ -184,7 +191,7 @@ def new(
 
     typer.echo(f"Created topic: {resolve_str(f'learn/{name}')}/")
     typer.echo(f"Edit topic info: {resolve_str(f'learn/{name}/topic_info.md')}")
-    typer.echo(f"Next: create a subtopic with `nexus learn subtopic new \"name\"`")
+    typer.echo('Next: create a subtopic with `nexus learn subtopic new "name"`')
 
 
 @app.command(name="list")
@@ -217,7 +224,9 @@ def delete(name: str = typer.Argument(help="Topic name to delete")):
         typer.echo(f"Topic '{name}' not found in weights.")
         raise typer.Exit(1)
 
-    typer.confirm(f"This will delete topic '{name}' and all its contents. Continue?", abort=True)
+    typer.confirm(
+        f"This will delete topic '{name}' and all its contents. Continue?", abort=True
+    )
 
     if topic_dir.exists():
         shutil.rmtree(topic_dir)

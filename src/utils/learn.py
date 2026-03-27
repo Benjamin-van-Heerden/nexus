@@ -10,9 +10,9 @@ from pathlib import Path
 import tomli_w
 
 from src.models.learn.learn import LearnConfig
-from src.models.learn.topic import TopicConfig
-from src.models.learn.subtopic import SubtopicConfig
 from src.models.learn.phase import Goal, PhaseConfig
+from src.models.learn.subtopic import SubtopicConfig
+from src.models.learn.topic import TopicConfig
 from src.utils.paths import get_learn_dir
 
 
@@ -63,7 +63,9 @@ def save_subtopic_config(topic: str, subtopic: str, config: SubtopicConfig) -> N
     _save_toml(path, config.model_dump(mode="json"))
 
 
-def save_phase_config(topic: str, subtopic: str, phase: str, config: PhaseConfig) -> None:
+def save_phase_config(
+    topic: str, subtopic: str, phase: str, config: PhaseConfig
+) -> None:
     path = get_learn_dir() / topic / subtopic / phase / "phase.toml"
     _save_toml(path, config.model_dump(mode="json"))
 
@@ -71,7 +73,9 @@ def save_phase_config(topic: str, subtopic: str, phase: str, config: PhaseConfig
 # -- Traversal helpers --
 
 
-def get_active_context() -> tuple[str, TopicConfig, str, SubtopicConfig, str, PhaseConfig] | None:
+def get_active_context() -> (
+    tuple[str, TopicConfig, str, SubtopicConfig, str, PhaseConfig] | None
+):
     """Walk the full hierarchy and return the active context.
 
     Returns (topic_name, topic_config, subtopic_name, subtopic_config, phase_name, phase_config)

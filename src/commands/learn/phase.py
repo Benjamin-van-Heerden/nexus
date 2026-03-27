@@ -10,7 +10,6 @@ from src.models.learn.subtopic import PhaseEntry
 from src.utils.learn import (
     get_active_context,
     get_phase_dir,
-    get_subtopic_dir,
     load_learn_config,
     load_subtopic_config,
     load_topic_config,
@@ -65,8 +64,10 @@ def new(
 
     save_subtopic_config(topic_name, subtopic_name, subtopic_cfg)
 
-    typer.echo(f"Created phase: {resolve_str(f'learn/{topic_name}/{subtopic_name}/{name}')}/")
-    typer.echo(f"Next: add goals with `nexus learn goal new \"goal name\"`")
+    typer.echo(
+        f"Created phase: {resolve_str(f'learn/{topic_name}/{subtopic_name}/{name}')}/"
+    )
+    typer.echo('Next: add goals with `nexus learn goal new "goal name"`')
 
 
 @app.command()
@@ -82,7 +83,9 @@ def complete():
     # Check for incomplete goals
     incomplete = [g for g in phase_cfg.goals if g.status != "completed"]
     if incomplete:
-        typer.echo(f"Cannot complete phase '{phase_name}' — {len(incomplete)} incomplete goal(s):")
+        typer.echo(
+            f"Cannot complete phase '{phase_name}' — {len(incomplete)} incomplete goal(s):"
+        )
         for g in incomplete:
             typer.echo(f"  [{g.status}] {g.name}")
         raise typer.Exit(1)
@@ -106,7 +109,9 @@ def complete():
     else:
         subtopic_cfg.current_phase = ""
         save_subtopic_config(topic_name, subtopic_name, subtopic_cfg)
-        typer.echo(f"Phase '{phase_name}' completed. All phases in this subtopic are done!")
+        typer.echo(
+            f"Phase '{phase_name}' completed. All phases in this subtopic are done!"
+        )
 
 
 @app.command()
@@ -129,7 +134,9 @@ def delete(name: str = typer.Argument(help="Phase name to delete")):
         typer.echo(f"Phase '{name}' does not exist.")
         raise typer.Exit(1)
 
-    typer.confirm(f"This will delete phase '{name}' and all its contents. Continue?", abort=True)
+    typer.confirm(
+        f"This will delete phase '{name}' and all its contents. Continue?", abort=True
+    )
 
     shutil.rmtree(phase_dir)
 
