@@ -1,6 +1,7 @@
 import typer
 
 from src.commands.learn.main import app as learn_app
+from src.utils.git_sync import post_sync, pre_sync
 from src.utils.path_resolution import resolve_str
 
 app = typer.Typer(help="Nexus - Personal learning and self-improvement CLI")
@@ -15,4 +16,8 @@ def resolve_path(relative_path: str = typer.Argument(help="Path relative to nexu
 
 
 if __name__ == "__main__":
-    app()
+    pre_sync()
+    try:
+        app()
+    finally:
+        post_sync()
