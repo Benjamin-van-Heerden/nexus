@@ -6,6 +6,7 @@ phases = [
     { name = "neural-net-primitives", status = "todo" },
     { name = "attention-and-transformers", status = "todo" },
     { name = "deepseek-moe", status = "todo" },
+    { name = "flax-rebuild", status = "todo" },
 ]
 
 [practical]
