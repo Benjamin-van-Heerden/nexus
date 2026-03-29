@@ -24,3 +24,9 @@ name = "PRNG and Randomness"
 reference = "reference/foundations-04-prng.md"
 status = "todo"
 tasks = []
+
+[[goals]]
+name = "Pytrees"
+reference = "reference/foundations-05-pytrees.md"
+status = "todo"
+tasks = []
