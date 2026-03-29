@@ -3,7 +3,6 @@ current_phase = "foundations"
 reference = ""
 phases = [
     { name = "foundations", status = "in_progress" },
-    { name = "neural-net-primitives", status = "todo" },
 ]
 
 [practical]
@@ -11,6 +10,7 @@ description = "Create exercises as standalone .py files in the practical/example
 setup_commands = [
     "uv init practical",
     "mkdir practical/examples",
+    "PHASE=$(basename $(pwd)) && sed -i '' \"s/name = \\\"practical\\\"/name = \\\"practical-$PHASE\\\"/\" practical/pyproject.toml",
 ]
 
 [theoretical]
