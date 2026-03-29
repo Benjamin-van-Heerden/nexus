@@ -30,3 +30,9 @@ name = "Pytrees"
 reference = "reference/foundations-05-pytrees.md"
 status = "todo"
 tasks = []
+
+[[goals]]
+name = "XLA and Sharp Bits"
+reference = "reference/foundations-06-xla-sharp-bits.md"
+status = "todo"
+tasks = []
