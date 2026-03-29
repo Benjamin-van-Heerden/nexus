@@ -7,11 +7,17 @@ from src.utils.learn import get_active_context, get_current_goal, get_subtopic_d
 
 app = typer.Typer()
 
+TOPIC_OPT = typer.Option("", help="Topic (defaults to current topic)")
+SUBTOPIC_OPT = typer.Option("", help="Subtopic (defaults to current subtopic)")
+
 
 @app.command()
-def complete():
+def complete(
+    topic: str = TOPIC_OPT,
+    subtopic: str = SUBTOPIC_OPT,
+):
     """Mark the current goal as completed. Fails if there are open tasks."""
-    ctx = get_active_context()
+    ctx = get_active_context(topic, subtopic)
     if not ctx:
         typer.echo("No active learning context.")
         raise typer.Exit(1)
@@ -60,9 +66,11 @@ def complete():
 def new(
     name: str = typer.Argument(help="Goal name"),
     reference: str = typer.Argument(help="Reference document path (relative to subtopic dir)"),
+    topic: str = TOPIC_OPT,
+    subtopic: str = SUBTOPIC_OPT,
 ):
     """Add a new goal to the active phase. Requires a reference document."""
-    ctx = get_active_context()
+    ctx = get_active_context(topic, subtopic)
     if not ctx:
         typer.echo("No active learning context.")
         raise typer.Exit(1)
@@ -90,9 +98,13 @@ def new(
 
 
 @app.command()
-def delete(name: str = typer.Argument(help="Goal name to delete")):
+def delete(
+    name: str = typer.Argument(help="Goal name to delete"),
+    topic: str = TOPIC_OPT,
+    subtopic: str = SUBTOPIC_OPT,
+):
     """Delete a goal from the active phase."""
-    ctx = get_active_context()
+    ctx = get_active_context(topic, subtopic)
     if not ctx:
         typer.echo("No active learning context.")
         raise typer.Exit(1)
@@ -114,9 +126,13 @@ def delete(name: str = typer.Argument(help="Goal name to delete")):
 
 
 @app.command(name="set")
-def set_goal(name: str = typer.Argument(help="Goal name to set as current")):
+def set_goal(
+    name: str = typer.Argument(help="Goal name to set as current"),
+    topic: str = TOPIC_OPT,
+    subtopic: str = SUBTOPIC_OPT,
+):
     """Set the current goal."""
-    ctx = get_active_context()
+    ctx = get_active_context(topic, subtopic)
     if not ctx:
         typer.echo("No active learning context.")
         raise typer.Exit(1)
@@ -137,9 +153,12 @@ def set_goal(name: str = typer.Argument(help="Goal name to set as current")):
 
 
 @app.command(name="list")
-def list_goals():
+def list_goals(
+    topic: str = TOPIC_OPT,
+    subtopic: str = SUBTOPIC_OPT,
+):
     """List all goals in the active phase."""
-    ctx = get_active_context()
+    ctx = get_active_context(topic, subtopic)
     if not ctx:
         typer.echo("No active learning context.")
         raise typer.Exit(1)
@@ -160,9 +179,12 @@ def list_goals():
 
 
 @app.command()
-def status():
+def status(
+    topic: str = TOPIC_OPT,
+    subtopic: str = SUBTOPIC_OPT,
+):
     """Show detailed status of the current goal."""
-    ctx = get_active_context()
+    ctx = get_active_context(topic, subtopic)
     if not ctx:
         typer.echo("No active learning context.")
         raise typer.Exit(1)

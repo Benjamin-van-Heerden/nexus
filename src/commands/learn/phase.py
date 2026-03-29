@@ -21,22 +21,32 @@ from src.utils.path_resolution import resolve_str
 app = typer.Typer()
 
 
-@app.command()
-def new(
-    name: str = typer.Argument(help="Phase name (used as directory name)"),
-):
-    """Create a new phase in the active subtopic."""
+def _resolve_topic_subtopic(
+    topic: str = "", subtopic: str = ""
+) -> tuple[str, str]:
     config = load_learn_config()
-    topic_name = config.current_topic
+    topic_name = topic or config.current_topic
     if not topic_name:
-        typer.echo("No current topic set.")
+        typer.echo("No topic specified and no current topic set.")
         raise typer.Exit(1)
 
     topic_cfg = load_topic_config(topic_name)
-    subtopic_name = topic_cfg.current_subtopic
+    subtopic_name = subtopic or topic_cfg.current_subtopic
     if not subtopic_name:
-        typer.echo("No current subtopic set.")
+        typer.echo("No subtopic specified and no current subtopic set.")
         raise typer.Exit(1)
+
+    return topic_name, subtopic_name
+
+
+@app.command()
+def new(
+    name: str = typer.Argument(help="Phase name (used as directory name)"),
+    topic: str = typer.Option("", help="Topic (defaults to current topic)"),
+    subtopic: str = typer.Option("", help="Subtopic (defaults to current subtopic)"),
+):
+    """Create a new phase in the active subtopic."""
+    topic_name, subtopic_name = _resolve_topic_subtopic(topic, subtopic)
 
     phase_dir = get_phase_dir(topic_name, subtopic_name, name)
     if phase_dir.exists():
@@ -78,13 +88,16 @@ def new(
     typer.echo(
         f"Created phase: {resolve_str(f'learn/{topic_name}/{subtopic_name}/{name}')}/"
     )
-    typer.echo('Next: add goals with `nexus learn goal new "goal name"`')
+    typer.echo('Next: add goals with `nexus learn goal new "goal name" "reference/path.md"`')
 
 
 @app.command()
-def complete():
+def complete(
+    topic: str = typer.Option("", help="Topic (defaults to current topic)"),
+    subtopic: str = typer.Option("", help="Subtopic (defaults to current subtopic)"),
+):
     """Mark the current phase as completed and advance to the next."""
-    ctx = get_active_context()
+    ctx = get_active_context(topic, subtopic)
     if not ctx:
         typer.echo("No active learning context.")
         raise typer.Exit(1)
@@ -126,19 +139,13 @@ def complete():
 
 
 @app.command()
-def delete(name: str = typer.Argument(help="Phase name to delete")):
+def delete(
+    name: str = typer.Argument(help="Phase name to delete"),
+    topic: str = typer.Option("", help="Topic (defaults to current topic)"),
+    subtopic: str = typer.Option("", help="Subtopic (defaults to current subtopic)"),
+):
     """Delete a phase and all its contents."""
-    config = load_learn_config()
-    topic_name = config.current_topic
-    if not topic_name:
-        typer.echo("No current topic set.")
-        raise typer.Exit(1)
-
-    topic_cfg = load_topic_config(topic_name)
-    subtopic_name = topic_cfg.current_subtopic
-    if not subtopic_name:
-        typer.echo("No current subtopic set.")
-        raise typer.Exit(1)
+    topic_name, subtopic_name = _resolve_topic_subtopic(topic, subtopic)
 
     phase_dir = get_phase_dir(topic_name, subtopic_name, name)
     if not phase_dir.exists():
@@ -162,9 +169,12 @@ def delete(name: str = typer.Argument(help="Phase name to delete")):
 
 
 @app.command()
-def status():
+def status(
+    topic: str = typer.Option("", help="Topic (defaults to current topic)"),
+    subtopic: str = typer.Option("", help="Subtopic (defaults to current subtopic)"),
+):
     """Show all phases and their status."""
-    ctx = get_active_context()
+    ctx = get_active_context(topic, subtopic)
     if not ctx:
         typer.echo("No active learning context.")
         raise typer.Exit(1)

@@ -73,25 +73,29 @@ def save_phase_config(
 # -- Traversal helpers --
 
 
-def get_active_context() -> (
-    tuple[str, TopicConfig, str, SubtopicConfig, str, PhaseConfig] | None
-):
+def get_active_context(
+    topic_override: str = "",
+    subtopic_override: str = "",
+) -> tuple[str, TopicConfig, str, SubtopicConfig, str, PhaseConfig] | None:
     """Walk the full hierarchy and return the active context.
+
+    Accepts optional overrides for topic and subtopic. Falls back to the
+    current values in config if not provided.
 
     Returns (topic_name, topic_config, subtopic_name, subtopic_config, phase_name, phase_config)
     or None if no topic is set.
     """
     learn = load_learn_config()
-    if not learn.current_topic:
+    topic_name = topic_override or learn.current_topic
+    if not topic_name:
         return None
 
-    topic_name = learn.current_topic
     topic = load_topic_config(topic_name)
 
-    if not topic.current_subtopic:
+    subtopic_name = subtopic_override or topic.current_subtopic
+    if not subtopic_name:
         return None
 
-    subtopic_name = topic.current_subtopic
     subtopic = load_subtopic_config(topic_name, subtopic_name)
 
     if not subtopic.current_phase:

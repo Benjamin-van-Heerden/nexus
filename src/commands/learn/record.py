@@ -8,19 +8,21 @@ from src.utils.learn import get_active_context, get_current_goal, get_records_di
 
 
 def record(
-    description: str = typer.Argument(help="Description of what was done"),
+    description: str = typer.Argument(help="Description of what the user did"),
     duration: str = typer.Option(
         "", help="How long the session took (e.g. '20min', '1h')"
     ),
     status: str = typer.Option("completed", help="Status: completed, partial, stuck"),
     type: str = typer.Option("practical", help="Type: practical, theoretical, quiz"),
+    topic: str = typer.Option("", help="Topic (defaults to current topic)"),
+    subtopic: str = typer.Option("", help="Subtopic (defaults to current subtopic)"),
 ):
-    """Log a learning session record for the active subtopic."""
+    """Log a learning session record. Describes what the USER did, not agent actions."""
     if type not in ("practical", "theoretical", "quiz"):
         typer.echo(f"Invalid type: {type}. Must be: practical, theoretical, quiz")
         raise typer.Exit(1)
 
-    ctx = get_active_context()
+    ctx = get_active_context(topic, subtopic)
     if not ctx:
         typer.echo("No active learning context.")
         raise typer.Exit(1)

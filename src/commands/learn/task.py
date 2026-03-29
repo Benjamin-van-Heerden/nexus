@@ -9,6 +9,9 @@ from src.utils.learn import get_active_context, get_current_goal, get_subtopic_d
 
 app = typer.Typer()
 
+TOPIC_OPT = typer.Option("", help="Topic (defaults to current topic)")
+SUBTOPIC_OPT = typer.Option("", help="Subtopic (defaults to current subtopic)")
+
 
 @app.command()
 def new(
@@ -19,13 +22,15 @@ def new(
     relevant_files: list[str] = typer.Option(
         [], "--file", "-f", help="Relevant file paths (relative to subtopic dir)"
     ),
+    topic: str = TOPIC_OPT,
+    subtopic: str = SUBTOPIC_OPT,
 ):
     """Add a new task to the current goal. Blocked if there are incomplete tasks from a previous day."""
     if type not in ("practical", "theoretical", "quiz"):
         typer.echo(f"Invalid type: {type}. Must be: practical, theoretical, quiz")
         raise typer.Exit(1)
 
-    ctx = get_active_context()
+    ctx = get_active_context(topic, subtopic)
     if not ctx:
         typer.echo("No active learning context.")
         raise typer.Exit(1)
@@ -63,9 +68,11 @@ def new(
 @app.command()
 def complete(
     description: str = typer.Argument(help="Task description to mark complete"),
+    topic: str = TOPIC_OPT,
+    subtopic: str = SUBTOPIC_OPT,
 ):
     """Mark a task as completed."""
-    ctx = get_active_context()
+    ctx = get_active_context(topic, subtopic)
     if not ctx:
         typer.echo("No active learning context.")
         raise typer.Exit(1)
@@ -98,9 +105,12 @@ def complete(
 
 
 @app.command(name="list")
-def list_tasks():
+def list_tasks(
+    topic: str = TOPIC_OPT,
+    subtopic: str = SUBTOPIC_OPT,
+):
     """List all tasks in the current goal."""
-    ctx = get_active_context()
+    ctx = get_active_context(topic, subtopic)
     if not ctx:
         typer.echo("No active learning context.")
         raise typer.Exit(1)
