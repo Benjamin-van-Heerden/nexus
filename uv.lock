@@ -7,6 +7,7 @@ members = [
     "nexus",
     "practical-jax-from-scratch-attention-and-transformers",
     "practical-jax-from-scratch-deepseek-moe",
+    "practical-jax-from-scratch-flax-rebuild",
     "practical-jax-from-scratch-foundations",
     "practical-jax-from-scratch-neural-net-primitives",
 ]
@@ -99,6 +100,11 @@ source = { virtual = "learn/jax/from-scratch/attention-and-transformers/practica
 name = "practical-jax-from-scratch-deepseek-moe"
 version = "0.1.0"
 source = { virtual = "learn/jax/from-scratch/deepseek-moe/practical" }
+
+[[package]]
+name = "practical-jax-from-scratch-flax-rebuild"
+version = "0.1.0"
+source = { virtual = "learn/jax/from-scratch/flax-rebuild/practical" }
 
 [[package]]
 name = "practical-jax-from-scratch-foundations"
