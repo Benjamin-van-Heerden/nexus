@@ -18,3 +18,9 @@ name = "Transformations: vmap and pmap"
 reference = "reference/foundations-03-vmap-and-pmap.md"
 status = "todo"
 tasks = []
+
+[[goals]]
+name = "PRNG and Randomness"
+reference = "reference/foundations-04-prng.md"
+status = "todo"
+tasks = []
