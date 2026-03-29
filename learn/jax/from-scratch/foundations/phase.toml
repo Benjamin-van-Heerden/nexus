@@ -12,3 +12,9 @@ name = "Transformations: jit and grad"
 reference = "reference/foundations-02-jit-and-grad.md"
 status = "todo"
 tasks = []
+
+[[goals]]
+name = "Transformations: vmap and pmap"
+reference = "reference/foundations-03-vmap-and-pmap.md"
+status = "todo"
+tasks = []
