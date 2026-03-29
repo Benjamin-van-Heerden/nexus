@@ -4,3 +4,6 @@
 .mem/docs/data/
 
 __pycache__/
+
+# mem temp artifacts (onboard output)
+.mem/tmp/
