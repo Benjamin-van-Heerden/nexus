@@ -2,6 +2,12 @@ version = 1
 revision = 3
 requires-python = ">=3.14"
 
+[manifest]
+members = [
+    "nexus",
+    "practical-jax-from-scratch-foundations",
+]
+
 [[package]]
 name = "annotated-doc"
 version = "0.0.4"
@@ -80,6 +86,11 @@ requires-dist = [
     { name = "tomli-w", specifier = ">=1.2.0" },
     { name = "typer", specifier = ">=0.24.1" },
 ]
+
+[[package]]
+name = "practical-jax-from-scratch-foundations"
+version = "0.1.0"
+source = { virtual = "learn/jax/from-scratch/foundations/practical" }
 
 [[package]]
 name = "pydantic"
