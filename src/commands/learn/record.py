@@ -4,7 +4,7 @@ from datetime import date
 
 import typer
 
-from src.utils.learn import get_active_context, get_records_dir
+from src.utils.learn import get_active_context, get_current_goal, get_records_dir
 
 
 def record(
@@ -13,16 +13,23 @@ def record(
         "", help="How long the session took (e.g. '20min', '1h')"
     ),
     status: str = typer.Option("completed", help="Status: completed, partial, stuck"),
+    type: str = typer.Option("practical", help="Type: practical, theoretical, quiz"),
 ):
-    """Log a learning session record for the active phase."""
+    """Log a learning session record for the active subtopic."""
+    if type not in ("practical", "theoretical", "quiz"):
+        typer.echo(f"Invalid type: {type}. Must be: practical, theoretical, quiz")
+        raise typer.Exit(1)
+
     ctx = get_active_context()
     if not ctx:
         typer.echo("No active learning context.")
         raise typer.Exit(1)
 
-    topic_name, _, subtopic_name, subtopic_cfg, phase_name, _ = ctx
+    topic_name, _, subtopic_name, _, phase_name, phase_cfg = ctx
+    goal = get_current_goal(phase_cfg)
+    goal_name = goal.name if goal else "none"
 
-    records_dir = get_records_dir(topic_name, subtopic_name, phase_name)
+    records_dir = get_records_dir(topic_name, subtopic_name)
     records_dir.mkdir(parents=True, exist_ok=True)
 
     today = date.today()
@@ -32,10 +39,14 @@ def record(
     record_path = records_dir / filename
 
     lines = [
-        f"# {today.isoformat()} — {subtopic_cfg.name} / {phase_name}",
-        "",
-        f"**Duration:** {duration or 'not recorded'}",
-        f"**Status:** {status}",
+        "---",
+        f"date: {today.isoformat()}",
+        f"phase: {phase_name}",
+        f"goal: {goal_name}",
+        f"type: {type}",
+        f"duration: {duration or 'not recorded'}",
+        f"status: {status}",
+        "---",
         "",
         description,
         "",

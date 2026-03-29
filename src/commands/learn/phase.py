@@ -1,6 +1,7 @@
 """Phase subcommand — manage phases in the active subtopic."""
 
 import shutil
+import subprocess
 
 import tomli_w
 import typer
@@ -44,9 +45,20 @@ def new(
 
     # Create directory structure
     phase_dir.mkdir(parents=True)
-    (phase_dir / "practical").mkdir()
-    (phase_dir / "theoretical").mkdir()
-    (phase_dir / "quiz").mkdir()
+
+    subtopic_cfg = load_subtopic_config(topic_name, subtopic_name)
+
+    for exercise_type in ("practical", "theoretical", "quiz"):
+        cfg = getattr(subtopic_cfg, exercise_type)
+        if cfg.setup_commands:
+            for cmd in cfg.setup_commands:
+                result = subprocess.run(cmd, shell=True, cwd=phase_dir, capture_output=True, text=True)
+                if result.returncode != 0:
+                    typer.echo(f"Setup command failed: {cmd}")
+                    typer.echo(result.stderr)
+                    raise typer.Exit(1)
+        else:
+            (phase_dir / exercise_type).mkdir()
 
     # Create phase.toml
     phase_cfg = PhaseConfig(name=name)
@@ -54,7 +66,6 @@ def new(
         tomli_w.dump(phase_cfg.model_dump(mode="json"), f)
 
     # Add to subtopic.toml
-    subtopic_cfg = load_subtopic_config(topic_name, subtopic_name)
     subtopic_cfg.phases.append(PhaseEntry(name=name, status="todo"))
 
     # If this is the first phase, make it current

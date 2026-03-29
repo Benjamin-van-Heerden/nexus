@@ -10,6 +10,7 @@ from pydantic import BaseModel
 
 class ExerciseTypeConfig(BaseModel):
     description: str = ""
+    setup_commands: list[str] = []
 
 
 class PhaseEntry(BaseModel):

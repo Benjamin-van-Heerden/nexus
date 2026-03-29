@@ -3,7 +3,7 @@
 import typer
 
 from src.models.learn.phase import Goal
-from src.utils.learn import get_active_context, get_current_goal, save_phase_config
+from src.utils.learn import get_active_context, get_current_goal, get_subtopic_dir, save_phase_config
 
 app = typer.Typer()
 
@@ -59,17 +59,22 @@ def complete():
 @app.command()
 def new(
     name: str = typer.Argument(help="Goal name"),
-    reference: str = typer.Option(
-        "", help="Reference document path (relative to phase dir)"
-    ),
+    reference: str = typer.Argument(help="Reference document path (relative to subtopic dir)"),
 ):
-    """Add a new goal to the active phase."""
+    """Add a new goal to the active phase. Requires a reference document."""
     ctx = get_active_context()
     if not ctx:
         typer.echo("No active learning context.")
         raise typer.Exit(1)
 
     topic_name, _, subtopic_name, _, phase_name, phase_cfg = ctx
+
+    subtopic_dir = get_subtopic_dir(topic_name, subtopic_name)
+    ref_path = subtopic_dir / reference
+    if not ref_path.exists():
+        typer.echo(f"Reference does not exist: {ref_path.resolve()}")
+        typer.echo("Create the reference document first, then create the goal.")
+        raise typer.Exit(1)
 
     phase_cfg.goals.append(Goal(name=name, reference=reference))
 
@@ -80,6 +85,8 @@ def new(
 
     save_phase_config(topic_name, subtopic_name, phase_name, phase_cfg)
     typer.echo(f"Added goal: {name}")
+    typer.echo(f"Reference: {ref_path.resolve()}")
+    typer.echo('Next: create tasks with `nexus learn task new "description" --type practical`')
 
 
 @app.command()
@@ -160,16 +167,18 @@ def status():
         typer.echo("No active learning context.")
         raise typer.Exit(1)
 
-    _, _, _, _, _, phase_cfg = ctx
+    topic_name, _, subtopic_name, _, _, phase_cfg = ctx
     goal = get_current_goal(phase_cfg)
     if not goal:
         typer.echo("No current goal set.")
         raise typer.Exit(1)
 
+    subtopic_dir = get_subtopic_dir(topic_name, subtopic_name)
+    ref_abs = (subtopic_dir / goal.reference).resolve()
+
     typer.echo(f"Goal: {goal.name}")
     typer.echo(f"Status: {goal.status}")
-    if goal.reference:
-        typer.echo(f"Reference: {goal.reference}")
+    typer.echo(f"Reference: {ref_abs}")
 
     if goal.tasks:
         typer.echo(

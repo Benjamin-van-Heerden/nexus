@@ -78,28 +78,38 @@ def topic(ctx: typer.Context):
     )
 
 
-@app.command()
-def update():
-    """Select topic for the current week (or confirm existing if already set this week)."""
+def ensure_topic_for_week() -> str | None:
+    """Ensure a topic is selected for the current week. Returns the topic name if a new one was picked, None if already set."""
     config = load_learn_config()
     today = date.today()
     current_week = get_week_start(today)
 
-    # Check if we already have a selection for this week
     if config.history:
         last = config.history[-1]
         if last.week == current_week:
-            typer.echo(f"Topic already set for this week: {last.topic}")
-            return
+            return None
 
     new_topic = pick_topic(config.weights, config.history, config.window_size)
     config.current_topic = new_topic
     config.history.append(TopicEntry(week=current_week, topic=new_topic))
     save_learn_config(config)
+    return new_topic
 
+
+@app.command()
+def update():
+    """Select topic for the current week (or confirm existing if already set this week)."""
+    result = ensure_topic_for_week()
+    if result is None:
+        config = load_learn_config()
+        typer.echo(f"Topic already set for this week: {config.current_topic}")
+        return
+
+    today = date.today()
+    current_week = get_week_start(today)
     week_end = current_week + timedelta(days=6)
     typer.echo(
-        f"Topic for {current_week.strftime('%B %d')} - {week_end.strftime('%B %d, %Y')}: {new_topic}"
+        f"Topic for {current_week.strftime('%B %d')} - {week_end.strftime('%B %d, %Y')}: {result}"
     )
 
 

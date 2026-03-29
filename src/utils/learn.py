@@ -115,8 +115,8 @@ def get_phase_dir(topic: str, subtopic: str, phase: str) -> Path:
     return get_learn_dir() / topic / subtopic / phase
 
 
-def get_records_dir(topic: str, subtopic: str, phase: str) -> Path:
-    return get_phase_dir(topic, subtopic, phase) / "records"
+def get_records_dir(topic: str, subtopic: str) -> Path:
+    return get_subtopic_dir(topic, subtopic) / "records"
 
 
 def get_current_goal(phase_cfg: PhaseConfig) -> Goal | None:

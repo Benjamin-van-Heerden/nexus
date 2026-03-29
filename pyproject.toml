@@ -10,3 +10,8 @@ dependencies = [
     "pydantic>=2.12.5",
     "pydantic-settings>=2.13.1",
 ]
+
+[tool.uv.workspace]
+members = [
+    "practical",
+]

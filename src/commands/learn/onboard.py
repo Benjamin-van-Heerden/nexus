@@ -6,18 +6,22 @@ from pathlib import Path
 
 import typer
 
-from src.commands.learn.topic import get_week_start
+from src.commands.learn.topic import ensure_topic_for_week, get_week_start
 from src.utils.learn import (
     get_active_context,
     get_current_goal,
-    get_phase_dir,
     get_records_dir,
+    get_subtopic_dir,
 )
 from src.utils.path_resolution import resolve, resolve_str
 
 
 def onboard():
     """Print full learning context for the current topic. Designed for agent consumption."""
+    new_topic = ensure_topic_for_week()
+    if new_topic:
+        typer.echo(f"New week — topic rotated to: {new_topic}\n")
+
     ctx = get_active_context()
     if not ctx:
         typer.echo("No active learning context. Run `nexus learn topic update` first.")
@@ -29,7 +33,8 @@ def onboard():
     current_week = get_week_start(today)
     week_end = current_week + timedelta(days=6)
 
-    phase_base = f"learn/{topic_name}/{subtopic_name}/{phase_name}"
+    subtopic_base = f"learn/{topic_name}/{subtopic_name}"
+    phase_base = f"{subtopic_base}/{phase_name}"
 
     print("=" * 60)
     print("NEXUS LEARN ONBOARD")
@@ -51,7 +56,7 @@ def onboard():
         print()
 
     # --- Subtopic info ---
-    subtopic_info_path = resolve(f"learn/{topic_name}/{subtopic_name}/subtopic_info.md")
+    subtopic_info_path = resolve(f"{subtopic_base}/subtopic_info.md")
     if subtopic_info_path.exists():
         print("-" * 60)
         print(f"SUBTOPIC INFO ({subtopic_info_path})")
@@ -69,15 +74,6 @@ def onboard():
         print(f"  {marker} {p.name}{current}")
     print()
 
-    # --- Phase status.md ---
-    status_path = resolve(f"{phase_base}/status.md")
-    if status_path.exists():
-        print("-" * 60)
-        print(f"PHASE STATUS ({status_path})")
-        print("-" * 60)
-        print(status_path.read_text().strip())
-        print()
-
     # --- Goals ---
     if phase_cfg.goals:
         print("-" * 60)
@@ -91,11 +87,9 @@ def onboard():
             task_count = len(goal.tasks)
             done_count = sum(1 for t in goal.tasks if t.status == "completed")
             task_info = f" ({done_count}/{task_count} tasks)" if task_count else ""
-            ref = ""
-            if goal.reference:
-                phase_dir = get_phase_dir(topic_name, subtopic_name, phase_name)
-                ref_abs = (phase_dir / goal.reference).resolve()
-                ref = f"\n      ref: {ref_abs}"
+            subtopic_dir = get_subtopic_dir(topic_name, subtopic_name)
+            ref_abs = (subtopic_dir / goal.reference).resolve()
+            ref = f"\n      ref: {ref_abs}"
             print(f"  {marker} {goal.name}{task_info}{current}{ref}")
         print()
 
@@ -105,10 +99,13 @@ def onboard():
         print("-" * 60)
         print(f"CURRENT GOAL: {current_goal.name}")
         print("-" * 60)
-        if current_goal.reference:
-            phase_dir = get_phase_dir(topic_name, subtopic_name, phase_name)
-            ref_abs = (phase_dir / current_goal.reference).resolve()
-            print(f"Reference: {ref_abs}")
+        subtopic_dir = get_subtopic_dir(topic_name, subtopic_name)
+        ref_path = subtopic_dir / current_goal.reference
+        print(f"Reference: {ref_path.resolve()}")
+
+        if ref_path.exists():
+            print()
+            print(ref_path.read_text().strip())
 
         if current_goal.tasks:
             print(
@@ -122,8 +119,6 @@ def onboard():
         print()
 
     # --- Weekly balance ---
-    # Count task types from all goals in this phase (completed this week)
-    records_dir = get_records_dir(topic_name, subtopic_name, phase_name)
     type_counts = Counter()
     for goal in phase_cfg.goals:
         for task in goal.tasks:
@@ -142,6 +137,7 @@ def onboard():
     print()
 
     # --- Recent records ---
+    records_dir = get_records_dir(topic_name, subtopic_name)
     if records_dir.exists():
         records = sorted(records_dir.glob("*.md"), reverse=True)[:8]
         if records:
@@ -151,10 +147,8 @@ def onboard():
             for record_path in records:
                 content = record_path.read_text().strip()
                 print(f"\n  [{record_path.stem}] ({record_path})")
-                for line in content.splitlines()[:4]:
+                for line in content.splitlines():
                     print(f"    {line}")
-                if len(content.splitlines()) > 4:
-                    print("    ...")
             print()
 
     # --- Exercise type descriptions ---
@@ -185,12 +179,11 @@ def onboard():
     print("PATHS")
     print("-" * 60)
     print(f"Phase directory:      {resolve_str(phase_base)}/")
-    print(
-        f"Practical exercises:  {resolve_str(f'learn/{topic_name}/{subtopic_name}/practical')}/"
-    )
+    print(f"Practical exercises:  {resolve_str(f'{phase_base}/practical')}/")
     print(f"Theoretical reading:  {resolve_str(f'{phase_base}/theoretical')}/")
     print(f"Quizzes:              {resolve_str(f'{phase_base}/quiz')}/")
-    print(f"Records:              {resolve_str(f'{phase_base}/records')}/")
+    print(f"Reference:            {resolve_str(f'{subtopic_base}/reference')}/")
+    print(f"Records:              {resolve_str(f'{subtopic_base}/records')}/")
     print()
 
     # --- Agent instructions (from file) ---

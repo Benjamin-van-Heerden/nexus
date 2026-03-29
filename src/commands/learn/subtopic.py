@@ -69,9 +69,6 @@ def new(
 
     # Create directory structure
     subtopic_dir.mkdir(parents=True)
-    (subtopic_dir / "practical").mkdir()
-    (subtopic_dir / "theoretical").mkdir()
-    (subtopic_dir / "quiz").mkdir()
 
     # Create subtopic.toml
     subtopic_cfg = SubtopicConfig(

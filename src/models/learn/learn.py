@@ -15,7 +15,7 @@ class TopicEntry(BaseModel):
 
 
 class LearnConfig(BaseModel):
+    weights: dict[str, int]
     window_size: int = 8
     current_topic: str = ""
-    weights: dict[str, int]
     history: list[TopicEntry] = []
