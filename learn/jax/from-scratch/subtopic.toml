@@ -1,16 +1,62 @@
-name = "from-scratch"
+name = "From Scratch — JAX to Transformers to DeepSeek"
 current_phase = ""
 reference = ""
 phases = []
 
 [practical]
-description = "Describe how practical exercises work for this subtopic."
-setup_commands = []
+description = """
+Create exercises as standalone .py files in the practical/examples/ directory,
+named by date (YYYY-MM-DD.py). If multiple exercises in one day, use
+YYYY-MM-DD_2.py etc.
+
+Each file should be runnable with `uv run python practical/examples/YYYY-MM-DD.py`
+from the phase directory. Files should include assertions or test functions that
+verify correctness — the user runs the file and sees whether their implementation
+passes.
+
+Structure: stub functions with docstrings explaining what to implement, a main
+block that calls them with test cases, and assertions that validate results.
+Import jax, jax.numpy, and any needed JAX modules at the top.
+
+Example:
+  import jax
+  import jax.numpy as jnp
+
+  def softmax(x):
+      \"\"\"Implement softmax along the last axis.\"\"\"
+      raise NotImplementedError()
+
+  if __name__ == "__main__":
+      x = jnp.array([1.0, 2.0, 3.0])
+      result = softmax(x)
+      assert jnp.allclose(result.sum(), 1.0)
+      print("All checks passed!")
+"""
+setup_commands = ["uv init practical", "mkdir practical/examples"]
 
 [theoretical]
-description = "Describe how theoretical reading works for this subtopic."
+description = """
+Create a markdown file in the phase's theoretical/ directory named
+YYYY-MM-DD-<slug>.md (e.g. 2026-03-29-pytrees.md).
+
+Select relevant material from the goal's reference document and compose a
+focused reading assignment. Summarize key concepts, highlight differences
+from PyTorch/NumPy equivalents, and ask the user to explain them back in
+their own words. Include code snippets where helpful.
+"""
 setup_commands = []
 
 [quiz]
-description = "Describe how quizzes work for this subtopic."
+description = """
+Create a markdown file in the phase's quiz/ directory named
+YYYY-MM-DD-<slug>.md (e.g. 2026-03-29-grad-quiz.md).
+
+Compose 3-5 questions based on recent goals and tasks. Mix:
+- Multiple choice (conceptual understanding)
+- Code prediction (what does this output?)
+- Short implementation (write a 3-5 line function)
+
+Include answer placeholders that the user fills in. Answers section at the
+bottom, initially hidden behind a <details> tag.
+"""
 setup_commands = []
