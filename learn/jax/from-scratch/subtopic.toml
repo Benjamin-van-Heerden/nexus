@@ -4,6 +4,7 @@ reference = ""
 phases = [
     { name = "foundations", status = "in_progress" },
     { name = "neural-net-primitives", status = "todo" },
+    { name = "attention-and-transformers", status = "todo" },
 ]
 
 [practical]

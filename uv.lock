@@ -6,6 +6,7 @@ requires-python = ">=3.14"
 members = [
     "nexus",
     "practical-jax-from-scratch-foundations",
+    "practical-jax-from-scratch-neural-net-primitives",
 ]
 
 [[package]]
@@ -91,6 +92,11 @@ requires-dist = [
 name = "practical-jax-from-scratch-foundations"
 version = "0.1.0"
 source = { virtual = "learn/jax/from-scratch/foundations/practical" }
+
+[[package]]
+name = "practical-jax-from-scratch-neural-net-primitives"
+version = "0.1.0"
+source = { virtual = "learn/jax/from-scratch/neural-net-primitives/practical" }
 
 [[package]]
 name = "pydantic"

@@ -16,4 +16,5 @@ members = [
     "practical",
     "learn/jax/from-scratch/foundations/practical",
     "learn/jax/from-scratch/neural-net-primitives/practical",
+    "learn/jax/from-scratch/attention-and-transformers/practical",
 ]
