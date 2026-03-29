@@ -10,7 +10,7 @@ description = "Create exercises as standalone .py files in the practical/example
 setup_commands = [
     "uv init practical",
     "mkdir practical/examples",
-    "PHASE=$(basename $(pwd)) && sed -i '' \"s/name = \\\"practical\\\"/name = \\\"practical-$PHASE\\\"/\" practical/pyproject.toml",
+    "sed -i '' \"s/name = \\\"practical\\\"/name = \\\"practical-${TOPIC}-${SUBTOPIC}-${PHASE}\\\"/\" practical/pyproject.toml",
 ]
 
 [theoretical]

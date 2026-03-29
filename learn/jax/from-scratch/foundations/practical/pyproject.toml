@@ -1,5 +1,5 @@
 [project]
-name = "practical-foundations"
+name = "practical-jax-from-scratch-foundations"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"

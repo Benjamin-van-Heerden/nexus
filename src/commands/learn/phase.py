@@ -1,5 +1,6 @@
 """Phase subcommand — manage phases in the active subtopic."""
 
+import os
 import shutil
 import subprocess
 
@@ -58,11 +59,18 @@ def new(
 
     subtopic_cfg = load_subtopic_config(topic_name, subtopic_name)
 
+    setup_env = {
+        **os.environ,
+        "TOPIC": topic_name,
+        "SUBTOPIC": subtopic_name,
+        "PHASE": name,
+    }
+
     for exercise_type in ("practical", "theoretical", "quiz"):
         cfg = getattr(subtopic_cfg, exercise_type)
         if cfg.setup_commands:
             for cmd in cfg.setup_commands:
-                result = subprocess.run(cmd, shell=True, cwd=phase_dir, capture_output=True, text=True)
+                result = subprocess.run(cmd, shell=True, cwd=phase_dir, env=setup_env, capture_output=True, text=True)
                 if result.returncode != 0:
                     typer.echo(f"Setup command failed: {cmd}")
                     typer.echo(result.stderr)
