@@ -3,7 +3,7 @@
 import typer
 
 from src.models.learn.phase import Goal
-from src.utils.learn import get_active_context, get_current_goal, get_subtopic_dir, save_phase_config
+from src.utils.learn import get_active_context, get_current_goal, get_topic_dir, save_phase_config
 
 app = typer.Typer()
 
@@ -65,7 +65,7 @@ def complete(
 @app.command()
 def new(
     name: str = typer.Argument(help="Goal name"),
-    reference: str = typer.Argument(help="Reference document path (relative to subtopic dir)"),
+    reference: str = typer.Argument(help="Reference document path (relative to topic dir, e.g. reference/doc.md)"),
     topic: str = TOPIC_OPT,
     subtopic: str = SUBTOPIC_OPT,
 ):
@@ -77,8 +77,8 @@ def new(
 
     topic_name, _, subtopic_name, _, phase_name, phase_cfg = ctx
 
-    subtopic_dir = get_subtopic_dir(topic_name, subtopic_name)
-    ref_path = subtopic_dir / reference
+    topic_dir = get_topic_dir(topic_name)
+    ref_path = topic_dir / reference
     if not ref_path.exists():
         typer.echo(f"Reference does not exist: {ref_path.resolve()}")
         typer.echo("Create the reference document first, then create the goal.")
@@ -195,8 +195,8 @@ def status(
         typer.echo("No current goal set.")
         raise typer.Exit(1)
 
-    subtopic_dir = get_subtopic_dir(topic_name, subtopic_name)
-    ref_abs = (subtopic_dir / goal.reference).resolve()
+    topic_dir = get_topic_dir(topic_name)
+    ref_abs = (topic_dir / goal.reference).resolve()
 
     typer.echo(f"Goal: {goal.name}")
     typer.echo(f"Status: {goal.status}")

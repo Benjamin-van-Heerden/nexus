@@ -98,6 +98,9 @@ def complete(
             else:
                 typer.echo(f"\nAll tasks in '{goal.name}' are complete.")
                 typer.echo("Run `nexus learn goal complete` to advance to the next goal.")
+            typer.echo()
+            typer.echo("Remember to log a record of what the USER did (not agent actions):")
+            typer.echo('  nexus learn record "what the user accomplished, struggled with, feedback" --duration "Xmin" --type ...')
             return
 
     typer.echo(f"Task not found: {description}")

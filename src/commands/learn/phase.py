@@ -81,7 +81,7 @@ def new(
     # Create phase.toml
     phase_cfg = PhaseConfig(name=name)
     with open(phase_dir / "phase.toml", "wb") as f:
-        tomli_w.dump(phase_cfg.model_dump(mode="json"), f)
+        tomli_w.dump(phase_cfg.model_dump(mode="json"), f, multiline_strings=True)
 
     # Add to subtopic.toml
     subtopic_cfg.phases.append(PhaseEntry(name=name, status="todo"))
@@ -93,10 +93,17 @@ def new(
 
     save_subtopic_config(topic_name, subtopic_name, subtopic_cfg)
 
+    ref_path = resolve_str(f"learn/{topic_name}/reference")
+
     typer.echo(
         f"Created phase: {resolve_str(f'learn/{topic_name}/{subtopic_name}/{name}')}/"
     )
-    typer.echo('Next: add goals with `nexus learn goal new "goal name" "reference/path.md"`')
+    typer.echo()
+    typer.echo("Next steps:")
+    typer.echo(f"  1. Create reference documents for each goal in: {ref_path}/")
+    typer.echo(f"     Reference docs must exist BEFORE creating a goal.")
+    typer.echo(f"  2. Add goals: nexus learn goal new \"goal name\" \"reference/doc.md\" --topic {topic_name} --subtopic {subtopic_name}")
+    typer.echo(f"     The reference path is relative to the topic directory (learn/{topic_name}/).")
 
 
 @app.command()

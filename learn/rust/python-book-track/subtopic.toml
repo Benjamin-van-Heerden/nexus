@@ -1,32 +1,80 @@
 name = "Rust for Python Developers"
 current_phase = "foundations"
-reference = "../reference/python-book/src"
+reference = ""
 
 [practical]
 description = """
-Create a .rs file in the project/ directory or a relevant subdirectory.
-Use cargo to build and test. Exercises should be runnable with `cargo run`
-or testable with `cargo test`. Always tell the user the absolute file path.
+Create exercises as .rs files in the practical/examples/ directory,
+named by date (YYYY-MM-DD.rs). If multiple exercises in one day, use
+YYYY-MM-DD_2.rs etc.
+
+Each file should be runnable with `cargo run --example YYYY-MM-DD` from the
+practical/ directory, or testable with `cargo test --example YYYY-MM-DD`.
+Always tell the user the absolute file path.
+
+Structure: stub functions with unimplemented!() bodies and doc comments
+explaining what to implement, a main() that calls them with test data and
+prints results, and a #[cfg(test)] module with assertion-based tests.
+
+Example:
+  fn fibonacci(n: u32) -> u32 {
+      unimplemented!()
+  }
+
+  fn main() {
+      println!("fib(10) = {}", fibonacci(10));
+  }
+
+  #[cfg(test)]
+  mod tests {
+      use super::*;
+
+      #[test]
+      fn test_fibonacci() {
+          assert_eq!(fibonacci(0), 0);
+          assert_eq!(fibonacci(1), 1);
+          assert_eq!(fibonacci(10), 55);
+      }
+  }
+
 Practical exercises are the most important type — they should make up the
 bulk of the learning. Focus on hands-on implementation that reinforces
 the concepts from the current goal.
 """
+setup_commands = [
+    "cargo new practical",
+    "mkdir practical/examples",
+    "PHASE=$(basename $(pwd)) && sed -i '' \"s/name = \\\"practical\\\"/name = \\\"practical-rust-python-book-track-$PHASE\\\"/\" practical/Cargo.toml",
+]
 
 [theoretical]
 description = """
-Create a markdown file in the phase's theoretical/ directory.
-Select relevant material from the goal's reference and compose a focused
-reading assignment. Summarize key concepts, highlight important patterns,
-and ask the user to explain them back in their own words.
+Create a markdown file in the phase's theoretical/ directory named
+YYYY-MM-DD-<slug>.md (e.g. 2026-03-29-ownership.md).
+
+Select relevant material from the goal's reference chapter and compose a
+focused reading assignment. Summarize key concepts, highlight differences
+from Python equivalents (e.g. Python's reference counting vs Rust's
+ownership model), and ask the user to explain them back in their own words.
+Include code snippets where helpful.
 """
+setup_commands = []
 
 [quiz]
 description = """
-Create a markdown file in the phase's quiz/ directory.
-Compose 3-5 questions based on recent goals and tasks. Mix multiple choice
-and short answer. Include placeholder positions for answers that the user
-fills in. At least one quiz should be assigned per week.
+Create a markdown file in the phase's quiz/ directory named
+YYYY-MM-DD-<slug>.md (e.g. 2026-03-29-types-quiz.md).
+
+Compose 3-5 questions based on recent goals and tasks. Mix:
+- Multiple choice (conceptual understanding)
+- Code prediction (what does this compile? what does this output?)
+- Short implementation (write a 3-5 line function)
+- Borrow checker reasoning (will this compile? why/why not?)
+
+Include answer placeholders that the user fills in. Answers section at the
+bottom, initially hidden behind a <details> tag.
 """
+setup_commands = []
 
 [[phases]]
 name = "foundations"

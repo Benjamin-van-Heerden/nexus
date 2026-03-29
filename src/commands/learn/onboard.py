@@ -12,6 +12,7 @@ from src.utils.learn import (
     get_current_goal,
     get_records_dir,
     get_subtopic_dir,
+    get_topic_dir,
 )
 from src.utils.path_resolution import resolve, resolve_str
 
@@ -87,8 +88,8 @@ def onboard():
             task_count = len(goal.tasks)
             done_count = sum(1 for t in goal.tasks if t.status == "completed")
             task_info = f" ({done_count}/{task_count} tasks)" if task_count else ""
-            subtopic_dir = get_subtopic_dir(topic_name, subtopic_name)
-            ref_abs = (subtopic_dir / goal.reference).resolve()
+            t_dir = get_topic_dir(topic_name)
+            ref_abs = (t_dir / goal.reference).resolve()
             ref = f"\n      ref: {ref_abs}"
             print(f"  {marker} {goal.name}{task_info}{current}{ref}")
         print()
@@ -99,8 +100,8 @@ def onboard():
         print("-" * 60)
         print(f"CURRENT GOAL: {current_goal.name}")
         print("-" * 60)
-        subtopic_dir = get_subtopic_dir(topic_name, subtopic_name)
-        ref_path = subtopic_dir / current_goal.reference
+        t_dir = get_topic_dir(topic_name)
+        ref_path = t_dir / current_goal.reference
         print(f"Reference: {ref_path.resolve()}")
 
         if ref_path.exists():
@@ -182,7 +183,7 @@ def onboard():
     print(f"Practical exercises:  {resolve_str(f'{phase_base}/practical')}/")
     print(f"Theoretical reading:  {resolve_str(f'{phase_base}/theoretical')}/")
     print(f"Quizzes:              {resolve_str(f'{phase_base}/quiz')}/")
-    print(f"Reference:            {resolve_str(f'{subtopic_base}/reference')}/")
+    print(f"Reference:            {resolve_str(f'learn/{topic_name}/reference')}/")
     print(f"Records:              {resolve_str(f'{subtopic_base}/records')}/")
     print()
 

@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "practical"
+name = "practical-rust-python-book-track-foundations"
 version = "0.1.0"

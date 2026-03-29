@@ -181,13 +181,14 @@ def new(
 
     # Create directory structure
     topic_dir.mkdir(parents=True)
+    (topic_dir / "reference").mkdir()
 
     # Create topic.toml
     import tomli_w
 
     topic_cfg = TopicConfig(name=name)
     with open(topic_dir / "topic.toml", "wb") as f:
-        tomli_w.dump(topic_cfg.model_dump(mode="json"), f)
+        tomli_w.dump(topic_cfg.model_dump(mode="json"), f, multiline_strings=True)
 
     # Create topic_info.md
     (topic_dir / "topic_info.md").write_text(
@@ -199,9 +200,17 @@ def new(
     config.weights[name] = weight
     save_learn_config(config)
 
+    info_path = resolve_str(f"learn/{name}/topic_info.md")
+    ref_path = resolve_str(f"learn/{name}/reference")
+
     typer.echo(f"Created topic: {resolve_str(f'learn/{name}')}/")
-    typer.echo(f"Edit topic info: {resolve_str(f'learn/{name}/topic_info.md')}")
-    typer.echo('Next: create a subtopic with `nexus learn subtopic new "name"`')
+    typer.echo()
+    typer.echo("Next steps:")
+    typer.echo(f"  1. Fill in the topic info (user background, goals, approach): {info_path}")
+    typer.echo(f"  2. Place any reference material (books, docs, guides) in: {ref_path}/")
+    typer.echo(f'  3. Create a subtopic (learning track): nexus learn subtopic new "name" --topic {name}')
+    typer.echo()
+    typer.echo("Discuss with the user what they want to learn, why, and how before proceeding.")
 
 
 @app.command(name="list")

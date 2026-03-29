@@ -1,3 +1,8 @@
 name = "foundations"
-current_goal = ""
-goals = []
+current_goal = "JAX Mental Model and jax.numpy"
+
+[[goals]]
+name = "JAX Mental Model and jax.numpy"
+reference = "reference/foundations-01-mental-model.md"
+status = "in_progress"
+tasks = []

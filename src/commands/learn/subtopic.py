@@ -84,7 +84,7 @@ def new(
         ),
     )
     with open(subtopic_dir / "subtopic.toml", "wb") as f:
-        tomli_w.dump(subtopic_cfg.model_dump(mode="json"), f)
+        tomli_w.dump(subtopic_cfg.model_dump(mode="json"), f, multiline_strings=True)
 
     # Create subtopic_info.md with deliberation template
     (subtopic_dir / "subtopic_info.md").write_text(
@@ -97,14 +97,18 @@ def new(
     typer.echo(f"Created subtopic: {resolve_str(f'learn/{topic_name}/{name}')}/")
     typer.echo()
     typer.echo("Next steps:")
-    typer.echo(f"  1. Review and fill in the learning plan: {info_path}")
-    typer.echo(f"  2. Update exercise type descriptions in: {toml_path}")
-    typer.echo('  3. Create phases with: nexus learn phase new "phase-name"')
-    typer.echo(f'  4. Set as active: nexus learn subtopic set "{name}"')
+    typer.echo(f"  1. Fill in the learning plan (what, why, how, proposed phases): {info_path}")
+    typer.echo(f"  2. Configure exercise types in: {toml_path}")
+    typer.echo(f"     - practical.description: how practical exercises work for this domain")
+    typer.echo(f"     - practical.setup_commands: shell commands to run when creating a phase")
+    typer.echo(f"       (e.g. ['cargo new practical', 'mkdir practical/examples'] for Rust)")
+    typer.echo(f"       Commands run with cwd=<phase_dir> and have $TOPIC, $SUBTOPIC, $PHASE env vars.")
+    typer.echo(f"       Leave empty to default to mkdir for that exercise type.")
+    typer.echo(f"     - Same for theoretical and quiz")
+    typer.echo(f"  3. Create phases: nexus learn phase new \"phase-name\" --topic {topic_name} --subtopic {name}")
+    typer.echo(f"  4. Set as active: nexus learn subtopic set \"{name}\" --topic {topic_name}")
     typer.echo()
-    typer.echo(
-        "Take time to deliberate on what and how you want to learn before proceeding."
-    )
+    typer.echo("Discuss with the user how they want exercises structured before configuring.")
 
 
 @app.command(name="set")
@@ -128,7 +132,7 @@ def set_subtopic(
     topic_cfg = load_topic_config(topic_name)
     topic_cfg.current_subtopic = name
     with open(get_topic_dir(topic_name) / "topic.toml", "wb") as f:
-        tomli_w.dump(topic_cfg.model_dump(mode="json"), f)
+        tomli_w.dump(topic_cfg.model_dump(mode="json"), f, multiline_strings=True)
 
     typer.echo(f"Active subtopic set to: {name}")
 
@@ -195,6 +199,6 @@ def delete(
     if topic_cfg.current_subtopic == name:
         topic_cfg.current_subtopic = ""
         with open(get_topic_dir(topic_name) / "topic.toml", "wb") as f:
-            tomli_w.dump(topic_cfg.model_dump(mode="json"), f)
+            tomli_w.dump(topic_cfg.model_dump(mode="json"), f, multiline_strings=True)
 
     typer.echo(f"Deleted subtopic: {name}")

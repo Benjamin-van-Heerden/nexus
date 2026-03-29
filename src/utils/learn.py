@@ -23,7 +23,7 @@ def _load_toml(path: Path) -> dict:
 
 def _save_toml(path: Path, data: dict) -> None:
     with open(path, "wb") as f:
-        tomli_w.dump(data, f)
+        tomli_w.dump(data, f, multiline_strings=True)
 
 
 # -- Load models --
