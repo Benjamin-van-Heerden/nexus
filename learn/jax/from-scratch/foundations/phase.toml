@@ -6,3 +6,9 @@ name = "JAX Mental Model and jax.numpy"
 reference = "reference/foundations-01-mental-model.md"
 status = "in_progress"
 tasks = []
+
+[[goals]]
+name = "Transformations: jit and grad"
+reference = "reference/foundations-02-jit-and-grad.md"
+status = "todo"
+tasks = []
