@@ -5,6 +5,7 @@ requires-python = ">=3.14"
 [manifest]
 members = [
     "nexus",
+    "practical-jax-from-scratch-attention-and-transformers",
     "practical-jax-from-scratch-foundations",
     "practical-jax-from-scratch-neural-net-primitives",
 ]
@@ -87,6 +88,11 @@ requires-dist = [
     { name = "tomli-w", specifier = ">=1.2.0" },
     { name = "typer", specifier = ">=0.24.1" },
 ]
+
+[[package]]
+name = "practical-jax-from-scratch-attention-and-transformers"
+version = "0.1.0"
+source = { virtual = "learn/jax/from-scratch/attention-and-transformers/practical" }
 
 [[package]]
 name = "practical-jax-from-scratch-foundations"
