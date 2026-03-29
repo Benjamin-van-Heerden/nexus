@@ -10,3 +10,4 @@ elixir = 2
 python = 4
 js-ts = 1
 rust = 4
+jax = 3
