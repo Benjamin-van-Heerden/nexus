@@ -3,6 +3,7 @@ current_phase = "otp-foundations"
 phases = [
     { name = "otp-foundations", status = "in_progress" },
     { name = "abstractions-and-supervision", status = "todo" },
+    { name = "advanced-patterns", status = "todo" },
 ]
 
 [practical]
