@@ -2,45 +2,43 @@ name = "OTP Deep Dive"
 current_phase = "otp-foundations"
 phases = [
     { name = "otp-foundations", status = "in_progress" },
+    { name = "abstractions-and-supervision", status = "todo" },
 ]
 
 [practical]
 description = """
-Create exercises as .exs files in the practical/examples/ directory,
-named by date (YYYY-MM-DD.exs). If multiple exercises in one day, use
-YYYY-MM-DD_2.exs etc.
+Each phase has a mix project at practical/. Create exercise modules in
+practical/lib/ and corresponding tests in practical/test/.
 
-Each file should be runnable with `elixir practical/examples/YYYY-MM-DD.exs`
-from the phase directory. For exercises that need a mix project (GenServers,
-supervisors, etc.), work inside the practical/ mix project directly — create
-modules in practical/lib/ and tests in practical/test/.
+Naming: lib/<slug>.ex and test/<slug>_test.exs, where slug describes
+the exercise (e.g. lib/genserver_basics.ex, test/genserver_basics_test.exs).
 
-For standalone .exs exercises: structure as stub functions/modules with
-@doc explaining what to implement, and test expressions at the bottom
-using ExUnit or simple assertions.
+Structure: modules with stub functions that raise \"implement me\", with
+@doc explaining what to implement. Tests use ExUnit assertions.
+The user runs `cd practical && mix test` to check their work.
 
-For mix project exercises: create modules with stub functions and write
-ExUnit tests. Run with `cd practical && mix test` from the phase directory.
-
-Example (.exs standalone):
+Example:
+  # lib/counter.ex
   defmodule Counter do
     @doc \"Implement a simple counter using Agent\"
     use Agent
 
-    def start_link(initial \\ 0) do
-      raise \"implement me\"
-    end
-
+    def start_link(initial \\\\ 0), do: raise(\"implement me\")
     def get(pid), do: raise(\"implement me\")
     def increment(pid), do: raise(\"implement me\")
   end
 
-  ExUnit.start()
+  # test/counter_test.exs
   defmodule CounterTest do
     use ExUnit.Case
-    test \"counter works\" do
+
+    test \"counter starts with initial value\" do
       {:ok, pid} = Counter.start_link(0)
       assert Counter.get(pid) == 0
+    end
+
+    test \"increment increases count\" do
+      {:ok, pid} = Counter.start_link(0)
       Counter.increment(pid)
       assert Counter.get(pid) == 1
     end
@@ -48,7 +46,6 @@ Example (.exs standalone):
 """
 setup_commands = [
     "mix new practical --app practical_$(echo ${PHASE} | tr '-' '_')",
-    "mkdir practical/examples",
 ]
 
 [theoretical]
