@@ -1,3 +1,8 @@
 name = "otp-foundations"
-current_goal = ""
-goals = []
+current_goal = "OTP Basics and Elixir Behaviours"
+
+[[goals]]
+name = "OTP Basics and Elixir Behaviours"
+reference = "./learn/elixir/reference/01-otp-basics-and-behaviours.md"
+status = "in_progress"
+tasks = []
