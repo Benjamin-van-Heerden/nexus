@@ -1,14 +1,10 @@
 window_size = 8
-current_topic = "python"
+current_topic = "jax"
 history = [
     { week = "2026-03-22", topic = "rust" },
-    { week = "2026-03-29", topic = "python" },
+    { week = "2026-03-29", topic = "jax" },
 ]
 
 [weights]
-c = 1
-elixir = 2
-python = 4
-js-ts = 1
 rust = 4
 jax = 3
