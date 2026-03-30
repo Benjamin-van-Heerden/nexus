@@ -3,6 +3,7 @@ current_phase = "how-async-works"
 reference = ""
 phases = [
     { name = "how-async-works", status = "in_progress" },
+    { name = "ecosystem", status = "todo" },
 ]
 
 [practical]
