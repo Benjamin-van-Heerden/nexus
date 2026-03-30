@@ -45,7 +45,7 @@ Example (.exs standalone):
   end
 """
 setup_commands = [
-    "mix new practical --app practical_${PHASE}",
+    "mix new practical --app practical_$(echo ${PHASE} | tr '-' '_')",
     "mkdir practical/examples",
 ]
 
