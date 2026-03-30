@@ -24,3 +24,9 @@ name = "Pin and Unpin"
 reference = "./learn/rust/reference/async-book/ch04-pin-and-unpin.md"
 status = "todo"
 tasks = []
+
+[[goals]]
+name = "The State Machine Reveal"
+reference = "./learn/rust/reference/async-book/ch05-the-state-machine-reveal.md"
+status = "todo"
+tasks = []
