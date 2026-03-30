@@ -1,3 +1,8 @@
 name = "capstone"
-current_goal = ""
-goals = []
+current_goal = "Async Chat Server"
+
+[[goals]]
+name = "Async Chat Server"
+reference = "./learn/rust/reference/async-book/ch16-capstone-project.md"
+status = "todo"
+tasks = []

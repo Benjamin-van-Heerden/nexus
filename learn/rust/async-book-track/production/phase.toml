@@ -1,3 +1,26 @@
 name = "production"
-current_goal = ""
-goals = []
+current_goal = "Streams and AsyncIterator"
+
+[[goals]]
+name = "Streams and AsyncIterator"
+reference = "./learn/rust/reference/async-book/ch11-streams-and-asynciterator.md"
+status = "todo"
+tasks = []
+
+[[goals]]
+name = "Common Pitfalls"
+reference = "./learn/rust/reference/async-book/ch12-common-pitfalls.md"
+status = "todo"
+tasks = []
+
+[[goals]]
+name = "Production Patterns"
+reference = "./learn/rust/reference/async-book/ch13-production-patterns.md"
+status = "todo"
+tasks = []
+
+[[goals]]
+name = "Exercises"
+reference = "./learn/rust/reference/async-book/ch14-exercises.md"
+status = "todo"
+tasks = []

@@ -102,8 +102,8 @@ def new(
     typer.echo("Next steps:")
     typer.echo(f"  1. Create reference documents for each goal in: {ref_path}/")
     typer.echo(f"     Reference docs must exist BEFORE creating a goal.")
-    typer.echo(f"  2. Add goals: nexus learn goal new \"goal name\" \"reference/doc.md\" --topic {topic_name} --subtopic {subtopic_name}")
-    typer.echo(f"     The reference path is relative to the topic directory (learn/{topic_name}/).")
+    typer.echo(f"  2. Add goals: nexus learn goal new \"goal name\" \"./learn/{topic_name}/reference/doc.md\" --topic {topic_name} --subtopic {subtopic_name}")
+    typer.echo(f"     All paths use the ./ prefix (relative to repo root).")
 
 
 @app.command()

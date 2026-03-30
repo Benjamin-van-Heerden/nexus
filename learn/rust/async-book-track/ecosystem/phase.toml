@@ -1,3 +1,32 @@
 name = "ecosystem"
-current_goal = ""
-goals = []
+current_goal = "Building Futures by Hand"
+
+[[goals]]
+name = "Building Futures by Hand"
+reference = "./learn/rust/reference/async-book/ch06-building-futures-by-hand.md"
+status = "todo"
+tasks = []
+
+[[goals]]
+name = "Executors and Runtimes"
+reference = "./learn/rust/reference/async-book/ch07-executors-and-runtimes.md"
+status = "todo"
+tasks = []
+
+[[goals]]
+name = "Tokio Deep Dive"
+reference = "./learn/rust/reference/async-book/ch08-tokio-deep-dive.md"
+status = "todo"
+tasks = []
+
+[[goals]]
+name = "When Tokio Isn't the Right Fit"
+reference = "./learn/rust/reference/async-book/ch09-when-tokio-isnt-the-right-fit.md"
+status = "todo"
+tasks = []
+
+[[goals]]
+name = "Async Traits"
+reference = "./learn/rust/reference/async-book/ch10-async-traits.md"
+status = "todo"
+tasks = []
