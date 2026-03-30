@@ -6,3 +6,9 @@ name = "Why Async is Different in Rust"
 reference = "./learn/rust/reference/async-book/ch01-why-async-is-different-in-rust.md"
 status = "in_progress"
 tasks = []
+
+[[goals]]
+name = "The Future Trait"
+reference = "./learn/rust/reference/async-book/ch02-the-future-trait.md"
+status = "todo"
+tasks = []
