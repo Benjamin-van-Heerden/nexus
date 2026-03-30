@@ -18,3 +18,9 @@ name = "How Poll Works"
 reference = "./learn/rust/reference/async-book/ch03-how-poll-works.md"
 status = "todo"
 tasks = []
+
+[[goals]]
+name = "Pin and Unpin"
+reference = "./learn/rust/reference/async-book/ch04-pin-and-unpin.md"
+status = "todo"
+tasks = []
