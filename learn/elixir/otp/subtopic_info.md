@@ -1,23 +1,26 @@
-# otp
+# OTP Deep Dive
 
 ## What are we learning?
-<!-- Describe the subject matter and scope. What specific area does this cover? -->
+
+OTP (Open Telecom Platform) — Elixir's framework for building concurrent, fault-tolerant applications. Covers the full stack: behaviours, GenServer, supervision trees, dynamic supervisors, tasks, agents, and design patterns. Culminates in a word ladder game that integrates all the concepts.
 
 ## Why are we learning this?
-<!-- Motivation: what will this enable? Why is it worth the time? -->
+
+OTP is the reason to use Elixir. Without it, Elixir is just a nice functional language. With it, you get a battle-tested framework for building systems that recover from failures, scale across cores, and manage state cleanly. Understanding OTP deeply is the difference between writing Elixir and thinking in Elixir.
 
 ## How will we learn?
-<!-- Approach and methodology. What resources will we use? How will we structure
-the learning — reading, exercises, projects? -->
 
-## Proposed Phases
-<!-- List the phases you plan to work through. These will be created with
-`nexus learn phase new "name"` once the plan is agreed on. -->
+Bottom-up through the OTP stack. Start with the primitives (behaviours, GenServer callbacks, CRC pattern), build up through supervision and abstractions, then apply everything in a capstone project. Practical exercises are the core — most concepts only click when you build something with them.
 
-1. ...
-2. ...
-3. ...
+## Phases
+
+1. **otp-foundations** — Behaviours, functional cores, CRC (Construct/Reduce/Convert) pattern, GenServer message callbacks
+2. **abstractions-and-supervision** — OTP core abstractions, links and monitors, supervisors, child specs, restart strategies
+3. **advanced-patterns** — Dynamic supervisors, registries, design concepts (when not to OTP), backpressure, tasks, agents
+4. **capstone** — Word ladder game: functional core, GenServer boundary, validation, CLI, dynamic supervisor for multiplayer
 
 ## Resources
-<!-- Links, books, repos, documentation, courses, etc. -->
 
+- OTP course material in `./learn/elixir/reference/`
+- Elixir documentation: https://hexdocs.pm/elixir/
+- OTP documentation: https://hexdocs.pm/elixir/otp.html

@@ -1,15 +1,79 @@
-name = "otp"
+name = "OTP Deep Dive"
 current_phase = ""
 phases = []
 
 [practical]
-description = "Describe how practical exercises work for this subtopic."
-setup_commands = []
+description = """
+Create exercises as .exs files in the practical/examples/ directory,
+named by date (YYYY-MM-DD.exs). If multiple exercises in one day, use
+YYYY-MM-DD_2.exs etc.
+
+Each file should be runnable with `elixir practical/examples/YYYY-MM-DD.exs`
+from the phase directory. For exercises that need a mix project (GenServers,
+supervisors, etc.), work inside the practical/ mix project directly — create
+modules in practical/lib/ and tests in practical/test/.
+
+For standalone .exs exercises: structure as stub functions/modules with
+@doc explaining what to implement, and test expressions at the bottom
+using ExUnit or simple assertions.
+
+For mix project exercises: create modules with stub functions and write
+ExUnit tests. Run with `cd practical && mix test` from the phase directory.
+
+Example (.exs standalone):
+  defmodule Counter do
+    @doc "Implement a simple counter using Agent"
+    use Agent
+
+    def start_link(initial \\ 0) do
+      raise "implement me"
+    end
+
+    def get(pid), do: raise("implement me")
+    def increment(pid), do: raise("implement me")
+  end
+
+  ExUnit.start()
+  defmodule CounterTest do
+    use ExUnit.Case
+    test "counter works" do
+      {:ok, pid} = Counter.start_link(0)
+      assert Counter.get(pid) == 0
+      Counter.increment(pid)
+      assert Counter.get(pid) == 1
+    end
+  end
+"""
+setup_commands = [
+    "mix new practical --app practical_${PHASE}",
+    "mkdir practical/examples",
+]
 
 [theoretical]
-description = "Describe how theoretical reading works for this subtopic."
+description = """
+Create a markdown file in the phase's theoretical/ directory named
+YYYY-MM-DD-<slug>.md (e.g. 2026-04-01-genserver.md).
+
+Select relevant material from the goal's reference document and compose a
+focused reading assignment. Summarize key concepts, draw parallels with
+other concurrency models the user knows (Python asyncio, Rust async),
+and ask the user to explain them back in their own words. Include code
+snippets and iex session examples where helpful.
+"""
 setup_commands = []
 
 [quiz]
-description = "Describe how quizzes work for this subtopic."
+description = """
+Create a markdown file in the phase's quiz/ directory named
+YYYY-MM-DD-<slug>.md (e.g. 2026-04-01-supervision-quiz.md).
+
+Compose 3-5 questions based on recent goals and tasks. Mix:
+- Multiple choice (conceptual understanding)
+- Code prediction (what happens when this process crashes?)
+- Short implementation (write a GenServer callback)
+- Supervision reasoning (draw the supervision tree, identify restart strategy)
+
+Include answer placeholders that the user fills in. Answers section at the
+bottom, initially hidden behind a <details> tag.
+"""
 setup_commands = []
