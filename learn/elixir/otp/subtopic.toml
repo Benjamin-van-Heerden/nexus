@@ -1,6 +1,8 @@
 name = "OTP Deep Dive"
-current_phase = ""
-phases = []
+current_phase = "otp-foundations"
+phases = [
+    { name = "otp-foundations", status = "in_progress" },
+]
 
 [practical]
 description = """
@@ -22,21 +24,21 @@ ExUnit tests. Run with `cd practical && mix test` from the phase directory.
 
 Example (.exs standalone):
   defmodule Counter do
-    @doc "Implement a simple counter using Agent"
+    @doc \"Implement a simple counter using Agent\"
     use Agent
 
     def start_link(initial \\ 0) do
-      raise "implement me"
+      raise \"implement me\"
     end
 
-    def get(pid), do: raise("implement me")
-    def increment(pid), do: raise("implement me")
+    def get(pid), do: raise(\"implement me\")
+    def increment(pid), do: raise(\"implement me\")
   end
 
   ExUnit.start()
   defmodule CounterTest do
     use ExUnit.Case
-    test "counter works" do
+    test \"counter works\" do
       {:ok, pid} = Counter.start_link(0)
       assert Counter.get(pid) == 0
       Counter.increment(pid)
