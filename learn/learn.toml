@@ -7,5 +7,5 @@ history = [
 
 [weights]
 rust = 4
-jax = 3
+jax = 4
 elixir = 2
