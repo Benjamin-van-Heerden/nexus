@@ -12,3 +12,9 @@ name = "The Future Trait"
 reference = "./learn/rust/reference/async-book/ch02-the-future-trait.md"
 status = "todo"
 tasks = []
+
+[[goals]]
+name = "How Poll Works"
+reference = "./learn/rust/reference/async-book/ch03-how-poll-works.md"
+status = "todo"
+tasks = []
