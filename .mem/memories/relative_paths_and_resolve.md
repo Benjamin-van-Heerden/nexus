@@ -1,6 +1,6 @@
 ---
 title: relative-paths-and-resolve
 created_at: '2026-03-27T14:40:52.440680'
-updated_at: '2026-03-27T14:46:34.236171'
+updated_at: '2026-03-30T11:35:53.134504'
 ---
-All paths stored in nexus TOML files and references must be relative to the project root. Never store absolute paths. The CLI provides 'nexus resolve-path <relative-path>' which resolves any relative path to an absolute path on the current machine. Agents should use this command to discover actual file locations. Anywhere a path is printed by the nexus app it must be resolved to an absolute path, for which functionality is provided in src/utils/path_resolution.py. This ensures nexus works identically across different machines.
+All paths stored in nexus TOML files use the ./ prefix, relative to the project root (e.g. ./learn/jax/reference/doc.md). This is the single, universal convention — no field-specific base directories. The CLI resolves these to absolute paths for display using src/utils/path_resolution.py. The to_stored_path() function converts any path to the ./ convention, and resolve()/resolve_str() convert stored paths to absolute paths. nexus resolve-path command is available for agents.
