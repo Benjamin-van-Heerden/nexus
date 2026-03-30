@@ -1,16 +1,90 @@
-name = "async-book-track"
-current_phase = ""
+name = "Async Rust Deep Dive"
+current_phase = "how-async-works"
 reference = ""
-phases = []
+phases = [
+    { name = "how-async-works", status = "in_progress" },
+]
 
 [practical]
-description = "Describe how practical exercises work for this subtopic."
-setup_commands = []
+description = """
+Create exercises as .rs files in the practical/examples/ directory,
+named by date (YYYY-MM-DD.rs). If multiple exercises in one day, use
+YYYY-MM-DD_2.rs etc.
+
+Each file should be runnable with `cargo run --example YYYY-MM-DD` from the
+practical/ directory, or testable with `cargo test --example YYYY-MM-DD`.
+Always tell the user the absolute file path.
+
+Async exercises will often need tokio as a dependency. The practical project's
+Cargo.toml should include `tokio = { version = \"1\", features = [\"full\"] }`.
+Add this after the first phase is created.
+
+Structure: stub async functions with unimplemented!() bodies and doc comments
+explaining what to implement. Use #[tokio::main] for the main function.
+Include a #[cfg(test)] module with #[tokio::test] assertions.
+
+Example:
+  use tokio::time::{sleep, Duration};
+
+  async fn fetch_with_timeout(url: &str, timeout_ms: u64) -> Result<String, String> {
+      unimplemented!()
+  }
+
+  #[tokio::main]
+  async fn main() {
+      let result = fetch_with_timeout(\"https://example.com\", 5000).await;
+      println!(\"{:?}\", result);
+  }
+
+  #[cfg(test)]
+  mod tests {
+      use super::*;
+
+      #[tokio::test]
+      async fn test_timeout() {
+          let result = fetch_with_timeout(\"https://example.com\", 1).await;
+          assert!(result.is_err());
+      }
+  }
+
+Practical exercises are the most important type — they should make up the
+bulk of the learning. Focus on hands-on implementation that reinforces
+the concepts from the current goal.
+"""
+setup_commands = [
+    "cargo new practical",
+    "mkdir practical/examples",
+    "PHASE=$(basename $(pwd)) && sed -i '' \"s/name = \\\"practical\\\"/name = \\\"practical-rust-async-book-track-$PHASE\\\"/\" practical/Cargo.toml",
+]
 
 [theoretical]
-description = "Describe how theoretical reading works for this subtopic."
+description = """
+Create a markdown file in the phase's theoretical/ directory named
+YYYY-MM-DD-<slug>.md (e.g. 2026-04-01-pin-unpin.md).
+
+Select relevant material from the goal's reference chapter and compose a
+focused reading assignment. Async Rust is conceptually dense — break down
+the mental model explicitly. Compare with Python's asyncio where useful
+(e.g. Python's event loop vs Rust's executor, Python's coroutines vs
+Rust's state machine futures). Ask the user to explain concepts back in
+their own words, especially around Pin, polling, and Send/Sync bounds.
+Include code snippets where helpful.
+"""
 setup_commands = []
 
 [quiz]
-description = "Describe how quizzes work for this subtopic."
+description = """
+Create a markdown file in the phase's quiz/ directory named
+YYYY-MM-DD-<slug>.md (e.g. 2026-04-01-futures-quiz.md).
+
+Compose 3-5 questions based on recent goals and tasks. Mix:
+- Multiple choice (conceptual understanding)
+- Code prediction (will this compile? what does this output?)
+- Short implementation (write a 3-5 line async function)
+- Send/Sync reasoning (is this future Send? why/why not?)
+- Pin reasoning (does this need pinning? why?)
+
+Include answer placeholders that the user fills in. Answers section at the
+bottom, initially hidden behind a <details> tag.
+"""
 setup_commands = []
