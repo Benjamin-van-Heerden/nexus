@@ -6,17 +6,19 @@ Benjamin has built a small CLI tool in Rust (topic rotation for the nexus learni
 
 ## End Goal
 
-Become proficient in async Rust — from language fundamentals through to writing production-quality async code. This means understanding ownership and borrowing deeply enough that async patterns (futures, pinning, Send/Sync bounds) make intuitive sense rather than being fought against.
+Become proficient in Rust — from language fundamentals through async and into building real systems. This means understanding ownership and borrowing deeply enough that async patterns (futures, pinning, Send/Sync bounds) make intuitive sense, and then applying that knowledge to non-trivial projects.
 
 ## Learning Approach
 
-Two-track curriculum using Microsoft's RustTraining material:
+Progressive curriculum:
 1. **python-book track** — Rust fundamentals through the lens of a Python developer. Covers types, ownership, traits, error handling, concurrency, and a capstone project.
-2. **async-book track** (planned) — Deep dive into async Rust: futures, executors, pinning, streams, and production patterns.
+2. **async-book track** — Deep dive into async Rust: futures, executors, pinning, streams, and production patterns.
+3. **bitcoin track** (future) — Build Bitcoin in Rust, based on a dedicated book. A CodeCrafters-style project applying systems-level Rust to a real protocol.
+4. **sqlite track** (future) — Build SQLite in Rust, based on the CodeCrafters project. Exercises low-level I/O, parsing, and data structures.
 
-The python-book track comes first to build solid foundations. The async track builds on top once ownership, traits, and concurrency basics are solid.
+The first two tracks build foundations and async fluency. The latter two are capstone-level projects that put it all together on real systems.
 
 ## Reference Material
 
-- `reference/python-book/` — Rust for Python Developers (17 chapters, foundations through capstone)
-- `reference/async-book/` — Async Rust deep dive (16 chapters, futures through production patterns)
+- `./learn/rust/reference/python-book/` — Rust for Python Developers (17 chapters, foundations through capstone)
+- `./learn/rust/reference/async-book/` — Async Rust deep dive (16 chapters, futures through production patterns)

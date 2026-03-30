@@ -21,7 +21,6 @@ class PhaseEntry(BaseModel):
 class SubtopicConfig(BaseModel):
     name: str
     current_phase: str = ""
-    reference: str = ""
     practical: ExerciseTypeConfig = ExerciseTypeConfig()
     theoretical: ExerciseTypeConfig = ExerciseTypeConfig()
     quiz: ExerciseTypeConfig = ExerciseTypeConfig()

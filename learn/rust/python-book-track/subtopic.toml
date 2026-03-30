@@ -1,6 +1,5 @@
 name = "Rust for Python Developers"
 current_phase = "foundations"
-reference = ""
 
 [practical]
 description = """

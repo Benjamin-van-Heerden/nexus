@@ -8,3 +8,4 @@ history = [
 [weights]
 rust = 4
 jax = 3
+elixir = 2

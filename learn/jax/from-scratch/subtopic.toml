@@ -1,6 +1,5 @@
 name = "From Scratch — JAX to Transformers to DeepSeek"
 current_phase = "foundations"
-reference = ""
 
 [practical]
 description = """
