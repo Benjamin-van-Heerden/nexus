@@ -55,19 +55,19 @@ def load_phase_config(topic: str, subtopic: str, phase: str) -> PhaseConfig:
 
 def save_learn_config(config: LearnConfig) -> None:
     path = get_learn_dir() / "learn.toml"
-    _save_toml(path, config.model_dump(mode="json"))
+    _save_toml(path, config.model_dump(mode="json", exclude_none=True))
 
 
 def save_subtopic_config(topic: str, subtopic: str, config: SubtopicConfig) -> None:
     path = get_learn_dir() / topic / subtopic / "subtopic.toml"
-    _save_toml(path, config.model_dump(mode="json"))
+    _save_toml(path, config.model_dump(mode="json", exclude_none=True))
 
 
 def save_phase_config(
     topic: str, subtopic: str, phase: str, config: PhaseConfig
 ) -> None:
     path = get_learn_dir() / topic / subtopic / phase / "phase.toml"
-    _save_toml(path, config.model_dump(mode="json"))
+    _save_toml(path, config.model_dump(mode="json", exclude_none=True))
 
 
 # -- Traversal helpers --
