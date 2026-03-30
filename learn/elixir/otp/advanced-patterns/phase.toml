@@ -1,3 +1,20 @@
 name = "advanced-patterns"
-current_goal = ""
-goals = []
+current_goal = "Dynamic Supervisors and Registries"
+
+[[goals]]
+name = "Dynamic Supervisors and Registries"
+reference = "./learn/elixir/reference/06-dynamic-supervisors-and-registries.md"
+status = "todo"
+tasks = []
+
+[[goals]]
+name = "Design Concepts and Backpressure"
+reference = "./learn/elixir/reference/07-design-concepts-and-backpressure.md"
+status = "todo"
+tasks = []
+
+[[goals]]
+name = "Tasks and Agents"
+reference = "./learn/elixir/reference/08-tasks-and-agents.md"
+status = "todo"
+tasks = []

@@ -1,3 +1,20 @@
 name = "capstone"
-current_goal = ""
-goals = []
+current_goal = "Word Ladder: Functional Core"
+
+[[goals]]
+name = "Word Ladder: Functional Core"
+reference = "./learn/elixir/reference/09-word-ladder-core.md"
+status = "todo"
+tasks = []
+
+[[goals]]
+name = "Word Ladder: GenServer Boundary and Validation"
+reference = "./learn/elixir/reference/10-word-ladder-genserver.md"
+status = "todo"
+tasks = []
+
+[[goals]]
+name = "Word Ladder: CLI and Dynamic Supervisor"
+reference = "./learn/elixir/reference/11-word-ladder-dynamic-supervisor.md"
+status = "todo"
+tasks = []

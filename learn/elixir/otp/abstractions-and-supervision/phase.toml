@@ -1,3 +1,14 @@
 name = "abstractions-and-supervision"
-current_goal = ""
-goals = []
+current_goal = "OTP Abstractions, Links, and Monitors"
+
+[[goals]]
+name = "OTP Abstractions, Links, and Monitors"
+reference = "./learn/elixir/reference/04-abstractions-links-monitors.md"
+status = "todo"
+tasks = []
+
+[[goals]]
+name = "Supervisors, Child Specs, and Restart Strategies"
+reference = "./learn/elixir/reference/05-supervisors-and-child-specs.md"
+status = "todo"
+tasks = []
