@@ -1,0 +1,6 @@
+[package]
+name = "practical-rust-async-book-track-production"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
