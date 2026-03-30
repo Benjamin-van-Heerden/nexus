@@ -12,3 +12,9 @@ name = "Functional Cores and the CRC Pattern"
 reference = "./learn/elixir/reference/02-functional-cores-and-crc.md"
 status = "todo"
 tasks = []
+
+[[goals]]
+name = "GenServer Message Callbacks"
+reference = "./learn/elixir/reference/03-genserver-callbacks.md"
+status = "todo"
+tasks = []
