@@ -1,3 +1,8 @@
 name = "how-async-works"
-current_goal = ""
-goals = []
+current_goal = "Why Async is Different in Rust"
+
+[[goals]]
+name = "Why Async is Different in Rust"
+reference = "./learn/rust/reference/async-book/ch01-why-async-is-different-in-rust.md"
+status = "in_progress"
+tasks = []
