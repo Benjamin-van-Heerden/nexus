@@ -4,6 +4,7 @@ phases = [
     { name = "otp-foundations", status = "in_progress" },
     { name = "abstractions-and-supervision", status = "todo" },
     { name = "advanced-patterns", status = "todo" },
+    { name = "capstone", status = "todo" },
 ]
 
 [practical]
