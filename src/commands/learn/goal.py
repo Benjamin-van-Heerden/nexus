@@ -3,7 +3,8 @@
 import typer
 
 from src.models.learn.phase import Goal
-from src.utils.learn import get_active_context, get_current_goal, get_topic_dir, save_phase_config
+from src.utils.learn import get_active_context, get_current_goal, save_phase_config
+from src.utils.path_resolution import resolve, resolve_str, to_stored_path
 
 app = typer.Typer()
 
@@ -65,7 +66,7 @@ def complete(
 @app.command()
 def new(
     name: str = typer.Argument(help="Goal name"),
-    reference: str = typer.Argument(help="Reference document path (relative to topic dir, e.g. reference/doc.md)"),
+    reference: str = typer.Argument(help="Reference document path (e.g. ./learn/jax/reference/doc.md)"),
     topic: str = TOPIC_OPT,
     subtopic: str = SUBTOPIC_OPT,
 ):
@@ -77,23 +78,22 @@ def new(
 
     topic_name, _, subtopic_name, _, phase_name, phase_cfg = ctx
 
-    topic_dir = get_topic_dir(topic_name)
-    ref_path = topic_dir / reference
-    if not ref_path.exists():
-        typer.echo(f"Reference does not exist: {ref_path.resolve()}")
+    stored = to_stored_path(reference)
+    ref_abs = resolve(stored)
+    if not ref_abs.exists():
+        typer.echo(f"Reference does not exist: {ref_abs}")
         typer.echo("Create the reference document first, then create the goal.")
         raise typer.Exit(1)
 
-    phase_cfg.goals.append(Goal(name=name, reference=reference))
+    phase_cfg.goals.append(Goal(name=name, reference=stored))
 
-    # If this is the first goal, make it current
     if not phase_cfg.current_goal:
         phase_cfg.current_goal = name
         phase_cfg.goals[-1].status = "in_progress"
 
     save_phase_config(topic_name, subtopic_name, phase_name, phase_cfg)
     typer.echo(f"Added goal: {name}")
-    typer.echo(f"Reference: {ref_path.resolve()}")
+    typer.echo(f"Reference: {ref_abs}")
     typer.echo('Next: create tasks with `nexus learn task new "description" --type practical`')
 
 
@@ -195,12 +195,9 @@ def status(
         typer.echo("No current goal set.")
         raise typer.Exit(1)
 
-    topic_dir = get_topic_dir(topic_name)
-    ref_abs = (topic_dir / goal.reference).resolve()
-
     typer.echo(f"Goal: {goal.name}")
     typer.echo(f"Status: {goal.status}")
-    typer.echo(f"Reference: {ref_abs}")
+    typer.echo(f"Reference: {resolve_str(goal.reference)}")
 
     if goal.tasks:
         typer.echo(

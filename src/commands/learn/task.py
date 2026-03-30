@@ -5,7 +5,8 @@ from datetime import date
 import typer
 
 from src.models.learn.phase import Task
-from src.utils.learn import get_active_context, get_current_goal, get_subtopic_dir, save_phase_config
+from src.utils.learn import get_active_context, get_current_goal, save_phase_config
+from src.utils.path_resolution import resolve_str, to_stored_path
 
 app = typer.Typer()
 
@@ -20,7 +21,7 @@ def new(
         "practical", help="Task type: practical, theoretical, quiz"
     ),
     relevant_files: list[str] = typer.Option(
-        [], "--file", "-f", help="Relevant file paths (relative to subtopic dir)"
+        [], "--file", "-f", help="Relevant file paths (e.g. ./learn/jax/from-scratch/foundations/practical/examples/2026-03-30.py)"
     ),
     topic: str = TOPIC_OPT,
     subtopic: str = SUBTOPIC_OPT,
@@ -44,25 +45,24 @@ def new(
     today = date.today()
     dangling = [t for t in goal.tasks if t.status == "todo" and t.created < today]
     if dangling:
-        subtopic_dir = get_subtopic_dir(topic_name, subtopic_name)
         typer.echo("Cannot create new tasks — the user still has incomplete tasks from previous work on this topic:")
         typer.echo()
         for t in dangling:
             typer.echo(f"  [{t.type}] {t.name} (created {t.created.isoformat()})")
             for f in t.relevant_files:
-                typer.echo(f"    file: {(subtopic_dir / f).resolve()}")
+                typer.echo(f"    file: {resolve_str(f)}")
         typer.echo()
         typer.echo("Report these to the user and ask them to complete or address them first.")
         raise typer.Exit(1)
 
-    goal.tasks.append(Task(name=description, type=type, created=today, relevant_files=relevant_files))
+    stored_files = [to_stored_path(f) for f in relevant_files]
+    goal.tasks.append(Task(name=description, type=type, created=today, relevant_files=stored_files))
     save_phase_config(topic_name, subtopic_name, phase_name, phase_cfg)
 
     typer.echo(f"Added {type} task to '{goal.name}': {description}")
-    if relevant_files:
-        subtopic_dir = get_subtopic_dir(topic_name, subtopic_name)
-        for f in relevant_files:
-            typer.echo(f"  file: {(subtopic_dir / f).resolve()}")
+    if stored_files:
+        for f in stored_files:
+            typer.echo(f"  file: {resolve_str(f)}")
 
 
 @app.command()
@@ -128,8 +128,6 @@ def list_tasks(
         typer.echo(f"No tasks for goal: {goal.name}")
         return
 
-    subtopic_dir = get_subtopic_dir(topic_name, subtopic_name)
-
     typer.echo(f"Tasks for: {goal.name}\n")
     for task in goal.tasks:
         marker = "[x]" if task.status == "completed" else "[ ]"
@@ -139,4 +137,4 @@ def list_tasks(
         date_info += ")"
         typer.echo(f"  {marker} [{task.type}] {task.name}{date_info}")
         for f in task.relevant_files:
-            typer.echo(f"      file: {(subtopic_dir / f).resolve()}")
+            typer.echo(f"      file: {resolve_str(f)}")

@@ -3,29 +3,29 @@ name = "Core Concepts"
 [[goals]]
 name = "Ownership and Borrowing"
 status = "todo"
-reference = "reference/python-book/src/ch07-ownership-and-borrowing.md"
+reference = "./learn/rust/reference/python-book/ch07-ownership-and-borrowing.md"
 
 [[goals]]
 name = "Crates and Modules"
 status = "todo"
-reference = "reference/python-book/src/ch08-crates-and-modules.md"
+reference = "./learn/rust/reference/python-book/ch08-crates-and-modules.md"
 
 [[goals]]
 name = "Error Handling"
 status = "todo"
-reference = "reference/python-book/src/ch09-error-handling.md"
+reference = "./learn/rust/reference/python-book/ch09-error-handling.md"
 
 [[goals]]
 name = "Traits and Generics"
 status = "todo"
-reference = "reference/python-book/src/ch10-traits-and-generics.md"
+reference = "./learn/rust/reference/python-book/ch10-traits-and-generics.md"
 
 [[goals]]
 name = "From and Into Traits"
 status = "todo"
-reference = "reference/python-book/src/ch11-from-and-into-traits.md"
+reference = "./learn/rust/reference/python-book/ch11-from-and-into-traits.md"
 
 [[goals]]
 name = "Closures and Iterators"
 status = "todo"
-reference = "reference/python-book/src/ch12-closures-and-iterators.md"
+reference = "./learn/rust/reference/python-book/ch12-closures-and-iterators.md"

@@ -47,9 +47,9 @@ After `nexus learn subtopic new "name"`:
 ### New phase
 After `nexus learn phase new "name"`:
 1. The setup_commands from `subtopic.toml` run automatically to create practical/theoretical/quiz directories
-2. Create reference documents in the subtopic's `reference/` directory for each goal you plan to add
-3. Create goals with `nexus learn goal new "name" "reference/path/to/doc.md"`
-4. Each goal MUST have a reference document (relative to the subtopic directory)
+2. Create reference documents in the topic's `reference/` directory for each goal you plan to add
+3. Create goals with `nexus learn goal new "name" "./learn/<topic>/reference/doc.md"`
+4. Each goal MUST have a reference document. All paths use the `./` prefix (relative to repo root).
 
 ## Creating exercises
 
@@ -89,16 +89,16 @@ Records should capture: what work the user completed, what they found difficult 
 You **cannot** create new tasks if there are incomplete tasks from a previous day. The CLI will block this. If the user has leftover tasks, your job is to report them and ask the user to complete them first (or discuss whether to abandon them).
 
 When creating tasks, always attach relevant files with the `--file` flag so the user knows exactly where to find and do the work:
-`nexus learn task new "description" --type practical -f "foundations/practical/examples/2026-03-29.rs"`
+`nexus learn task new "description" --type practical -f "./learn/rust/python-book-track/foundations/practical/examples/2026-03-29.rs"`
 
-File paths are relative to the subtopic directory.
+All paths use the `./` prefix — relative to the repo root. The CLI resolves them to absolute paths for display.
 
 ## Rules
 
-- Always use absolute paths when telling the user where files are. Use `nexus resolve-path "relative/path"` if needed.
+- Always use absolute paths when telling the user where files are. Use `nexus resolve-path "./path/from/root"` if needed.
 - Do not create tasks for goals that are not the current goal.
 - Do not skip ahead — work through goals in order.
-- When creating a goal, the reference document must already exist in the subtopic's `reference/` directory.
+- When creating a goal, the reference document must already exist. Provide the full `./` prefixed path.
 - When all goals in a phase are done, prompt the user to complete the phase.
 - Read the exercise type descriptions in the onboard output — they tell you exactly how to structure exercises for this particular subtopic.
 - Read recent records to understand what the user has been working on, what they struggled with, and how long things take. Calibrate exercise difficulty and scope accordingly.
@@ -114,11 +114,11 @@ File paths are relative to the subtopic directory.
 - `nexus learn phase new "name"` — Create phase (runs setup_commands)
 
 ### Goals and tasks
-- `nexus learn goal new "name" "reference/path.md"` — Add goal (reference required)
+- `nexus learn goal new "name" "./learn/<topic>/reference/path.md"` — Add goal (reference required, ./ prefix)
 - `nexus learn goal set "name"` — Set current goal
 - `nexus learn goal complete` — Complete current goal (blocked if tasks open)
 - `nexus learn goal list` — List all goals
-- `nexus learn task new "desc" --type X -f "path/to/file"` — Add task with relevant files (blocked if dangling tasks exist)
+- `nexus learn task new "desc" --type X -f "./learn/.../file"` — Add task with relevant files (./ prefix, blocked if dangling tasks exist)
 - `nexus learn task complete "desc"` — Mark task completed
 - `nexus learn task list` — List tasks in current goal
 
@@ -128,4 +128,4 @@ File paths are relative to the subtopic directory.
 - `nexus learn record "what the user did" --duration "20min" --type X` — Log what the USER accomplished (not agent actions)
 
 ### Utility
-- `nexus resolve-path "relative/path"` — Resolve to absolute path on this machine
+- `nexus resolve-path "./path/from/root"` — Resolve to absolute path on this machine

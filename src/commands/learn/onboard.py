@@ -11,8 +11,6 @@ from src.utils.learn import (
     get_active_context,
     get_current_goal,
     get_records_dir,
-    get_subtopic_dir,
-    get_topic_dir,
 )
 from src.utils.path_resolution import resolve, resolve_str
 
@@ -88,9 +86,7 @@ def onboard():
             task_count = len(goal.tasks)
             done_count = sum(1 for t in goal.tasks if t.status == "completed")
             task_info = f" ({done_count}/{task_count} tasks)" if task_count else ""
-            t_dir = get_topic_dir(topic_name)
-            ref_abs = (t_dir / goal.reference).resolve()
-            ref = f"\n      ref: {ref_abs}"
+            ref = f"\n      ref: {resolve_str(goal.reference)}"
             print(f"  {marker} {goal.name}{task_info}{current}{ref}")
         print()
 
@@ -100,13 +96,12 @@ def onboard():
         print("-" * 60)
         print(f"CURRENT GOAL: {current_goal.name}")
         print("-" * 60)
-        t_dir = get_topic_dir(topic_name)
-        ref_path = t_dir / current_goal.reference
-        print(f"Reference: {ref_path.resolve()}")
+        ref_abs = resolve(current_goal.reference)
+        print(f"Reference: {ref_abs}")
 
-        if ref_path.exists():
+        if ref_abs.exists():
             print()
-            print(ref_path.read_text().strip())
+            print(ref_abs.read_text().strip())
 
         if current_goal.tasks:
             print(

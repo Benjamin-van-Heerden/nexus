@@ -35,6 +35,7 @@ setup_commands = [
     "uv init practical",
     "mkdir practical/examples",
     "sed -i '' \"s/name = \\\"practical\\\"/name = \\\"practical-${TOPIC}-${SUBTOPIC}-${PHASE}\\\"/\" practical/pyproject.toml",
+    "rm practical/README.md"
 ]
 
 [theoretical]

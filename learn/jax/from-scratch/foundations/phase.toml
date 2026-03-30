@@ -3,7 +3,7 @@ current_goal = "JAX Mental Model and jax.numpy"
 
 [[goals]]
 name = "JAX Mental Model and jax.numpy"
-reference = "reference/foundations-01-mental-model.md"
+reference = "./learn/jax/reference/foundations-01-mental-model.md"
 status = "in_progress"
 
 [[goals.tasks]]
@@ -12,35 +12,35 @@ type = "practical"
 created = "2026-03-30"
 status = "todo"
 relevant_files = [
-    "foundations/practical/examples/2026-03-30.py",
+    "./learn/jax/from-scratch/foundations/practical/examples/2026-03-30.py",
 ]
 
 [[goals]]
 name = "Transformations: jit and grad"
-reference = "reference/foundations-02-jit-and-grad.md"
+reference = "./learn/jax/reference/foundations-02-jit-and-grad.md"
 status = "todo"
 tasks = []
 
 [[goals]]
 name = "Transformations: vmap and pmap"
-reference = "reference/foundations-03-vmap-and-pmap.md"
+reference = "./learn/jax/reference/foundations-03-vmap-and-pmap.md"
 status = "todo"
 tasks = []
 
 [[goals]]
 name = "PRNG and Randomness"
-reference = "reference/foundations-04-prng.md"
+reference = "./learn/jax/reference/foundations-04-prng.md"
 status = "todo"
 tasks = []
 
 [[goals]]
 name = "Pytrees"
-reference = "reference/foundations-05-pytrees.md"
+reference = "./learn/jax/reference/foundations-05-pytrees.md"
 status = "todo"
 tasks = []
 
 [[goals]]
 name = "XLA and Sharp Bits"
-reference = "reference/foundations-06-xla-sharp-bits.md"
+reference = "./learn/jax/reference/foundations-06-xla-sharp-bits.md"
 status = "todo"
 tasks = []
