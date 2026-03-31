@@ -259,8 +259,12 @@ def complete(
     task.last_modified = now
     save_task(_resolve_path(entry.path), task)
 
-    move_to_completed(task.slug)
-    typer.echo(f"Completed: {task.name}")
+    if task.parent:
+        # Subtasks stay in place — only top-level tasks move to completed/
+        typer.echo(f"Completed: {task.name}")
+    else:
+        move_to_completed(task.slug)
+        typer.echo(f"Completed: {task.name}")
 
 
 @app.command()

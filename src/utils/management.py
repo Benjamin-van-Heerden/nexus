@@ -284,8 +284,9 @@ def get_task_tree(slug: str) -> list[tuple[IndexEntry, int]]:
 
 
 def move_to_completed(slug: str) -> None:
-    """Move a task (and its subtask directory) to completed/.
+    """Move a task (and its subtask directory) to completed/, preserving structure.
 
+    The path relative to tasks/ is mirrored under completed/.
     Removes the task and all descendants from the index.
     """
     from src.utils.path_resolution import resolve
@@ -301,15 +302,26 @@ def move_to_completed(slug: str) -> None:
         return
 
     task_path = resolve(entry.path)
+    tasks_dir = get_tasks_dir()
     completed_dir = get_completed_dir()
-    completed_dir.mkdir(parents=True, exist_ok=True)
+
+    # Preserve relative path from tasks/ into completed/
+    try:
+        rel = task_path.relative_to(tasks_dir)
+    except ValueError:
+        rel = Path(task_path.name)
+
+    dest = completed_dir / rel
+    dest.parent.mkdir(parents=True, exist_ok=True)
 
     if task_path.exists():
-        shutil.move(str(task_path), str(completed_dir / task_path.name))
+        shutil.move(str(task_path), str(dest))
 
+    # Move subtask directory too (same relative structure)
     subtask_dir = task_path.with_suffix("")
     if subtask_dir.is_dir():
-        shutil.move(str(subtask_dir), str(completed_dir / subtask_dir.name))
+        subtask_dest = completed_dir / rel.with_suffix("")
+        shutil.move(str(subtask_dir), str(subtask_dest))
 
     slugs_to_remove = {slug}
     def _collect_descendants(parent: str) -> None:

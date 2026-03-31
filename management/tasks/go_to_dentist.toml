@@ -1,0 +1,14 @@
+name = "Go to dentist"
+slug = "go_to_dentist"
+description = ""
+status = "todo"
+created = "2026-03-31"
+due = "2026-04-15T10:00:00"
+tags = [
+    "health",
+]
+recurrence = ""
+gcal_event_id = ""
+last_modified = "2026-03-31T12:37:52.523908"
+has_subtasks = false
+parent = ""
