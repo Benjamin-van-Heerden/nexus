@@ -1,0 +1,3 @@
+sessions = [
+    { date = "2026-03-31", did_learn = true, notes = "Worked on Rust exercises" },
+]
