@@ -1,11 +1,12 @@
 name = "Get dentist number"
 slug = "get_dentist_number"
 description = ""
-status = "todo"
+status = "completed"
 created = "2026-03-31"
+completed_at = "2026-03-31"
 tags = []
 recurrence = ""
 gcal_event_id = ""
-last_modified = "2026-03-31T12:37:57.748434"
+last_modified = "2026-03-31T12:38:04.689815"
 has_subtasks = false
 parent = "make_appointment"
