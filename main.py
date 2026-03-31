@@ -1,12 +1,14 @@
 import typer
 
 from src.commands.learn.main import app as learn_app
+from src.commands.self_improvement.main import app as self_app
 from src.utils.git_sync import post_sync, pre_sync
 from src.utils.path_resolution import resolve_str
 
 app = typer.Typer(help="Nexus - Personal learning and self-improvement CLI")
 
 app.add_typer(learn_app, name="learn", help="Learning system commands")
+app.add_typer(self_app, name="self", help="Self-improvement and habit tracking")
 
 
 @app.command(name="resolve-path")
