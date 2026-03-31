@@ -31,6 +31,8 @@ CLIENT_SECRET_PATH = "auth/client_secret_221009037075-mscrrhc8b32ad40ang5ha8rd82
 TOKEN_PATH = "auth/token.json"
 CALENDAR_ID = "benjaminvh1997@gmail.com"
 PULL_WINDOW_DAYS = 14
+LOOKAHEAD_DAYS = 30
+BIRTHDAY_KEYWORDS = ("birthday", "bday", "b-day")
 
 
 def _get_abs_path(relative: str) -> Path:
@@ -101,14 +103,16 @@ def sync():
     conflicts = 0
 
     # -- PULL (gcal -> nexus) --
-    # Only pull events from the last 2 weeks forward
+    # Window: 2 weeks ago to 30 days ahead
     window_start = (datetime.now() - timedelta(days=PULL_WINDOW_DAYS)).isoformat() + "Z"
+    window_end = (datetime.now() + timedelta(days=LOOKAHEAD_DAYS)).isoformat() + "Z"
 
     list_kwargs = {
         "calendarId": calendar_id,
         "singleEvents": True,
         "orderBy": "startTime",
         "timeMin": window_start,
+        "timeMax": window_end,
     }
     if last_sync_str:
         list_kwargs["updatedMin"] = last_sync_str
@@ -127,6 +131,10 @@ def sync():
         event_id = event["id"]
         event_summary = event.get("summary", "Untitled Event")
         event_updated = event.get("updated", "")
+
+        # Skip birthday events — handled by nexus contacts
+        if any(kw in event_summary.lower() for kw in BIRTHDAY_KEYWORDS):
+            continue
 
         start = event.get("start", {})
         event_start = start.get("dateTime", start.get("date", ""))
