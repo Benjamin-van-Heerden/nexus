@@ -2,5 +2,11 @@
 slug = "weekly_standup"
 name = "Weekly standup"
 path = "./management/tasks/weekly_standup.toml"
-due = "2026-03-31"
+due = "2026-03-31T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "look_into_new_laptop"
+name = "Look into new laptop"
+path = "./management/tasks/look_into_new_laptop.toml"
 parent = ""

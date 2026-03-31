@@ -1,0 +1,11 @@
+name = "Look into new laptop"
+slug = "look_into_new_laptop"
+description = ""
+status = "todo"
+created = "2026-03-31"
+tags = []
+recurrence = ""
+gcal_event_id = ""
+last_modified = "2026-03-31T12:39:17.413874"
+has_subtasks = false
+parent = ""
