@@ -2,7 +2,7 @@ name = "Test Book"
 author = "Test Author"
 slug = "test_book"
 started = "2026-03-31"
-status = "active"
+status = "completed"
 current_section = "Chapter 2-3"
 total_sections = "10 chapters"
 
