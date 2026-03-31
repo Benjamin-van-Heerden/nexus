@@ -1,14 +1,14 @@
 ---
 title: nexus management command
-status: merge_ready
+status: completed
 assigned_to: Benjamin-van-Heerden
 issue_id: 5
 issue_url: https://github.com/Benjamin-van-Heerden/nexus/issues/5
 branch: dev-benjamin_van_heerden-nexus_management_command
 pr_url: https://github.com/Benjamin-van-Heerden/nexus/pull/7
 created_at: '2026-03-31T09:00:01.166659'
-updated_at: '2026-03-31T15:56:52.132013'
-completed_at: null
+updated_at: '2026-03-31T16:02:10.999500'
+completed_at: '2026-03-31T16:02:10.998421'
 last_synced_at: '2026-03-31T09:32:10.139861'
 local_content_hash: 318d8018ded1c4f836f73f8449d3092d31d0ed075421b84654e4fba0e6de4d32
 remote_content_hash: 318d8018ded1c4f836f73f8449d3092d31d0ed075421b84654e4fba0e6de4d32
