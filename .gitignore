@@ -13,3 +13,9 @@ target/
 deps/
 
 auth/
+
+# mem worktree symlinks (auto-added)
+.mem/docs/data
+.claude
+.claude/
+auth
