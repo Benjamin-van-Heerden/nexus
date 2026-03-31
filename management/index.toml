@@ -4,10 +4,3 @@ name = "Go to dentist"
 path = "./management/tasks/go_to_dentist.toml"
 due = "2026-04-15T10:00:00"
 parent = ""
-
-[[tasks]]
-slug = "make_appointment"
-name = "Make appointment"
-path = "./management/tasks/go_to_dentist/make_appointment.toml"
-due = "2026-04-10T00:00:00"
-parent = "go_to_dentist"
