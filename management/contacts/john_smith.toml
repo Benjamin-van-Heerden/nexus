@@ -6,3 +6,4 @@ birthday = "1990-04-07"
 relationship = "friend"
 
 [info]
+occupation = "Software engineer at Acme"
