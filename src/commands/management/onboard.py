@@ -22,6 +22,15 @@ from src.utils.management import (
 from src.utils.path_resolution import resolve
 
 
+def _has_time(due: datetime | date | None) -> bool:
+    """Check if a due value has meaningful time info (not midnight)."""
+    if due is None:
+        return False
+    if isinstance(due, datetime):
+        return due.hour != 0 or due.minute != 0
+    return False
+
+
 def _format_task_name(entry) -> str:
     """Format a task name with parent context if it's a subtask."""
     if entry.parent:
@@ -188,7 +197,7 @@ def onboard():
         print("DUE TODAY")
         print("-" * 60)
         for name, slug, due in due_today:
-            time_str = f" at {due.strftime('%H:%M')}" if isinstance(due, datetime) else ""
+            time_str = f" at {due.strftime('%H:%M')}" if _has_time(due) else ""
             print(f"  Remember {name} is due today{time_str}")
         print()
 
@@ -199,7 +208,7 @@ def onboard():
         print("DUE TOMORROW")
         print("-" * 60)
         for name, slug, due in due_tomorrow:
-            time_str = f" at {due.strftime('%H:%M')}" if isinstance(due, datetime) else ""
+            time_str = f" at {due.strftime('%H:%M')}" if _has_time(due) else ""
             print(f"  Remember you have {name} tomorrow{time_str}")
         print()
 
@@ -275,7 +284,7 @@ def upcoming(
     if due_today:
         print("DUE TODAY:")
         for name, slug, due in due_today:
-            time_str = f" at {due.strftime('%H:%M')}" if isinstance(due, datetime) else ""
+            time_str = f" at {due.strftime('%H:%M')}" if _has_time(due) else ""
             print(f"  Remember {name} is due today{time_str}")
         print()
 
@@ -284,7 +293,7 @@ def upcoming(
     if due_tomorrow:
         print("DUE TOMORROW:")
         for name, slug, due in due_tomorrow:
-            time_str = f" at {due.strftime('%H:%M')}" if isinstance(due, datetime) else ""
+            time_str = f" at {due.strftime('%H:%M')}" if _has_time(due) else ""
             print(f"  Remember you have {name} tomorrow{time_str}")
         print()
 
