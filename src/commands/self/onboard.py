@@ -2,9 +2,7 @@ from datetime import date, timedelta
 from pathlib import Path
 
 import typer
-
-from src.commands.self_improvement.math_generator import generate_problems
-from src.utils.self_improvement import (
+from src.utils.self import (
     format_duration,
     get_current_week_start,
     get_days_with_activity,
@@ -17,6 +15,8 @@ from src.utils.self_improvement import (
     load_math_log,
 )
 
+from src.commands.self.math_generator import generate_problems
+
 
 def _section(title: str) -> None:
     typer.echo(f"\n{'=' * 60}")
@@ -26,7 +26,15 @@ def _section(title: str) -> None:
 
 def onboard() -> None:
     today = date.today()
-    day_names = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    day_names = [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+    ]
     day_of_week = today.weekday()
     iso_week = today.isocalendar()[1]
     days_remaining = 7 - day_of_week
@@ -41,7 +49,9 @@ def onboard() -> None:
 
     # SECTION 2 - Date Context
     _section("DATE CONTEXT")
-    typer.echo(f"Today: {day_names[day_of_week]}, {today.strftime('%B %d, %Y')} (Week {iso_week})")
+    typer.echo(
+        f"Today: {day_names[day_of_week]}, {today.strftime('%B %d, %Y')} (Week {iso_week})"
+    )
     typer.echo(f"Day {day_of_week + 1} of 7, {days_remaining} days remaining")
 
     # SECTION 3 - Reading Status
@@ -58,13 +68,19 @@ def onboard() -> None:
                 all_reading_sessions.extend(book.sessions)
 
                 last_session_date = book.sessions[-1].date if book.sessions else None
-                days_since = (today - last_session_date).days if last_session_date else None
-                last_str = last_session_date.isoformat() if last_session_date else "never"
+                days_since = (
+                    (today - last_session_date).days if last_session_date else None
+                )
+                last_str = (
+                    last_session_date.isoformat() if last_session_date else "never"
+                )
                 days_str = f" ({days_since} days ago)" if days_since is not None else ""
 
                 stale_flag = " ⚠️ STALE" if days_since and days_since > 3 else ""
                 typer.echo(f"📖 {book.name} by {book.author}{stale_flag}")
-                typer.echo(f"   Section: {book.current_section or 'Not set'} / {book.total_sections or '?'}")
+                typer.echo(
+                    f"   Section: {book.current_section or 'Not set'} / {book.total_sections or '?'}"
+                )
                 typer.echo(f"   Last session: {last_str}{days_str}")
 
                 if book.sessions:
@@ -77,7 +93,9 @@ def onboard() -> None:
             missing = get_missing_days_this_week(all_reading_sessions)
             typer.echo(f"Reading sessions this week: {len(week_reading)}")
             if reading_days:
-                typer.echo(f"Active days: {', '.join(day_names[d.weekday()] for d in sorted(reading_days))}")
+                typer.echo(
+                    f"Active days: {', '.join(day_names[d.weekday()] for d in sorted(reading_days))}"
+                )
             if missing:
                 typer.echo(f"Missing days: {', '.join(missing)}")
 
@@ -91,7 +109,9 @@ def onboard() -> None:
 
         if week_sessions:
             for s in week_sessions:
-                typer.echo(f"  [{s.date}] {s.type} — {s.intensity}, {s.duration_minutes} min")
+                typer.echo(
+                    f"  [{s.date}] {s.type} — {s.intensity}, {s.duration_minutes} min"
+                )
                 typer.echo(f"    {s.description[:100]}")
             typer.echo(f"\nSessions this week: {len(week_sessions)}")
         else:
@@ -116,12 +136,16 @@ def onboard() -> None:
         yesterday_sessions = [s for s in math_log.sessions if s.date == yesterday]
         if yesterday_sessions:
             ys = yesterday_sessions[-1]
-            typer.echo(f"Yesterday: {format_duration(ys.time_seconds)}, {ys.correct}/{ys.total} correct")
+            typer.echo(
+                f"Yesterday: {format_duration(ys.time_seconds)}, {ys.correct}/{ys.total} correct"
+            )
 
         this_week_start = get_current_week_start(today)
         last_week_start = this_week_start - timedelta(days=7)
         this_week = [s for s in math_log.sessions if s.date >= this_week_start]
-        last_week = [s for s in math_log.sessions if last_week_start <= s.date < this_week_start]
+        last_week = [
+            s for s in math_log.sessions if last_week_start <= s.date < this_week_start
+        ]
 
         if this_week:
             avg_this = sum(s.time_seconds for s in this_week) // len(this_week)
@@ -157,7 +181,9 @@ def onboard() -> None:
         else:
             typer.echo("No check-ins this week.")
 
-        learned_dates = sorted({s.date for s in learning_log.sessions if s.did_learn}, reverse=True)
+        learned_dates = sorted(
+            {s.date for s in learning_log.sessions if s.did_learn}, reverse=True
+        )
         streak = 0
         check = today if today in learned_dates else today - timedelta(days=1)
         if check in learned_dates:
@@ -195,10 +221,18 @@ def onboard() -> None:
     math_count = len(get_sessions_this_week(load_math_log().sessions))
     learning_count = len(get_sessions_this_week(learning_log.sessions))
 
-    typer.echo(f"  Reading:    {reading_count} sessions  {_status_emoji(reading_count, 5)}")
-    typer.echo(f"  Exercise:   {exercise_count} sessions  {_status_emoji(exercise_count, 4)}")
-    typer.echo(f"  Math:       {math_count} sessions  {_status_emoji(math_count, day_of_week + 1)}")
-    typer.echo(f"  Learning:   {learning_count} sessions  {_status_emoji(learning_count, day_of_week + 1)}")
+    typer.echo(
+        f"  Reading:    {reading_count} sessions  {_status_emoji(reading_count, 5)}"
+    )
+    typer.echo(
+        f"  Exercise:   {exercise_count} sessions  {_status_emoji(exercise_count, 4)}"
+    )
+    typer.echo(
+        f"  Math:       {math_count} sessions  {_status_emoji(math_count, day_of_week + 1)}"
+    )
+    typer.echo(
+        f"  Learning:   {learning_count} sessions  {_status_emoji(learning_count, day_of_week + 1)}"
+    )
 
     # SECTION 8 - Agent Instructions
     _section("AGENT INSTRUCTIONS")

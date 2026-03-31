@@ -2,10 +2,7 @@ from datetime import date, timedelta
 from typing import Annotated
 
 import typer
-
-from src.commands.self_improvement.math_generator import generate_problems
-from src.models.self_improvement.math import MathSession
-from src.utils.self_improvement import (
+from src.utils.self import (
     format_duration,
     get_current_week_start,
     load_math_config,
@@ -13,6 +10,9 @@ from src.utils.self_improvement import (
     parse_duration,
     save_math_log,
 )
+
+from src.commands.self.math_generator import generate_problems
+from src.models.self.math import MathSession
 
 app = typer.Typer(help="Mental math practice")
 
@@ -49,7 +49,9 @@ def log(
         avg = sum(s.time_seconds for s in recent) // len(recent)
         avg_time = f" (recent avg: {format_duration(avg)})"
 
-    typer.echo(f"Logged: {format_duration(time_seconds)}, {correct}/{session.total} correct{avg_time}")
+    typer.echo(
+        f"Logged: {format_duration(time_seconds)}, {correct}/{session.total} correct{avg_time}"
+    )
 
 
 @app.command()
@@ -66,12 +68,16 @@ def status() -> None:
     last_week_start = this_week_start - timedelta(days=7)
 
     this_week = [s for s in math_log.sessions if s.date >= this_week_start]
-    last_week = [s for s in math_log.sessions if last_week_start <= s.date < this_week_start]
+    last_week = [
+        s for s in math_log.sessions if last_week_start <= s.date < this_week_start
+    ]
 
     typer.echo("Recent sessions (last 2 weeks):")
     recent = [s for s in math_log.sessions if s.date >= last_week_start]
     for s in sorted(recent, key=lambda x: x.date):
-        typer.echo(f"  [{s.date}] {format_duration(s.time_seconds)}, {s.correct}/{s.total} correct")
+        typer.echo(
+            f"  [{s.date}] {format_duration(s.time_seconds)}, {s.correct}/{s.total} correct"
+        )
 
     if this_week:
         avg_this = sum(s.time_seconds for s in this_week) // len(this_week)
@@ -95,7 +101,9 @@ def status() -> None:
     for name in ["addition", "subtraction", "multiplication", "division"]:
         tc = getattr(config, name)
         if tc.enabled:
-            typer.echo(f"  {name}: weight={tc.weight}, digits={tc.min_digits}-{tc.max_digits}")
+            typer.echo(
+                f"  {name}: weight={tc.weight}, digits={tc.min_digits}-{tc.max_digits}"
+            )
 
 
 @app.command("config")

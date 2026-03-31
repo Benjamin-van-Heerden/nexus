@@ -1,7 +1,7 @@
 import typer
 
 from src.commands.learn.main import app as learn_app
-from src.commands.self_improvement.main import app as self_app
+from src.commands.self.main import app as self_app
 from src.utils.git_sync import post_sync, pre_sync
 from src.utils.path_resolution import resolve_str
 
@@ -12,7 +12,9 @@ app.add_typer(self_app, name="self", help="Self-improvement and habit tracking")
 
 
 @app.command(name="resolve-path")
-def resolve_path(relative_path: str = typer.Argument(help="Path relative to nexus project root")):
+def resolve_path(
+    relative_path: str = typer.Argument(help="Path relative to nexus project root"),
+):
     """Resolve a relative path to an absolute path on this machine."""
     print(resolve_str(relative_path))
 

@@ -2,17 +2,16 @@ from datetime import date, timedelta
 from typing import Annotated
 
 import typer
-
-from src.models.self_improvement.exercise import ExerciseSession
-from src.utils.self_improvement import (
+from src.utils.self import (
     get_current_week_start,
-    get_days_with_activity,
     get_missing_days_this_week,
     get_sessions_this_week,
     load_exercise_log,
     load_habits_config,
     save_exercise_log,
 )
+
+from src.models.self.exercise import ExerciseSession
 
 app = typer.Typer(help="Exercise habit tracking")
 
@@ -42,7 +41,9 @@ def log(
     habits = load_habits_config()
     week_sessions = get_sessions_this_week(exercise_log.sessions)
     typer.echo(f"Logged: {type} ({intensity}, {duration} min)")
-    typer.echo(f"Sessions this week: {len(week_sessions)} — Goal: {habits.exercise.goal}")
+    typer.echo(
+        f"Sessions this week: {len(week_sessions)} — Goal: {habits.exercise.goal}"
+    )
 
 
 @app.command()
@@ -56,7 +57,9 @@ def status() -> None:
 
     if week_sessions:
         for s in week_sessions:
-            typer.echo(f"  [{s.date}] {s.type} — {s.intensity}, {s.duration_minutes} min")
+            typer.echo(
+                f"  [{s.date}] {s.type} — {s.intensity}, {s.duration_minutes} min"
+            )
     else:
         typer.echo("  No sessions logged this week.")
 
@@ -87,7 +90,11 @@ def history(
         week_start = get_current_week_start(s.date)
         if week_start != current_week_start:
             current_week_start = week_start
-            week_sessions = [x for x in recent if get_current_week_start(x.date) == week_start]
+            week_sessions = [
+                x for x in recent if get_current_week_start(x.date) == week_start
+            ]
             typer.echo(f"\nWeek of {week_start} ({len(week_sessions)} sessions)")
         desc = s.description[:60] + "..." if len(s.description) > 60 else s.description
-        typer.echo(f"  [{s.date}] {s.type} — {desc} ({s.intensity}, {s.duration_minutes} min)")
+        typer.echo(
+            f"  [{s.date}] {s.type} — {desc} ({s.intensity}, {s.duration_minutes} min)"
+        )

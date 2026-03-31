@@ -2,15 +2,15 @@ from datetime import date, timedelta
 from typing import Annotated
 
 import typer
-
-from src.models.self_improvement.learning import LearningSession
-from src.utils.self_improvement import (
+from src.utils.self import (
     get_missing_days_this_week,
     get_sessions_this_week,
     load_habits_config,
     load_learning_log,
     save_learning_log,
 )
+
+from src.models.self.learning import LearningSession
 
 app = typer.Typer(help="Daily learning check-in")
 

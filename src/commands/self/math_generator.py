@@ -1,8 +1,8 @@
 import random
 
-from src.models.self_improvement.math import MathConfig
-from src.utils.self_improvement import load_math_config
+from src.utils.self import load_math_config
 
+from src.models.self.math import MathConfig
 
 SYMBOLS = {
     "addition": "+",
@@ -62,7 +62,9 @@ def generate_problems(config: MathConfig | None = None) -> tuple[str, list[str]]
     if not enabled_types:
         return ("No problem types enabled.", [])
 
-    problem_types = random.choices(enabled_types, weights=weights, k=config.general.problems_per_day)
+    problem_types = random.choices(
+        enabled_types, weights=weights, k=config.general.problems_per_day
+    )
 
     lines = []
     for i, pt in enumerate(problem_types, 1):

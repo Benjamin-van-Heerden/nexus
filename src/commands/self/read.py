@@ -1,19 +1,17 @@
-import shutil
 from datetime import date
 from typing import Annotated
 
 import typer
-
-from src.models.self_improvement.reading import BookConfig, ReadingSession
-from src.utils.self_improvement import (
+from src.utils.self import (
     get_reading_active_dir,
-    get_reading_completed_dir,
     list_active_books,
     list_completed_books,
     load_book,
     save_book,
     slugify,
 )
+
+from src.models.self.reading import BookConfig, ReadingSession
 
 app = typer.Typer(help="Reading habit tracking")
 
@@ -48,13 +46,19 @@ def new(
 def list_books() -> None:
     books = list_active_books()
     if not books:
-        typer.echo("No active books. Create one with: nexus self read new 'Title' --author 'Author'")
+        typer.echo(
+            "No active books. Create one with: nexus self read new 'Title' --author 'Author'"
+        )
         return
 
     for book in books:
-        last_session = book.sessions[-1].date.isoformat() if book.sessions else "No sessions yet"
+        last_session = (
+            book.sessions[-1].date.isoformat() if book.sessions else "No sessions yet"
+        )
         section = book.current_section or "Not set"
-        typer.echo(f"  {book.name} by {book.author} — section: {section}, last session: {last_session}, sessions: {len(book.sessions)}")
+        typer.echo(
+            f"  {book.name} by {book.author} — section: {section}, last session: {last_session}, sessions: {len(book.sessions)}"
+        )
 
 
 @app.command()
@@ -77,8 +81,16 @@ def show(slug: str) -> None:
     if book.sessions:
         typer.echo("\nRecent sessions:")
         for session in book.sessions[-3:]:
-            summary = session.summary[:100] + "..." if len(session.summary) > 100 else session.summary
-            takeaway = session.takeaway[:100] + "..." if len(session.takeaway) > 100 else session.takeaway
+            summary = (
+                session.summary[:100] + "..."
+                if len(session.summary) > 100
+                else session.summary
+            )
+            takeaway = (
+                session.takeaway[:100] + "..."
+                if len(session.takeaway) > 100
+                else session.takeaway
+            )
             typer.echo(f"  [{session.date}] {session.section}")
             typer.echo(f"    Summary: {summary}")
             typer.echo(f"    Takeaway: {takeaway}")
@@ -147,4 +159,6 @@ def history() -> None:
 
     for book in books:
         last_date = book.sessions[-1].date.isoformat() if book.sessions else "unknown"
-        typer.echo(f"  {book.name} by {book.author} — started: {book.started}, completed: {last_date}, sessions: {len(book.sessions)}")
+        typer.echo(
+            f"  {book.name} by {book.author} — started: {book.started}, completed: {last_date}, sessions: {len(book.sessions)}"
+        )

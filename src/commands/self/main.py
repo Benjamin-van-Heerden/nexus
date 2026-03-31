@@ -1,10 +1,10 @@
 import typer
 
-from src.commands.self_improvement.exercise import app as exercise_app
-from src.commands.self_improvement.learn import app as learn_app
-from src.commands.self_improvement.math import app as math_app
-from src.commands.self_improvement.onboard import onboard
-from src.commands.self_improvement.read import app as read_app
+from src.commands.self.exercise import app as exercise_app
+from src.commands.self.learn import app as learn_app
+from src.commands.self.math import app as math_app
+from src.commands.self.onboard import onboard
+from src.commands.self.read import app as read_app
 
 app = typer.Typer(help="Self-improvement and habit tracking")
 
