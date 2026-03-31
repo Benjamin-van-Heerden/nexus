@@ -1,1 +1,6 @@
-
+[[tasks]]
+slug = "test_gcal_sync"
+name = "Test gcal sync"
+path = "./management/tasks/test_gcal_sync.toml"
+due = "2026-04-05T14:00:00"
+parent = ""
