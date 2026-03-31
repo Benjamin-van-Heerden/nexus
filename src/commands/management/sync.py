@@ -29,6 +29,8 @@ from src.utils.paths import get_project_root
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
 CLIENT_SECRET_PATH = "auth/client_secret_221009037075-mscrrhc8b32ad40ang5ha8rd82ivtmuq.apps.googleusercontent.com.json"
 TOKEN_PATH = "auth/token.json"
+CALENDAR_ID = "benjaminvh1997@gmail.com"
+PULL_WINDOW_DAYS = 14
 
 
 def _get_abs_path(relative: str) -> Path:
@@ -52,7 +54,7 @@ def _load_sync_state() -> dict:
     sync_dir.mkdir(parents=True, exist_ok=True)
     state_path = sync_dir / "sync_state.toml"
     if not state_path.exists():
-        return {"last_sync": "", "calendar_id": "primary"}
+        return {"last_sync": "", "calendar_id": CALENDAR_ID}
     with open(state_path, "rb") as f:
         return tomllib.load(f)
 
@@ -91,7 +93,7 @@ def sync():
     service = build("calendar", "v3", credentials=creds)
 
     state = _load_sync_state()
-    calendar_id = state.get("calendar_id", "primary")
+    calendar_id = CALENDAR_ID
     last_sync_str = state.get("last_sync", "")
 
     pulled = 0
@@ -99,14 +101,17 @@ def sync():
     conflicts = 0
 
     # -- PULL (gcal -> nexus) --
+    # Only pull events from the last 2 weeks forward
+    window_start = (datetime.now() - timedelta(days=PULL_WINDOW_DAYS)).isoformat() + "Z"
+
     list_kwargs = {
         "calendarId": calendar_id,
         "singleEvents": True,
         "orderBy": "startTime",
+        "timeMin": window_start,
     }
     if last_sync_str:
         list_kwargs["updatedMin"] = last_sync_str
-        list_kwargs["timeMin"] = last_sync_str
 
     events_result = service.events().list(**list_kwargs).execute()
     events = events_result.get("items", [])

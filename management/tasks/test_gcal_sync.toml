@@ -3,12 +3,12 @@ slug = "test_gcal_sync"
 description = ""
 status = "todo"
 created = "2026-03-31"
-due = "2026-04-05T14:00:00"
+due = "2026-04-05T16:00:00+02:00"
 tags = [
-    "test",
+    "gcal",
 ]
 recurrence = ""
 gcal_event_id = "rgb8ksr0fcaovnhchh33la1v9g"
-last_modified = "2026-03-31T12:47:20.710635"
+last_modified = "2026-03-31T12:49:43.377977"
 has_subtasks = false
 parent = ""
