@@ -1,9 +1,9 @@
 ---
 title: End-to-end testing
-status: todo
+status: completed
 created_at: '2026-03-31T09:27:34.357214'
-updated_at: '2026-03-31T09:27:34.357214'
-completed_at: null
+updated_at: '2026-03-31T15:35:07.734461'
+completed_at: '2026-03-31T15:35:07.734454'
 ---
 Test the full management system end-to-end using the nexus CLI:
 
@@ -38,3 +38,7 @@ Test the full management system end-to-end using the nexus CLI:
    - Create task with due date, sync, verify it appears in gcal
 
 Fix any bugs found during testing.
+
+## Completion Notes
+
+Full e2e testing completed with bugs found and fixed: (1) move_to_completed now preserves directory structure relative to tasks/, (2) subtask completion stays in place — only top-level parent moves the whole subtree, (3) date-only tasks no longer show 'at 00:00', (4) gcal sync: added 30-day lookahead window, birthday event filtering, auto-completion of past events, event metadata extraction (description/location/meeting links), fixed updatedMin RFC3339 format, hardcoded calendar to benjaminvh1997@gmail.com, (5) onboard/refresh: added THIS WEEK section (2-7 days out), strict birthday windows (7,2,1,0), user context, last sync info, condensed refresh instructions, clean date formatting, (6) renamed src/commands/management to src/commands/manage, (7) added refresh command for follow-up sessions.
