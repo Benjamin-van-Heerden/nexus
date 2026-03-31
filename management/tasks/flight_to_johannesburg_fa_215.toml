@@ -1,0 +1,14 @@
+name = "Flight to Johannesburg (FA 215)"
+slug = "flight_to_johannesburg_fa_215"
+description = ""
+status = "todo"
+created = "2026-03-31"
+due = "2024-04-15T19:15:00+02:00"
+tags = [
+    "gcal",
+]
+recurrence = ""
+gcal_event_id = "_6tlnaqrle5p6cpb4dhmj4phpehr6krbde0pn0qracdh6korddkp76c31d9pmst9lchgjcs35ckp76rrdchmm6qr6e9ljccj3ekoj2sr2doo6e"
+last_modified = "2026-03-31T12:47:19.922583"
+has_subtasks = false
+parent = ""

@@ -1,0 +1,14 @@
+name = "Flight to Plettenberg Bay (5Z 702)"
+slug = "flight_to_plettenberg_bay_5z_702"
+description = ""
+status = "todo"
+created = "2026-03-31"
+due = "2021-12-19T09:00:00+02:00"
+tags = [
+    "gcal",
+]
+recurrence = ""
+gcal_event_id = "_6tlnaqrle5p6cpb4dhmj4phpehij0oracti66c1jepmn6e31cdn74q9k6tp3eqreddl36ppid5r6adjid8pmsqj5chijesbceoon4r1jdhh6e"
+last_modified = "2026-03-31T12:47:19.507075"
+has_subtasks = false
+parent = ""

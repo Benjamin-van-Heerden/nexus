@@ -1,0 +1,14 @@
+name = "Paxton Properties - Interactive Map Integration"
+slug = "paxton_properties_interactive_map_integration"
+description = ""
+status = "todo"
+created = "2026-03-31"
+due = "2026-03-11T09:00:00+02:00"
+tags = [
+    "gcal",
+]
+recurrence = ""
+gcal_event_id = "5b9gbm9cvue5rthnnt5jvbfe7c"
+last_modified = "2026-03-31T12:47:20.201731"
+has_subtasks = false
+parent = ""

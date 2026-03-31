@@ -1,0 +1,14 @@
+name = "YNWA "
+slug = "ynwa"
+description = ""
+status = "todo"
+created = "2026-03-31"
+due = "2021-03-10T22:00:00+02:00"
+tags = [
+    "gcal",
+]
+recurrence = ""
+gcal_event_id = "0tiof6cgfhr7jma3oahhqtt9uq"
+last_modified = "2026-03-31T12:47:19.483963"
+has_subtasks = false
+parent = ""

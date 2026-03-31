@@ -1,0 +1,14 @@
+name = "Flight to Johannesburg (MN 104)"
+slug = "flight_to_johannesburg_mn_104"
+description = ""
+status = "todo"
+created = "2026-03-31"
+due = "2022-02-07T09:10:00+02:00"
+tags = [
+    "gcal",
+]
+recurrence = ""
+gcal_event_id = "_6tlnaqrle5p6cpb4dhmj4phpegsj4prdcgpmecrdc5h34cpk6op6ep3gehgn0tb1cplmgr9md4s68opj6lq70pj8dhqmgr3kdcsjas3iecrj0"
+last_modified = "2026-03-31T12:47:19.517446"
+has_subtasks = false
+parent = ""

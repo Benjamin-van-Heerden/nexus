@@ -1,0 +1,14 @@
+name = "Flight to Cape Town (FA 129)"
+slug = "flight_to_cape_town_fa_129"
+description = ""
+status = "todo"
+created = "2026-03-31"
+due = "2025-09-19T08:30:00+02:00"
+tags = [
+    "gcal",
+]
+recurrence = ""
+gcal_event_id = "s54o358t1qokptm4sfco2k1ct0"
+last_modified = "2026-03-31T12:47:20.095287"
+has_subtasks = false
+parent = ""

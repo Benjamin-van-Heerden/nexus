@@ -1,0 +1,14 @@
+name = "Tutoring (Ferdi Gr. 8)"
+slug = "tutoring_ferdi_gr_8"
+description = ""
+status = "todo"
+created = "2026-03-31"
+due = "2019-02-07T14:30:00+02:00"
+tags = [
+    "gcal",
+]
+recurrence = ""
+gcal_event_id = "6pdir4run39ejfiaint6t0lkqf_20190207T123000Z"
+last_modified = "2026-03-31T12:47:19.409125"
+has_subtasks = false
+parent = ""

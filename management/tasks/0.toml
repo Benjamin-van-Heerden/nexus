@@ -1,0 +1,14 @@
+name = "0"
+slug = "0"
+description = ""
+status = "todo"
+created = "2026-03-31"
+due = "2014-08-29T18:00:00+02:00"
+tags = [
+    "gcal",
+]
+recurrence = ""
+gcal_event_id = "aj5s9tesh80p2qu044e11p8n3s"
+last_modified = "2026-03-31T12:47:19.385826"
+has_subtasks = false
+parent = ""

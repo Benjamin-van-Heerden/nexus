@@ -1,0 +1,14 @@
+name = "FW: STUDII PRODUCT SPEC"
+slug = "fw_studii_product_spec"
+description = ""
+status = "todo"
+created = "2026-03-31"
+due = "2023-05-02T13:30:00+02:00"
+tags = [
+    "gcal",
+]
+recurrence = ""
+gcal_event_id = "_60q30c1g60o30e1i60o4ac1g60rj8gpl88rj2c1h84s34h9g60s30c1g60o30c1g6ko3ig9n6t1jeghm6sr48e9g64o30c1g60o30c1g60o30c1g60o32c1g60o30c1g6d1j8cq4710k4h246sok4cpk64s4agi3612j8h9l84q48e1k6gs0"
+last_modified = "2026-03-31T12:47:19.867617"
+has_subtasks = false
+parent = ""

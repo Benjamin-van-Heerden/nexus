@@ -1,0 +1,14 @@
+name = "Charge Pulse - MVP Software"
+slug = "charge_pulse_mvp_software_gcal"
+description = ""
+status = "todo"
+created = "2026-03-31"
+due = "2025-06-27T15:00:00+02:00"
+tags = [
+    "gcal",
+]
+recurrence = ""
+gcal_event_id = "140k0bq2lgnegij9a2f5n9e8kk"
+last_modified = "2026-03-31T12:47:20.010000"
+has_subtasks = false
+parent = ""

@@ -1,0 +1,14 @@
+name = "Flight to Cape Town (MN 103)"
+slug = "flight_to_cape_town_mn_103"
+description = ""
+status = "todo"
+created = "2026-03-31"
+due = "2022-02-02T08:45:00+02:00"
+tags = [
+    "gcal",
+]
+recurrence = ""
+gcal_event_id = "_6tlnaqrle5p6cpb4dhmj4phpegpn2c3a6so62d1kelm64s36d4sn2cb6c5m3aqpkd8q6qd9kcopn4eb96ko34dbb61m6cr1lc9oj4dbe68o30"
+last_modified = "2026-03-31T12:47:19.513972"
+has_subtasks = false
+parent = ""

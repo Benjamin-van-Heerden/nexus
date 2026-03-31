@@ -1,0 +1,14 @@
+name = "Chrissie's birthday"
+slug = "chrissie_s_birthday_gcal"
+description = ""
+status = "todo"
+created = "2026-03-31"
+due = "2032-08-31"
+tags = [
+    "gcal",
+]
+recurrence = ""
+gcal_event_id = "9okemgrpje8ktuo8ah3fas6cbg_20320831"
+last_modified = "2026-03-31T12:47:20.675925"
+has_subtasks = false
+parent = ""
