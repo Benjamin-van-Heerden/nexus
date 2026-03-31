@@ -11,10 +11,10 @@ Usage:
 
 import typer
 
-from src.commands.management.contact import app as contact_app
-from src.commands.management.onboard import onboard, refresh, upcoming
-from src.commands.management.sync import auth_google, sync
-from src.commands.management.task import app as task_app
+from src.commands.manage.contact import app as contact_app
+from src.commands.manage.onboard import onboard, refresh, upcoming
+from src.commands.manage.sync import auth_google, sync
+from src.commands.manage.task import app as task_app
 
 auth_app = typer.Typer()
 auth_app.command(name="google", help="Set up Google Calendar OAuth")(auth_google)

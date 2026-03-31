@@ -1,8 +1,0 @@
-name = "Mom"
-slug = "mom"
-phone = "+27821234567"
-email = ""
-birthday = "1965-04-05"
-relationship = "family"
-
-[info]
