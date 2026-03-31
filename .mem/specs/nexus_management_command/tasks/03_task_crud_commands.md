@@ -1,9 +1,9 @@
 ---
 title: Task CRUD commands
-status: todo
+status: completed
 created_at: '2026-03-31T09:14:21.428232'
-updated_at: '2026-03-31T09:14:21.428232'
-completed_at: null
+updated_at: '2026-03-31T10:04:28.377940'
+completed_at: '2026-03-31T10:04:28.377935'
 ---
 Create src/commands/management/task.py with typer app:
 
@@ -16,3 +16,7 @@ Commands:
 - task delete <slug> — confirm, then delete task + subtask dir, remove from index recursively
 
 Patterns: use typer.echo() for output, typer.confirm() for destructive ops, raise typer.Exit(1) on errors. Use resolve_slug() from utils for slug arguments.
+
+## Completion Notes
+
+Created src/commands/management/task.py with 6 commands: new (with --due, --recur, --parent, --tag, --description), list (tree view, --flat, --tag, --due filters), show (full details + subtask tree), complete (subtask guard, recurring task handling, move to completed), edit (--due, --description, --tag, --remove-tag, --status), delete (recursive cleanup with confirmation). All follow existing typer patterns.

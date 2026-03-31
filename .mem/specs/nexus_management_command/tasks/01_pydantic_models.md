@@ -1,9 +1,9 @@
 ---
 title: Pydantic models
-status: todo
+status: completed
 created_at: '2026-03-31T09:11:50.521270'
-updated_at: '2026-03-31T09:11:50.521270'
-completed_at: null
+updated_at: '2026-03-31T09:53:43.543174'
+completed_at: '2026-03-31T09:53:43.543165'
 ---
 Create src/models/management/ with three model files:
 
@@ -14,3 +14,7 @@ Create src/models/management/ with three model files:
 - index.py: IndexEntry model with fields: slug (str), name (str), path (str), due (datetime | date | None), parent (str, default ''). ManageIndex model with tasks (list[IndexEntry], default [])
 
 No __init__.py files. Follow existing Pydantic patterns from src/models/learn/.
+
+## Completion Notes
+
+Created src/models/management/ with three model files: task.py (TaskConfig with all fields including recurrence, gcal, subtask support), contact.py (ContactConfig with info dict), index.py (IndexEntry + ManageIndex). Follows existing patterns from src/models/learn/ — no __init__.py, Pydantic BaseModel, Union types with | syntax.

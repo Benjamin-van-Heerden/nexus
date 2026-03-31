@@ -1,9 +1,9 @@
 ---
 title: Utility module
-status: todo
+status: completed
 created_at: '2026-03-31T09:12:05.411522'
-updated_at: '2026-03-31T09:12:05.411522'
-completed_at: null
+updated_at: '2026-03-31T10:00:29.364713'
+completed_at: '2026-03-31T10:00:29.364707'
 ---
 Create src/utils/management.py with:
 
@@ -20,3 +20,7 @@ Create src/utils/management.py with:
 - Cron helpers: parse_recurrence(cron_3field) — parse 'dom month dow' format. next_occurrence(cron_3field, after=datetime) — calculate next occurrence from pattern. is_due_in_window(cron_3field, days=14) — check if next occurrence is within window.
 
 - Task tree helpers: get_subtasks(slug) — read index to find children. get_task_tree(slug) — recursive tree of task + all descendants. move_to_completed(slug) — move task.toml and subtask dir to completed/, remove from index recursively.
+
+## Completion Notes
+
+Created src/utils/management.py with TOML I/O (load/save for tasks, contacts, index), index management (add/remove/update entries), slug helpers (slugify, resolve_slug, resolve_contact_slug), cron helpers (parse_recurrence, next_occurrence, is_due_in_window — custom 3-field parser), task tree helpers (get_subtasks, get_task_tree, move_to_completed). Added get_management_dir() to src/utils/paths.py. All follows existing patterns from learn.py.
