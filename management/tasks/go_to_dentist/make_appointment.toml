@@ -1,0 +1,12 @@
+name = "Make appointment"
+slug = "make_appointment"
+description = ""
+status = "todo"
+created = "2026-03-31"
+due = "2026-04-10"
+tags = []
+recurrence = ""
+gcal_event_id = ""
+last_modified = "2026-03-31T12:33:45.766211"
+has_subtasks = false
+parent = "go_to_dentist"
