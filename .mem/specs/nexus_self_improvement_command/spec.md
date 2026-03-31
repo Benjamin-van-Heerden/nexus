@@ -2,16 +2,16 @@
 title: nexus self-improvement command
 status: todo
 assigned_to: null
-issue_id: null
-issue_url: null
+issue_id: 6
+issue_url: https://github.com/Benjamin-van-Heerden/nexus/issues/6
 branch: null
 pr_url: null
 created_at: '2026-03-31T10:04:55.701451'
-updated_at: '2026-03-31T10:04:55.701451'
+updated_at: '2026-03-31T12:08:39.595590'
 completed_at: null
-last_synced_at: null
-local_content_hash: null
-remote_content_hash: null
+last_synced_at: '2026-03-31T12:08:39.595091'
+local_content_hash: 4264b740b80252e28c0527976cbb3dc5fb0f86ae7d42b4881d0f0de379b16bbc
+remote_content_hash: 4264b740b80252e28c0527976cbb3dc5fb0f86ae7d42b4881d0f0de379b16bbc
 ---
 ## Overview
 
