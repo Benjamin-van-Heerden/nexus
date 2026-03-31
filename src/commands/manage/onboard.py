@@ -152,47 +152,6 @@ def _get_birthday_reminders() -> list[tuple[str, date, int | None, str]]:
     return sorted(results, key=lambda x: x[1])
 
 
-def _get_upcoming_birthdays(days: int = 14) -> list[tuple[str, date, int | None, str]]:
-    """Return all birthdays within a window, with appropriate messages."""
-    contacts_dir = get_contacts_dir()
-    if not contacts_dir.exists():
-        return []
-
-    today = date.today()
-    window_end = today + timedelta(days=days)
-    results = []
-
-    for f in contacts_dir.glob("*.toml"):
-        contact = load_contact(f)
-        if not contact.birthday:
-            continue
-        bday_this_year = contact.birthday.replace(year=today.year)
-        if bday_this_year < today:
-            bday_this_year = contact.birthday.replace(year=today.year + 1)
-
-        if not (today <= bday_this_year <= window_end):
-            continue
-
-        days_until = (bday_this_year - today).days
-        age = bday_this_year.year - contact.birthday.year
-
-        if days_until == 0:
-            msg = f"It's {contact.name}'s birthday today!"
-        elif days_until == 1:
-            msg = f"{contact.name}'s birthday is tomorrow"
-        elif days_until == 2:
-            msg = f"{contact.name}'s birthday is in 2 days"
-        else:
-            msg = f"{contact.name}'s birthday is on {bday_this_year.strftime('%a %d %B')}"
-
-        if age:
-            msg += f" (turning {age})"
-
-        results.append((contact.name, bday_this_year, age, msg))
-
-    return sorted(results, key=lambda x: x[1])
-
-
 def _get_recurring_today() -> list[tuple[str, str]]:
     """Return (name, recurrence) for recurring tasks due today."""
     index = load_index()
@@ -376,19 +335,6 @@ def onboard():
     # All actionable sections
     _print_actionable_sections()
 
-    # Upcoming birthdays (broader window for onboard)
-    upcoming_bdays = _get_upcoming_birthdays(14)
-    # Filter out any already shown in the reminder section
-    reminder_names = {b[0] for b in _get_birthday_reminders()}
-    upcoming_bdays = [b for b in upcoming_bdays if b[0] not in reminder_names]
-    if upcoming_bdays:
-        print("-" * 60)
-        print("UPCOMING BIRTHDAYS")
-        print("-" * 60)
-        for name, bday, age, msg in upcoming_bdays:
-            print(f"  🎂 {msg}")
-        print()
-
     # Task tree
     index = load_index()
     if index.tasks:
@@ -409,7 +355,7 @@ def onboard():
 
 
 def refresh():
-    """Lightweight context refresh — current state without full instructions."""
+    """Lightweight context refresh — current state with condensed instructions."""
     today = date.today()
 
     print("=" * 60)
@@ -428,21 +374,34 @@ def refresh():
 
     has_content = _print_actionable_sections()
 
-    # Upcoming birthdays (broader window)
-    upcoming_bdays = _get_upcoming_birthdays(14)
-    reminder_names = {b[0] for b in _get_birthday_reminders()}
-    upcoming_bdays = [b for b in upcoming_bdays if b[0] not in reminder_names]
-    if upcoming_bdays:
+    # Task tree
+    index = load_index()
+    if index.tasks:
         print("-" * 60)
-        print("UPCOMING BIRTHDAYS")
+        print("ALL ACTIVE TASKS")
         print("-" * 60)
-        for name, bday, age, msg in upcoming_bdays:
-            print(f"  🎂 {msg}")
+        _print_task_tree()
         print()
         has_content = True
 
     if not has_content:
         print("Nothing actionable right now.")
+        print()
+
+    # Condensed instructions
+    print("-" * 60)
+    print("REFRESH INSTRUCTIONS")
+    print("-" * 60)
+    print("Report the above to Benjamin. Priority order:")
+    print("  1. Overdue → ask: complete, reschedule, or delete?")
+    print("  2. Due today → remind him")
+    print("  3. Tomorrow / this week → brief him")
+    print("  4. Birthdays → mention so he can prepare")
+    print("  5. Open todos → surface if nothing urgent")
+    print()
+    print("Do not create/delete/complete tasks without his input.")
+    print("If he asks about his calendar and sync is stale, run: nexus manage sync")
+    print()
 
 
 def upcoming(
