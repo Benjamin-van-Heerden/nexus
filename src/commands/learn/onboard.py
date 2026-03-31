@@ -1,5 +1,6 @@
 """Onboard subcommand — context dump for agents."""
 
+import re
 from collections import Counter
 from datetime import date, timedelta
 from pathlib import Path
@@ -13,6 +14,85 @@ from src.utils.learn import (
     get_records_dir,
 )
 from src.utils.path_resolution import resolve, resolve_str
+
+
+def _parse_duration_minutes(duration_str: str) -> int | None:
+    """Parse a duration string like '20min', '1h', '1h30min' into minutes."""
+    if not duration_str or duration_str == "not recorded":
+        return None
+    total = 0
+    h_match = re.search(r"(\d+)\s*h", duration_str)
+    m_match = re.search(r"(\d+)\s*m", duration_str)
+    if h_match:
+        total += int(h_match.group(1)) * 60
+    if m_match:
+        total += int(m_match.group(1))
+    return total if total > 0 else None
+
+
+def _parse_record_frontmatter(path: Path) -> dict[str, str]:
+    """Extract YAML frontmatter fields from a record file."""
+    text = path.read_text()
+    if not text.startswith("---"):
+        return {}
+    parts = text.split("---", 2)
+    if len(parts) < 3:
+        return {}
+    fields = {}
+    for line in parts[1].strip().splitlines():
+        if ": " in line:
+            key, val = line.split(": ", 1)
+            fields[key.strip()] = val.strip()
+    return fields
+
+
+def _weekly_session_summary(records_dir: Path, week_start: date) -> str | None:
+    """Summarize this week's sessions from records for agent decision-making."""
+    if not records_dir.exists():
+        return None
+
+    week_end = week_start + timedelta(days=6)
+    sessions: list[dict[str, str]] = []
+    for record_path in sorted(records_dir.glob("*.md")):
+        fm = _parse_record_frontmatter(record_path)
+        if not fm.get("date"):
+            continue
+        try:
+            record_date = date.fromisoformat(fm["date"])
+        except ValueError:
+            continue
+        if week_start <= record_date <= week_end:
+            sessions.append(fm)
+
+    if not sessions:
+        return "No sessions logged this week yet."
+
+    total_minutes = 0
+    long_sessions = 0
+    type_counts: Counter[str] = Counter()
+    days_active: set[date] = set()
+
+    for s in sessions:
+        minutes = _parse_duration_minutes(s.get("duration", ""))
+        if minutes:
+            total_minutes += minutes
+            if minutes >= 60:
+                long_sessions += 1
+        t = s.get("type", "")
+        if t:
+            type_counts[t] += 1
+        try:
+            days_active.add(date.fromisoformat(s["date"]))
+        except (ValueError, KeyError):
+            pass
+
+    lines = [
+        f"Sessions this week: {len(sessions)} across {len(days_active)} day(s)",
+        f"Total time: ~{total_minutes} min",
+        f"Long sessions (1h+): {long_sessions}/2 target",
+        f"Types: {type_counts.get('practical', 0)} practical, {type_counts.get('theoretical', 0)} theoretical, {type_counts.get('quiz', 0)} quiz",
+    ]
+    return "\n  ".join(lines)
 
 
 def onboard():
@@ -36,9 +116,26 @@ def onboard():
     phase_base = f"{subtopic_base}/{phase_name}"
 
     print("=" * 60)
-    print("NEXUS LEARN ONBOARD")
+    print("NEXUS LEARN — DAILY ONBOARD")
     print("=" * 60)
     print()
+    print(
+        "Nexus is Benjamin's personal structured learning system."
+    )
+    print(
+        "You are the learning agent. You compose daily exercises,"
+    )
+    print(
+        "track progress, and maintain continuity across sessions."
+    )
+    print(
+        "The user interacts with you via Telegram. You wake up"
+    )
+    print(
+        "cold each session — this output is your full context."
+    )
+    print()
+    print(f"DATE: {today.strftime('%A, %B %d, %Y')}")
     print(f"TOPIC: {topic_name}")
     print(f"SUBTOPIC: {subtopic_cfg.name}")
     print(f"PHASE: {phase_cfg.name} [{phase_name}]")
@@ -110,6 +207,8 @@ def onboard():
             for task in current_goal.tasks:
                 marker = "[x]" if task.status == "completed" else "[ ]"
                 print(f"  {marker} [{task.type}] {task.name}")
+                for f in task.relevant_files:
+                    print(f"      file: {resolve_str(f)}")
         else:
             print("\nNo tasks yet — create exercises for this goal.")
         print()
@@ -132,8 +231,44 @@ def onboard():
     print("  Requirement: at least 1 quiz per week")
     print()
 
-    # --- Recent records ---
+    # --- Weekly session summary ---
     records_dir = get_records_dir(topic_name, subtopic_name)
+    weekly_summary = _weekly_session_summary(records_dir, current_week)
+    if weekly_summary:
+        print("-" * 60)
+        print("THIS WEEK'S SESSIONS")
+        print("-" * 60)
+        print(f"  {weekly_summary}")
+        print()
+
+    # --- Last session highlight ---
+    if records_dir.exists():
+        all_records = sorted(records_dir.glob("*.md"), reverse=True)
+        if all_records:
+            last_record = all_records[0]
+            last_fm = _parse_record_frontmatter(last_record)
+            last_content = last_record.read_text().strip()
+            # Strip frontmatter for display
+            if last_content.startswith("---"):
+                parts = last_content.split("---", 2)
+                last_body = parts[2].strip() if len(parts) >= 3 else ""
+            else:
+                last_body = last_content
+
+            print("-" * 60)
+            print("LAST SESSION")
+            print("-" * 60)
+            print(f"  Date: {last_fm.get('date', last_record.stem)}")
+            print(f"  Duration: {last_fm.get('duration', 'not recorded')}")
+            print(f"  Type: {last_fm.get('type', 'unknown')}")
+            print(f"  Status: {last_fm.get('status', 'unknown')}")
+            if last_body:
+                print()
+                for line in last_body.splitlines():
+                    print(f"  {line}")
+            print()
+
+    # --- Recent records ---
     if records_dir.exists():
         records = sorted(records_dir.glob("*.md"), reverse=True)[:8]
         if records:
