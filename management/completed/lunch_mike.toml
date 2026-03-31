@@ -1,14 +1,15 @@
 name = "Lunch Mike"
 slug = "lunch_mike"
 description = ""
-status = "todo"
+status = "completed"
 created = "2026-03-31"
 due = "2026-03-18T13:00:00+02:00"
+completed_at = "2026-03-31"
 tags = [
     "gcal",
 ]
 recurrence = ""
 gcal_event_id = "_84pk2e9l6l2kab9l6sq3ib9k6ss38ba164s3iba674sjagi188qj6d9o6g"
-last_modified = "2026-03-31T12:53:55.346788"
+last_modified = "2026-03-31T12:57:54.457601"
 has_subtasks = false
 parent = ""

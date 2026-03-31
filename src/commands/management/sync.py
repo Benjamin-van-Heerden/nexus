@@ -1,5 +1,6 @@
 """Google Calendar sync and auth commands."""
 
+import shutil
 import tomllib
 from datetime import date, datetime, timedelta
 from pathlib import Path
@@ -101,6 +102,7 @@ def sync():
     pulled = 0
     pushed = 0
     conflicts = 0
+    auto_completed = 0
 
     # -- PULL (gcal -> nexus) --
     # Window: 2 weeks ago to 30 days ahead
@@ -140,6 +142,9 @@ def sync():
         event_start = start.get("dateTime", start.get("date", ""))
         due_value = _parse_gcal_datetime(event_start)
 
+        description = _extract_gcal_description(event)
+        is_past = _is_past_event(due_value)
+
         if event_id in gcal_id_map:
             entry = gcal_id_map[event_id]
             task_path = resolve(entry.path)
@@ -151,6 +156,8 @@ def sync():
             if gcal_modified > nexus_modified:
                 task.name = event_summary
                 task.due = due_value
+                if description:
+                    task.description = description
                 task.last_modified = datetime.now()
                 save_task(task_path, task)
                 update_index_entry(entry.slug, name=event_summary, due=due_value)
@@ -167,27 +174,42 @@ def sync():
             tasks_dir.mkdir(parents=True, exist_ok=True)
             task_path = tasks_dir / f"{slug}.toml"
 
+            # Past events without existing nexus tasks are auto-completed
+            status = "completed" if is_past else "todo"
+            completed_at = date.today() if is_past else None
+
             task = TaskConfig(
                 name=event_summary,
                 slug=slug,
-                status="todo",
+                description=description,
+                status=status,
                 created=date.today(),
                 due=due_value,
+                completed_at=completed_at,
                 tags=["gcal"],
                 gcal_event_id=event_id,
                 last_modified=datetime.now(),
             )
             save_task(task_path, task)
 
-            entry = IndexEntry(
-                slug=slug,
-                name=event_summary,
-                path=to_stored_path(task_path),
-                due=due_value,
-            )
-            add_to_index(entry)
-            index = load_index()
-            pulled += 1
+            if is_past:
+                # Move directly to completed/
+                from src.utils.management import get_completed_dir
+                completed_dir = get_completed_dir()
+                completed_dir.mkdir(parents=True, exist_ok=True)
+                completed_path = completed_dir / f"{slug}.toml"
+                shutil.move(str(task_path), str(completed_path))
+                auto_completed += 1
+            else:
+                entry = IndexEntry(
+                    slug=slug,
+                    name=event_summary,
+                    path=to_stored_path(task_path),
+                    due=due_value,
+                )
+                add_to_index(entry)
+                index = load_index()
+                pulled += 1
 
     # -- PUSH (nexus -> gcal) --
     index = load_index()
@@ -238,7 +260,12 @@ def sync():
     state["calendar_id"] = calendar_id
     _save_sync_state(state)
 
-    typer.echo(f"Sync complete: {pulled} pulled, {pushed} pushed, {conflicts} conflicts (latest wins)")
+    summary = f"Sync complete: {pulled} pulled, {pushed} pushed"
+    if auto_completed:
+        summary += f", {auto_completed} auto-completed (past events)"
+    if conflicts:
+        summary += f", {conflicts} conflicts (latest wins)"
+    typer.echo(summary)
 
 
 def _parse_gcal_datetime(dt_str: str) -> datetime | date | None:
@@ -247,6 +274,31 @@ def _parse_gcal_datetime(dt_str: str) -> datetime | date | None:
     if "T" in dt_str:
         return datetime.fromisoformat(dt_str.replace("Z", "+00:00"))
     return date.fromisoformat(dt_str)
+
+
+def _extract_gcal_description(event: dict) -> str:
+    """Build a description from gcal event metadata (description, location, hangout link)."""
+    parts = []
+    if event.get("description"):
+        parts.append(event["description"])
+    if event.get("location"):
+        parts.append(f"Location: {event['location']}")
+    hangout = event.get("hangoutLink")
+    if hangout:
+        parts.append(f"Meeting link: {hangout}")
+    return "\n".join(parts)
+
+
+def _is_past_event(due: datetime | date | None) -> bool:
+    """Check if a due value is in the past."""
+    if due is None:
+        return False
+    today = date.today()
+    if isinstance(due, datetime):
+        due_date = due.date() if due.tzinfo is None else due.astimezone().date()
+    else:
+        due_date = due
+    return due_date < today
 
 
 def _build_gcal_event(task: TaskConfig) -> dict:
