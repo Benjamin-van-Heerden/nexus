@@ -1,0 +1,13 @@
+name = "Buy groceries"
+slug = "buy_groceries"
+description = ""
+status = "todo"
+created = "2026-03-31"
+tags = [
+    "personal",
+]
+recurrence = ""
+gcal_event_id = ""
+last_modified = "2026-03-31T13:15:33.561391"
+has_subtasks = false
+parent = ""
