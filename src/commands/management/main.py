@@ -12,7 +12,7 @@ Usage:
 import typer
 
 from src.commands.management.contact import app as contact_app
-from src.commands.management.onboard import onboard, upcoming
+from src.commands.management.onboard import onboard, refresh, upcoming
 from src.commands.management.sync import auth_google, sync
 from src.commands.management.task import app as task_app
 
@@ -25,5 +25,6 @@ app.add_typer(task_app, name="task", help="Manage tasks")
 app.add_typer(contact_app, name="contact", help="Manage contacts")
 app.add_typer(auth_app, name="auth", help="Authentication commands")
 app.command(name="onboard", help="Full management context dump for agents")(onboard)
+app.command(name="refresh", help="Lightweight context refresh for follow-up sessions")(refresh)
 app.command(name="upcoming", help="Show upcoming tasks, birthdays, and recurring events")(upcoming)
 app.command(name="sync", help="Bidirectional Google Calendar sync")(sync)

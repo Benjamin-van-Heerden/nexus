@@ -1,12 +1,14 @@
-"""Onboard and upcoming commands — context dump for agents and quick daily check.
+"""Onboard, refresh, and upcoming commands.
 
 Reminder windows:
 - Birthdays: at 7 days out, then daily from 2 days out (2 days, tomorrow, today)
 - Recurring tasks: only on the day of
 - Open todos: always shown
 - Tasks with due dates: from 1 day out (tomorrow, today) + overdue
+- Due this week: 2-7 days out (onboard/refresh only, not daily reminders)
 """
 
+import tomllib
 from datetime import date, datetime, timedelta
 from pathlib import Path
 
@@ -14,12 +16,16 @@ import typer
 
 from src.utils.management import (
     get_contacts_dir,
+    get_sync_dir,
     load_contact,
     load_index,
     load_task,
     next_occurrence,
 )
 from src.utils.path_resolution import resolve
+
+
+# -- Display helpers --
 
 
 def _has_time(due: datetime | date | None) -> bool:
@@ -31,6 +37,16 @@ def _has_time(due: datetime | date | None) -> bool:
     return False
 
 
+def _format_due_display(due: datetime | date | None) -> str:
+    """Format a due value for display — date only for all-day, time for timed events."""
+    if due is None:
+        return ""
+    if _has_time(due):
+        return due.strftime("%a %d %b at %H:%M")
+    due_date = due.date() if isinstance(due, datetime) else due
+    return due_date.strftime("%a %d %b")
+
+
 def _format_task_name(entry) -> str:
     """Format a task name with parent context if it's a subtask."""
     if entry.parent:
@@ -38,8 +54,10 @@ def _format_task_name(entry) -> str:
         for t in index.tasks:
             if t.slug == entry.parent:
                 return f"{entry.name} (of {t.name})"
-        return entry.name
     return entry.name
+
+
+# -- Data helpers --
 
 
 def _get_overdue_tasks() -> list[tuple[str, str, date, int]]:
@@ -72,6 +90,22 @@ def _get_due_on(target: date) -> list[tuple[str, str, date | datetime]]:
             continue
         due_date = entry.due.date() if isinstance(entry.due, datetime) else entry.due
         if due_date == target:
+            results.append((_format_task_name(entry), entry.slug, entry.due))
+    return sorted(results, key=lambda x: x[2])
+
+
+def _get_due_in_range(start: date, end: date) -> list[tuple[str, str, date | datetime]]:
+    """Return non-recurring tasks due within a date range (inclusive)."""
+    index = load_index()
+    results = []
+    for entry in index.tasks:
+        if entry.due is None:
+            continue
+        task = load_task(resolve(entry.path))
+        if task.recurrence:
+            continue
+        due_date = entry.due.date() if isinstance(entry.due, datetime) else entry.due
+        if start <= due_date <= end:
             results.append((_format_task_name(entry), entry.slug, entry.due))
     return sorted(results, key=lambda x: x[2])
 
@@ -110,9 +144,49 @@ def _get_birthday_reminders() -> list[tuple[str, date, int | None, str]]:
         else:
             continue
 
-        age_str = f" (turning {age})" if age else None
-        if age_str:
-            msg += age_str
+        if age:
+            msg += f" (turning {age})"
+
+        results.append((contact.name, bday_this_year, age, msg))
+
+    return sorted(results, key=lambda x: x[1])
+
+
+def _get_upcoming_birthdays(days: int = 14) -> list[tuple[str, date, int | None, str]]:
+    """Return all birthdays within a window, with appropriate messages."""
+    contacts_dir = get_contacts_dir()
+    if not contacts_dir.exists():
+        return []
+
+    today = date.today()
+    window_end = today + timedelta(days=days)
+    results = []
+
+    for f in contacts_dir.glob("*.toml"):
+        contact = load_contact(f)
+        if not contact.birthday:
+            continue
+        bday_this_year = contact.birthday.replace(year=today.year)
+        if bday_this_year < today:
+            bday_this_year = contact.birthday.replace(year=today.year + 1)
+
+        if not (today <= bday_this_year <= window_end):
+            continue
+
+        days_until = (bday_this_year - today).days
+        age = bday_this_year.year - contact.birthday.year
+
+        if days_until == 0:
+            msg = f"It's {contact.name}'s birthday today!"
+        elif days_until == 1:
+            msg = f"{contact.name}'s birthday is tomorrow"
+        elif days_until == 2:
+            msg = f"{contact.name}'s birthday is in 2 days"
+        else:
+            msg = f"{contact.name}'s birthday is on {bday_this_year.strftime('%a %d %B')}"
+
+        if age:
+            msg += f" (turning {age})"
 
         results.append((contact.name, bday_this_year, age, msg))
 
@@ -148,6 +222,17 @@ def _get_open_todos() -> list[tuple[str, str, date]]:
     return results
 
 
+def _get_last_sync_info() -> str | None:
+    """Return last sync timestamp string, or None if never synced."""
+    state_path = get_sync_dir() / "sync_state.toml"
+    if not state_path.exists():
+        return None
+    with open(state_path, "rb") as f:
+        state = tomllib.load(f)
+    last = state.get("last_sync", "")
+    return last if last else None
+
+
 def _print_task_tree():
     """Print hierarchical view of all active tasks."""
     index = load_index()
@@ -156,7 +241,7 @@ def _print_task_tree():
     def _print_entry(entry, indent=0):
         task = load_task(resolve(entry.path))
         status = {"todo": "[ ]", "in_progress": "[~]", "completed": "[x]"}[task.status]
-        due_str = f" (due: {entry.due})" if entry.due else ""
+        due_str = f" ({_format_due_display(entry.due)})" if entry.due else ""
         recur_str = f" [recurring: {task.recurrence}]" if task.recurrence else ""
         tags_str = f" #{' #'.join(task.tags)}" if task.tags else ""
         prefix = "  " * indent
@@ -169,50 +254,68 @@ def _print_task_tree():
         _print_entry(entry)
 
 
-def onboard():
-    """Full management context dump for agents."""
+# -- Shared section printers --
+
+
+def _print_actionable_sections():
+    """Print all actionable sections (shared by onboard, refresh, upcoming)."""
     today = date.today()
     tomorrow = today + timedelta(days=1)
+    has_content = False
 
-    print("=" * 60)
-    print("NEXUS MANAGE ONBOARD")
-    print("=" * 60)
-    print(f"Date: {today.strftime('%A, %B %d, %Y')}")
-    print()
-
-    # 1. Overdue tasks
+    # Overdue
     overdue = _get_overdue_tasks()
     if overdue:
         print("-" * 60)
-        print("OVERDUE TASKS")
+        print("OVERDUE")
         print("-" * 60)
         for name, slug, due_date, days in overdue:
-            print(f"  ⚠ {name} — due {due_date} ({days} day(s) overdue)")
+            print(f"  ⚠ {name} — due {due_date.strftime('%a %d %b')} ({days} day(s) overdue)")
         print()
+        has_content = True
 
-    # 2. Due today
+    # Due today
     due_today = _get_due_on(today)
     if due_today:
         print("-" * 60)
-        print("DUE TODAY")
+        print("TODAY")
         print("-" * 60)
         for name, slug, due in due_today:
-            time_str = f" at {due.strftime('%H:%M')}" if _has_time(due) else ""
-            print(f"  Remember {name} is due today{time_str}")
+            if _has_time(due):
+                print(f"  {name} at {due.strftime('%H:%M')}")
+            else:
+                print(f"  {name}")
         print()
+        has_content = True
 
-    # 3. Due tomorrow
+    # Due tomorrow
     due_tomorrow = _get_due_on(tomorrow)
     if due_tomorrow:
         print("-" * 60)
-        print("DUE TOMORROW")
+        print("TOMORROW")
         print("-" * 60)
         for name, slug, due in due_tomorrow:
-            time_str = f" at {due.strftime('%H:%M')}" if _has_time(due) else ""
-            print(f"  Remember you have {name} tomorrow{time_str}")
+            if _has_time(due):
+                print(f"  {name} at {due.strftime('%H:%M')}")
+            else:
+                print(f"  {name}")
         print()
+        has_content = True
 
-    # 4. Birthday reminders
+    # Due this week (2-7 days out)
+    week_start = today + timedelta(days=2)
+    week_end = today + timedelta(days=7)
+    due_week = _get_due_in_range(week_start, week_end)
+    if due_week:
+        print("-" * 60)
+        print("THIS WEEK")
+        print("-" * 60)
+        for name, slug, due in due_week:
+            print(f"  {name} — {_format_due_display(due)}")
+        print()
+        has_content = True
+
+    # Birthdays
     birthdays = _get_birthday_reminders()
     if birthdays:
         print("-" * 60)
@@ -221,8 +324,9 @@ def onboard():
         for name, bday, age, msg in birthdays:
             print(f"  🎂 {msg}")
         print()
+        has_content = True
 
-    # 5. Recurring tasks due today
+    # Recurring today
     recurring = _get_recurring_today()
     if recurring:
         print("-" * 60)
@@ -231,8 +335,9 @@ def onboard():
         for name, recur in recurring:
             print(f"  ↻ {name}")
         print()
+        has_content = True
 
-    # 6. Open todos (always shown)
+    # Open todos (always shown)
     todos = _get_open_todos()
     if todos:
         print("-" * 60)
@@ -241,8 +346,50 @@ def onboard():
         for name, slug, created in todos:
             print(f"  ○ {name} (created: {created})")
         print()
+        has_content = True
 
-    # 7. Task tree
+    return has_content
+
+
+# -- Commands --
+
+
+def onboard():
+    """Full management context dump for agents."""
+    today = date.today()
+
+    print("=" * 60)
+    print("NEXUS MANAGE ONBOARD")
+    print("=" * 60)
+    print(f"Date: {today.strftime('%A, %B %d, %Y')}")
+    print(f"User: Benjamin van Heerden")
+    print()
+
+    # Last sync info
+    last_sync = _get_last_sync_info()
+    if last_sync:
+        print(f"Last Google Calendar sync: {last_sync}")
+    else:
+        print("Google Calendar: never synced")
+    print()
+
+    # All actionable sections
+    _print_actionable_sections()
+
+    # Upcoming birthdays (broader window for onboard)
+    upcoming_bdays = _get_upcoming_birthdays(14)
+    # Filter out any already shown in the reminder section
+    reminder_names = {b[0] for b in _get_birthday_reminders()}
+    upcoming_bdays = [b for b in upcoming_bdays if b[0] not in reminder_names]
+    if upcoming_bdays:
+        print("-" * 60)
+        print("UPCOMING BIRTHDAYS")
+        print("-" * 60)
+        for name, bday, age, msg in upcoming_bdays:
+            print(f"  🎂 {msg}")
+        print()
+
+    # Task tree
     index = load_index()
     if index.tasks:
         print("-" * 60)
@@ -251,7 +398,7 @@ def onboard():
         _print_task_tree()
         print()
 
-    # 8. Agent instructions
+    # Agent instructions
     instructions_path = Path(__file__).parent / "agent_instructions.md"
     if instructions_path.exists():
         print("-" * 60)
@@ -261,65 +408,53 @@ def onboard():
         print()
 
 
+def refresh():
+    """Lightweight context refresh — current state without full instructions."""
+    today = date.today()
+
+    print("=" * 60)
+    print("NEXUS MANAGE REFRESH")
+    print("=" * 60)
+    print(f"Date: {today.strftime('%A, %B %d, %Y')}")
+    print()
+
+    # Last sync info
+    last_sync = _get_last_sync_info()
+    if last_sync:
+        print(f"Last Google Calendar sync: {last_sync}")
+    else:
+        print("Google Calendar: never synced")
+    print()
+
+    has_content = _print_actionable_sections()
+
+    # Upcoming birthdays (broader window)
+    upcoming_bdays = _get_upcoming_birthdays(14)
+    reminder_names = {b[0] for b in _get_birthday_reminders()}
+    upcoming_bdays = [b for b in upcoming_bdays if b[0] not in reminder_names]
+    if upcoming_bdays:
+        print("-" * 60)
+        print("UPCOMING BIRTHDAYS")
+        print("-" * 60)
+        for name, bday, age, msg in upcoming_bdays:
+            print(f"  🎂 {msg}")
+        print()
+        has_content = True
+
+    if not has_content:
+        print("Nothing actionable right now.")
+
+
 def upcoming(
     days: int = typer.Option(14, help="Lookahead window in days"),
 ):
     """Show upcoming tasks, birthdays, and recurring events."""
     today = date.today()
-    tomorrow = today + timedelta(days=1)
 
     print(f"Upcoming — {today.strftime('%A, %B %d, %Y')}")
     print()
 
-    # Overdue
-    overdue = _get_overdue_tasks()
-    if overdue:
-        print("OVERDUE:")
-        for name, slug, due_date, days_overdue in overdue:
-            print(f"  ⚠ {name} — due {due_date} ({days_overdue} day(s) overdue)")
-        print()
+    has_content = _print_actionable_sections()
 
-    # Due today
-    due_today = _get_due_on(today)
-    if due_today:
-        print("DUE TODAY:")
-        for name, slug, due in due_today:
-            time_str = f" at {due.strftime('%H:%M')}" if _has_time(due) else ""
-            print(f"  Remember {name} is due today{time_str}")
-        print()
-
-    # Due tomorrow
-    due_tomorrow = _get_due_on(tomorrow)
-    if due_tomorrow:
-        print("DUE TOMORROW:")
-        for name, slug, due in due_tomorrow:
-            time_str = f" at {due.strftime('%H:%M')}" if _has_time(due) else ""
-            print(f"  Remember you have {name} tomorrow{time_str}")
-        print()
-
-    # Birthdays
-    birthdays = _get_birthday_reminders()
-    if birthdays:
-        print("BIRTHDAYS:")
-        for name, bday, age, msg in birthdays:
-            print(f"  🎂 {msg}")
-        print()
-
-    # Recurring today
-    recurring = _get_recurring_today()
-    if recurring:
-        print("RECURRING (today):")
-        for name, recur in recurring:
-            print(f"  ↻ {name}")
-        print()
-
-    # Open todos (always shown)
-    todos = _get_open_todos()
-    if todos:
-        print("OPEN TODOS:")
-        for name, slug, created in todos:
-            print(f"  ○ {name} (created: {created})")
-        print()
-
-    if not overdue and not due_today and not due_tomorrow and not birthdays and not recurring and not todos:
+    if not has_content:
         print("Nothing upcoming.")
