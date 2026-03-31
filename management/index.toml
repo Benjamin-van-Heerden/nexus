@@ -4,3 +4,10 @@ name = "Test gcal sync"
 path = "./management/tasks/test_gcal_sync.toml"
 due = "2026-04-05T16:00:00+02:00"
 parent = ""
+
+[[tasks]]
+slug = "cross_sync_test"
+name = "Cross sync test"
+path = "./management/tasks/cross_sync_test.toml"
+due = "2026-04-10T15:00:00"
+parent = ""
