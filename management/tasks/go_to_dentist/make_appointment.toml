@@ -1,12 +1,13 @@
 name = "Make appointment"
 slug = "make_appointment"
 description = ""
-status = "todo"
+status = "completed"
 created = "2026-03-31"
 due = "2026-04-10T00:00:00"
+completed_at = "2026-03-31"
 tags = []
 recurrence = ""
 gcal_event_id = ""
-last_modified = "2026-03-31T12:37:57.748434"
+last_modified = "2026-03-31T12:38:07.129871"
 has_subtasks = true
 parent = "go_to_dentist"
