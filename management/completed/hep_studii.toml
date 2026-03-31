@@ -1,0 +1,31 @@
+name = "HEP // Studii"
+slug = "hep_studii"
+description = """
+Marco Booyse is inviting you to a scheduled Zoom meeting.
+Join Zoom Meeting
+https://us06web.zoom.us/j/83948330683
+
+Meeting ID: 839 4833 0683
+
+---
+
+Join by SIP
+• 83948330683@zoomcrc.com
+
+Join instructions
+https://us06web.zoom.us/meetings/83948330683/invitations?signature=Y11CG9EM4_54RlpLBtW7SnPs_Wh8CpdhCLcuJcuHVro
+
+
+Location: https://us06web.zoom.us/j/83948330683"""
+status = "completed"
+created = "2026-03-31"
+due = "2026-03-20T11:00:00+02:00"
+completed_at = "2026-03-31"
+tags = [
+    "gcal",
+]
+recurrence = ""
+gcal_event_id = "_68o34dhg6cojcl1h68p34chkb8mjgcpp6gs36cpg6os36g3nclh2qs3idti2qtbj60r2qtj164mnepb2dtliqdpmcos3gdpn74q68bbid8qm6s0"
+last_modified = "2026-03-31T12:57:54.458229"
+has_subtasks = false
+parent = ""
