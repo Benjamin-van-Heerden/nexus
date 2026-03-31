@@ -1,1 +1,5 @@
-
+[[tasks]]
+slug = "buy_groceries"
+name = "Buy groceries"
+path = "./management/tasks/buy_groceries.toml"
+parent = ""
