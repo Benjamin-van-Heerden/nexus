@@ -117,7 +117,8 @@ def sync():
         "timeMax": window_end,
     }
     if last_sync_str:
-        list_kwargs["updatedMin"] = last_sync_str
+        updated_min = last_sync_str if last_sync_str.endswith("Z") else last_sync_str + "Z"
+        list_kwargs["updatedMin"] = updated_min
 
     events_result = service.events().list(**list_kwargs).execute()
     events = events_result.get("items", [])
