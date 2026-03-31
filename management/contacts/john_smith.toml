@@ -1,0 +1,8 @@
+name = "John Smith"
+slug = "john_smith"
+phone = "+1234567890"
+email = "john@example.com"
+birthday = "1990-04-07"
+relationship = "friend"
+
+[info]
