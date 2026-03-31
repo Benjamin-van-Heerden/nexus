@@ -22,7 +22,7 @@ description = "Project overview and setup instructions"
 
 [worktree]
 # Paths to symlink into worktrees instead of copying (e.g. large data dirs) - will be automatically added to .gitignore - necessary for symlinks to work with version control
-symlink_paths = [".mem/docs/data", ".claude"]
+symlink_paths = [".mem/docs/data", ".claude", "auth"]
 
 [branches]
 # Name of the production/main branch
