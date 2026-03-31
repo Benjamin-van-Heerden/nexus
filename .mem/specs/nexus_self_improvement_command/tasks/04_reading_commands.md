@@ -1,9 +1,9 @@
 ---
 title: Reading commands
-status: todo
+status: completed
 created_at: '2026-03-31T11:22:57.528277'
-updated_at: '2026-03-31T11:22:57.528277'
-completed_at: null
+updated_at: '2026-03-31T15:52:14.329323'
+completed_at: '2026-03-31T15:52:14.329314'
 ---
 Create src/commands/self_improvement/read.py with a typer app for reading habit tracking.
 
@@ -38,3 +38,7 @@ nexus self read complete <slug>:
 
 nexus self read history:
 - List completed books: name, author, started, completed date (from last session or file mtime), total sessions
+
+## Completion Notes
+
+Created read.py with new, list, show, log, complete, history commands. Full session logging with questions/takeaways.

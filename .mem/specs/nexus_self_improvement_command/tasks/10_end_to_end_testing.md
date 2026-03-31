@@ -1,9 +1,9 @@
 ---
 title: End-to-end testing
-status: todo
+status: completed
 created_at: '2026-03-31T12:07:19.905157'
-updated_at: '2026-03-31T12:07:19.905157'
-completed_at: null
+updated_at: '2026-03-31T15:52:47.215444'
+completed_at: '2026-03-31T15:52:47.215435'
 ---
 Test the full self-improvement system end-to-end using the nexus CLI. Fix any bugs found.
 
@@ -58,3 +58,7 @@ IMPORTANT CONTEXT: Run all commands via 'uv run python main.py self ...' from th
 - Reading with no active books
 - Exercise with no sessions this week
 - Math with no logged sessions (trends should say 'no data')
+
+## Completion Notes
+
+Tested all flows: reading (new, list, show, log, complete, history), exercise (log, status, history), math (generate, log, status, config), learning (log, status), and onboard (with data and empty state). All passing. Cleaned up test data.

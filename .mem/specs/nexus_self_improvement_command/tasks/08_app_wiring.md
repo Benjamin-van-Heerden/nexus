@@ -1,9 +1,9 @@
 ---
 title: App wiring
-status: todo
+status: completed
 created_at: '2026-03-31T12:00:38.929226'
-updated_at: '2026-03-31T12:00:38.929226'
-completed_at: null
+updated_at: '2026-03-31T15:52:34.858929'
+completed_at: '2026-03-31T15:52:34.858924'
 ---
 Wire up the self-improvement app into the nexus CLI.
 
@@ -29,3 +29,7 @@ nexus self read [new|list|show|log|complete|history]
 nexus self exercise [log|status|history]
 nexus self math [generate|log|status|config]
 nexus self learn [log|status]
+
+## Completion Notes
+
+Created self_improvement/main.py wiring all sub-apps. Updated root main.py with self_app import and add_typer.

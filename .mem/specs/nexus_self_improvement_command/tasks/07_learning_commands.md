@@ -1,9 +1,9 @@
 ---
 title: Learning commands
-status: todo
+status: completed
 created_at: '2026-03-31T11:25:06.427091'
-updated_at: '2026-03-31T11:25:06.427091'
-completed_at: null
+updated_at: '2026-03-31T15:52:30.249682'
+completed_at: '2026-03-31T15:52:30.249676'
 ---
 Create src/commands/self_improvement/learn.py with a typer app for daily learning check-in tracking.
 
@@ -24,3 +24,7 @@ nexus self learn status:
 - Show streak: consecutive days with did_learn=True ending today (or yesterday if today not yet logged)
 - Show the goal text from habits.toml
 - Show missing days this week (days with no entry at all)
+
+## Completion Notes
+
+Created learn.py with log (overwrite protection, skip flag) and status (streak calc, missing days) commands.

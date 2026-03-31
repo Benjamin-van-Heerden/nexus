@@ -1,9 +1,9 @@
 ---
 title: Onboard command and agent instructions
-status: todo
+status: completed
 created_at: '2026-03-31T12:02:59.307975'
-updated_at: '2026-03-31T12:02:59.307975'
-completed_at: null
+updated_at: '2026-03-31T15:52:41.377762'
+completed_at: '2026-03-31T15:52:41.377751'
 ---
 Create the onboard command and agent instructions file. This is the most critical task in the spec — the onboard output is the ONLY interface between the nexus system and the AI agent.
 
@@ -108,3 +108,7 @@ ACCOUNTABILITY PATTERNS:
 
 AVAILABLE COMMANDS REFERENCE:
 List every nexus self command with flags and examples (copy from the spec)
+
+## Completion Notes
+
+Created onboard.py with all 8 sections (intro, date, reading, exercise, math, learning, weekly overview, agent instructions). Created agent_instructions.md with full playbook covering identity, daily message structure, reading comprehension flow, logging commands, accountability patterns, and command reference.
