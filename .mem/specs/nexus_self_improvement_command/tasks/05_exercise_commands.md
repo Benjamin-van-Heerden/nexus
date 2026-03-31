@@ -1,9 +1,9 @@
 ---
 title: Exercise commands
-status: todo
+status: completed
 created_at: '2026-03-31T11:23:17.771649'
-updated_at: '2026-03-31T11:23:17.771649'
-completed_at: null
+updated_at: '2026-03-31T15:52:18.128331'
+completed_at: '2026-03-31T15:52:18.128326'
 ---
 Create src/commands/self_improvement/exercise.py with a typer app for exercise habit tracking.
 
@@ -27,3 +27,7 @@ nexus self exercise history:
 - Show recent sessions, default last 4 weeks (--weeks flag to override)
 - Group by ISO week, show weekly session counts
 - Show per-session: date, type, description (truncated), intensity, duration
+
+## Completion Notes
+
+Created exercise.py with log, status, history commands. Weekly grouping, missing day detection.

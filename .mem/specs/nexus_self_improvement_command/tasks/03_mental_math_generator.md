@@ -1,9 +1,9 @@
 ---
 title: Mental math generator
-status: todo
+status: completed
 created_at: '2026-03-31T11:22:10.313720'
-updated_at: '2026-03-31T11:22:10.313720'
-completed_at: null
+updated_at: '2026-03-31T15:52:09.958834'
+completed_at: '2026-03-31T15:52:09.958827'
 ---
 Create src/commands/self_improvement/math_generator.py — a standalone module that reads self/math/config.toml and generates math problems.
 
@@ -27,3 +27,7 @@ IMPORTANT CONTEXT: This generator is called by the onboard command to print prob
   - Returns (formatted_problem_string, list_of_problem_type_names)
 
 **Symbols:** use × for multiplication, ÷ for division, + for addition, - for subtraction (unicode, not ASCII x or /)
+
+## Completion Notes
+
+Created math_generator.py with weighted problem selection, trailing zeros, whole-number division, unicode symbols

@@ -1,9 +1,9 @@
 ---
 title: Utility module
-status: todo
+status: completed
 created_at: '2026-03-31T11:20:44.308686'
-updated_at: '2026-03-31T11:20:44.308686'
-completed_at: null
+updated_at: '2026-03-31T15:52:04.589804'
+completed_at: '2026-03-31T15:52:04.589797'
 ---
 Create src/utils/self_improvement.py with TOML I/O helpers, path helpers, and week calculation utilities.
 
@@ -44,3 +44,7 @@ IMPORTANT CONTEXT: Follow the patterns in src/utils/learn.py. Use tomllib (stdli
 
 **Slug helper:**
 - slugify(name: str) -> str  (lowercase, spaces and special chars to underscores)
+
+## Completion Notes
+
+Created src/utils/self_improvement.py with path helpers, TOML I/O for all models, week calculation (ISO Mon-Sun), format/parse duration, slugify. Updated paths.py.

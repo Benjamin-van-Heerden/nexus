@@ -1,9 +1,9 @@
 ---
 title: Pydantic models and directory setup
-status: todo
+status: completed
 created_at: '2026-03-31T11:09:34.425390'
-updated_at: '2026-03-31T11:09:34.425390'
-completed_at: null
+updated_at: '2026-03-31T15:51:39.100319'
+completed_at: '2026-03-31T15:51:39.100311'
 ---
 Create all Pydantic models and the self/ directory structure. No __init__.py files anywhere.
 
@@ -53,3 +53,7 @@ learning.py:
 - Remove the self-improvement/ directory entirely (it contains only empty subdirs)
 - Remove the [self-improvement.goals] section from config.toml (lines with exercise_sessions_per_week and reading_sessions_per_week)
 - Remove the habits/ directory if it exists (unused)
+
+## Completion Notes
+
+Created all models in src/models/self_improvement/, self/ directory with TOML files, cleaned up stale dirs

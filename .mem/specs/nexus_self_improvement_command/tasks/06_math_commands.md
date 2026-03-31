@@ -1,9 +1,9 @@
 ---
 title: Math commands
-status: todo
+status: completed
 created_at: '2026-03-31T11:24:21.473293'
-updated_at: '2026-03-31T11:24:21.473293'
-completed_at: null
+updated_at: '2026-03-31T15:52:23.331710'
+completed_at: '2026-03-31T15:52:23.331703'
 ---
 Create src/commands/self_improvement/math.py with a typer app for mental math tracking.
 
@@ -36,3 +36,7 @@ nexus self math config:
 - Print the current self/math/config.toml in a readable format
 - Show each problem type: enabled, weight, digit range, trailing zeros chance
 - This is informational only — the agent modifies the config directly by editing the TOML file, no CLI command needed for that
+
+## Completion Notes
+
+Created math.py with generate, log, status, config commands. Duration parsing, trend analysis, config display.
