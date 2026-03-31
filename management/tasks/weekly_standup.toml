@@ -1,0 +1,12 @@
+name = "Weekly standup"
+slug = "weekly_standup"
+description = ""
+status = "todo"
+created = "2026-03-31"
+due = "2026-03-31"
+tags = []
+recurrence = "* * 1"
+gcal_event_id = ""
+last_modified = "2026-03-31T12:38:37.789446"
+has_subtasks = false
+parent = ""

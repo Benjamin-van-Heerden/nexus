@@ -1,1 +1,6 @@
-tasks = []
+[[tasks]]
+slug = "weekly_standup"
+name = "Weekly standup"
+path = "./management/tasks/weekly_standup.toml"
+due = "2026-03-31"
+parent = ""
