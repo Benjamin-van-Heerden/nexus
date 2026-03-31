@@ -10,3 +10,10 @@ slug = "look_into_new_laptop"
 name = "Look into new laptop"
 path = "./management/tasks/look_into_new_laptop.toml"
 parent = ""
+
+[[tasks]]
+slug = "submit_tax_return"
+name = "Submit tax return"
+path = "./management/tasks/submit_tax_return.toml"
+due = "2026-04-01"
+parent = ""
