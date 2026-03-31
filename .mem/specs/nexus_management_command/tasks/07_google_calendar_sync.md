@@ -1,9 +1,9 @@
 ---
 title: Google Calendar sync
-status: todo
+status: completed
 created_at: '2026-03-31T09:27:19.290527'
-updated_at: '2026-03-31T09:27:19.290527'
-completed_at: null
+updated_at: '2026-03-31T12:33:32.078985'
+completed_at: '2026-03-31T12:33:32.078967'
 ---
 Create src/commands/management/sync.py with two commands:
 
@@ -32,3 +32,7 @@ sync command (wired as 'nexus manage sync'):
 Dependencies needed (advise user, do not install): google-auth-oauthlib, google-api-python-client, google-auth-httplib2
 
 Wire both commands into src/commands/management/main.py.
+
+## Completion Notes
+
+Created src/commands/management/sync.py with auth_google (OAuth flow via InstalledAppFlow, saves token to auth/token.json) and sync (bidirectional gcal sync — pull new/updated events, push tasks with due dates, latest-wins conflict resolution, sync_state.toml tracking). Wired into main.py with auth as sub-typer (nexus manage auth google) and sync as direct command.

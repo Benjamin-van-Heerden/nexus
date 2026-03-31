@@ -2,6 +2,9 @@
 
 # mem docs data (vector DB and hashes)
 .mem/docs/data/
+.mem/docs/data
+.claude
+.claude/
 
 __pycache__/
 
@@ -13,9 +16,9 @@ target/
 deps/
 
 auth/
+auth
 
 # mem worktree symlinks (auto-added)
 .mem/docs/data
 .claude
 .claude/
-auth

@@ -1,9 +1,9 @@
 ---
 title: Onboard and upcoming commands
-status: todo
+status: completed
 created_at: '2026-03-31T09:20:55.549090'
-updated_at: '2026-03-31T09:20:55.549090'
-completed_at: null
+updated_at: '2026-03-31T11:25:15.873804'
+completed_at: '2026-03-31T11:25:15.873794'
 ---
 Create src/commands/management/onboard.py and add 'upcoming' to main.py:
 
@@ -20,3 +20,7 @@ onboard command — full context dump for agents. Output sections in order:
 upcoming command — lighter version, just sections 1-5 from onboard. Useful for quick daily check. Add --days option to control the lookahead window (default 14).
 
 Also create src/commands/management/agent_instructions.md with instructions for the OpenClaw agent on how to use the management commands, following the pattern of src/commands/learn/agent_instructions.md.
+
+## Completion Notes
+
+Created src/commands/management/onboard.py with onboard (full agent context dump) and upcoming (quick daily check) commands. Created agent_instructions.md. Reminder windows: birthdays at 7 days then daily from 2 days out, recurring only on day-of, tasks with due dates from 1 day out, open todos always shown. Subtasks show parent context (e.g. 'Make appointment (of Go to dentist)'). Times shown for datetime due values. Wired into main.py.
