@@ -1,0 +1,31 @@
+[general]
+problems_per_day = 5
+
+[addition]
+enabled = true
+weight = 1
+min_digits = 2
+max_digits = 3
+trailing_zeros_chance = 0.3
+
+[subtraction]
+enabled = true
+weight = 1
+min_digits = 2
+max_digits = 3
+trailing_zeros_chance = 0.3
+
+[multiplication]
+enabled = true
+weight = 3
+min_digits = 2
+max_digits = 2
+trailing_zeros_chance = 0.3
+
+[division]
+enabled = true
+weight = 1
+min_digits = 2
+max_digits = 2
+trailing_zeros_chance = 0.3
+whole_numbers_only = true

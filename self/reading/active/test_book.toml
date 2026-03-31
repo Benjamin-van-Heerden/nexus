@@ -1,0 +1,8 @@
+name = "Test Book"
+author = "Test Author"
+slug = "test_book"
+started = "2026-03-31"
+status = "active"
+current_section = "Chapter 1"
+total_sections = "10 chapters"
+sessions = []

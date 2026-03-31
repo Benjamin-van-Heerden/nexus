@@ -27,5 +27,5 @@ def get_learn_dir() -> Path:
     return get_project_root() / "learn"
 
 
-def get_self_improvement_dir() -> Path:
-    return get_project_root() / "self-improvement"
+def get_self_dir() -> Path:
+    return get_project_root() / "self"

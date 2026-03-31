@@ -1,0 +1,150 @@
+import shutil
+from datetime import date
+from typing import Annotated
+
+import typer
+
+from src.models.self_improvement.reading import BookConfig, ReadingSession
+from src.utils.self_improvement import (
+    get_reading_active_dir,
+    get_reading_completed_dir,
+    list_active_books,
+    list_completed_books,
+    load_book,
+    save_book,
+    slugify,
+)
+
+app = typer.Typer(help="Reading habit tracking")
+
+
+@app.command()
+def new(
+    title: str,
+    author: Annotated[str, typer.Option("--author")] = "",
+    section: Annotated[str, typer.Option("--section")] = "",
+    total: Annotated[str, typer.Option("--total")] = "",
+) -> None:
+    slug = slugify(title)
+    path = get_reading_active_dir() / f"{slug}.toml"
+    if path.exists():
+        typer.echo(f"Book '{slug}' already exists.")
+        raise typer.Exit(1)
+
+    book = BookConfig(
+        name=title,
+        author=author,
+        slug=slug,
+        started=date.today(),
+        status="active",
+        current_section=section,
+        total_sections=total,
+    )
+    save_book(book)
+    typer.echo(f"Created book: {title} (slug: {slug})")
+
+
+@app.command("list")
+def list_books() -> None:
+    books = list_active_books()
+    if not books:
+        typer.echo("No active books. Create one with: nexus self read new 'Title' --author 'Author'")
+        return
+
+    for book in books:
+        last_session = book.sessions[-1].date.isoformat() if book.sessions else "No sessions yet"
+        section = book.current_section or "Not set"
+        typer.echo(f"  {book.name} by {book.author} — section: {section}, last session: {last_session}, sessions: {len(book.sessions)}")
+
+
+@app.command()
+def show(slug: str) -> None:
+    try:
+        book = load_book(slug)
+    except FileNotFoundError:
+        typer.echo(f"Book '{slug}' not found.")
+        raise typer.Exit(1)
+
+    typer.echo(f"Title: {book.name}")
+    typer.echo(f"Author: {book.author}")
+    typer.echo(f"Started: {book.started}")
+    typer.echo(f"Status: {book.status}")
+    typer.echo(f"Current section: {book.current_section or 'Not set'}")
+    if book.total_sections:
+        typer.echo(f"Total sections: {book.total_sections}")
+    typer.echo(f"Total sessions: {len(book.sessions)}")
+
+    if book.sessions:
+        typer.echo("\nRecent sessions:")
+        for session in book.sessions[-3:]:
+            summary = session.summary[:100] + "..." if len(session.summary) > 100 else session.summary
+            takeaway = session.takeaway[:100] + "..." if len(session.takeaway) > 100 else session.takeaway
+            typer.echo(f"  [{session.date}] {session.section}")
+            typer.echo(f"    Summary: {summary}")
+            typer.echo(f"    Takeaway: {takeaway}")
+
+
+@app.command()
+def log(
+    slug: str,
+    section: Annotated[str, typer.Option("--section")],
+    summary: Annotated[str, typer.Option("--summary")],
+    takeaway: Annotated[str, typer.Option("--takeaway")],
+    question: Annotated[list[str] | None, typer.Option("--question")] = None,
+) -> None:
+    try:
+        book = load_book(slug)
+    except FileNotFoundError:
+        typer.echo(f"Book '{slug}' not found.")
+        raise typer.Exit(1)
+
+    session = ReadingSession(
+        date=date.today(),
+        section=section,
+        summary=summary,
+        takeaway=takeaway,
+        agent_questions=question or [],
+    )
+    book.sessions.append(session)
+    book.current_section = section
+    save_book(book)
+    typer.echo(f"Logged reading session for '{book.name}' — {section}")
+
+
+@app.command()
+def complete(slug: str) -> None:
+    try:
+        book = load_book(slug)
+    except FileNotFoundError:
+        typer.echo(f"Book '{slug}' not found.")
+        raise typer.Exit(1)
+
+    if book.status == "completed":
+        typer.echo(f"Book '{book.name}' is already completed.")
+        raise typer.Exit(1)
+
+    book.status = "completed"
+    active_path = get_reading_active_dir() / f"{slug}.toml"
+    save_book(book)
+    if active_path.exists():
+        active_path.unlink()
+
+    date_range = ""
+    if book.sessions:
+        first = book.sessions[0].date
+        last = book.sessions[-1].date
+        date_range = f" ({first} to {last})"
+
+    typer.echo(f"Completed '{book.name}' — {len(book.sessions)} sessions{date_range}")
+
+
+@app.command()
+def history() -> None:
+    books = list_completed_books()
+    if not books:
+        typer.echo("No completed books yet.")
+        return
+
+    for book in books:
+        last_date = book.sessions[-1].date.isoformat() if book.sessions else "unknown"
+        typer.echo(f"  {book.name} by {book.author} — started: {book.started}, completed: {last_date}, sessions: {len(book.sessions)}")

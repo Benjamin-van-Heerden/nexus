@@ -1,0 +1,15 @@
+[reading]
+goal = "Read 5 days per week, at least 20 pages or 1 section per session"
+active = true
+
+[exercise]
+goal = "Exercise 4 times per week, mix of soccer and gym"
+active = true
+
+[mental_math]
+goal = "5 mental math problems per day, speed is what Benjamin is most looking to improve."
+active = true
+
+[learning]
+goal = "Complete one learning session per day"
+active = true
