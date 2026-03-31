@@ -1,0 +1,14 @@
+name = "Stay at Wind Catcher Self-catering Unit"
+slug = "stay_at_wind_catcher_self_catering_unit"
+description = ""
+status = "todo"
+created = "2026-03-31"
+due = "2025-09-19"
+tags = [
+    "gcal",
+]
+recurrence = ""
+gcal_event_id = "6up167s4avseipoksrp1ufhpl8"
+last_modified = "2026-03-31T12:47:20.087649"
+has_subtasks = false
+parent = ""

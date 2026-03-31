@@ -1,0 +1,14 @@
+name = "Flight to Johannesburg (5Z 701)"
+slug = "flight_to_johannesburg_5z_701"
+description = ""
+status = "todo"
+created = "2026-03-31"
+due = "2022-01-01T12:00:00+02:00"
+tags = [
+    "gcal",
+]
+recurrence = ""
+gcal_event_id = "_6tlnaqrle5p6cpb4dhmj4phpehh3gdhm69ij0sphd9ljcrb665o72q3j65pjgojb71i74qb26oq3erj868om2s9gcph7copld5l32r3a60pj0"
+last_modified = "2026-03-31T12:47:19.510529"
+has_subtasks = false
+parent = ""

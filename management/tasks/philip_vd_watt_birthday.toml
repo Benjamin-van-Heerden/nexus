@@ -1,0 +1,14 @@
+name = "🎂Philip vd Watt Birthday"
+slug = "philip_vd_watt_birthday"
+description = ""
+status = "todo"
+created = "2026-03-31"
+due = "2022-04-07"
+tags = [
+    "gcal",
+]
+recurrence = ""
+gcal_event_id = "6oqj2dj368sj2b9nchh38b9kcorj2bb1coom2bb36hgm6e346opjio9m70"
+last_modified = "2026-03-31T12:47:19.672917"
+has_subtasks = false
+parent = ""

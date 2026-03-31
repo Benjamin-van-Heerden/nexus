@@ -1,0 +1,14 @@
+name = "Electrodynamics ST 1"
+slug = "electrodynamics_st_1"
+description = ""
+status = "todo"
+created = "2026-03-31"
+due = "2019-03-08T08:30:00+02:00"
+tags = [
+    "gcal",
+]
+recurrence = ""
+gcal_event_id = "c5gj6o9l70p62b9icphjib9k68o62bb264pj8b9jc8s3cdhj6gsjic1lcc"
+last_modified = "2026-03-31T12:47:19.436523"
+has_subtasks = false
+parent = ""

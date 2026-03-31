@@ -1,0 +1,14 @@
+name = "Blue lagoon creepy"
+slug = "blue_lagoon_creepy"
+description = ""
+status = "todo"
+created = "2026-03-31"
+due = "2019-02-27T09:30:00+02:00"
+tags = [
+    "gcal",
+]
+recurrence = ""
+gcal_event_id = "cdimaeb374rm2bb369h3ib9kcpgm2bb2cdim4bb36ti32e1lcgr3id1h6k"
+last_modified = "2026-03-31T12:47:19.426776"
+has_subtasks = false
+parent = ""

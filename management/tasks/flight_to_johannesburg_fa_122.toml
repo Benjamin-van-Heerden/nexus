@@ -1,0 +1,14 @@
+name = "Flight to Johannesburg (FA 122)"
+slug = "flight_to_johannesburg_fa_122"
+description = ""
+status = "todo"
+created = "2026-03-31"
+due = "2025-09-21T17:20:00+02:00"
+tags = [
+    "gcal",
+]
+recurrence = ""
+gcal_event_id = "gv5g7977gvva7arntlp0jesjk0"
+last_modified = "2026-03-31T12:47:20.103186"
+has_subtasks = false
+parent = ""

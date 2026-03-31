@@ -1,0 +1,14 @@
+name = "Tutoring (Garreth Gr. 8)"
+slug = "tutoring_garreth_gr_8"
+description = ""
+status = "todo"
+created = "2026-03-31"
+due = "2019-02-05T15:00:00+02:00"
+tags = [
+    "gcal",
+]
+recurrence = ""
+gcal_event_id = "cdj38dpkcli3gbb3ccsj0b9kcos30b9ochgj8b9ic8o6aoj6c5h68eb56k_20190205T130000Z"
+last_modified = "2026-03-31T12:47:19.407088"
+has_subtasks = false
+parent = ""
