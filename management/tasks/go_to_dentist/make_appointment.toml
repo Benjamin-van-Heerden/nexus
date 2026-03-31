@@ -1,14 +1,12 @@
-name = "Go to dentist"
-slug = "go_to_dentist"
+name = "Make appointment"
+slug = "make_appointment"
 description = ""
 status = "todo"
 created = "2026-03-31"
-due = "2026-04-15T10:00:00"
-tags = [
-    "health",
-]
+due = "2026-04-10"
+tags = []
 recurrence = ""
 gcal_event_id = ""
 last_modified = "2026-03-31T12:37:55.184597"
-has_subtasks = true
-parent = ""
+has_subtasks = false
+parent = "go_to_dentist"
