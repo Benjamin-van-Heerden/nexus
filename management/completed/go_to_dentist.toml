@@ -1,15 +1,16 @@
 name = "Go to dentist"
 slug = "go_to_dentist"
 description = "Annual checkup. Dr. Smith's office on Main St."
-status = "todo"
+status = "completed"
 created = "2026-03-31"
 due = "2026-04-15T10:00:00"
+completed_at = "2026-03-31"
 tags = [
     "health",
     "personal",
 ]
 recurrence = ""
 gcal_event_id = ""
-last_modified = "2026-03-31T12:33:45.766211"
+last_modified = "2026-03-31T12:35:38.902324"
 has_subtasks = true
 parent = ""
