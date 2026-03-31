@@ -1,14 +1,14 @@
-name = "Anro van Tonder's birthday"
+name = "Anro van Tonder's Birthday"
 slug = "anro_van_tonder_s_birthday"
 description = ""
 status = "todo"
 created = "2026-03-31"
-due = "2022-05-13"
+due = "2026-05-13"
 tags = [
     "gcal",
 ]
 recurrence = ""
-gcal_event_id = "j5ti2hldnse4n02bk3o8m9gaic_20220513"
-last_modified = "2026-03-31T12:47:19.828100"
+gcal_event_id = "74s6aoj269h64bb26lhjcb9k6grjcbb1cdh3cb9icgr3icplcphj2oj3cc_20260513"
+last_modified = "2026-03-31T12:49:43.379642"
 has_subtasks = false
 parent = ""

@@ -1,1404 +1,4 @@
 [[tasks]]
-slug = "test_gcal_sync"
-name = "Test gcal sync"
-path = "./management/tasks/test_gcal_sync.toml"
-due = "2026-04-05T14:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday.toml"
-due = "1997-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "1998-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday.toml"
-due = "1998-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "1999-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "1999-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2000-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2000-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2001-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2001-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2002-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2002-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2003-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2003-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2004-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2004-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2005-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2005-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2006-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2006-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2007-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2007-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2008-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2008-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2009-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2009-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2010-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2010-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2011-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2011-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2012-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2012-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2013-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2013-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2014-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "0"
-name = "0"
-path = "./management/tasks/0.toml"
-due = "2014-08-29T18:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2014-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2015-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2015-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2016-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2016-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2017-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2017-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2018-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2018-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "remind_me_to_do_something"
-name = "Remind me to do something"
-path = "./management/tasks/remind_me_to_do_something.toml"
-due = "2018-10-22T22:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "tutoring_garreth_gr_8"
-name = "Tutoring (Garreth Gr. 8)"
-path = "./management/tasks/tutoring_garreth_gr_8.toml"
-due = "2019-02-05T15:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "tutoring_ferdi_gr_8"
-name = "Tutoring (Ferdi Gr. 8)"
-path = "./management/tasks/tutoring_ferdi_gr_8.toml"
-due = "2019-02-07T14:30:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "tutoring_garreth_gr_8_gcal"
-name = "Tutoring (Garreth Gr. 8)"
-path = "./management/tasks/tutoring_garreth_gr_8_gcal.toml"
-due = "2019-02-12T15:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "tutoring_ferdi_gr_8_gcal"
-name = "Tutoring (Ferdi Gr. 8)"
-path = "./management/tasks/tutoring_ferdi_gr_8_gcal.toml"
-due = "2019-02-14T14:30:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "tutoring_shawnri_juanice_gr_12"
-name = "Tutoring (Shawnri + Juanice Gr. 12)"
-path = "./management/tasks/tutoring_shawnri_juanice_gr_12.toml"
-due = "2019-02-14T17:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "tutoring_garreth_gr_8_gcal"
-name = "Tutoring (Garreth Gr. 8)"
-path = "./management/tasks/tutoring_garreth_gr_8_gcal.toml"
-due = "2019-02-19T15:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "tutoring_ferdi_gr_8_gcal"
-name = "Tutoring (Ferdi Gr. 8)"
-path = "./management/tasks/tutoring_ferdi_gr_8_gcal.toml"
-due = "2019-02-21T14:30:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "tutoring_shawnri_juanice_gr_12_gcal"
-name = "Tutoring (Shawnri + Juanice Gr. 12)"
-path = "./management/tasks/tutoring_shawnri_juanice_gr_12_gcal.toml"
-due = "2019-02-21T17:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "tutoring_garreth_gr_8_gcal"
-name = "Tutoring (Garreth Gr. 8)"
-path = "./management/tasks/tutoring_garreth_gr_8_gcal.toml"
-due = "2019-02-26T14:45:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "blue_lagoon_creepy"
-name = "Blue lagoon creepy"
-path = "./management/tasks/blue_lagoon_creepy.toml"
-due = "2019-02-27T09:30:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "ferdi_tutoring"
-name = "Ferdi Tutoring"
-path = "./management/tasks/ferdi_tutoring.toml"
-due = "2019-03-03T10:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "382_consultation"
-name = "382 Consultation"
-path = "./management/tasks/382_consultation.toml"
-due = "2019-03-04T13:30:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "tutoring_garreth_gr_8_gcal"
-name = "Tutoring (Garreth Gr. 8)"
-path = "./management/tasks/tutoring_garreth_gr_8_gcal.toml"
-due = "2019-03-05T14:45:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "electrodynamics_st_1"
-name = "Electrodynamics ST 1"
-path = "./management/tasks/electrodynamics_st_1.toml"
-due = "2019-03-08T08:30:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "tutoring_garreth_gr_8_gcal"
-name = "Tutoring (Garreth Gr. 8)"
-path = "./management/tasks/tutoring_garreth_gr_8_gcal.toml"
-due = "2019-03-12T14:45:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "tutoring_garreth_gr_8_gcal"
-name = "Tutoring (Garreth Gr. 8)"
-path = "./management/tasks/tutoring_garreth_gr_8_gcal.toml"
-due = "2019-03-19T14:45:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "st_2_phy_356"
-name = "St 2 phy 356"
-path = "./management/tasks/st_2_phy_356.toml"
-due = "2019-03-20T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "tutoring_garreth_gr_8_gcal"
-name = "Tutoring (Garreth Gr. 8)"
-path = "./management/tasks/tutoring_garreth_gr_8_gcal.toml"
-due = "2019-03-26T14:45:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "tutoring_garreth_gr_8_gcal"
-name = "Tutoring (Garreth Gr. 8)"
-path = "./management/tasks/tutoring_garreth_gr_8_gcal.toml"
-due = "2019-04-02T14:45:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "tutoring_garreth_gr_8_gcal"
-name = "Tutoring (Garreth Gr. 8)"
-path = "./management/tasks/tutoring_garreth_gr_8_gcal.toml"
-due = "2019-04-09T14:45:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "tutoring_garreth_gr_8_gcal"
-name = "Tutoring (Garreth Gr. 8)"
-path = "./management/tasks/tutoring_garreth_gr_8_gcal.toml"
-due = "2019-04-16T14:45:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2019-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "tutoring_garreth_gr_8_gcal"
-name = "Tutoring (Garreth Gr. 8)"
-path = "./management/tasks/tutoring_garreth_gr_8_gcal.toml"
-due = "2019-04-23T14:45:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "tutoring_garreth_gr_8_gcal"
-name = "Tutoring (Garreth Gr. 8)"
-path = "./management/tasks/tutoring_garreth_gr_8_gcal.toml"
-due = "2019-04-30T14:45:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "tutoring_garreth_gr_8_gcal"
-name = "Tutoring (Garreth Gr. 8)"
-path = "./management/tasks/tutoring_garreth_gr_8_gcal.toml"
-due = "2019-05-07T14:45:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2019-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2020-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "gideon_oosthuizen_beleggingsgesprek"
-name = "Gideon Oosthuizen Beleggingsgesprek"
-path = "./management/tasks/gideon_oosthuizen_beleggingsgesprek.toml"
-due = "2020-04-23T10:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2020-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "ynwa"
-name = "YNWA "
-path = "./management/tasks/ynwa.toml"
-due = "2021-03-10T22:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "data_scientist_interview_benjamin"
-name = "Data Scientist Interview - Benjamin"
-path = "./management/tasks/data_scientist_interview_benjamin.toml"
-due = "2021-03-15T16:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2021-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "newbie_walkthrough_africa_learn_how_to_use_binance"
-name = "Newbie Walkthrough Africa: Learn how to use Binance"
-path = "./management/tasks/newbie_walkthrough_africa_learn_how_to_use_binance.toml"
-due = "2021-05-19T18:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "newbie_walkthrough_africa_learn_how_to_use_binance_gcal"
-name = "Newbie Walkthrough Africa: Learn how to use Binance"
-path = "./management/tasks/newbie_walkthrough_africa_learn_how_to_use_binance_gcal.toml"
-due = "2021-05-21T18:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "fw_1457_full_stack_java_developer_spotlight_benjamin_van_heerden_direct_referral_confirmed"
-name = "FW: 1457 Full Stack Java Developer (Spotlight)- Benjamin van Heerden (Direct Referral) - Confirmed"
-path = "./management/tasks/fw_1457_full_stack_java_developer_spotlight_benjamin_van_heerden_direct_referral_confirmed.toml"
-due = "2021-06-23T11:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2021-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "flight_to_plettenberg_bay_5z_702"
-name = "Flight to Plettenberg Bay (5Z 702)"
-path = "./management/tasks/flight_to_plettenberg_bay_5z_702.toml"
-due = "2021-12-19T09:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "flight_to_johannesburg_5z_701"
-name = "Flight to Johannesburg (5Z 701)"
-path = "./management/tasks/flight_to_johannesburg_5z_701.toml"
-due = "2022-01-01T12:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "flight_to_cape_town_mn_103"
-name = "Flight to Cape Town (MN 103)"
-path = "./management/tasks/flight_to_cape_town_mn_103.toml"
-due = "2022-02-02T08:45:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "flight_to_johannesburg_mn_104"
-name = "Flight to Johannesburg (MN 104)"
-path = "./management/tasks/flight_to_johannesburg_mn_104.toml"
-due = "2022-02-07T09:10:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow.toml"
-due = "2022-03-14T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_sql_fundamentals_datacamp"
-name = "Learning - SQL Fundamentals DataCamp"
-path = "./management/tasks/learning_sql_fundamentals_datacamp.toml"
-due = "2022-03-14T20:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-14T21:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-15T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_sql_fundamentals_datacamp_gcal"
-name = "Learning - SQL Fundamentals DataCamp"
-path = "./management/tasks/learning_sql_fundamentals_datacamp_gcal.toml"
-due = "2022-03-15T20:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-15T21:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-16T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_sql_fundamentals_datacamp_gcal"
-name = "Learning - SQL Fundamentals DataCamp"
-path = "./management/tasks/learning_sql_fundamentals_datacamp_gcal.toml"
-due = "2022-03-16T20:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-16T21:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-17T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-18T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-21T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-21T21:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-22T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-22T21:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-23T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-23T21:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-24T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-24T21:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-25T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-28T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-28T21:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-29T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-29T21:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-30T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-30T21:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-31T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-03-31T21:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-01T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-04T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-04T21:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-05T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-05T21:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-06T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-06T21:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "philip_vd_watt_birthday"
-name = "🎂Philip vd Watt Birthday"
-path = "./management/tasks/philip_vd_watt_birthday.toml"
-due = "2022-04-07T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-07T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-07T21:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-08T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-11T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-11T21:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-12T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-12T21:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-13T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-13T21:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-14T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-14T21:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-15T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-18T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-18T21:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2022-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-19T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-19T21:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-20T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-20T21:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-21T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-21T21:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-22T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "learning_time_building_deep_learning_models_with_tensorflow_gcal"
-name = "Learning time - Building Deep Learning Models with TensorFlow"
-path = "./management/tasks/learning_time_building_deep_learning_models_with_tensorflow_gcal.toml"
-due = "2022-04-25T08:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "maths_logic_assessment_benjamin_van_heerden"
-name = "Maths/Logic Assessment - Benjamin van Heerden"
-path = "./management/tasks/maths_logic_assessment_benjamin_van_heerden.toml"
-due = "2022-04-28T11:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "zoom_interview_benjamin_van_heerden_data_analyst_contact_details_082_303_5964_benjaminvh1997_gmail_com"
-name = "Zoom interview - Benjamin van Heerden - Data Analyst - Contact Details: 082 303 5964 / benjaminvh1997@gmail.com "
-path = "./management/tasks/zoom_interview_benjamin_van_heerden_data_analyst_contact_details_082_303_5964_benjaminvh1997_gmail_com.toml"
-due = "2022-04-28T14:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "anro_van_tonder_s_birthday"
-name = "Anro van Tonder's birthday"
-path = "./management/tasks/anro_van_tonder_s_birthday.toml"
-due = "2022-05-13T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2022-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "sql"
-name = "SQL"
-path = "./management/tasks/sql.toml"
-due = "2023-02-07T13:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "gesprek_blue_mantle_studii_benjamin"
-name = "Gesprek: Blue Mantle // Studii // Benjamin"
-path = "./management/tasks/gesprek_blue_mantle_studii_benjamin.toml"
-due = "2023-04-12T12:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2023-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "teams"
-name = "Teams"
-path = "./management/tasks/teams.toml"
-due = "2023-05-02T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "fw_studii_product_spec"
-name = "FW: STUDII PRODUCT SPEC"
-path = "./management/tasks/fw_studii_product_spec.toml"
-due = "2023-05-02T13:30:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "anro_van_tonder_s_birthday_gcal"
-name = "Anro van Tonder's Birthday"
-path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
-due = "2023-05-13T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "anro_van_tonder_s_birthday_gcal"
-name = "Anro van Tonder's birthday"
-path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
-due = "2023-05-13T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "onderhoud_benjamin_van_heerden"
-name = "Onderhoud: Benjamin van Heerden"
-path = "./management/tasks/onderhoud_benjamin_van_heerden.toml"
-due = "2023-06-05T14:45:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "happy_birthday"
-name = "Happy birthday!"
-path = "./management/tasks/happy_birthday.toml"
-due = "2023-07-30T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2023-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "bunk_spring_loader_double_sun_album_launch_railways_cafe"
-name = "Bunk: Spring Loader Double Sun Album Launch - Railways Cafe"
-path = "./management/tasks/bunk_spring_loader_double_sun_album_launch_railways_cafe.toml"
-due = "2024-02-02T18:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "flight_to_cape_town_fa_206"
-name = "Flight to Cape Town (FA 206)"
-path = "./management/tasks/flight_to_cape_town_fa_206.toml"
-due = "2024-04-10T12:15:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "flight_to_johannesburg_fa_215"
-name = "Flight to Johannesburg (FA 215)"
-path = "./management/tasks/flight_to_johannesburg_fa_215.toml"
-due = "2024-04-15T19:15:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2024-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "anro_van_tonder_s_birthday_gcal"
-name = "Anro van Tonder's Birthday"
-path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
-due = "2024-05-13T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "anro_van_tonder_s_birthday_gcal"
-name = "Anro van Tonder's birthday"
-path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
-due = "2024-05-13T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "happy_birthday_gcal"
-name = "Happy birthday!"
-path = "./management/tasks/happy_birthday_gcal.toml"
-due = "2024-07-30T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2024-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "marike_weys_s_birthday_gcal"
-name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
-due = "2025-04-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "the_big_pitch_2025_qualifier_one"
-name = "The Big Pitch 2025 - Qualifier One."
-path = "./management/tasks/the_big_pitch_2025_qualifier_one.toml"
-due = "2025-04-23T18:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "ai"
-name = "AI"
-path = "./management/tasks/ai.toml"
-due = "2025-04-29T09:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "anro_van_tonder_s_birthday_gcal"
-name = "Anro van Tonder's Birthday"
-path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
-due = "2025-05-13T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "anro_van_tonder_s_birthday_gcal"
-name = "Anro van Tonder's birthday"
-path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
-due = "2025-05-13T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "charge_pulse_mvp_software"
-name = "Charge Pulse - MVP Software"
-path = "./management/tasks/charge_pulse_mvp_software.toml"
-due = "2025-06-26T15:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "charge_pulse_mvp_software_gcal"
-name = "Charge Pulse - MVP Software"
-path = "./management/tasks/charge_pulse_mvp_software_gcal.toml"
-due = "2025-06-27T15:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "charge_pulse_mpv_software_build"
-name = "Charge Pulse - MPV Software build"
-path = "./management/tasks/charge_pulse_mpv_software_build.toml"
-due = "2025-07-01T15:30:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "chargepulse_software_mvp"
-name = "ChargePulse Software MVP"
-path = "./management/tasks/chargepulse_software_mvp.toml"
-due = "2025-07-02T16:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "benjamin_van_heerden_s_birthday"
-name = "Benjamin Van heerden's birthday"
-path = "./management/tasks/benjamin_van_heerden_s_birthday.toml"
-due = "2025-07-30T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "happy_birthday_gcal"
-name = "Happy birthday!"
-path = "./management/tasks/happy_birthday_gcal.toml"
-due = "2025-07-30T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "lunch_catchup"
-name = "Lunch & catchup"
-path = "./management/tasks/lunch_catchup.toml"
-due = "2025-07-30T12:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "benjamin_intro"
-name = "Benjamin intro"
-path = "./management/tasks/benjamin_intro.toml"
-due = "2025-07-31T16:30:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "dev_catchup"
-name = "Dev catchup"
-path = "./management/tasks/dev_catchup.toml"
-due = "2025-08-13T09:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "wcu_demo"
-name = "WCU Demo"
-path = "./management/tasks/wcu_demo.toml"
-due = "2025-08-18T11:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "chrissie_s_birthday_gcal"
-name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
-due = "2025-08-31T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "stay_at_wind_catcher_self_catering_unit"
-name = "Stay at Wind Catcher Self-catering Unit"
-path = "./management/tasks/stay_at_wind_catcher_self_catering_unit.toml"
-due = "2025-09-19T00:00:00"
-parent = ""
-
-[[tasks]]
-slug = "flight_to_cape_town_fa_129"
-name = "Flight to Cape Town (FA 129)"
-path = "./management/tasks/flight_to_cape_town_fa_129.toml"
-due = "2025-09-19T08:30:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "flight_to_johannesburg_fa_122"
-name = "Flight to Johannesburg (FA 122)"
-path = "./management/tasks/flight_to_johannesburg_fa_122.toml"
-due = "2025-09-21T17:20:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "jacques_boardroom"
-name = "Jacques - Boardroom"
-path = "./management/tasks/jacques_boardroom.toml"
-due = "2025-10-29T10:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "marco_in_die_boardroom"
-name = "Marco in die boardroom"
-path = "./management/tasks/marco_in_die_boardroom.toml"
-due = "2025-10-30T12:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "ai_demo"
-name = "AI demo"
-path = "./management/tasks/ai_demo.toml"
-due = "2026-01-30T14:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "yhat_onboarding"
-name = "Yhat Onboarding"
-path = "./management/tasks/yhat_onboarding.toml"
-due = "2026-02-02T11:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "charge_yhat_catchup"
-name = "CHARGE | Yhat catchup"
-path = "./management/tasks/charge_yhat_catchup.toml"
-due = "2026-02-06T12:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "charge_yhat_expo_deployment"
-name = "CHARGE | Yhat - expo deployment"
-path = "./management/tasks/charge_yhat_expo_deployment.toml"
-due = "2026-02-09T10:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "benjamin_ian"
-name = "Benjamin / Ian"
-path = "./management/tasks/benjamin_ian.toml"
-due = "2026-02-11T14:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "charge_yhat_catchup_gcal"
-name = "CHARGE | Yhat - catchup"
-path = "./management/tasks/charge_yhat_catchup_gcal.toml"
-due = "2026-02-13T10:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "charge_yhat"
-name = "CHARGE Yhat"
-path = "./management/tasks/charge_yhat.toml"
-due = "2026-02-18T16:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "charge_yhat_app_development"
-name = "CHARGE Yhat App Development"
-path = "./management/tasks/charge_yhat_app_development.toml"
-due = "2026-02-24T14:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "yhat_charge_voucher_project"
-name = "Yhat | CHARGE - voucher project"
-path = "./management/tasks/yhat_charge_voucher_project.toml"
-due = "2026-03-06T11:30:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "paxton_properties_interactive_map_integration"
-name = "Paxton Properties - Interactive Map Integration"
-path = "./management/tasks/paxton_properties_interactive_map_integration.toml"
-due = "2026-03-11T09:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "charge_yhat_vouchers_project"
-name = "CHARGE | Yhat - Vouchers project"
-path = "./management/tasks/charge_yhat_vouchers_project.toml"
-due = "2026-03-11T11:00:00+02:00"
-parent = ""
-
-[[tasks]]
-slug = "charge_yhat_vouchers_project_gcal"
-name = "CHARGE | Yhat - Vouchers project"
-path = "./management/tasks/charge_yhat_vouchers_project_gcal.toml"
-due = "2026-03-13T13:00:00+02:00"
-parent = ""
-
-[[tasks]]
 slug = "lunch_mike"
 name = "Lunch Mike"
 path = "./management/tasks/lunch_mike.toml"
@@ -1413,9 +13,9 @@ due = "2026-03-20T11:00:00+02:00"
 parent = ""
 
 [[tasks]]
-slug = "charge_yhat_vouchers_project_gcal"
+slug = "charge_yhat_vouchers_project"
 name = "CHARGE | Yhat - Vouchers project"
-path = "./management/tasks/charge_yhat_vouchers_project_gcal.toml"
+path = "./management/tasks/charge_yhat_vouchers_project.toml"
 due = "2026-03-20T13:00:00+02:00"
 parent = ""
 
@@ -1448,16 +48,23 @@ due = "2026-03-24T09:00:00+02:00"
 parent = ""
 
 [[tasks]]
-slug = "marike_weys_s_birthday_gcal"
+slug = "test_gcal_sync"
+name = "Test gcal sync"
+path = "./management/tasks/test_gcal_sync.toml"
+due = "2026-04-05T16:00:00+02:00"
+parent = ""
+
+[[tasks]]
+slug = "marike_weys_s_birthday"
 name = "Marike Weys's birthday"
-path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
+path = "./management/tasks/marike_weys_s_birthday.toml"
 due = "2026-04-19T00:00:00"
 parent = ""
 
 [[tasks]]
-slug = "anro_van_tonder_s_birthday_gcal"
+slug = "anro_van_tonder_s_birthday"
 name = "Anro van Tonder's Birthday"
-path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+path = "./management/tasks/anro_van_tonder_s_birthday.toml"
 due = "2026-05-13T00:00:00"
 parent = ""
 
@@ -1469,23 +76,23 @@ due = "2026-05-13T00:00:00"
 parent = ""
 
 [[tasks]]
-slug = "benjamin_van_heerden_s_birthday_gcal"
+slug = "benjamin_van_heerden_s_birthday"
 name = "Benjamin Van heerden's birthday"
-path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+path = "./management/tasks/benjamin_van_heerden_s_birthday.toml"
 due = "2026-07-30T00:00:00"
 parent = ""
 
 [[tasks]]
-slug = "happy_birthday_gcal"
+slug = "happy_birthday"
 name = "Happy birthday!"
-path = "./management/tasks/happy_birthday_gcal.toml"
+path = "./management/tasks/happy_birthday.toml"
 due = "2026-07-30T00:00:00"
 parent = ""
 
 [[tasks]]
-slug = "chrissie_s_birthday_gcal"
+slug = "chrissie_s_birthday"
 name = "Chrissie's birthday"
-path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+path = "./management/tasks/chrissie_s_birthday.toml"
 due = "2026-08-31T00:00:00"
 parent = ""
 
@@ -1752,5 +359,957 @@ parent = ""
 slug = "anro_van_tonder_s_birthday_gcal"
 name = "Anro van Tonder's Birthday"
 path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
-due = "2033-05-13"
+due = "2033-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2033-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "benjamin_van_heerden_s_birthday_gcal"
+name = "Benjamin Van heerden's birthday"
+path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+due = "2033-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "happy_birthday_gcal"
+name = "Happy birthday!"
+path = "./management/tasks/happy_birthday_gcal.toml"
+due = "2033-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "chrissie_s_birthday_gcal"
+name = "Chrissie's birthday"
+path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+due = "2033-08-31T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "marike_weys_s_birthday_gcal"
+name = "Marike Weys's birthday"
+path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
+due = "2034-04-19T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's Birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2034-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2034-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "benjamin_van_heerden_s_birthday_gcal"
+name = "Benjamin Van heerden's birthday"
+path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+due = "2034-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "happy_birthday_gcal"
+name = "Happy birthday!"
+path = "./management/tasks/happy_birthday_gcal.toml"
+due = "2034-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "chrissie_s_birthday_gcal"
+name = "Chrissie's birthday"
+path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+due = "2034-08-31T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "marike_weys_s_birthday_gcal"
+name = "Marike Weys's birthday"
+path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
+due = "2035-04-19T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's Birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2035-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2035-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "benjamin_van_heerden_s_birthday_gcal"
+name = "Benjamin Van heerden's birthday"
+path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+due = "2035-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "happy_birthday_gcal"
+name = "Happy birthday!"
+path = "./management/tasks/happy_birthday_gcal.toml"
+due = "2035-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "chrissie_s_birthday_gcal"
+name = "Chrissie's birthday"
+path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+due = "2035-08-31T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "marike_weys_s_birthday_gcal"
+name = "Marike Weys's birthday"
+path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
+due = "2036-04-19T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's Birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2036-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2036-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "benjamin_van_heerden_s_birthday_gcal"
+name = "Benjamin Van heerden's birthday"
+path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+due = "2036-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "happy_birthday_gcal"
+name = "Happy birthday!"
+path = "./management/tasks/happy_birthday_gcal.toml"
+due = "2036-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "chrissie_s_birthday_gcal"
+name = "Chrissie's birthday"
+path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+due = "2036-08-31T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "marike_weys_s_birthday_gcal"
+name = "Marike Weys's birthday"
+path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
+due = "2037-04-19T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's Birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2037-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2037-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "benjamin_van_heerden_s_birthday_gcal"
+name = "Benjamin Van heerden's birthday"
+path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+due = "2037-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "happy_birthday_gcal"
+name = "Happy birthday!"
+path = "./management/tasks/happy_birthday_gcal.toml"
+due = "2037-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "chrissie_s_birthday_gcal"
+name = "Chrissie's birthday"
+path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+due = "2037-08-31T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "marike_weys_s_birthday_gcal"
+name = "Marike Weys's birthday"
+path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
+due = "2038-04-19T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's Birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2038-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2038-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "benjamin_van_heerden_s_birthday_gcal"
+name = "Benjamin Van heerden's birthday"
+path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+due = "2038-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "happy_birthday_gcal"
+name = "Happy birthday!"
+path = "./management/tasks/happy_birthday_gcal.toml"
+due = "2038-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "chrissie_s_birthday_gcal"
+name = "Chrissie's birthday"
+path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+due = "2038-08-31T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "marike_weys_s_birthday_gcal"
+name = "Marike Weys's birthday"
+path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
+due = "2039-04-19T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's Birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2039-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2039-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "benjamin_van_heerden_s_birthday_gcal"
+name = "Benjamin Van heerden's birthday"
+path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+due = "2039-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "happy_birthday_gcal"
+name = "Happy birthday!"
+path = "./management/tasks/happy_birthday_gcal.toml"
+due = "2039-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "chrissie_s_birthday_gcal"
+name = "Chrissie's birthday"
+path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+due = "2039-08-31T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "marike_weys_s_birthday_gcal"
+name = "Marike Weys's birthday"
+path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
+due = "2040-04-19T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's Birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2040-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2040-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "benjamin_van_heerden_s_birthday_gcal"
+name = "Benjamin Van heerden's birthday"
+path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+due = "2040-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "happy_birthday_gcal"
+name = "Happy birthday!"
+path = "./management/tasks/happy_birthday_gcal.toml"
+due = "2040-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "chrissie_s_birthday_gcal"
+name = "Chrissie's birthday"
+path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+due = "2040-08-31T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "marike_weys_s_birthday_gcal"
+name = "Marike Weys's birthday"
+path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
+due = "2041-04-19T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's Birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2041-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2041-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "benjamin_van_heerden_s_birthday_gcal"
+name = "Benjamin Van heerden's birthday"
+path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+due = "2041-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "happy_birthday_gcal"
+name = "Happy birthday!"
+path = "./management/tasks/happy_birthday_gcal.toml"
+due = "2041-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "chrissie_s_birthday_gcal"
+name = "Chrissie's birthday"
+path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+due = "2041-08-31T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "marike_weys_s_birthday_gcal"
+name = "Marike Weys's birthday"
+path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
+due = "2042-04-19T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's Birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2042-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2042-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "benjamin_van_heerden_s_birthday_gcal"
+name = "Benjamin Van heerden's birthday"
+path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+due = "2042-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "happy_birthday_gcal"
+name = "Happy birthday!"
+path = "./management/tasks/happy_birthday_gcal.toml"
+due = "2042-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "chrissie_s_birthday_gcal"
+name = "Chrissie's birthday"
+path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+due = "2042-08-31T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "marike_weys_s_birthday_gcal"
+name = "Marike Weys's birthday"
+path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
+due = "2043-04-19T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's Birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2043-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2043-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "benjamin_van_heerden_s_birthday_gcal"
+name = "Benjamin Van heerden's birthday"
+path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+due = "2043-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "happy_birthday_gcal"
+name = "Happy birthday!"
+path = "./management/tasks/happy_birthday_gcal.toml"
+due = "2043-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "chrissie_s_birthday_gcal"
+name = "Chrissie's birthday"
+path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+due = "2043-08-31T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "marike_weys_s_birthday_gcal"
+name = "Marike Weys's birthday"
+path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
+due = "2044-04-19T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's Birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2044-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2044-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "benjamin_van_heerden_s_birthday_gcal"
+name = "Benjamin Van heerden's birthday"
+path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+due = "2044-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "happy_birthday_gcal"
+name = "Happy birthday!"
+path = "./management/tasks/happy_birthday_gcal.toml"
+due = "2044-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "chrissie_s_birthday_gcal"
+name = "Chrissie's birthday"
+path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+due = "2044-08-31T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "marike_weys_s_birthday_gcal"
+name = "Marike Weys's birthday"
+path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
+due = "2045-04-19T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's Birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2045-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2045-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "benjamin_van_heerden_s_birthday_gcal"
+name = "Benjamin Van heerden's birthday"
+path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+due = "2045-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "happy_birthday_gcal"
+name = "Happy birthday!"
+path = "./management/tasks/happy_birthday_gcal.toml"
+due = "2045-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "chrissie_s_birthday_gcal"
+name = "Chrissie's birthday"
+path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+due = "2045-08-31T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "marike_weys_s_birthday_gcal"
+name = "Marike Weys's birthday"
+path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
+due = "2046-04-19T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's Birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2046-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2046-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "benjamin_van_heerden_s_birthday_gcal"
+name = "Benjamin Van heerden's birthday"
+path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+due = "2046-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "happy_birthday_gcal"
+name = "Happy birthday!"
+path = "./management/tasks/happy_birthday_gcal.toml"
+due = "2046-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "chrissie_s_birthday_gcal"
+name = "Chrissie's birthday"
+path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+due = "2046-08-31T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "marike_weys_s_birthday_gcal"
+name = "Marike Weys's birthday"
+path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
+due = "2047-04-19T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's Birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2047-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2047-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "benjamin_van_heerden_s_birthday_gcal"
+name = "Benjamin Van heerden's birthday"
+path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+due = "2047-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "happy_birthday_gcal"
+name = "Happy birthday!"
+path = "./management/tasks/happy_birthday_gcal.toml"
+due = "2047-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "chrissie_s_birthday_gcal"
+name = "Chrissie's birthday"
+path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+due = "2047-08-31T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "marike_weys_s_birthday_gcal"
+name = "Marike Weys's birthday"
+path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
+due = "2048-04-19T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's Birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2048-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2048-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "benjamin_van_heerden_s_birthday_gcal"
+name = "Benjamin Van heerden's birthday"
+path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+due = "2048-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "happy_birthday_gcal"
+name = "Happy birthday!"
+path = "./management/tasks/happy_birthday_gcal.toml"
+due = "2048-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "chrissie_s_birthday_gcal"
+name = "Chrissie's birthday"
+path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+due = "2048-08-31T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "marike_weys_s_birthday_gcal"
+name = "Marike Weys's birthday"
+path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
+due = "2049-04-19T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's Birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2049-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2049-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "benjamin_van_heerden_s_birthday_gcal"
+name = "Benjamin Van heerden's birthday"
+path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+due = "2049-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "happy_birthday_gcal"
+name = "Happy birthday!"
+path = "./management/tasks/happy_birthday_gcal.toml"
+due = "2049-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "chrissie_s_birthday_gcal"
+name = "Chrissie's birthday"
+path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+due = "2049-08-31T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "marike_weys_s_birthday_gcal"
+name = "Marike Weys's birthday"
+path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
+due = "2050-04-19T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's Birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2050-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2050-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "benjamin_van_heerden_s_birthday_gcal"
+name = "Benjamin Van heerden's birthday"
+path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+due = "2050-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "happy_birthday_gcal"
+name = "Happy birthday!"
+path = "./management/tasks/happy_birthday_gcal.toml"
+due = "2050-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "chrissie_s_birthday_gcal"
+name = "Chrissie's birthday"
+path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+due = "2050-08-31T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "marike_weys_s_birthday_gcal"
+name = "Marike Weys's birthday"
+path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
+due = "2051-04-19T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's Birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2051-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2051-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "benjamin_van_heerden_s_birthday_gcal"
+name = "Benjamin Van heerden's birthday"
+path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+due = "2051-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "happy_birthday_gcal"
+name = "Happy birthday!"
+path = "./management/tasks/happy_birthday_gcal.toml"
+due = "2051-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "chrissie_s_birthday_gcal"
+name = "Chrissie's birthday"
+path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+due = "2051-08-31T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "marike_weys_s_birthday_gcal"
+name = "Marike Weys's birthday"
+path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
+due = "2052-04-19T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's Birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2052-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2052-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "benjamin_van_heerden_s_birthday_gcal"
+name = "Benjamin Van heerden's birthday"
+path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+due = "2052-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "happy_birthday_gcal"
+name = "Happy birthday!"
+path = "./management/tasks/happy_birthday_gcal.toml"
+due = "2052-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "chrissie_s_birthday_gcal"
+name = "Chrissie's birthday"
+path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+due = "2052-08-31T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "marike_weys_s_birthday_gcal"
+name = "Marike Weys's birthday"
+path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
+due = "2053-04-19T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's Birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2053-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2053-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "benjamin_van_heerden_s_birthday_gcal"
+name = "Benjamin Van heerden's birthday"
+path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+due = "2053-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "happy_birthday_gcal"
+name = "Happy birthday!"
+path = "./management/tasks/happy_birthday_gcal.toml"
+due = "2053-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "chrissie_s_birthday_gcal"
+name = "Chrissie's birthday"
+path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+due = "2053-08-31T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "marike_weys_s_birthday_gcal"
+name = "Marike Weys's birthday"
+path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
+due = "2054-04-19T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's Birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2054-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2054-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "benjamin_van_heerden_s_birthday_gcal"
+name = "Benjamin Van heerden's birthday"
+path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+due = "2054-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "happy_birthday_gcal"
+name = "Happy birthday!"
+path = "./management/tasks/happy_birthday_gcal.toml"
+due = "2054-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "chrissie_s_birthday_gcal"
+name = "Chrissie's birthday"
+path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+due = "2054-08-31T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "marike_weys_s_birthday_gcal"
+name = "Marike Weys's birthday"
+path = "./management/tasks/marike_weys_s_birthday_gcal.toml"
+due = "2055-04-19T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's Birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2055-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "anro_van_tonder_s_birthday_gcal"
+name = "Anro van Tonder's birthday"
+path = "./management/tasks/anro_van_tonder_s_birthday_gcal.toml"
+due = "2055-05-13T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "benjamin_van_heerden_s_birthday_gcal"
+name = "Benjamin Van heerden's birthday"
+path = "./management/tasks/benjamin_van_heerden_s_birthday_gcal.toml"
+due = "2055-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "happy_birthday_gcal"
+name = "Happy birthday!"
+path = "./management/tasks/happy_birthday_gcal.toml"
+due = "2055-07-30T00:00:00"
+parent = ""
+
+[[tasks]]
+slug = "chrissie_s_birthday_gcal"
+name = "Chrissie's birthday"
+path = "./management/tasks/chrissie_s_birthday_gcal.toml"
+due = "2055-08-31"
 parent = ""
