@@ -50,7 +50,8 @@ relevant_files = [
 name = "Quiz — JAX mental model: tracing, immutability, axis semantics"
 type = "quiz"
 created = "2026-04-01"
-status = "todo"
+status = "completed"
+completed = "2026-04-01"
 relevant_files = [
     "./learn/jax/from-scratch/foundations/quiz/2026-04-02-mental-model.md",
 ]
