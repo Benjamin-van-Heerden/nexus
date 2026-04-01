@@ -119,21 +119,11 @@ def onboard():
     print("NEXUS LEARN — DAILY ONBOARD")
     print("=" * 60)
     print()
-    print(
-        "Nexus is Benjamin's personal structured learning system."
-    )
-    print(
-        "You are the learning agent. You compose daily exercises,"
-    )
-    print(
-        "track progress, and maintain continuity across sessions."
-    )
-    print(
-        "The user interacts with you via Telegram. You wake up"
-    )
-    print(
-        "cold each session — this output is your full context."
-    )
+    print("Nexus is Benjamin's personal structured learning system.")
+    print("You are the learning agent. You compose daily exercises,")
+    print("track progress, and maintain continuity across sessions.")
+    print("The user interacts with you via Telegram. You wake up")
+    print("cold each session — this output is your full context.")
     print()
     print(f"DATE: {today.strftime('%A, %B %d, %Y')}")
     print(f"TOPIC: {topic_name}")
@@ -343,7 +333,6 @@ def refresh():
     today = date.today()
     current_week = get_week_start(today)
     week_end = current_week + timedelta(days=6)
-    subtopic_base = f"learn/{topic_name}/{subtopic_name}"
 
     print("=" * 60)
     print("NEXUS LEARN REFRESH")
@@ -391,7 +380,9 @@ def refresh():
     print("-" * 60)
     print("EXERCISE BALANCE (this phase)")
     print("-" * 60)
-    print(f"  Practical: {type_counts.get('practical', 0)}  |  Theoretical: {type_counts.get('theoretical', 0)}  |  Quiz: {type_counts.get('quiz', 0)}")
+    print(
+        f"  Practical: {type_counts.get('practical', 0)}  |  Theoretical: {type_counts.get('theoretical', 0)}  |  Quiz: {type_counts.get('quiz', 0)}"
+    )
     print()
 
     # Weekly session summary
@@ -435,8 +426,10 @@ def refresh():
     print("REFRESH INSTRUCTIONS")
     print("-" * 60)
     print("Check the state above and proceed:")
-    print("  1. Incomplete tasks from last session → ask if completed or needs follow-up")
-    print("  2. No tasks on current goal → compose a new exercise")
+    print(
+        "  1. Incomplete tasks from last session → ask if completed or needs follow-up"
+    )
+    print("  2. No tasks on current goal → compose one or more exercises")
     print("  3. All tasks done on goal → advance to next goal or phase")
     print("  4. Quiz balance → ensure at least 1 quiz per week")
     print("  5. Session count → suggest short/long based on weekly progress")

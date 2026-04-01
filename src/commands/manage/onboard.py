@@ -322,7 +322,7 @@ def onboard():
     print("NEXUS MANAGE ONBOARD")
     print("=" * 60)
     print(f"Date: {today.strftime('%A, %B %d, %Y')}")
-    print(f"User: Benjamin van Heerden")
+    print("User: Benjamin van Heerden")
     print()
 
     # Last sync info
