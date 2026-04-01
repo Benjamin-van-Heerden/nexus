@@ -30,7 +30,8 @@ relevant_files = [
 name = "Theoretical reading — JAX mental model: functions vs tensors, purity, immutability, device/dtype"
 type = "theoretical"
 created = "2026-04-01"
-status = "todo"
+status = "completed"
+completed = "2026-04-01"
 relevant_files = [
     "./learn/jax/from-scratch/foundations/theoretical/2026-04-01-mental-model.md",
 ]
