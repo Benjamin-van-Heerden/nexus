@@ -43,7 +43,7 @@ Read the onboard output. Present the information clearly and concisely in this o
 - `nexus manage task delete SLUG`
 
 ### Contacts
-- `nexus manage contact new "name" [--phone PHONE] [--email EMAIL] [--birthday YYYY-MM-DD] [--relationship REL]`
+- `nexus manage contact new "name" [--phone PHONE] [--email EMAIL] [--birthday MM-DD] [--birth-year YEAR] [--relationship REL]`
 - `nexus manage contact list` / `show SLUG` / `edit SLUG` / `delete SLUG`
 
 ### Overview
