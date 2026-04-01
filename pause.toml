@@ -1,7 +1,5 @@
 [learn]
-active = true
-resume_date = "2026-04-10"
-reason = "Weekend away"
+active = false
 
 [self]
 active = false
