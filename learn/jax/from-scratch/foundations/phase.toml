@@ -16,6 +16,15 @@ relevant_files = [
     "./learn/jax/from-scratch/foundations/practical/examples/2026-03-30.py",
 ]
 
+[[goals.tasks]]
+name = "Pure functions and composition — normalize rows, running max, scatter add, batch stats, two-layer forward pass"
+type = "practical"
+created = "2026-04-01"
+status = "todo"
+relevant_files = [
+    "./learn/jax/from-scratch/foundations/practical/examples/2026-04-01.py",
+]
+
 [[goals]]
 name = "Transformations: jit and grad"
 reference = "./learn/jax/reference/foundations-02-jit-and-grad.md"

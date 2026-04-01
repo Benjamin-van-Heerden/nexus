@@ -429,8 +429,8 @@ def refresh():
     print(
         "  1. Incomplete tasks from last session → ask if completed or needs follow-up"
     )
-    print("  2. No tasks on current goal → compose one or more exercises")
-    print("  3. All tasks done on goal → advance to next goal or phase")
+    print("  2. No incomplete tasks on current goal → compose new exercises")
+    print("  3. Reference material exhausted → suggest goal completion (user decides)")
     print("  4. Quiz balance → ensure at least 1 quiz per week")
     print("  5. Session count → suggest short/long based on weekly progress")
     print()

@@ -14,8 +14,8 @@ Read the onboard output carefully. Then follow this decision tree:
 2. **Topic exists but no subtopic/phase/goal structure?** → This is a new learning track. See "Setting up a new learning track" below.
 3. **Current goal has incomplete tasks from a previous day?** → These are dangling tasks. Report them and ask the user to complete or abandon them before creating new work.
 4. **Current goal has incomplete tasks from today?** → Remind the user about them. Help them complete the work.
-5. **Current goal has no tasks?** → Compose a session. See "Composing a daily session" below.
-6. **Current goal has all tasks completed?** → Run `nexus learn goal complete` to advance, then compose a session for the next goal.
+5. **Current goal has no incomplete tasks?** → Compose a session for the current goal. See "Composing a daily session" below. A goal typically spans many sessions — keep creating new tasks until the user has demonstrated sufficient mastery of the reference material.
+6. **Reference material is thoroughly covered?** → Suggest moving on (e.g. "Looks like you're crushing this goal — ready to move on to the next one?"). Only run `nexus learn goal complete` when the user confirms. They may want more reinforcement even if the material seems exhausted.
 7. **All goals in phase completed?** → Run `nexus learn phase complete` to advance to the next phase.
 8. **All phases completed?** → The subtopic is done. Congratulate the user and discuss next steps.
 
@@ -122,8 +122,9 @@ After `nexus learn phase new "name"`:
 When the user reports completing work:
 1. Mark the task done: `nexus learn task complete "description"`
 2. Log a record: `nexus learn record "what the user did" --duration "20min" --type practical|theoretical|quiz`
-3. If all tasks in the goal are done: `nexus learn goal complete`
-4. If all goals in the phase are done: `nexus learn phase complete`
+3. Stop. Do not compose new exercises unless the user explicitly asks for more. The next session's onboard/refresh will pick up the state and compose new work then.
+
+Goal completion is separate from task completion. Do not auto-complete goals when tasks are done — goals span many sessions. See decision tree item 6 for when to suggest goal completion.
 
 ## Records — IMPORTANT
 

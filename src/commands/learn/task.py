@@ -96,8 +96,7 @@ def complete(
                 for t in remaining:
                     typer.echo(f"  [ ] [{t.type}] {t.name}")
             else:
-                typer.echo(f"\nAll tasks in '{goal.name}' are complete.")
-                typer.echo("Run `nexus learn goal complete` to advance to the next goal.")
+                typer.echo(f"\nAll tasks in '{goal.name}' are complete. New exercises will be composed next session.")
             typer.echo()
             typer.echo("Remember to log a record of what the USER did (not agent actions):")
             typer.echo('  nexus learn record "what the user accomplished, struggled with, feedback" --duration "Xmin" --type ...')
