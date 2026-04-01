@@ -21,7 +21,7 @@ def new(
         "practical", help="Task type: practical, theoretical, quiz"
     ),
     relevant_files: list[str] = typer.Option(
-        ..., "--file", "-f", help="Relevant file paths (e.g. ./learn/jax/from-scratch/foundations/practical/examples/2026-03-30.py)"
+        [], "--file", "-f", help="Relevant file paths (e.g. ./learn/jax/from-scratch/foundations/practical/examples/2026-03-30.py)"
     ),
     topic: str = TOPIC_OPT,
     subtopic: str = SUBTOPIC_OPT,
