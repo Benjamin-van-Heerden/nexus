@@ -45,6 +45,15 @@ relevant_files = [
     "./learn/jax/from-scratch/foundations/practical/examples/2026-04-02.py",
 ]
 
+[[goals.tasks]]
+name = "Quiz — JAX mental model: tracing, immutability, axis semantics"
+type = "quiz"
+created = "2026-04-01"
+status = "todo"
+relevant_files = [
+    "./learn/jax/from-scratch/foundations/quiz/2026-04-02-mental-model.md",
+]
+
 [[goals]]
 name = "Transformations: jit and grad"
 reference = "./learn/jax/reference/foundations-02-jit-and-grad.md"
