@@ -18,7 +18,9 @@ def normalize_rows(x: jnp.ndarray) -> jnp.ndarray:
     Must be a pure function — no mutation, no global state.
     Handle rows of all zeros by leaving them as zeros.
     """
-    raise NotImplementedError()
+    sum = jnp.sum(x, axis=1, keepdims=True)
+    sum_rep_zeros = jnp.where(sum == 0, 1, sum)
+    return x / sum_rep_zeros
 
 
 def running_max(x: jnp.ndarray) -> jnp.ndarray:
@@ -31,10 +33,12 @@ def running_max(x: jnp.ndarray) -> jnp.ndarray:
     cumulative results. jax.lax.associative_scan or
     jnp.maximum.accumulate are worth looking into.
     """
-    raise NotImplementedError()
+    return jnp.maximum.accumulate(x, axis=0)
 
 
-def scatter_add(target: jnp.ndarray, indices: jnp.ndarray, values: jnp.ndarray) -> jnp.ndarray:
+def scatter_add(
+    target: jnp.ndarray, indices: jnp.ndarray, values: jnp.ndarray
+) -> jnp.ndarray:
     """Add `values` into `target` at the given `indices`.
 
     If an index appears multiple times, the values should accumulate.
@@ -46,7 +50,7 @@ def scatter_add(target: jnp.ndarray, indices: jnp.ndarray, values: jnp.ndarray) 
 
     Use the .at[] API. Remember: returns a new array.
     """
-    raise NotImplementedError()
+    return target.at[indices].add(values)
 
 
 def pure_batch_stats(batch: jnp.ndarray) -> tuple[jnp.ndarray, jnp.ndarray]:
@@ -58,11 +62,14 @@ def pure_batch_stats(batch: jnp.ndarray) -> tuple[jnp.ndarray, jnp.ndarray]:
     This is the kind of operation you'll write constantly in JAX
     neural net code. Must be pure — no in-place updates.
     """
-    raise NotImplementedError()
+    means = jnp.mean(batch, axis=0)
+    stds = jnp.std(batch, axis=0)
+    return means, stds
 
 
-def compose_transforms(x: jnp.ndarray, w1: jnp.ndarray, b1: jnp.ndarray,
-                       w2: jnp.ndarray, b2: jnp.ndarray) -> jnp.ndarray:
+def compose_transforms(
+    x: jnp.ndarray, w1: jnp.ndarray, b1: jnp.ndarray, w2: jnp.ndarray, b2: jnp.ndarray
+) -> jnp.ndarray:
     """Apply two linear transformations with ReLU activation between them.
 
     out = relu(x @ w1 + b1) @ w2 + b2
@@ -71,7 +78,8 @@ def compose_transforms(x: jnp.ndarray, w1: jnp.ndarray, b1: jnp.ndarray,
     All state (weights, biases) is passed explicitly — no class attributes,
     no global variables. This is the JAX way.
     """
-    raise NotImplementedError()
+    out = jnp.maximum(x @ w1 + b1, 0) @ w2 + b2
+    return out
 
 
 if __name__ == "__main__":
