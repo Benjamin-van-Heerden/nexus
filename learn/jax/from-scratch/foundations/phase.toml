@@ -65,6 +65,15 @@ relevant_files = [
     "./learn/jax/from-scratch/foundations/theoretical/2026-04-02-device-and-dtype.md",
 ]
 
+[[goals.tasks]]
+name = "Theoretical reading — functions vs tensors mental model, JAX transformations vs PyTorch autograd"
+type = "theoretical"
+created = "2026-04-01"
+status = "todo"
+relevant_files = [
+    "./learn/jax/from-scratch/foundations/theoretical/2026-04-02-functions-vs-tensors.md",
+]
+
 [[goals]]
 name = "Transformations: jit and grad"
 reference = "./learn/jax/reference/foundations-02-jit-and-grad.md"
