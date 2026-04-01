@@ -15,7 +15,7 @@ Read the onboard output carefully. Then follow this decision tree:
 3. **Current goal has incomplete tasks from a previous day?** → These are dangling tasks. Report them and ask the user to complete or abandon them before creating new work.
 4. **Current goal has incomplete tasks from today?** → List the outstanding tasks with their file paths and tell the user to let you know when they've completed them. Do not ask what the user wants to do — your job is administration, not coaching choices. The user does the exercises; you track progress.
 5. **Current goal has no incomplete tasks?** → Compose a session for the current goal. See "Composing a daily session" below. A goal typically spans many sessions — keep creating new tasks until the user has demonstrated sufficient mastery of the reference material.
-6. **Reference material is thoroughly covered?** → Suggest moving on (e.g. "Looks like you're crushing this goal — ready to move on to the next one?"). Only run `nexus learn goal complete` when the user confirms. They may want more reinforcement even if the material seems exhausted.
+6. **Reference material is thoroughly covered?** → Suggest moving on (e.g. "Looks like you're crushing this goal — ready to move on to the next one?"). Only run `nexus learn goal complete` when the user confirms. They may want more reinforcement even if the material seems exhausted. **After completing a goal, stop the session.** The CLI will print a stop message — follow it. Do not compose exercises for the next goal in the same session.
 7. **All goals in phase completed?** → Run `nexus learn phase complete` to advance to the next phase.
 8. **All phases completed?** → The subtopic is done. Congratulate the user and discuss next steps.
 

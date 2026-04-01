@@ -56,6 +56,14 @@ def complete(
         phase_cfg.current_goal = next_goal.name
         save_phase_config(topic_name, subtopic_name, phase_name, phase_cfg)
         typer.echo(f"Goal '{goal.name}' completed. Now on: {next_goal.name}")
+        typer.echo("")
+        typer.echo("--- SESSION STOP ---")
+        typer.echo(
+            "Goal completion is a natural stopping point. Do not compose new exercises."
+        )
+        typer.echo(
+            "Notify the user and here. The next session/refresh/onboard will pick up the goals and then you'll create exercises for the new goal."
+        )
     else:
         phase_cfg.current_goal = ""
         save_phase_config(topic_name, subtopic_name, phase_name, phase_cfg)
@@ -66,7 +74,9 @@ def complete(
 @app.command()
 def new(
     name: str = typer.Argument(help="Goal name"),
-    reference: str = typer.Argument(help="Reference document path (e.g. ./learn/jax/reference/doc.md)"),
+    reference: str = typer.Argument(
+        help="Reference document path (e.g. ./learn/jax/reference/doc.md)"
+    ),
     topic: str = TOPIC_OPT,
     subtopic: str = SUBTOPIC_OPT,
 ):
@@ -94,7 +104,9 @@ def new(
     save_phase_config(topic_name, subtopic_name, phase_name, phase_cfg)
     typer.echo(f"Added goal: {name}")
     typer.echo(f"Reference: {ref_abs}")
-    typer.echo('Next: create tasks with `nexus learn task new "description" --type practical`')
+    typer.echo(
+        'Next: create tasks with `nexus learn task new "description" --type practical`'
+    )
 
 
 @app.command()
