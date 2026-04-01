@@ -25,6 +25,15 @@ relevant_files = [
     "./learn/jax/from-scratch/foundations/practical/examples/2026-04-01.py",
 ]
 
+[[goals.tasks]]
+name = "Theoretical reading — JAX mental model: functions vs tensors, purity, immutability, device/dtype"
+type = "theoretical"
+created = "2026-04-01"
+status = "todo"
+relevant_files = [
+    "./learn/jax/from-scratch/foundations/theoretical/2026-04-01-mental-model.md",
+]
+
 [[goals]]
 name = "Transformations: jit and grad"
 reference = "./learn/jax/reference/foundations-02-jit-and-grad.md"
