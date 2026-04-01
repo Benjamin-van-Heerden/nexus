@@ -56,6 +56,15 @@ relevant_files = [
     "./learn/jax/from-scratch/foundations/quiz/2026-04-02-mental-model.md",
 ]
 
+[[goals.tasks]]
+name = "Theoretical reading — device residency, silent host-device transfers, and float32 default"
+type = "theoretical"
+created = "2026-04-01"
+status = "todo"
+relevant_files = [
+    "./learn/jax/from-scratch/foundations/theoretical/2026-04-02-device-and-dtype.md",
+]
+
 [[goals]]
 name = "Transformations: jit and grad"
 reference = "./learn/jax/reference/foundations-02-jit-and-grad.md"
