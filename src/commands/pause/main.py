@@ -4,7 +4,6 @@ from datetime import date
 
 import typer
 
-from src.models.pause import PauseConfig
 from src.utils.pause import (
     get_pause_config_path,
     load_pause_config,
