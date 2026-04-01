@@ -27,6 +27,11 @@ def new(
     subtopic: str = SUBTOPIC_OPT,
 ):
     """Add a new task to the current goal. Blocked if there are incomplete tasks from a previous day."""
+    if not relevant_files:
+        typer.echo("Error: At least one --file/-f is required. Every task must be linked to a concrete file.")
+        typer.echo('  Example: nexus learn task new "description" --type practical -f "./learn/jax/.../file.py"')
+        raise typer.Exit(1)
+
     if type not in ("practical", "theoretical", "quiz"):
         typer.echo(f"Invalid type: {type}. Must be: practical, theoretical, quiz")
         raise typer.Exit(1)

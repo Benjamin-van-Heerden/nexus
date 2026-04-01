@@ -66,16 +66,21 @@ setup_commands = []
 
 [quiz]
 description = """
-Create a markdown file in the phase's quiz/ directory named
-YYYY-MM-DD-<slug>.md (e.g. 2026-04-01-supervision-quiz.md).
+Create TWO files for each quiz:
 
-Compose 3-5 questions based on recent goals and tasks. Mix:
-- Multiple choice (conceptual understanding)
-- Code prediction (what happens when this process crashes?)
-- Short implementation (write a GenServer callback)
-- Supervision reasoning (draw the supervision tree, identify restart strategy)
+1. Quiz file: quiz/YYYY-MM-DD-<slug>.md (e.g. 2026-04-01-supervision-quiz.md)
+   - Compose 3-5 questions based on recent goals and tasks. Mix:
+     - Multiple choice (conceptual understanding)
+     - Code prediction (what happens when this process crashes?)
+     - Short implementation (write a GenServer callback)
+     - Supervision reasoning (draw the supervision tree, identify restart strategy)
+   - Include answer placeholders that the user fills in.
+   - Do NOT include answers in this file.
 
-Include answer placeholders that the user fills in. Answers section at the
-bottom, initially hidden behind a <details> tag.
+2. Answer key: quiz/answers/YYYY-MM-DD-<slug>.md
+   - Contains the answers and explanations for the quiz.
+   - Kept separate so the user cannot accidentally see them while working.
+
+Register the task with --file pointing to the quiz file (not the answer key).
 """
-setup_commands = []
+setup_commands = ["mkdir -p quiz/answers"]
