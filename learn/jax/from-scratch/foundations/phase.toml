@@ -70,7 +70,8 @@ relevant_files = [
 name = "Theoretical reading — functions vs tensors mental model, JAX transformations vs PyTorch autograd"
 type = "theoretical"
 created = "2026-04-01"
-status = "todo"
+status = "completed"
+completed = "2026-04-01"
 relevant_files = [
     "./learn/jax/from-scratch/foundations/theoretical/2026-04-02-functions-vs-tensors.md",
 ]
