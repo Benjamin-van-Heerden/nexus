@@ -9,7 +9,6 @@ Run: uv run python practical/examples/2026-04-02.py
 
 import jax.numpy as jnp
 
-
 # --- Exercise 1: Axis intuition ---
 # Given a (3, 4) matrix where each row is a student and each column is a test score,
 # compute:
@@ -17,32 +16,38 @@ import jax.numpy as jnp
 #   b) The highest score on each test (should be shape (4,))
 #   c) The overall average (scalar)
 
+
 def per_student_avg(scores):
     """Return mean score per student."""
-    raise NotImplementedError()
+    return jnp.mean(scores, axis=1)
+
 
 def per_test_max(scores):
     """Return max score on each test."""
-    raise NotImplementedError()
+    return jnp.max(scores, axis=0)
+
 
 def overall_avg(scores):
     """Return scalar overall average."""
-    raise NotImplementedError()
+    return jnp.mean(scores)
 
 
 # --- Exercise 2: Broadcasting + axis alignment ---
 # Given a (3, 4) matrix, subtract the row-mean from every element
 # (i.e., center each row to have mean ~0).
 
+
 def center_rows(x):
     """Subtract each row's mean from that row. Return same shape as input."""
-    raise NotImplementedError()
+    row_mean = jnp.mean(x, axis=1, keepdims=True)
+    return x - row_mean
 
 
 # --- Exercise 3: scatter_add use case ---
 # You have 5 data points belonging to 3 groups (group_ids below).
 # Compute the sum of values in each group using jnp.zeros + .at[].add().
 # This is what scatter_add is for: accumulating values into buckets by index.
+
 
 def group_sum(values, group_ids, num_groups):
     """
@@ -51,16 +56,18 @@ def group_sum(values, group_ids, num_groups):
     num_groups: int
     Returns: (num_groups,) array where result[g] = sum of values where group_ids == g
     """
-    raise NotImplementedError()
+    return jnp.zeros(num_groups).at[group_ids].add(values)
 
 
 if __name__ == "__main__":
     # Exercise 1
-    scores = jnp.array([
-        [80.0, 90.0, 70.0, 85.0],
-        [60.0, 75.0, 80.0, 65.0],
-        [95.0, 85.0, 90.0, 100.0],
-    ])
+    scores = jnp.array(
+        [
+            [80.0, 90.0, 70.0, 85.0],
+            [60.0, 75.0, 80.0, 65.0],
+            [95.0, 85.0, 90.0, 100.0],
+        ]
+    )
     assert per_student_avg(scores).shape == (3,)
     assert jnp.allclose(per_student_avg(scores), jnp.array([81.25, 70.0, 92.5]))
     assert per_test_max(scores).shape == (4,)
@@ -70,9 +77,9 @@ if __name__ == "__main__":
     print("Exercise 1 passed!")
 
     # Exercise 2
-    x = jnp.array([[10.0, 20.0, 30.0, 40.0],
-                    [1.0, 2.0, 3.0, 4.0],
-                    [100.0, 200.0, 300.0, 400.0]])
+    x = jnp.array(
+        [[10.0, 20.0, 30.0, 40.0], [1.0, 2.0, 3.0, 4.0], [100.0, 200.0, 300.0, 400.0]]
+    )
     centered = center_rows(x)
     assert centered.shape == x.shape
     assert jnp.allclose(centered.mean(axis=1), jnp.zeros(3), atol=1e-5)

@@ -19,7 +19,7 @@ f_jit(jnp.ones(5))  # works? same result?
 
 Your answer:
 
->
+> This actually works since acc is local state and jax jit can handle it. Not a good pattern to follow though. If the accumulator were a global variable it not do what we want at all.
 
 ---
 
@@ -32,7 +32,7 @@ Your answer:
 
 Your answer:
 
->
+> B)
 
 ---
 
@@ -40,7 +40,7 @@ Your answer:
 
 Your answer:
 
->
+> Over axis 1 (batch axis), the sum should have shape (batch,)
 
 ---
 

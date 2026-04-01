@@ -40,7 +40,8 @@ relevant_files = [
 name = "Axes and shapes reinforcement — axis reductions, broadcasting, scatter_add use case"
 type = "practical"
 created = "2026-04-01"
-status = "todo"
+status = "completed"
+completed = "2026-04-01"
 relevant_files = [
     "./learn/jax/from-scratch/foundations/practical/examples/2026-04-02.py",
 ]

@@ -26,3 +26,13 @@ Both tasks marked complete. How long did they take you roughly, and was there an
 In general: we should add hints that "record" files should be more descriptive than they currently are. it's ok as is, but we can tell the agent that they can ask follow up questions the user, records are how the agent will guage comprehension so they are important.
 
 -----------------------
+
+In general: we should make sure that tasks *must* have relevant_files section, we can't be having random open ended tasks that attach to nothing
+
+-----------------------
+
+"""
+...
+2. Quiz (~5 min)** — 3 questions on tracing, immutability, and axis semantics. Fill in your answers and check against the hidden answers at the bottom.
+...
+""" --> Don't put the answers at the bottom of the same file, that just makes it way too easy to look at. We should create a separate file with the answers, maybe under quiz/answers I think would be best
