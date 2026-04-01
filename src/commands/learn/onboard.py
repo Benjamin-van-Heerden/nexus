@@ -325,3 +325,122 @@ def onboard():
         print("-" * 60)
         print(instructions_path.read_text().strip())
         print()
+
+
+def refresh():
+    """Lightweight context refresh — current state with condensed instructions."""
+    new_topic = ensure_topic_for_week()
+    if new_topic:
+        typer.echo(f"New week — topic rotated to: {new_topic}\n")
+
+    ctx = get_active_context()
+    if not ctx:
+        typer.echo("No active learning context. Run `nexus learn topic update` first.")
+        raise typer.Exit(1)
+
+    topic_name, topic_cfg, subtopic_name, subtopic_cfg, phase_name, phase_cfg = ctx
+
+    today = date.today()
+    current_week = get_week_start(today)
+    week_end = current_week + timedelta(days=6)
+    subtopic_base = f"learn/{topic_name}/{subtopic_name}"
+
+    print("=" * 60)
+    print("NEXUS LEARN REFRESH")
+    print("=" * 60)
+    print(f"\nDate: {today.strftime('%A, %B %d, %Y')}")
+    print(f"Topic: {topic_name} / {subtopic_cfg.name} / {phase_cfg.name}")
+    print(f"Week: {current_week.strftime('%B %d')} - {week_end.strftime('%B %d, %Y')}")
+    print()
+
+    # Phase progress
+    print("-" * 60)
+    print("PHASE PROGRESS")
+    print("-" * 60)
+    for p in subtopic_cfg.phases:
+        marker = {"todo": "[ ]", "in_progress": "[~]", "completed": "[x]"}[p.status]
+        current = " ← current" if p.name == phase_name else ""
+        print(f"  {marker} {p.name}{current}")
+    print()
+
+    # Current goal + tasks
+    current_goal = get_current_goal(phase_cfg)
+    if current_goal:
+        done_count = sum(1 for t in current_goal.tasks if t.status == "completed")
+        total_count = len(current_goal.tasks)
+        print("-" * 60)
+        print(f"CURRENT GOAL: {current_goal.name} ({done_count}/{total_count} tasks)")
+        print("-" * 60)
+        if current_goal.tasks:
+            for task in current_goal.tasks:
+                marker = "[x]" if task.status == "completed" else "[ ]"
+                print(f"  {marker} [{task.type}] {task.name}")
+                for f in task.relevant_files:
+                    print(f"      file: {resolve_str(f)}")
+        else:
+            print("  No tasks yet — create exercises for this goal.")
+        print()
+
+    # Exercise balance
+    type_counts = Counter()
+    for goal in phase_cfg.goals:
+        for task in goal.tasks:
+            if task.status == "completed":
+                type_counts[task.type] += 1
+
+    print("-" * 60)
+    print("EXERCISE BALANCE (this phase)")
+    print("-" * 60)
+    print(f"  Practical: {type_counts.get('practical', 0)}  |  Theoretical: {type_counts.get('theoretical', 0)}  |  Quiz: {type_counts.get('quiz', 0)}")
+    print()
+
+    # Weekly session summary
+    records_dir = get_records_dir(topic_name, subtopic_name)
+    weekly_summary = _weekly_session_summary(records_dir, current_week)
+    if weekly_summary:
+        print("-" * 60)
+        print("THIS WEEK'S SESSIONS")
+        print("-" * 60)
+        print(f"  {weekly_summary}")
+        print()
+
+    # Last session highlight
+    if records_dir.exists():
+        all_records = sorted(records_dir.glob("*.md"), reverse=True)
+        if all_records:
+            last_record = all_records[0]
+            last_fm = _parse_record_frontmatter(last_record)
+            last_content = last_record.read_text().strip()
+            if last_content.startswith("---"):
+                parts = last_content.split("---", 2)
+                last_body = parts[2].strip() if len(parts) >= 3 else ""
+            else:
+                last_body = last_content
+
+            print("-" * 60)
+            print("LAST SESSION")
+            print("-" * 60)
+            print(f"  Date: {last_fm.get('date', last_record.stem)}")
+            print(f"  Duration: {last_fm.get('duration', 'not recorded')}")
+            print(f"  Type: {last_fm.get('type', 'unknown')}")
+            print(f"  Status: {last_fm.get('status', 'unknown')}")
+            if last_body:
+                print()
+                for line in last_body.splitlines()[:10]:
+                    print(f"  {line}")
+            print()
+
+    # Condensed instructions
+    print("-" * 60)
+    print("REFRESH INSTRUCTIONS")
+    print("-" * 60)
+    print("Check the state above and proceed:")
+    print("  1. Incomplete tasks from last session → ask if completed or needs follow-up")
+    print("  2. No tasks on current goal → compose a new exercise")
+    print("  3. All tasks done on goal → advance to next goal or phase")
+    print("  4. Quiz balance → ensure at least 1 quiz per week")
+    print("  5. Session count → suggest short/long based on weekly progress")
+    print()
+    print("Use `nexus learn task new` to create exercises.")
+    print("Use `nexus learn record` to log completed sessions.")
+    print()

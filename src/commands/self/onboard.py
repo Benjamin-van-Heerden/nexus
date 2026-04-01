@@ -241,3 +241,182 @@ def onboard() -> None:
         typer.echo(instructions_path.read_text())
     else:
         typer.echo("WARNING: agent_instructions.md not found!")
+
+
+def refresh() -> None:
+    """Lightweight context refresh — current state with condensed instructions."""
+    today = date.today()
+    day_names = [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+    ]
+    day_of_week = today.weekday()
+    iso_week = today.isocalendar()[1]
+    days_remaining = 7 - day_of_week
+
+    habits = load_habits_config()
+
+    typer.echo("=" * 60)
+    typer.echo("  SELF-IMPROVEMENT REFRESH")
+    typer.echo("=" * 60)
+    typer.echo(
+        f"\nToday: {day_names[day_of_week]}, {today.strftime('%B %d, %Y')} (Week {iso_week})"
+    )
+    typer.echo(f"Day {day_of_week + 1} of 7, {days_remaining} days remaining\n")
+
+    # Reading status
+    if habits.reading.active:
+        typer.echo("-" * 60)
+        typer.echo("READING")
+        typer.echo("-" * 60)
+        books = list_active_books()
+        all_reading_sessions = []
+        if not books:
+            typer.echo("  No active books.\n")
+        else:
+            for book in books:
+                all_reading_sessions.extend(book.sessions)
+                last_session_date = book.sessions[-1].date if book.sessions else None
+                days_since = (
+                    (today - last_session_date).days if last_session_date else None
+                )
+                stale_flag = " ⚠️ STALE" if days_since and days_since > 3 else ""
+                section_str = f" — section {book.current_section or '?'}/{book.total_sections or '?'}"
+                typer.echo(f"  📖 {book.name}{section_str}{stale_flag}")
+
+            week_reading = get_sessions_this_week(all_reading_sessions)
+            reading_days = get_days_with_activity(all_reading_sessions)
+            missing = get_missing_days_this_week(all_reading_sessions)
+            typer.echo(f"  Sessions this week: {len(week_reading)}")
+            if reading_days:
+                typer.echo(
+                    f"  Active days: {', '.join(day_names[d.weekday()] for d in sorted(reading_days))}"
+                )
+            if missing:
+                typer.echo(f"  Missing days: {', '.join(missing)}")
+        typer.echo()
+
+    # Exercise status
+    if habits.exercise.active:
+        typer.echo("-" * 60)
+        typer.echo("EXERCISE")
+        typer.echo("-" * 60)
+        exercise_log = load_exercise_log()
+        week_sessions = get_sessions_this_week(exercise_log.sessions)
+        if week_sessions:
+            for s in week_sessions:
+                typer.echo(
+                    f"  [{s.date}] {s.type} — {s.intensity}, {s.duration_minutes} min"
+                )
+            typer.echo(f"  Sessions this week: {len(week_sessions)}")
+        else:
+            typer.echo("  No sessions this week.")
+        missing = get_missing_days_this_week(exercise_log.sessions)
+        if missing:
+            typer.echo(f"  Missing days: {', '.join(missing)}")
+        typer.echo()
+
+    # Mental math status
+    if habits.mental_math.active:
+        typer.echo("-" * 60)
+        typer.echo("MENTAL MATH")
+        typer.echo("-" * 60)
+        math_log = load_math_log()
+        this_week_start = get_current_week_start(today)
+        this_week = [s for s in math_log.sessions if s.date >= this_week_start]
+        if this_week:
+            avg_time = sum(s.time_seconds for s in this_week) // len(this_week)
+            typer.echo(
+                f"  Sessions this week: {len(this_week)}, avg: {format_duration(avg_time)}"
+            )
+        else:
+            typer.echo("  No sessions this week.")
+        typer.echo()
+
+    # Learning status
+    if habits.learning.active:
+        typer.echo("-" * 60)
+        typer.echo("LEARNING")
+        typer.echo("-" * 60)
+        learning_log = load_learning_log()
+        week_sessions = get_sessions_this_week(learning_log.sessions)
+        if week_sessions:
+            for s in sorted(week_sessions, key=lambda x: x.date):
+                status_str = "✓ learned" if s.did_learn else "✗ skipped"
+                notes_str = f" — {s.notes[:60]}" if s.notes else ""
+                typer.echo(f"  [{s.date}] {status_str}{notes_str}")
+        else:
+            typer.echo("  No check-ins this week.")
+
+        learned_dates = sorted(
+            {s.date for s in learning_log.sessions if s.did_learn}, reverse=True
+        )
+        streak = 0
+        check = today if today in learned_dates else today - timedelta(days=1)
+        if check in learned_dates:
+            for d in learned_dates:
+                if d == check - timedelta(days=streak):
+                    streak += 1
+                else:
+                    break
+        typer.echo(f"  Streak: {streak} day(s)")
+        typer.echo()
+
+    # Weekly overview
+    typer.echo("-" * 60)
+    typer.echo("WEEKLY OVERVIEW")
+    typer.echo("-" * 60)
+
+    def _status_emoji(count: int, target: int) -> str:
+        if count == 0:
+            return "⬜ not started"
+        elif count >= target:
+            return "✅ on track"
+        else:
+            return "🟡 behind"
+
+    exercise_log = load_exercise_log()
+    learning_log = load_learning_log()
+    books = list_active_books()
+    all_reading = []
+    for b in books:
+        all_reading.extend(b.sessions)
+
+    reading_count = len(get_sessions_this_week(all_reading))
+    exercise_count = len(get_sessions_this_week(exercise_log.sessions))
+    math_count = len(get_sessions_this_week(load_math_log().sessions))
+    learning_count = len(get_sessions_this_week(learning_log.sessions))
+
+    typer.echo(
+        f"  Reading:    {reading_count} sessions  {_status_emoji(reading_count, 5)}"
+    )
+    typer.echo(
+        f"  Exercise:   {exercise_count} sessions  {_status_emoji(exercise_count, 4)}"
+    )
+    typer.echo(
+        f"  Math:       {math_count} sessions  {_status_emoji(math_count, day_of_week + 1)}"
+    )
+    typer.echo(
+        f"  Learning:   {learning_count} sessions  {_status_emoji(learning_count, day_of_week + 1)}"
+    )
+    typer.echo()
+
+    # Condensed instructions
+    typer.echo("-" * 60)
+    typer.echo("REFRESH INSTRUCTIONS")
+    typer.echo("-" * 60)
+    typer.echo("Report the above to Benjamin. Priority order:")
+    typer.echo("  1. Stale books (>3 days) → nudge him to read")
+    typer.echo("  2. Behind habits → remind and encourage")
+    typer.echo("  3. Math problems → generate fresh set if not done today")
+    typer.echo("  4. Learning streak → highlight if active, motivate if broken")
+    typer.echo("  5. On-track items → brief acknowledgement")
+    typer.echo()
+    typer.echo("Keep it conversational and brief. No need to repeat what he already knows.")
+    typer.echo("Log sessions as he reports them. Ask follow-up questions for reading.")
+    typer.echo()

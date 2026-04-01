@@ -13,7 +13,7 @@ Usage:
 import typer
 
 from src.commands.learn.goal import app as goal_app
-from src.commands.learn.onboard import onboard
+from src.commands.learn.onboard import onboard, refresh
 from src.commands.learn.phase import app as phase_app
 from src.commands.learn.record import record
 from src.commands.learn.subtopic import app as subtopic_app
@@ -28,4 +28,5 @@ app.add_typer(phase_app, name="phase", help="Manage learning phases")
 app.add_typer(goal_app, name="goal", help="Manage goals in active phase")
 app.add_typer(task_app, name="task", help="Manage tasks in current goal")
 app.command(name="onboard", help="Print full learning context for agents")(onboard)
+app.command(name="refresh", help="Lightweight context refresh for follow-up sessions")(refresh)
 app.command(name="record", help="Log a learning session record")(record)
