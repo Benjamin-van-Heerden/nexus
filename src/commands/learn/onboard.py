@@ -14,6 +14,7 @@ from src.utils.learn import (
     get_records_dir,
 )
 from src.utils.path_resolution import resolve, resolve_str
+from src.utils.pause import check_pause
 
 
 def _parse_duration_minutes(duration_str: str) -> int | None:
@@ -97,6 +98,14 @@ def _weekly_session_summary(records_dir: Path, week_start: date) -> str | None:
 
 def onboard():
     """Print full learning context for the current topic. Designed for agent consumption."""
+    paused = check_pause("learn")
+    if paused:
+        typer.echo(
+            f"Nexus learn is paused. Reason: {paused.reason or 'no reason provided'}. "
+            f"Will resume on {paused.resume_date}. Nothing further to do."
+        )
+        raise typer.Exit(0)
+
     new_topic = ensure_topic_for_week()
     if new_topic:
         typer.echo(f"New week — topic rotated to: {new_topic}\n")
@@ -319,6 +328,14 @@ def onboard():
 
 def refresh():
     """Lightweight context refresh — current state with condensed instructions."""
+    paused = check_pause("learn")
+    if paused:
+        typer.echo(
+            f"Nexus learn is paused. Reason: {paused.reason or 'no reason provided'}. "
+            f"Will resume on {paused.resume_date}. Nothing further to do."
+        )
+        raise typer.Exit(0)
+
     new_topic = ensure_topic_for_week()
     if new_topic:
         typer.echo(f"New week — topic rotated to: {new_topic}\n")

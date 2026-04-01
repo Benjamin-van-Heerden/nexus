@@ -16,6 +16,7 @@ from src.utils.self import (
 )
 
 from src.commands.self.math_generator import generate_problems
+from src.utils.pause import check_pause
 
 
 def _section(title: str) -> None:
@@ -25,6 +26,14 @@ def _section(title: str) -> None:
 
 
 def onboard() -> None:
+    paused = check_pause("self")
+    if paused:
+        typer.echo(
+            f"Nexus self-improvement is paused. Reason: {paused.reason or 'no reason provided'}. "
+            f"Will resume on {paused.resume_date}. Nothing further to do."
+        )
+        raise typer.Exit(0)
+
     today = date.today()
     day_names = [
         "Monday",
@@ -245,6 +254,14 @@ def onboard() -> None:
 
 def refresh() -> None:
     """Lightweight context refresh — current state with condensed instructions."""
+    paused = check_pause("self")
+    if paused:
+        typer.echo(
+            f"Nexus self-improvement is paused. Reason: {paused.reason or 'no reason provided'}. "
+            f"Will resume on {paused.resume_date}. Nothing further to do."
+        )
+        raise typer.Exit(0)
+
     today = date.today()
     day_names = [
         "Monday",
@@ -417,6 +434,8 @@ def refresh() -> None:
     typer.echo("  4. Learning streak → highlight if active, motivate if broken")
     typer.echo("  5. On-track items → brief acknowledgement")
     typer.echo()
-    typer.echo("Keep it conversational and brief. No need to repeat what he already knows.")
+    typer.echo(
+        "Keep it conversational and brief. No need to repeat what he already knows."
+    )
     typer.echo("Log sessions as he reports them. Ask follow-up questions for reading.")
     typer.echo()

@@ -23,6 +23,7 @@ from src.utils.manage import (
     next_occurrence,
 )
 from src.utils.path_resolution import resolve
+from src.utils.pause import check_pause
 
 # -- Display helpers --
 
@@ -316,6 +317,14 @@ def _print_actionable_sections():
 
 def onboard():
     """Full manage context dump for agents."""
+    paused = check_pause("manage")
+    if paused:
+        print(
+            f"Nexus manage is paused. Reason: {paused.reason or 'no reason provided'}. "
+            f"Will resume on {paused.resume_date}. Nothing further to do."
+        )
+        raise typer.Exit(0)
+
     today = date.today()
 
     print("=" * 60)
@@ -357,6 +366,14 @@ def onboard():
 
 def refresh():
     """Lightweight context refresh — current state with condensed instructions."""
+    paused = check_pause("manage")
+    if paused:
+        print(
+            f"Nexus manage is paused. Reason: {paused.reason or 'no reason provided'}. "
+            f"Will resume on {paused.resume_date}. Nothing further to do."
+        )
+        raise typer.Exit(0)
+
     today = date.today()
 
     print("=" * 60)
