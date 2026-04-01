@@ -36,3 +36,9 @@ In general: we should make sure that tasks *must* have relevant_files section, w
 2. Quiz (~5 min)** — 3 questions on tracing, immutability, and axis semantics. Fill in your answers and check against the hidden answers at the bottom.
 ...
 """ --> Don't put the answers at the bottom of the same file, that just makes it way too easy to look at. We should create a separate file with the answers, maybe under quiz/answers I think would be best
+
+----------------------
+
+"""
+nexus learn record "User completed axes/shapes practical and mental model quiz. Practical was clean — axis reductions, broadcasting with keepdims, and scatter_add via .at[].add() all correct. Quiz: correctly identified that local list accumulation works in jit (caught an issue with the answer key), got immutability question right. On axis semantics Q3, got the axis number right (1) but mislabeled it as 'batch axis' instead of 'features axis', and said shape should be (batch,) instead of (batch, 1) — though notably used keepdims=True correctly in the practical exercise. Pattern: mechanical implementation is ahead of verbal/conceptual articulation of axes. Scatter_add confusion from last session appears resolved." --duration "15min" --type practical
+""" --> NB! agent *has* to ask how long something took. Don't assume.

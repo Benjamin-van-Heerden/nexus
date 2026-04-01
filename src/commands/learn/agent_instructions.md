@@ -13,7 +13,7 @@ Read the onboard output carefully. Then follow this decision tree:
 1. **No current topic?** → Run `nexus learn topic update` to pick one.
 2. **Topic exists but no subtopic/phase/goal structure?** → This is a new learning track. See "Setting up a new learning track" below.
 3. **Current goal has incomplete tasks from a previous day?** → These are dangling tasks. Report them and ask the user to complete or abandon them before creating new work.
-4. **Current goal has incomplete tasks from today?** → Remind the user about them. Help them complete the work.
+4. **Current goal has incomplete tasks from today?** → List the outstanding tasks with their file paths and tell the user to let you know when they've completed them. Do not ask what the user wants to do — your job is administration, not coaching choices. The user does the exercises; you track progress.
 5. **Current goal has no incomplete tasks?** → Compose a session for the current goal. See "Composing a daily session" below. A goal typically spans many sessions — keep creating new tasks until the user has demonstrated sufficient mastery of the reference material.
 6. **Reference material is thoroughly covered?** → Suggest moving on (e.g. "Looks like you're crushing this goal — ready to move on to the next one?"). Only run `nexus learn goal complete` when the user confirms. They may want more reinforcement even if the material seems exhausted.
 7. **All goals in phase completed?** → Run `nexus learn phase complete` to advance to the next phase.
@@ -63,7 +63,7 @@ Follow the exercise type instructions in the onboard output — they tell you ex
 
 - **practical** — Create files in the phase's `practical/` directory. Always tell the user the absolute file path.
 - **theoretical** — Create a markdown file in the phase's `theoretical/` directory with material from the goal's reference and questions for the user to reflect on.
-- **quiz** — Create a markdown file in the phase's `quiz/` directory with 3-5 questions and placeholder answer positions.
+- **quiz** — Create two files: the quiz itself in `quiz/YYYY-MM-DD-slug.md` (questions with answer placeholders only, NO answers in this file), and a separate answer key in `quiz/answers/YYYY-MM-DD-slug.md`. This prevents the user from accidentally seeing answers while working. Register the task with `--file` pointing to the quiz file (not the answer key).
 
 ### Step 6: Register the tasks
 
@@ -121,8 +121,10 @@ After `nexus learn phase new "name"`:
 
 When the user reports completing work:
 1. Mark the task done: `nexus learn task complete "description"`
-2. Log a record: `nexus learn record "what the user did" --duration "20min" --type practical|theoretical|quiz`
-3. Stop. Do not compose new exercises unless the user explicitly asks for more. The next session's onboard/refresh will pick up the state and compose new work then.
+2. **Always ask the user how long the work took.** Never assume or estimate duration — the user must provide it.
+3. Ask follow-up questions to gather detail for the record. Records are how you gauge comprehension and calibrate future exercises, so they need to be thorough. Good follow-ups: "What did you find tricky?", "Anything that surprised you?", "How confident do you feel about X concept?"
+4. Log a record: `nexus learn record "what the user did" --duration "20min" --type practical|theoretical|quiz`
+5. Stop. Do not compose new exercises unless the user explicitly asks for more. The next session's onboard/refresh will pick up the state and compose new work then.
 
 Goal completion is separate from task completion. Do not auto-complete goals when tasks are done — goals span many sessions. See decision tree item 6 for when to suggest goal completion.
 
@@ -130,16 +132,16 @@ Goal completion is separate from task completion. Do not auto-complete goals whe
 
 Records describe **what the user did**, not what you (the agent) did. They are the primary continuity mechanism — future sessions depend on them to understand the user's progress, struggles, and pace.
 
-**CORRECT**: "User implemented ownership transfer exercises. Reported struggling with lifetime annotations — said it took longer than expected. Completed 2/3 tasks."
+**CORRECT**: "User implemented ownership transfer exercises. Reported struggling with lifetime annotations — said it took longer than expected. Completed 2/3 tasks. When asked about confidence, said they understand the concept but need more practice with the syntax."
 **WRONG**: "I ran the onboard command, created three tasks for the user, and marked one complete."
 
-Records should capture: what work the user completed, what they found difficult or easy, how long it took, and any feedback they gave. This is how you calibrate future exercises.
+Records should capture: what work the user completed, what they found difficult or easy, how long it took, and any feedback they gave. Be descriptive — these records are the only way future sessions can understand the user's comprehension level. Ask follow-up questions if the user's initial report is sparse. This is how you calibrate future exercises.
 
 ## Dangling tasks
 
 You **cannot** create new tasks if there are incomplete tasks from a previous day. The CLI will block this. If the user has leftover tasks, your job is to report them and ask the user to complete them first (or discuss whether to abandon them).
 
-When creating tasks, always attach relevant files with the `--file` flag so the user knows exactly where to find and do the work:
+Every task **must** have at least one relevant file attached via the `--file` flag. The CLI enforces this — task creation will fail without it. Tasks must always be tied to concrete files so the user knows exactly where to find and do the work:
 `nexus learn task new "description" --type practical -f "./learn/rust/python-book-track/foundations/practical/examples/2026-03-29.rs"`
 
 All paths use the `./` prefix — relative to the repo root. The CLI resolves them to absolute paths for display.

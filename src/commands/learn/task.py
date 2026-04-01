@@ -21,7 +21,7 @@ def new(
         "practical", help="Task type: practical, theoretical, quiz"
     ),
     relevant_files: list[str] = typer.Option(
-        [], "--file", "-f", help="Relevant file paths (e.g. ./learn/jax/from-scratch/foundations/practical/examples/2026-03-30.py)"
+        ..., "--file", "-f", help="Relevant file paths (e.g. ./learn/jax/from-scratch/foundations/practical/examples/2026-03-30.py)"
     ),
     topic: str = TOPIC_OPT,
     subtopic: str = SUBTOPIC_OPT,
@@ -90,6 +90,11 @@ def complete(
             save_phase_config(topic_name, subtopic_name, phase_name, phase_cfg)
             typer.echo(f"Completed: {task.name}")
 
+            if task.relevant_files:
+                typer.echo("\nRelevant files:")
+                for f in task.relevant_files:
+                    typer.echo(f"  {resolve_str(f)}")
+
             remaining = [t for t in goal.tasks if t.status != "completed"]
             if remaining:
                 typer.echo(f"\n{len(remaining)} task(s) remaining in this goal:")
@@ -99,6 +104,7 @@ def complete(
                 typer.echo(f"\nAll tasks in '{goal.name}' are complete. New exercises will be composed next session.")
             typer.echo()
             typer.echo("Remember to log a record of what the USER did (not agent actions):")
+            typer.echo("IMPORTANT: Always ask the user how long the work took — never assume duration.")
             typer.echo('  nexus learn record "what the user accomplished, struggled with, feedback" --duration "Xmin" --type ...')
             return
 
