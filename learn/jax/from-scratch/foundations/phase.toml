@@ -60,7 +60,8 @@ relevant_files = [
 name = "Theoretical reading — device residency, silent host-device transfers, and float32 default"
 type = "theoretical"
 created = "2026-04-01"
-status = "todo"
+status = "completed"
+completed = "2026-04-01"
 relevant_files = [
     "./learn/jax/from-scratch/foundations/theoretical/2026-04-02-device-and-dtype.md",
 ]
