@@ -1,1 +1,6 @@
-
+[[tasks]]
+slug = "go_to_pharmacy"
+name = "Go to pharmacy"
+path = "./manage/tasks/go_to_pharmacy.toml"
+due = "2026-04-02"
+parent = ""
