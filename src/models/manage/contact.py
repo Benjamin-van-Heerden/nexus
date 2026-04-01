@@ -3,7 +3,6 @@
 Maps to: manage/contacts/<slug>.toml
 """
 
-from datetime import date
 from typing import Any
 
 from pydantic import BaseModel
@@ -14,6 +13,7 @@ class ContactConfig(BaseModel):
     slug: str
     phone: str = ""
     email: str = ""
-    birthday: date | None = None
+    birthday: str = ""  # MM-DD format, e.g. "04-01"
+    birth_year: int | None = None  # Optional, used to compute age
     relationship: str = ""
     info: dict[str, Any] = {}

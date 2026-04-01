@@ -4,7 +4,9 @@ Usage:
   nexus manage task [new|list|show|complete|edit|delete]
   nexus manage contact [new|list|show|edit|delete]
   nexus manage onboard
+  nexus manage refresh
   nexus manage upcoming
+  nexus manage weather [--latlon "lat,lon" --name "City"]
   nexus manage sync
   nexus manage auth google
 """
@@ -15,6 +17,7 @@ from src.commands.manage.contact import app as contact_app
 from src.commands.manage.onboard import onboard, refresh, upcoming
 from src.commands.manage.sync import auth_google, sync
 from src.commands.manage.task import app as task_app
+from src.commands.manage.weather import weather
 
 auth_app = typer.Typer()
 auth_app.command(name="google", help="Set up Google Calendar OAuth")(auth_google)
@@ -31,4 +34,7 @@ app.command(name="refresh", help="Lightweight context refresh for follow-up sess
 app.command(
     name="upcoming", help="Show upcoming tasks, birthdays, and recurring events"
 )(upcoming)
+app.command(name="weather", help="Configure weather or show current conditions")(
+    weather
+)
 app.command(name="sync", help="Bidirectional Google Calendar sync")(sync)

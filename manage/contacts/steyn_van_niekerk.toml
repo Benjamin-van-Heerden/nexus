@@ -2,7 +2,8 @@ name = "Steyn van Niekerk"
 slug = "steyn_van_niekerk"
 phone = ""
 email = ""
-birthday = "1990-04-01"
+birthday = "04-01"
+birth_year = 1990
 relationship = ""
 
 [info]

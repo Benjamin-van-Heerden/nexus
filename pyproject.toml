@@ -13,6 +13,7 @@ dependencies = [
     "google-api-python-client>=2.193.0",
     "google-auth-httplib2>=0.3.1",
     "jax>=0.9.2",
+    "httpx>=0.28.1",
 ]
 
 [tool.uv.workspace]

@@ -24,6 +24,7 @@ from src.utils.manage import (
 )
 from src.utils.path_resolution import resolve
 from src.utils.pause import check_pause
+from src.utils.weather import fetch_weather_sync, format_weather, load_weather_config
 
 # -- Display helpers --
 
@@ -126,12 +127,19 @@ def _get_birthday_reminders() -> list[tuple[str, date, int | None, str]]:
         contact = load_contact(f)
         if not contact.birthday:
             continue
-        bday_this_year = contact.birthday.replace(year=today.year)
+        try:
+            month = int(contact.birthday[:2])
+            day = int(contact.birthday[3:])
+        except (ValueError, IndexError):
+            continue
+        bday_this_year = date(today.year, month, day)
         if bday_this_year < today:
-            bday_this_year = contact.birthday.replace(year=today.year + 1)
+            bday_this_year = date(today.year + 1, month, day)
 
         days_until = (bday_this_year - today).days
-        age = bday_this_year.year - contact.birthday.year
+        age = None
+        if contact.birth_year is not None:
+            age = bday_this_year.year - contact.birth_year
 
         if days_until == 7:
             msg = f"{contact.name}'s birthday is in a week ({bday_this_year.strftime('%a %d %B')})"
@@ -312,6 +320,23 @@ def _print_actionable_sections():
     return has_content
 
 
+def _print_weather() -> bool:
+    """Print weather section if configured. Returns True if weather was shown."""
+    config = load_weather_config()
+    if not config:
+        return False
+    try:
+        weather_data = fetch_weather_sync(config)
+        print("-" * 60)
+        print("WEATHER")
+        print("-" * 60)
+        print(format_weather(weather_data))
+        print()
+        return True
+    except Exception:
+        return False
+
+
 # -- Commands --
 
 
@@ -341,6 +366,9 @@ def onboard():
     else:
         print("Google Calendar: never synced")
     print()
+
+    # Weather
+    _print_weather()
 
     # All actionable sections
     _print_actionable_sections()
@@ -390,6 +418,9 @@ def refresh():
         print("Google Calendar: never synced")
     print()
 
+    # Weather
+    _print_weather()
+
     has_content = _print_actionable_sections()
 
     # Task tree
@@ -410,13 +441,15 @@ def refresh():
     print("-" * 60)
     print("REFRESH INSTRUCTIONS")
     print("-" * 60)
-    print("Report the above to Benjamin. Priority order:")
-    print("  1. Overdue → ask: complete, reschedule, or delete?")
-    print("  2. Due today → remind him")
-    print("  3. Tomorrow / this week → brief him")
+    print("Present the information to Benjamin. Priority order:")
+    print("  1. Overdue → alert, ask: complete, reschedule, or delete?")
+    print("  2. Due today → list what's happening")
+    print("  3. Tomorrow / this week → brief summary")
     print("  4. Birthdays → mention so he can prepare")
     print("  5. Open todos → surface if nothing urgent")
+    print("  6. Weather → include if available")
     print()
+    print("Be direct and informational. Present facts, offer to help if needed.")
     print("Do not create/delete/complete tasks without his input.")
     print("If he asks about his calendar and sync is stale, run: nexus manage sync")
     print()
