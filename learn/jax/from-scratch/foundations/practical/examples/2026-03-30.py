@@ -13,17 +13,17 @@ import jax.numpy as jnp
 
 def create_identity(n: int) -> jnp.ndarray:
     """Create an n×n identity matrix using jax.numpy."""
-    raise NotImplementedError()
+    return jnp.eye(n)
 
 
 def linspace_sum(start: float, stop: float, num: int) -> float:
     """Create a linspace array and return its sum as a Python float."""
-    raise NotImplementedError()
+    return float(jnp.sum(jnp.linspace(start, stop, num)))
 
 
 def reverse_slice(x: jnp.ndarray) -> jnp.ndarray:
     """Return the array reversed along the first axis using slicing."""
-    raise NotImplementedError()
+    return x[::-1]
 
 
 def set_diagonal_to_value(x: jnp.ndarray, val: float) -> jnp.ndarray:
@@ -31,7 +31,7 @@ def set_diagonal_to_value(x: jnp.ndarray, val: float) -> jnp.ndarray:
 
     Use .at[].set() — do NOT mutate in place (JAX arrays are immutable).
     """
-    raise NotImplementedError()
+    return x.at[jnp.diag_indices_from(x)].set(val)
 
 
 def increment_row(x: jnp.ndarray, row: int, amount: float) -> jnp.ndarray:
@@ -39,12 +39,12 @@ def increment_row(x: jnp.ndarray, row: int, amount: float) -> jnp.ndarray:
 
     Use .at[].add().
     """
-    raise NotImplementedError()
+    return x.at[row, :].add(amount)
 
 
 def outer_product(a: jnp.ndarray, b: jnp.ndarray) -> jnp.ndarray:
     """Compute the outer product of two 1-D arrays using jax.numpy."""
-    raise NotImplementedError()
+    return jnp.outer(a, b)
 
 
 if __name__ == "__main__":

@@ -1,8 +1,7 @@
 import random
 
-from src.utils.self import load_math_config
-
 from src.models.self.math import MathConfig
+from src.utils.self import load_math_config
 
 SYMBOLS = {
     "addition": "+",
@@ -69,6 +68,6 @@ def generate_problems(config: MathConfig | None = None) -> tuple[str, list[str]]
     lines = []
     for i, pt in enumerate(problem_types, 1):
         problem = _generate_problem(pt, config)
-        lines.append(f"{i}. {problem}")
+        lines.append(f"{i}. {problem}")  # type: ignore
 
     return ("\n".join(lines), problem_types)
