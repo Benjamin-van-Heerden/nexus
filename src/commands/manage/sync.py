@@ -11,10 +11,10 @@ from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
+from src.models.manage.index import IndexEntry
+from src.models.manage.task import TaskConfig
 
-from src.models.management.index import IndexEntry
-from src.models.management.task import TaskConfig
-from src.utils.management import (
+from src.utils.manage import (
     add_to_index,
     get_sync_dir,
     get_tasks_dir,
@@ -73,7 +73,9 @@ def auth_google():
     client_secret = _get_abs_path(CLIENT_SECRET_PATH)
     if not client_secret.exists():
         typer.echo(f"Client secret not found: {client_secret}")
-        typer.echo("Place your Google OAuth client credentials JSON in the auth/ directory.")
+        typer.echo(
+            "Place your Google OAuth client credentials JSON in the auth/ directory."
+        )
         raise typer.Exit(1)
 
     flow = InstalledAppFlow.from_client_secrets_file(str(client_secret), SCOPES)
@@ -117,7 +119,9 @@ def sync():
         "timeMax": window_end,
     }
     if last_sync_str:
-        updated_min = last_sync_str if last_sync_str.endswith("Z") else last_sync_str + "Z"
+        updated_min = (
+            last_sync_str if last_sync_str.endswith("Z") else last_sync_str + "Z"
+        )
         list_kwargs["updatedMin"] = updated_min
 
     events_result = service.events().list(**list_kwargs).execute()
@@ -152,7 +156,11 @@ def sync():
             task = load_task(task_path)
 
             gcal_modified = datetime.fromisoformat(event_updated.replace("Z", "+00:00"))
-            nexus_modified = task.last_modified.replace(tzinfo=gcal_modified.tzinfo) if task.last_modified.tzinfo is None else task.last_modified
+            nexus_modified = (
+                task.last_modified.replace(tzinfo=gcal_modified.tzinfo)
+                if task.last_modified.tzinfo is None
+                else task.last_modified
+            )
 
             if gcal_modified > nexus_modified:
                 task.name = event_summary
@@ -195,7 +203,8 @@ def sync():
 
             if is_past:
                 # Move directly to completed/
-                from src.utils.management import get_completed_dir
+                from src.utils.manage import get_completed_dir
+
                 completed_dir = get_completed_dir()
                 completed_dir.mkdir(parents=True, exist_ok=True)
                 completed_path = completed_dir / f"{slug}.toml"
@@ -246,10 +255,14 @@ def sync():
                 body=event_body,
             ).execute()
         else:
-            created_event = service.events().insert(
-                calendarId=calendar_id,
-                body=event_body,
-            ).execute()
+            created_event = (
+                service.events()
+                .insert(
+                    calendarId=calendar_id,
+                    body=event_body,
+                )
+                .execute()
+            )
             task.gcal_event_id = created_event["id"]
             task.last_modified = now
             save_task(task_path, task)

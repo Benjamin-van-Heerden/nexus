@@ -1,11 +1,11 @@
-"""Contact CRUD commands for the management system."""
+"""Contact CRUD commands for the manage system."""
 
 from datetime import date
 
 import typer
+from src.models.manage.contact import ContactConfig
 
-from src.models.management.contact import ContactConfig
-from src.utils.management import (
+from src.utils.manage import (
     get_contacts_dir,
     load_contact,
     resolve_contact_slug,
@@ -22,7 +22,9 @@ def new(
     phone: str = typer.Option("", help="Phone number"),
     email: str = typer.Option("", help="Email address"),
     birthday: str = typer.Option("", help="Birthday (YYYY-MM-DD)"),
-    relationship: str = typer.Option("", help="Relationship (e.g. friend, colleague, family)"),
+    relationship: str = typer.Option(
+        "", help="Relationship (e.g. friend, colleague, family)"
+    ),
 ):
     """Create a new contact."""
     slug = slugify(name)

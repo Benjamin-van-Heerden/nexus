@@ -1,6 +1,6 @@
 """Contact configuration model.
 
-Maps to: management/contacts/<slug>.toml
+Maps to: manage/contacts/<slug>.toml
 """
 
 from datetime import date

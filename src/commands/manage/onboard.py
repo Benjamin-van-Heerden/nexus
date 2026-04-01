@@ -14,7 +14,7 @@ from pathlib import Path
 
 import typer
 
-from src.utils.management import (
+from src.utils.manage import (
     get_contacts_dir,
     get_sync_dir,
     load_contact,
@@ -23,7 +23,6 @@ from src.utils.management import (
     next_occurrence,
 )
 from src.utils.path_resolution import resolve
-
 
 # -- Display helpers --
 
@@ -229,7 +228,9 @@ def _print_actionable_sections():
         print("OVERDUE")
         print("-" * 60)
         for name, slug, due_date, days in overdue:
-            print(f"  ⚠ {name} — due {due_date.strftime('%a %d %b')} ({days} day(s) overdue)")
+            print(
+                f"  ⚠ {name} — due {due_date.strftime('%a %d %b')} ({days} day(s) overdue)"
+            )
         print()
         has_content = True
 
@@ -314,7 +315,7 @@ def _print_actionable_sections():
 
 
 def onboard():
-    """Full management context dump for agents."""
+    """Full manage context dump for agents."""
     today = date.today()
 
     print("=" * 60)

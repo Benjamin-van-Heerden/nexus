@@ -1,12 +1,12 @@
-"""Task CRUD commands for the management system."""
+"""Task CRUD commands for the manage system."""
 
 from datetime import date, datetime
 
 import typer
+from src.models.manage.index import IndexEntry
+from src.models.manage.task import TaskConfig
 
-from src.models.management.index import IndexEntry
-from src.models.management.task import TaskConfig
-from src.utils.management import (
+from src.utils.manage import (
     add_to_index,
     get_subtasks,
     get_task_tree,
@@ -35,15 +35,21 @@ def _parse_due(due_str: str) -> datetime | date:
             return dt.date()
         except ValueError:
             continue
-    raise typer.BadParameter(f"Invalid date format: '{due_str}'. Use YYYY-MM-DD or YYYY-MM-DDTHH:MM")
+    raise typer.BadParameter(
+        f"Invalid date format: '{due_str}'. Use YYYY-MM-DD or YYYY-MM-DDTHH:MM"
+    )
 
 
 @app.command()
 def new(
     title: str = typer.Argument(help="Task title"),
     description: str = typer.Option("", help="Task description"),
-    due: str = typer.Option("", help="Due date (YYYY-MM-DD) or datetime (YYYY-MM-DDTHH:MM)"),
-    recur: str = typer.Option("", help="Recurrence pattern (3-field cron: 'dom month dow')"),
+    due: str = typer.Option(
+        "", help="Due date (YYYY-MM-DD) or datetime (YYYY-MM-DDTHH:MM)"
+    ),
+    recur: str = typer.Option(
+        "", help="Recurrence pattern (3-field cron: 'dom month dow')"
+    ),
     parent: str = typer.Option("", help="Parent task slug or name"),
     tag: list[str] = typer.Option([], help="Tags (repeatable)"),
 ):
@@ -220,7 +226,9 @@ def show(slug: str = typer.Argument(help="Task slug or name")):
 @app.command()
 def complete(
     slug: str = typer.Argument(help="Task slug or name"),
-    force: bool = typer.Option(False, help="Force completion even if subtasks are incomplete"),
+    force: bool = typer.Option(
+        False, help="Force completion even if subtasks are incomplete"
+    ),
 ):
     """Mark a task as completed."""
     entry = resolve_slug(slug)
@@ -310,7 +318,8 @@ def edit(
     save_task(task_path, task)
 
     if due:
-        from src.utils.management import update_index_entry
+        from src.utils.manage import update_index_entry
+
         update_index_entry(task.slug, due=task.due)
 
     typer.echo(f"Updated: {task.name}")
@@ -360,4 +369,5 @@ def delete(slug: str = typer.Argument(help="Task slug or name")):
 def _resolve_path(stored_path: str):
     """Resolve a stored ./ path to absolute Path."""
     from src.utils.path_resolution import resolve
+
     return resolve(stored_path)

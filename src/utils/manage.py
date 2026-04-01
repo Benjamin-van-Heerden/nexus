@@ -1,10 +1,9 @@
-"""Management system utilities.
+"""Manage system utilities.
 
 Handles TOML I/O, index management, slug resolution, cron helpers,
-and task tree operations for the management system.
+and task tree operations for the manage system.
 """
 
-import calendar
 import re
 import shutil
 import tomllib
@@ -12,13 +11,11 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 
 import tomli_w
+from src.models.manage.contact import ContactConfig
+from src.models.manage.index import IndexEntry, ManageIndex
+from src.models.manage.task import TaskConfig
 
-from src.models.management.contact import ContactConfig
-from src.models.management.index import IndexEntry, ManageIndex
-from src.models.management.task import TaskConfig
-from src.utils.path_resolution import to_stored_path
-from src.utils.paths import get_management_dir
-
+from src.utils.paths import get_manage_dir
 
 # -- TOML I/O --
 
@@ -50,7 +47,7 @@ def save_contact(path: Path, contact: ContactConfig) -> None:
 
 
 def load_index() -> ManageIndex:
-    path = get_management_dir() / "index.toml"
+    path = get_manage_dir() / "index.toml"
     if not path.exists():
         return ManageIndex()
     raw = _load_toml(path)
@@ -58,7 +55,7 @@ def load_index() -> ManageIndex:
 
 
 def save_index(index: ManageIndex) -> None:
-    path = get_management_dir() / "index.toml"
+    path = get_manage_dir() / "index.toml"
     _save_toml(path, index.model_dump(mode="json", exclude_none=True))
 
 
@@ -136,7 +133,7 @@ def resolve_slug(slug_or_name: str) -> IndexEntry:
 def resolve_contact_slug(slug_or_name: str) -> Path:
     """Resolve a contact slug or name to its TOML file path.
 
-    Scans management/contacts/ directory. Raises typer.Exit if not found.
+    Scans manage/contacts/ directory. Raises typer.Exit if not found.
     """
     import typer
 
@@ -160,19 +157,19 @@ def resolve_contact_slug(slug_or_name: str) -> Path:
 
 
 def get_tasks_dir() -> Path:
-    return get_management_dir() / "tasks"
+    return get_manage_dir() / "tasks"
 
 
 def get_completed_dir() -> Path:
-    return get_management_dir() / "completed"
+    return get_manage_dir() / "completed"
 
 
 def get_contacts_dir() -> Path:
-    return get_management_dir() / "contacts"
+    return get_manage_dir() / "contacts"
 
 
 def get_sync_dir() -> Path:
-    return get_management_dir() / "sync"
+    return get_manage_dir() / "sync"
 
 
 # -- Cron helpers --
@@ -185,7 +182,9 @@ def parse_recurrence(cron_3field: str) -> tuple[str, str, str]:
     """
     parts = cron_3field.strip().split()
     if len(parts) != 3:
-        raise ValueError(f"Expected 3-field cron format 'dom month dow', got: '{cron_3field}'")
+        raise ValueError(
+            f"Expected 3-field cron format 'dom month dow', got: '{cron_3field}'"
+        )
     return parts[0], parts[1], parts[2]
 
 
@@ -229,7 +228,9 @@ def next_occurrence(cron_3field: str, after: datetime | None = None) -> date | N
     while check_date <= end_date:
         month_ok = check_date.month in month_values
         dom_ok = check_date.day in dom_values
-        dow_ok = check_date.isoweekday() % 7 in dow_values  # isoweekday: Mon=1..Sun=7, cron: Sun=0..Sat=6
+        dow_ok = (
+            check_date.isoweekday() % 7 in dow_values
+        )  # isoweekday: Mon=1..Sun=7, cron: Sun=0..Sat=6
 
         if has_dow and not has_dom and not has_month:
             if dow_ok:
@@ -324,6 +325,7 @@ def move_to_completed(slug: str) -> None:
         shutil.move(str(subtask_dir), str(subtask_dest))
 
     slugs_to_remove = {slug}
+
     def _collect_descendants(parent: str) -> None:
         for t in index.tasks:
             if t.parent == parent and t.slug not in slugs_to_remove:

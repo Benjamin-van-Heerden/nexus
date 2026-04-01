@@ -1,6 +1,6 @@
-"""Management index models.
+"""Manage index models.
 
-Maps to: management/index.toml
+Maps to: manage/index.toml
 """
 
 from datetime import date, datetime

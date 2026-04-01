@@ -5,13 +5,12 @@ from pathlib import Path
 
 import tomli_w
 
-from src.models.self_improvement.exercise import ExerciseLog
-from src.models.self_improvement.habits import HabitsConfig
-from src.models.self_improvement.learning import LearningLog
-from src.models.self_improvement.math import MathConfig, MathLog
-from src.models.self_improvement.reading import BookConfig
+from src.models.self.exercise import ExerciseLog
+from src.models.self.habits import HabitsConfig
+from src.models.self.learning import LearningLog
+from src.models.self.math import MathConfig, MathLog
+from src.models.self.reading import BookConfig
 from src.utils.paths import get_self_dir
-
 
 # -- Path helpers --
 
@@ -123,7 +122,9 @@ def load_math_config() -> MathConfig:
 
 
 def save_math_config(config: MathConfig) -> None:
-    _save_toml(get_math_config_path(), config.model_dump(mode="json", exclude_none=True))
+    _save_toml(
+        get_math_config_path(), config.model_dump(mode="json", exclude_none=True)
+    )
 
 
 def load_math_log() -> MathLog:
@@ -165,11 +166,21 @@ def get_days_with_activity(sessions: list, reference: date | None = None) -> set
     return {s.date for s in week_sessions}
 
 
-def get_missing_days_this_week(sessions: list, reference: date | None = None) -> list[str]:
+def get_missing_days_this_week(
+    sessions: list, reference: date | None = None
+) -> list[str]:
     today = reference or date.today()
     week_start = get_current_week_start(today)
     active_dates = get_days_with_activity(sessions, today)
-    day_names = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    day_names = [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+    ]
     missing = []
     for i in range(7):
         day = week_start + timedelta(days=i)

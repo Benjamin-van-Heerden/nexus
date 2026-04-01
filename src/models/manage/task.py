@@ -1,6 +1,6 @@
 """Task configuration model.
 
-Maps to: management/tasks/<slug>.toml
+Maps to: manage/tasks/<slug>.toml
 """
 
 from datetime import date, datetime

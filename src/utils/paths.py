@@ -31,5 +31,5 @@ def get_self_dir() -> Path:
     return get_project_root() / "self"
 
 
-def get_management_dir() -> Path:
-    return get_project_root() / "management"
+def get_manage_dir() -> Path:
+    return get_project_root() / "manage"
