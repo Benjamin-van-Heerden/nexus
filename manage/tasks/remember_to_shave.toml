@@ -1,0 +1,12 @@
+name = "Remember to shave"
+slug = "remember_to_shave"
+description = ""
+status = "todo"
+created = "2026-04-01"
+due = "2026-04-02"
+tags = []
+recurrence = ""
+gcal_event_id = ""
+last_modified = "2026-04-01T20:56:32.161408"
+has_subtasks = false
+parent = ""
