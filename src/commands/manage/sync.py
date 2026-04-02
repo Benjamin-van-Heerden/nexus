@@ -28,7 +28,7 @@ from src.utils.path_resolution import resolve, to_stored_path
 from src.utils.paths import get_project_root
 
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
-CLIENT_SECRET_PATH = "auth/client_secret_221009037075-mscrrhc8b32ad40ang5ha8rd82ivtmuq.apps.googleusercontent.com.json"
+CLIENT_SECRET_PATH = "auth/client_secret_221009037075-la7sii4ro3pdfhkv9ksir4ett8c7l8t3.apps.googleusercontent.com.json"
 TOKEN_PATH = "auth/token.json"
 CALENDAR_ID = "benjaminvh1997@gmail.com"
 PULL_WINDOW_DAYS = 14
