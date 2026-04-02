@@ -1,12 +1,13 @@
 name = "Go to pharmacy"
 slug = "go_to_pharmacy"
 description = ""
-status = "todo"
+status = "completed"
 created = "2026-04-01"
-due = "2026-04-02"
+due = "2026-04-02T00:00:00"
+completed_at = "2026-04-02"
 tags = []
 recurrence = ""
 gcal_event_id = ""
-last_modified = "2026-04-01T20:56:30.998313"
+last_modified = "2026-04-02T21:28:03.415759"
 has_subtasks = false
 parent = ""

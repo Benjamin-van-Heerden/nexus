@@ -1,11 +1,4 @@
 [[tasks]]
-slug = "go_to_pharmacy"
-name = "Go to pharmacy"
-path = "./manage/tasks/go_to_pharmacy.toml"
-due = "2026-04-02T00:00:00"
-parent = ""
-
-[[tasks]]
 slug = "refill_water"
 name = "Refill water"
 path = "./manage/tasks/refill_water.toml"
@@ -16,5 +9,5 @@ parent = ""
 slug = "remember_to_shave"
 name = "Remember to shave"
 path = "./manage/tasks/remember_to_shave.toml"
-due = "2026-04-02"
+due = "2026-04-02T00:00:00"
 parent = ""
