@@ -2,5 +2,5 @@
 slug = "refill_water"
 name = "Refill water"
 path = "./manage/tasks/refill_water.toml"
-due = "2026-04-02T00:00:00"
+due = "2026-04-06"
 parent = ""
