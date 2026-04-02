@@ -33,11 +33,11 @@ else
         brew install asdf
     fi
     asdf plugin add elixir || true
-    asdf install elixir latest
-    asdf global elixir latest
+    asdf install elixir 1.19.3-otp-28
+    asdf global elixir 1.19.3-otp-28
     asdf plugin add erlang || true
-    asdf install erlang latest
-    asdf global erlang latest
+    asdf install erlang 28.2
+    asdf global erlang 28.2
     echo "[ok] elixir installed: $(elixir --version)"
 fi
 
