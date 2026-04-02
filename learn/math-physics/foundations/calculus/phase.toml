@@ -1,0 +1,20 @@
+name = "language"
+current_goal = "algebra refresher"
+
+[[goals]]
+name = "algebra refresher"
+reference = "./learn/math-physics/reference/calculus_language_algebra.md"
+status = "in_progress"
+tasks = []
+
+[[goals]]
+name = "functions refresher"
+reference = "./learn/math-physics/reference/calculus_language_functions.md"
+status = "todo"
+tasks = []
+
+[[goals]]
+name = "trigonometry refresher"
+reference = "./learn/math-physics/reference/calculus_language_trig.md"
+status = "todo"
+tasks = []

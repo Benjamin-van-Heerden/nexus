@@ -1,32 +1,11 @@
 name = "foundations"
-current_phase = "language"
+current_phase = "calculus"
 phases = [
-    { name = "language", status = "in_progress" },
-    { name = "change", status = "todo" },
-    { name = "accumulation", status = "todo" },
-    { name = "flow", status = "todo" },
-    { name = "differential-equations", status = "todo" },
-    { name = "fundamentals", status = "todo" },
-    { name = "distributions", status = "todo" },
-    { name = "estimation", status = "todo" },
-    { name = "inference", status = "todo" },
-    { name = "regression", status = "todo" },
-    { name = "time-series", status = "todo" },
-    { name = "stochastic-processes", status = "todo" },
-    { name = "mathematical-preliminaries", status = "todo" },
-    { name = "foundations", status = "todo" },
-    { name = "one-dimensional-systems", status = "todo" },
-    { name = "angular-momentum", status = "todo" },
-    { name = "approximation-methods", status = "todo" },
-    { name = "quantum-information", status = "todo" },
-    { name = "automata", status = "todo" },
-    { name = "computability", status = "todo" },
-    { name = "complexity", status = "todo" },
-    { name = "quantum-intro", status = "todo" },
-    { name = "change", status = "todo" },
-    { name = "accumulation", status = "todo" },
-    { name = "flow", status = "todo" },
-    { name = "differential-equations", status = "todo" },
+    { name = "calculus", status = "in_progress" },
+    { name = "statistics-and-probability", status = "todo" },
+    { name = "quantum-mechanics", status = "todo" },
+    { name = "theoretical-computer-science", status = "todo" },
+    { name = "language", status = "todo" },
 ]
 
 [practical]
