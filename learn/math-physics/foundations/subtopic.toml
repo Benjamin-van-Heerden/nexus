@@ -2,9 +2,6 @@ name = "foundations"
 current_phase = "calculus"
 phases = [
     { name = "calculus", status = "in_progress" },
-    { name = "statistics-and-probability", status = "todo" },
-    { name = "quantum-mechanics", status = "todo" },
-    { name = "theoretical-computer-science", status = "todo" },
 ]
 
 [practical]

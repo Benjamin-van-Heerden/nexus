@@ -1,20 +1,32 @@
-name = "language"
-current_goal = "algebra refresher"
+name = "calculus"
+current_goal = "language"
 
 [[goals]]
-name = "algebra refresher"
-reference = "./learn/math-physics/reference/calculus_language_algebra.md"
+name = "language"
+reference = "./learn/math-physics/reference/calc_language.md"
 status = "in_progress"
 tasks = []
 
 [[goals]]
-name = "functions refresher"
-reference = "./learn/math-physics/reference/calculus_language_functions.md"
+name = "change"
+reference = "./learn/math-physics/reference/calc_change.md"
 status = "todo"
 tasks = []
 
 [[goals]]
-name = "trigonometry refresher"
-reference = "./learn/math-physics/reference/calculus_language_trig.md"
+name = "accumulation"
+reference = "./learn/math-physics/reference/calc_accumulation.md"
+status = "todo"
+tasks = []
+
+[[goals]]
+name = "flow"
+reference = "./learn/math-physics/reference/calc_flow.md"
+status = "todo"
+tasks = []
+
+[[goals]]
+name = "differential-equations"
+reference = "./learn/math-physics/reference/calc_differential-equations.md"
 status = "todo"
 tasks = []
