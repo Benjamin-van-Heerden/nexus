@@ -80,7 +80,15 @@ relevant_files = [
 name = "Transformations: jit and grad"
 reference = "./learn/jax/reference/foundations-02-jit-and-grad.md"
 status = "in_progress"
-tasks = []
+
+[[goals.tasks]]
+name = "JAX jit and grad transformations exercise"
+type = "practical"
+created = "2026-04-02"
+status = "todo"
+relevant_files = [
+    "./jax/from-scratch/foundations/practical/examples/2026-04-02.py",
+]
 
 [[goals]]
 name = "Transformations: vmap and pmap"
