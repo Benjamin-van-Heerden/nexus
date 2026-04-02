@@ -8,6 +8,7 @@ phases = [
     { name = "language", status = "todo" },
     { name = "change", status = "todo" },
     { name = "accumulation", status = "todo" },
+    { name = "flow", status = "todo" },
 ]
 
 [practical]
