@@ -41,5 +41,14 @@ else
     echo "[ok] elixir installed: $(elixir --version)"
 fi
 
+# --- Typst ---
+if command -v typst &> /dev/null; then
+    echo "[ok] typst is installed: $(typst --version)"
+else
+    echo "[installing] typst..."
+    brew install typst
+    echo "[ok] typst installed: $(typst --version)"
+fi
+
 echo ""
 echo "=== Setup complete ==="
