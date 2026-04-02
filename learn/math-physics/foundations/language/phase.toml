@@ -6,3 +6,9 @@ name = "algebra refresher"
 reference = "./learn/math-physics/reference/calculus_language_algebra.md"
 status = "in_progress"
 tasks = []
+
+[[goals]]
+name = "functions refresher"
+reference = "./learn/math-physics/reference/calculus_language_functions.md"
+status = "todo"
+tasks = []
