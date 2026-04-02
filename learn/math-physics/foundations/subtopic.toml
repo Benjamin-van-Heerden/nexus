@@ -5,10 +5,6 @@ phases = [
     { name = "statistics-and-probability", status = "todo" },
     { name = "quantum-mechanics", status = "todo" },
     { name = "theoretical-computer-science", status = "todo" },
-    { name = "language", status = "todo" },
-    { name = "change", status = "todo" },
-    { name = "accumulation", status = "todo" },
-    { name = "flow", status = "todo" },
 ]
 
 [practical]
