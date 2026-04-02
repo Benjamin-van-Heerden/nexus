@@ -26,6 +26,7 @@ phases = [
     { name = "change", status = "todo" },
     { name = "accumulation", status = "todo" },
     { name = "flow", status = "todo" },
+    { name = "differential-equations", status = "todo" },
 ]
 
 [practical]
