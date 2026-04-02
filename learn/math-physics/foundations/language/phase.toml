@@ -12,3 +12,9 @@ name = "functions refresher"
 reference = "./learn/math-physics/reference/calculus_language_functions.md"
 status = "todo"
 tasks = []
+
+[[goals]]
+name = "trigonometry refresher"
+reference = "./learn/math-physics/reference/calculus_language_trig.md"
+status = "todo"
+tasks = []
