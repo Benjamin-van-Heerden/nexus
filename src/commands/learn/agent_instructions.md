@@ -47,7 +47,19 @@ Check "EXERCISE BALANCE" in the onboard output:
 
 The current goal's reference document is printed in the onboard output under "CURRENT GOAL". Read it carefully — this is the source material for the exercises you'll create.
 
-### Step 4: Check recent records
+### Step 4: Research and validate
+
+Before composing exercises, do your homework:
+- **Web search** for examples, best practices, common pitfalls, and alternative explanations related to the concepts in the reference material
+- Verify your exercise ideas are sound — don't trust that your mental model is correct
+- For practical/code exercises: run the code to ensure it works, write solutions first to verify tests pass
+- For theoretical/abstract exercises: work through problems yourself, verify your reasoning is sound
+- Validate that exercises are neither too easy (trivial) nor too hard (require knowledge not in the reference)
+- Cross-check facts, formulas, and claims against multiple sources
+
+**Sources matter** — note your sources in your work so future sessions can reference them.
+
+### Step 5: Check recent records
 
 Read "LAST SESSION" and "RECENT ACTIVITY" to understand:
 - What the user has been working on recently
@@ -57,7 +69,7 @@ Read "LAST SESSION" and "RECENT ACTIVITY" to understand:
 
 Use this to calibrate difficulty and scope. If the user struggled with a concept last session, reinforce it. If they breezed through, increase the challenge.
 
-### Step 5: Create the exercise files
+### Step 6: Create the exercise files
 
 Follow the exercise type instructions in the onboard output — they tell you exactly how to structure files for this particular subtopic (naming, directory, format, how to run/test).
 
@@ -65,7 +77,7 @@ Follow the exercise type instructions in the onboard output — they tell you ex
 - **theoretical** — Create a markdown file in the phase's `theoretical/` directory with material from the goal's reference and questions for the user to reflect on.
 - **quiz** — Create two files: the quiz itself in `quiz/YYYY-MM-DD-slug.md` (questions with answer placeholders only, NO answers in this file), and a separate answer key in `quiz/answers/YYYY-MM-DD-slug.md`. This prevents the user from accidentally seeing answers while working. Register the task with `--file` pointing to the quiz file (not the answer key).
 
-### Step 6: Register the tasks
+### Step 7: Register the tasks
 
 After creating the exercise files, register them with the CLI:
 ```
@@ -74,7 +86,7 @@ nexus learn task new "description" --type practical|theoretical|quiz -f "./path/
 
 Always use the `--file` flag so the task is linked to the actual exercise file. All paths use the `./` prefix (relative to repo root).
 
-### Step 7: Send the message to the user
+### Step 8: Send the message to the user
 
 Your message should include:
 1. A brief greeting and progress note (e.g. "You're on goal 2/6 in the foundations phase")

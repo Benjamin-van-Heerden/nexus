@@ -24,5 +24,22 @@ else
     echo "[ok] rust installed: $(rustc --version)"
 fi
 
+# --- Elixir + Erlang ---
+if command -v elixir &> /dev/null; then
+    echo "[ok] elixir is installed: $(elixir --version)"
+else
+    echo "[installing] elixir via asdf..."
+    if ! command -v asdf &> /dev/null; then
+        brew install asdf
+    fi
+    asdf plugin add elixir || true
+    asdf install elixir latest
+    asdf global elixir latest
+    asdf plugin add erlang || true
+    asdf install erlang latest
+    asdf global erlang latest
+    echo "[ok] elixir installed: $(elixir --version)"
+fi
+
 echo ""
 echo "=== Setup complete ==="
