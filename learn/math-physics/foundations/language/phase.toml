@@ -1,3 +1,8 @@
 name = "language"
-current_goal = ""
-goals = []
+current_goal = "algebra refresher"
+
+[[goals]]
+name = "algebra refresher"
+reference = "./learn/math-physics/reference/calculus_language_algebra.md"
+status = "in_progress"
+tasks = []
