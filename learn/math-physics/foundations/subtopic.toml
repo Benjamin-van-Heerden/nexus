@@ -6,6 +6,7 @@ phases = [
     { name = "quantum-mechanics", status = "todo" },
     { name = "theoretical-computer-science", status = "todo" },
     { name = "language", status = "todo" },
+    { name = "change", status = "todo" },
 ]
 
 [practical]
