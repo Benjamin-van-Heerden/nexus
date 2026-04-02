@@ -25,6 +25,7 @@ phases = [
     { name = "quantum-intro", status = "todo" },
     { name = "change", status = "todo" },
     { name = "accumulation", status = "todo" },
+    { name = "flow", status = "todo" },
 ]
 
 [practical]
