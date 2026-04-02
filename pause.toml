@@ -1,0 +1,10 @@
+[learn]
+active = true
+resume_date = "2026-04-06"
+reason = "Easter weekend away - wedding"
+
+[self]
+active = false
+
+[manage]
+active = false
