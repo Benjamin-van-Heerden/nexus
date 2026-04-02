@@ -6,22 +6,32 @@ phases = [
 
 [practical]
 description = """
-Worked exercises — 1-2 problems to solidify concepts. Each exercise is a
-markdown file in practical/ with:
-- Problem statement with context
-- Step-by-step solution with reasoning
-- Key takeaways
+Worked exercises — 1-2 problems to solidify concepts.
 
-Files: practical/YYYY-MM-DD-<slug>.md
+Structure:
+- A Typst file: practical/YYYY-MM-DD-<slug>.typ
+  - Problem statement with context
+  - Any diagrams, charts, visualizations (lilaq for 2D, plotsy-3d for 3D, cetz for diagrams)
+  - Leading language that allows the user to look up and discover the solutions themselves
+- Compile with: typst compile practical/YYYY-MM-DD-<slug>.typ
+
+All content in Typst — no markdown files.
 """
 setup_commands = []
 
 [theoretical]
 description = """
-Reading notes — a markdown document summarizing the material, explaining
-concepts in your own words, and posing reflection questions for you to answer.
+Reading notes — explaining concepts in your own words, with reflection questions.
 
-Files: theoretical/YYYY-MM-DD-<slug>.md
+Structure:
+- A Typst file: theoretical/YYYY-MM-DD-<slug>.typ
+  - Summary of key concepts
+  - Explanations in your own words
+  - Reflection questions
+  - Any diagrams/charts as needed
+- Compile with: typst compile theoretical/YYYY-MM-DD-<slug>.typ
+
+All content in Typst — no markdown files.
 """
 setup_commands = []
 
@@ -30,8 +40,11 @@ description = """
 Multiple choice questions — 5-10 questions testing conceptual understanding.
 Each question has 4 options (a-d) with one correct answer.
 
-Files: quiz/YYYY-MM-DD-<slug>.md (questions only, NO answers)
-Files: quiz/answers/YYYY-MM-DD-<slug>.md (answer key, kept separate)
+Structure:
+- Quiz file: quiz/YYYY-MM-DD-<slug>.typ (questions only, NO answers)
+- Answer key: quiz/answers/YYYY-MM-DD-<slug>.typ
+
+Include diagrams/charts as needed using Typst.
 """
 setup_commands = [
     "mkdir -p quiz/answers",
