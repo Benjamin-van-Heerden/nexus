@@ -1,0 +1,15 @@
+name = "foundations"
+current_phase = ""
+phases = []
+
+[practical]
+description = "Describe how practical exercises work for this subtopic."
+setup_commands = []
+
+[theoretical]
+description = "Describe how theoretical reading works for this subtopic."
+setup_commands = []
+
+[quiz]
+description = "Describe how quizzes work for this subtopic."
+setup_commands = []
