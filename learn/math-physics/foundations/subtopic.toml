@@ -3,13 +3,32 @@ current_phase = ""
 phases = []
 
 [practical]
-description = "Describe how practical exercises work for this subtopic."
+description = """
+Worked exercises — 1-2 problems to solidify concepts. Each exercise is a
+markdown file in practical/ with:
+- Problem statement with context
+- Step-by-step solution with reasoning
+- Key takeaways
+
+Files: practical/YYYY-MM-DD-<slug>.md
+"""
 setup_commands = []
 
 [theoretical]
-description = "Describe how theoretical reading works for this subtopic."
+description = """
+Reading notes — a markdown document summarizing the material, explaining
+concepts in your own words, and posing reflection questions for you to answer.
+
+Files: theoretical/YYYY-MM-DD-<slug>.md
+"""
 setup_commands = []
 
 [quiz]
-description = "Describe how quizzes work for this subtopic."
-setup_commands = []
+description = """
+Multiple choice questions — 5-10 questions testing conceptual understanding.
+Each question has 4 options (a-d) with one correct answer.
+
+Files: quiz/YYYY-MM-DD-<slug>.md (questions only, NO answers)
+Files: quiz/answers/YYYY-MM-DD-<slug>.md (answer key, kept separate)
+"""
+setup_commands = ["mkdir -p quiz/answers"]
