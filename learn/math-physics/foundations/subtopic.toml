@@ -1,6 +1,8 @@
 name = "foundations"
-current_phase = ""
-phases = []
+current_phase = "language"
+phases = [
+    { name = "language", status = "in_progress" },
+]
 
 [practical]
 description = """
@@ -31,4 +33,6 @@ Each question has 4 options (a-d) with one correct answer.
 Files: quiz/YYYY-MM-DD-<slug>.md (questions only, NO answers)
 Files: quiz/answers/YYYY-MM-DD-<slug>.md (answer key, kept separate)
 """
-setup_commands = ["mkdir -p quiz/answers"]
+setup_commands = [
+    "mkdir -p quiz/answers",
+]
