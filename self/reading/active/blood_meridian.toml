@@ -5,4 +5,14 @@ started = "2026-04-06"
 status = "active"
 current_section = "Chapter 10"
 total_sections = "23 chapters"
-sessions = []
+
+[[sessions]]
+date = "2026-04-06"
+section = "Chapter 10"
+summary = "The ex-priest describes to the kid how the Glanton gang met the judge in the desert. The judge appeared alone on a rock like an apparition. The ex-priest initially felt cursed by this meeting but later thought otherwise after the judge's makeshift gunpowder helped them defeat Indians. Now he questions that relief. The chapter establishes the judge's mythic status through his vast knowledge (languages, geology, botany), physical dominance, and unsettling presence."
+takeaway = "The judge is portrayed as accumulated — possessing too much skill, knowledge, and presence to be merely human. The ex-priest's shifting interpretation of him as curse/blessing/uncertainty creates the reader's own unease about his true nature."
+agent_questions = [
+    "What made the ex-priest initially feel cursed when they met the judge?",
+    "What skills and knowledge areas establish the judge's mythic status in this chapter?",
+    "Why does the ex-priest question whether the 'curse' has truly lifted?",
+]
