@@ -24,7 +24,7 @@ defmodule CounterServer do
   Returns {:ok, pid} on success.
   """
   def start_link(initial_value \\ 0) do
-    raise("implement me")
+    GenServer.start_link(__MODULE__, initial_value)
   end
 
   @doc """
@@ -32,7 +32,7 @@ defmodule CounterServer do
   Returns the integer value.
   """
   def get_value(pid) do
-    raise("implement me")
+    GenServer.call(pid, :get_value)
   end
 
   @doc """
@@ -40,7 +40,7 @@ defmodule CounterServer do
   Returns :ok immediately.
   """
   def increment(pid) do
-    raise("implement me")
+    GenServer.cast(pid, :increment)
   end
 
   @doc """
@@ -48,7 +48,7 @@ defmodule CounterServer do
   Returns :ok immediately.
   """
   def decrement(pid) do
-    raise("implement me")
+    GenServer.cast(pid, :decrement)
   end
 
   @doc """
@@ -56,33 +56,33 @@ defmodule CounterServer do
   Returns :ok on success.
   """
   def reset(pid, new_value) do
-    raise("implement me")
+    GenServer.call(pid, {:reset, new_value})
   end
 
   # --- Callbacks ---
 
   @impl true
   def init(initial_value) do
-    raise("implement me")
+    {:ok, initial_value}
   end
 
   @impl true
   def handle_call(:get_value, _from, state) do
-    raise("implement me")
+    {:reply, state, state}
   end
 
   @impl true
-  def handle_call({:reset, new_value}, _from, state) do
-    raise("implement me")
+  def handle_call({:reset, new_value}, _from, _state) do
+    {:reply, :ok, new_value}
   end
 
   @impl true
   def handle_cast(:increment, state) do
-    raise("implement me")
+    {:noreply, state + 1}
   end
 
   @impl true
   def handle_cast(:decrement, state) do
-    raise("implement me")
+    {:noreply, state - 1}
   end
 end
