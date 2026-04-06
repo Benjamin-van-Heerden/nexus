@@ -5,7 +5,15 @@ current_goal = "OTP Basics and Elixir Behaviours"
 name = "OTP Basics and Elixir Behaviours"
 reference = "./learn/elixir/reference/01-otp-basics-and-behaviours.md"
 status = "in_progress"
-tasks = []
+
+[[goals.tasks]]
+name = "Implement a GenServer counter with handle_call and handle_cast"
+type = "practical"
+created = "2026-04-06"
+status = "todo"
+relevant_files = [
+    "./learn/elixir/otp/otp-foundations/practical/lib/counter_server.ex",
+]
 
 [[goals]]
 name = "Functional Cores and the CRC Pattern"

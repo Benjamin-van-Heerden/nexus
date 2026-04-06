@@ -1,0 +1,88 @@
+defmodule CounterServer do
+  @moduledoc """
+  A simple GenServer-based counter.
+
+  This exercise practices the fundamental GenServer callbacks:
+  - init/1: Initialize the server's state
+  - handle_call/3: Handle synchronous requests (get current value)
+  - handle_cast/2: Handle asynchronous updates (increment/decrement)
+
+  The counter should support:
+  - Starting with an optional initial value (default 0)
+  - Getting the current value (synchronous)
+  - Incrementing the value (asynchronous)
+  - Decrementing the value (asynchronous)
+  - Resetting to a specific value (synchronous with reply)
+  """
+
+  use GenServer
+
+  # --- Public API ---
+
+  @doc """
+  Starts the counter GenServer with an optional initial value.
+  Returns {:ok, pid} on success.
+  """
+  def start_link(initial_value \\ 0) do
+    raise("implement me")
+  end
+
+  @doc """
+  Gets the current counter value.
+  Returns the integer value.
+  """
+  def get_value(pid) do
+    raise("implement me")
+  end
+
+  @doc """
+  Increments the counter by 1 (asynchronous).
+  Returns :ok immediately.
+  """
+  def increment(pid) do
+    raise("implement me")
+  end
+
+  @doc """
+  Decrements the counter by 1 (asynchronous).
+  Returns :ok immediately.
+  """
+  def decrement(pid) do
+    raise("implement me")
+  end
+
+  @doc """
+  Resets the counter to a specific value (synchronous).
+  Returns :ok on success.
+  """
+  def reset(pid, new_value) do
+    raise("implement me")
+  end
+
+  # --- Callbacks ---
+
+  @impl true
+  def init(initial_value) do
+    raise("implement me")
+  end
+
+  @impl true
+  def handle_call(:get_value, _from, state) do
+    raise("implement me")
+  end
+
+  @impl true
+  def handle_call({:reset, new_value}, _from, state) do
+    raise("implement me")
+  end
+
+  @impl true
+  def handle_cast(:increment, state) do
+    raise("implement me")
+  end
+
+  @impl true
+  def handle_cast(:decrement, state) do
+    raise("implement me")
+  end
+end
