@@ -16,3 +16,9 @@ slug = "research_cargo_monorepo_handling_for_rust_track"
 name = "Research Cargo monorepo handling for Rust track"
 path = "./manage/tasks/research_cargo_monorepo_handling_for_rust_track.toml"
 parent = ""
+
+[[tasks]]
+slug = "scaffold_nexus_learn_c_course"
+name = "Scaffold Nexus Learn C course"
+path = "./manage/tasks/scaffold_nexus_learn_c_course.toml"
+parent = ""

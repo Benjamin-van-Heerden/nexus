@@ -1,0 +1,13 @@
+name = "Scaffold Nexus Learn C course"
+slug = "scaffold_nexus_learn_c_course"
+description = ""
+status = "todo"
+created = "2026-04-06"
+tags = [
+    "nexus-learn",
+]
+recurrence = ""
+gcal_event_id = ""
+last_modified = "2026-04-06T19:09:37.755689"
+has_subtasks = false
+parent = ""
