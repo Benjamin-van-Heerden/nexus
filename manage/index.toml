@@ -10,3 +10,9 @@ slug = "research_mix_monorepo_handling_for_elixir_track"
 name = "Research Mix monorepo handling for Elixir track"
 path = "./manage/tasks/research_mix_monorepo_handling_for_elixir_track.toml"
 parent = ""
+
+[[tasks]]
+slug = "research_cargo_monorepo_handling_for_rust_track"
+name = "Research Cargo monorepo handling for Rust track"
+path = "./manage/tasks/research_cargo_monorepo_handling_for_rust_track.toml"
+parent = ""
