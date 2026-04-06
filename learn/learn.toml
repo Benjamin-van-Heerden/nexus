@@ -1,8 +1,9 @@
 window_size = 8
-current_topic = "jax"
+current_topic = "elixir"
 history = [
     { week = "2026-03-22", topic = "rust" },
     { week = "2026-03-29", topic = "jax" },
+    { week = "2026-04-05", topic = "elixir" },
 ]
 
 [weights]
