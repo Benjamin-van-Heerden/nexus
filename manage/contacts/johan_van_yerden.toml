@@ -1,0 +1,9 @@
+name = "Johan van Yerden"
+slug = "johan_van_yerden"
+phone = ""
+email = ""
+birthday = "04-13"
+birth_year = 1966
+relationship = "father"
+
+[info]
