@@ -1,13 +1,14 @@
 name = "Research Mix monorepo handling for Elixir track"
 slug = "research_mix_monorepo_handling_for_elixir_track"
 description = ""
-status = "todo"
+status = "completed"
 created = "2026-04-06"
+completed_at = "2026-04-07"
 tags = [
     "nexus-learn",
 ]
 recurrence = ""
 gcal_event_id = ""
-last_modified = "2026-04-06T19:09:37.507520"
+last_modified = "2026-04-07T13:38:33.906216"
 has_subtasks = false
 parent = ""
