@@ -1,11 +1,4 @@
 [[tasks]]
-slug = "refill_water"
-name = "Refill water"
-path = "./manage/tasks/refill_water.toml"
-due = "2026-04-07T13:00:00"
-parent = ""
-
-[[tasks]]
 slug = "research_mix_monorepo_handling_for_elixir_track"
 name = "Research Mix monorepo handling for Elixir track"
 path = "./manage/tasks/research_mix_monorepo_handling_for_elixir_track.toml"
