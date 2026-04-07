@@ -10,7 +10,8 @@ status = "in_progress"
 name = "Implement a GenServer counter with handle_call and handle_cast"
 type = "practical"
 created = "2026-04-06"
-status = "todo"
+status = "completed"
+completed = "2026-04-07"
 relevant_files = [
     "./learn/elixir/otp/otp-foundations/practical/lib/counter_server.ex",
 ]
