@@ -28,13 +28,15 @@ def log(
     time: Annotated[str, typer.Option("--time")],
     correct: Annotated[int, typer.Option("--correct")],
     type: Annotated[list[str] | None, typer.Option("--type")] = None,
+    log_date: Annotated[str, typer.Option("--date", help="Backdate entry (YYYY-MM-DD)")] = "",
 ) -> None:
     time_seconds = parse_duration(time)
     config = load_math_config()
     math_log = load_math_log()
 
+    session_date = date.fromisoformat(log_date) if log_date else date.today()
     session = MathSession(
-        date=date.today(),
+        date=session_date,
         time_seconds=time_seconds,
         correct=correct,
         total=config.general.problems_per_day,

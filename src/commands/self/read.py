@@ -103,6 +103,7 @@ def log(
     summary: Annotated[str, typer.Option("--summary")],
     takeaway: Annotated[str, typer.Option("--takeaway")],
     question: Annotated[list[str] | None, typer.Option("--question")] = None,
+    log_date: Annotated[str, typer.Option("--date", help="Backdate entry (YYYY-MM-DD)")] = "",
 ) -> None:
     try:
         book = load_book(slug)
@@ -110,8 +111,9 @@ def log(
         typer.echo(f"Book '{slug}' not found.")
         raise typer.Exit(1)
 
+    session_date = date.fromisoformat(log_date) if log_date else date.today()
     session = ReadingSession(
-        date=date.today(),
+        date=session_date,
         section=section,
         summary=summary,
         takeaway=takeaway,

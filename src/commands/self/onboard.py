@@ -434,8 +434,10 @@ def refresh() -> None:
     typer.echo("  4. Learning streak → highlight if active, motivate if broken")
     typer.echo("  5. On-track items → brief acknowledgement")
     typer.echo()
+    typer.echo("When he reports back:")
+    typer.echo("  - Exercise/math/learning → log immediately, confirm briefly, stop")
     typer.echo(
-        "Keep it conversational and brief. No need to repeat what he already knows."
+        "  - Reading → research the section, provide recap, discuss, THEN log"
     )
-    typer.echo("Log sessions as he reports them. Ask follow-up questions for reading.")
+    typer.echo("  - Backdated reports → use --date YYYY-MM-DD flag")
     typer.echo()

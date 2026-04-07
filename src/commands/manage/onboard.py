@@ -453,6 +453,11 @@ def refresh():
     print("Do not create/delete/complete tasks without his input.")
     print("If he asks about his calendar and sync is stale, run: nexus manage sync")
     print()
+    print("When he responds:")
+    print("  - Parse request → execute command → confirm briefly → stop")
+    print("  - Ambiguous? Ask one clarifying question, don't guess")
+    print("  - Bulk requests? Execute all, confirm each in one message")
+    print()
 
 
 def upcoming(

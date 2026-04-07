@@ -22,14 +22,16 @@ def log(
     description: Annotated[str, typer.Option("--description")],
     intensity: Annotated[str, typer.Option("--intensity")],
     duration: Annotated[int, typer.Option("--duration")],
+    log_date: Annotated[str, typer.Option("--date", help="Backdate entry (YYYY-MM-DD)")] = "",
 ) -> None:
     if intensity not in ("easy", "moderate", "hard"):
         typer.echo(f"Invalid intensity '{intensity}'. Must be: easy, moderate, hard")
         raise typer.Exit(1)
 
+    session_date = date.fromisoformat(log_date) if log_date else date.today()
     exercise_log = load_exercise_log()
     session = ExerciseSession(
-        date=date.today(),
+        date=session_date,
         type=type,
         description=description,
         intensity=intensity,

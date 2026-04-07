@@ -40,18 +40,19 @@ def _calculate_streak(sessions: list[LearningSession]) -> int:
 def log(
     notes: Annotated[str, typer.Option("--notes")] = "",
     skip: Annotated[bool, typer.Option("--skip")] = False,
+    log_date: Annotated[str, typer.Option("--date", help="Backdate entry (YYYY-MM-DD)")] = "",
 ) -> None:
     learning_log = load_learning_log()
-    today = date.today()
+    session_date = date.fromisoformat(log_date) if log_date else date.today()
 
-    existing = [s for s in learning_log.sessions if s.date == today]
+    existing = [s for s in learning_log.sessions if s.date == session_date]
     if existing:
-        if not typer.confirm("A session for today already exists. Overwrite?"):
+        if not typer.confirm(f"A session for {session_date} already exists. Overwrite?"):
             raise typer.Exit(0)
-        learning_log.sessions = [s for s in learning_log.sessions if s.date != today]
+        learning_log.sessions = [s for s in learning_log.sessions if s.date != session_date]
 
     session = LearningSession(
-        date=today,
+        date=session_date,
         did_learn=not skip,
         notes=notes,
     )
