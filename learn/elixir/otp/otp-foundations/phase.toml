@@ -16,6 +16,15 @@ relevant_files = [
     "./learn/elixir/otp/otp-foundations/practical/lib/counter_server.ex",
 ]
 
+[[goals.tasks]]
+name = "Build Hangman functional core with CRC pattern"
+type = "practical"
+created = "2026-04-07"
+status = "todo"
+relevant_files = [
+    "./Documents/nexus/learn/elixir/otp/otp-foundations/practical/lib/hangman_core.ex",
+]
+
 [[goals]]
 name = "Functional Cores and the CRC Pattern"
 reference = "./learn/elixir/reference/02-functional-cores-and-crc.md"
