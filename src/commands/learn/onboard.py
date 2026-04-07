@@ -226,7 +226,7 @@ def onboard():
     print(f"  Theoretical: {type_counts.get('theoretical', 0)}")
     print(f"  Quiz:        {type_counts.get('quiz', 0)}")
     print()
-    print("  Priority: practical > theoretical > quiz")
+    print("  Default: pair practical with theoretical reading")
     print("  Requirement: at least 1 quiz per week")
     print()
 
@@ -446,7 +446,9 @@ def refresh():
     print(
         "  1. Incomplete tasks from last session → ask if completed or needs follow-up"
     )
-    print("  2. No incomplete tasks on current goal → compose new exercises")
+    print(
+        "  2. No incomplete tasks on current goal → compose new exercises (pair practical with theoretical reading by default)"
+    )
     print("  3. Reference material exhausted → suggest goal completion (user decides)")
     print("  4. Quiz balance → ensure at least 1 quiz per week")
     print("  5. Session count → suggest short/long based on weekly progress")

@@ -38,7 +38,8 @@ Use the weekly summary to make an informed suggestion:
 ### Step 2: Choose exercise type
 
 Check "EXERCISE BALANCE" in the onboard output:
-- **Practical** exercises should be the bulk of the work
+- **Practical + theoretical pairing** is the default. Most sessions should include both a theoretical reading task (drawn from the goal's reference material, with supplementary research) and a practical exercise that applies those concepts. The reading comes first — it gives the user the mental model before they write code. Don't be stingy with the theory: provide substantial, well-structured reading that covers the "why" and "how", not just a brief summary.
+- A practical-only session is fine occasionally (e.g. reinforcing a concept already read about, or a long coding session), but should be the exception rather than the rule.
 - **At least 1 quiz per week** is required
 - If the weekly quiz hasn't been done yet, consider making this session a quiz
 - Use your judgement to maintain a healthy balance
@@ -96,6 +97,73 @@ Your message should include:
 
 Keep it conversational but focused. The user wants to get to work, not read a wall of text.
 
+### Step 9: Stop and wait
+
+After sending the exercises, **stop**. Do not do anything else. The ball is now in the user's court — they will go away, do the work, and come back with a report. This may take minutes, hours, or until the next day. Do not prompt, nudge, or follow up. Just wait.
+
+## When the user reports back
+
+This is the second half of your core job. The user has completed (or attempted) the exercises and is now reporting how it went. Your job is to process their feedback, update the system state, and create a record.
+
+### What to expect
+
+The user will typically say something like:
+- "Done, took me 30 minutes" (minimal report)
+- "Finished the practical but the tests were broken — had to fix test X"
+- "I read through the theory but didn't get to the practical"
+- "This was way too easy / way too hard"
+- "I got stuck on X and gave up"
+
+### How to respond
+
+#### 1. Gather detail
+
+If the report is sparse, ask follow-up questions to get the information you need for a good record:
+- **"How long did it take?"** — Always ask if they didn't say. Never estimate.
+- **"What did you find tricky?"** — Identifies concepts to reinforce later.
+- **"Anything that surprised you?"** — Surfaces misconceptions or aha moments.
+- **"How confident do you feel about X concept?"** — Calibrates future difficulty.
+
+Don't interrogate — one or two targeted follow-ups are usually enough. Match the depth of your questions to the depth of their report.
+
+#### 2. Handle edge cases
+
+- **Broken or poorly constructed exercise**: The user may say the tests were wrong, the instructions were unclear, or the exercise didn't make sense. Acknowledge this, fix the exercise if possible, and leave the task open for them to retry. Do not mark it complete.
+- **Partial completion**: If they completed some tasks but not others, mark only the completed ones. The incomplete tasks remain for next session (they become dangling tasks, which the decision tree handles).
+- **User wants a redo**: If they say "set this up again" or "give me a better version", leave the task open, fix/recreate the exercise, and let them try again.
+- **User says it was too easy**: Note this in the record. Increase difficulty in future sessions.
+- **User says it was too hard**: Note this in the record. Scale back and reinforce fundamentals next time.
+- **User gives feedback on the theoretical reading**: Note what they found useful or lacking. This helps calibrate how much theory to provide in future sessions.
+
+#### 3. Update the system
+
+For each completed task:
+```
+nexus learn task complete "description"
+```
+
+#### 4. Create a learning record
+
+This is **critical**. The record is the primary continuity mechanism — future sessions depend on it to understand the user's progress, struggles, and pace.
+
+```
+nexus learn record "what the user did" --duration "20min" --type practical|theoretical|quiz
+```
+
+Records describe **what the user did**, not what you (the agent) did:
+- **CORRECT**: "User implemented ownership transfer exercises. Reported struggling with lifetime annotations — said it took longer than expected. Completed 2/3 tasks. When asked about confidence, said they understand the concept but need more practice with the syntax."
+- **WRONG**: "I ran the onboard command, created three tasks for the user, and marked one complete."
+
+Include: what work the user completed, what they found difficult or easy, how long it took, any feedback they gave, and what should logically come next based on their performance. Be descriptive — these records are the only way future sessions can calibrate exercises.
+
+If the session included both theoretical and practical work, create a single record that covers both, with the `--type` set to whichever was the primary focus.
+
+#### 5. Stop
+
+After creating the record, **stop**. Do not compose new exercises. Do not suggest what to do next. The next session's onboard/refresh will pick up the updated state and the decision tree will determine what happens next.
+
+Goal completion is separate from task completion. Do not auto-complete goals when tasks are done — goals span many sessions. See decision tree item 6 for when to suggest goal completion.
+
 ## Setting up a new learning track
 
 When a topic has no subtopic structure yet, you need to collaborate with the user to build one. This is a deliberate process — do not rush it.
@@ -128,26 +196,6 @@ After `nexus learn phase new "name"`:
 2. Create reference documents in the topic's `reference/` directory for each goal you plan to add
 3. Create goals with `nexus learn goal new "name" "./learn/<topic>/reference/doc.md"`
 4. Each goal MUST have a reference document. All paths use the `./` prefix (relative to repo root).
-
-## Tracking progress
-
-When the user reports completing work:
-1. Mark the task done: `nexus learn task complete "description"`
-2. **Always ask the user how long the work took.** Never assume or estimate duration — the user must provide it.
-3. Ask follow-up questions to gather detail for the record. Records are how you gauge comprehension and calibrate future exercises, so they need to be thorough. Good follow-ups: "What did you find tricky?", "Anything that surprised you?", "How confident do you feel about X concept?"
-4. Log a record: `nexus learn record "what the user did" --duration "20min" --type practical|theoretical|quiz`
-5. Stop. Do not compose new exercises unless the user explicitly asks for more. The next session's onboard/refresh will pick up the state and compose new work then.
-
-Goal completion is separate from task completion. Do not auto-complete goals when tasks are done — goals span many sessions. See decision tree item 6 for when to suggest goal completion.
-
-## Records — IMPORTANT
-
-Records describe **what the user did**, not what you (the agent) did. They are the primary continuity mechanism — future sessions depend on them to understand the user's progress, struggles, and pace.
-
-**CORRECT**: "User implemented ownership transfer exercises. Reported struggling with lifetime annotations — said it took longer than expected. Completed 2/3 tasks. When asked about confidence, said they understand the concept but need more practice with the syntax."
-**WRONG**: "I ran the onboard command, created three tasks for the user, and marked one complete."
-
-Records should capture: what work the user completed, what they found difficult or easy, how long it took, and any feedback they gave. Be descriptive — these records are the only way future sessions can understand the user's comprehension level. Ask follow-up questions if the user's initial report is sparse. This is how you calibrate future exercises.
 
 ## Dangling tasks
 
