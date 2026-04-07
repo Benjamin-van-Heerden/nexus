@@ -47,9 +47,6 @@ def list_books() -> None:
         return
 
     for book in books:
-        last_session = (
-            book.sessions[-1].date.isoformat() if book.sessions else "No sessions yet"
-        )
         last_read = book.sessions[-1].description if book.sessions else "Just started"
         typer.echo(
             f"  {book.name} by {book.author} (slug: {book.slug}) — last: {last_read}, sessions: {len(book.sessions)}"

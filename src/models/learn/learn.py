@@ -4,7 +4,6 @@ Maps to: learn/learn.toml
 """
 
 from datetime import date
-from typing import Literal
 
 from pydantic import BaseModel
 
