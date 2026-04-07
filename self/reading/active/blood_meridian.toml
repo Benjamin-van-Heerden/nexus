@@ -3,27 +3,15 @@ author = "Cormac McCarthy"
 slug = "blood_meridian"
 started = "2026-04-06"
 status = "active"
-current_section = "Chapter 11"
-total_sections = "23 chapters"
 
 [[sessions]]
 date = "2026-04-06"
-section = "Chapter 10"
+description = "Chapter 10"
 summary = "The ex-priest describes to the kid how the Glanton gang met the judge in the desert. The judge appeared alone on a rock like an apparition. The ex-priest initially felt cursed by this meeting but later thought otherwise after the judge's makeshift gunpowder helped them defeat Indians. Now he questions that relief. The chapter establishes the judge's mythic status through his vast knowledge (languages, geology, botany), physical dominance, and unsettling presence."
 takeaway = "The judge is portrayed as accumulated — possessing too much skill, knowledge, and presence to be merely human. The ex-priest's shifting interpretation of him as curse/blessing/uncertainty creates the reader's own unease about his true nature."
-agent_questions = [
-    "What made the ex-priest initially feel cursed when they met the judge?",
-    "What skills and knowledge areas establish the judge's mythic status in this chapter?",
-    "Why does the ex-priest question whether the 'curse' has truly lifted?",
-]
 
 [[sessions]]
 date = "2026-04-06"
-section = "Chapter 11"
+description = "Chapter 11"
 summary = "The gang travels through mountains; a Delaware is killed by a bear. At camp, the judge tells a parable about a harness maker who dressed as an Indian beggar, killed a traveler who showed him kindness, and buried him in the woods. The judge reveals the harness maker's son became a killer and the traveler left a pregnant wife. The gang argues about details rather than engage with the meaning."
 takeaway = "The harness maker parable is a theological provocation, not a moral lesson. The judge poses questions about evil and inheritance to an audience incapable of answering. His capitalization shifts (Judge/judge) suggest he operates as both man and dark mirror of divine authority — an inhuman presence with knowledge of the true God."
-agent_questions = [
-    "What is the significance of the capitalization shifts between 'Judge' and 'judge' in this chapter?",
-    "Why does the gang argue about the parable's details rather than engage with its moral implications?",
-    "How does the judge function as a dark arbiter who nevertheless points toward something beyond himself?",
-]

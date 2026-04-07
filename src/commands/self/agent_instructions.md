@@ -63,10 +63,24 @@ Go back and forth. If Benjamin's interpretation differs from the mainstream read
 
 Only after the discussion is complete:
 ```
-nexus self read log <slug> --section "Chapter 12" --summary "what was covered" --takeaway "formulated takeaway from discussion" --question "q1" --question "q2"
+nexus self read log <slug> --description "Chapter 10-12" --summary "what was covered" --takeaway "formulated takeaway from discussion" [--date YYYY-MM-DD]
 ```
 
-The `--section` value also updates the book's `current_section`. The takeaway should reflect what emerged from the discussion, not just a plot summary.
+The `--description` is a free-form string describing what was read — "Chapter 10-12", "Pages 45-72", "The section on thermodynamics", etc. The takeaway should reflect what emerged from the discussion, not just a plot summary.
+
+### Book completion
+
+When Benjamin says he finished a book, this triggers a broader feedback loop — not just a quick log:
+
+1. **Research the book** as a whole — themes, critical reception, what makes it significant.
+2. **Recap the journey** — reference earlier sessions and how the reading evolved.
+3. **Discuss** — "What did you think overall?", "What will stick with you?", "How does it compare to X?" This should be a real conversation, not a checklist.
+4. **Only after discussion**, complete the book:
+   ```
+   nexus self read complete <slug> --summary "Overall summary" --takeaway "Key takeaways from discussion"
+   ```
+
+Use `nexus self read list` to find the slug. The summary and takeaway should capture the arc of the whole book, not just the last session.
 
 ## Exercise Logging
 
@@ -136,17 +150,17 @@ For reading: **parse → research → recap → discuss → log → confirm.** T
 
 ### Reading
 ```
-nexus self read new "Title" --author "Author" --section "Chapter 1" --total "10 chapters"
-nexus self read list
+nexus self read new "Title" --author "Author"
+nexus self read list                          # shows slugs — use this to find the slug
 nexus self read show <slug>
-nexus self read log <slug> --section "Ch 2-3" --summary "..." --takeaway "..." --question "q1" --question "q2"
-nexus self read complete <slug>
+nexus self read log <slug> --description "Chapter 10-12" --summary "..." --takeaway "..." [--date YYYY-MM-DD]
+nexus self read complete <slug> --summary "Overall book summary" --takeaway "Key takeaways"
 nexus self read history
 ```
 
 ### Exercise
 ```
-nexus self exercise log --type "gym" --description "..." --intensity hard --duration 60
+nexus self exercise log --type "gym" --description "..." --intensity hard --duration 60 [--date YYYY-MM-DD]
 nexus self exercise status
 nexus self exercise history --weeks 4
 ```
@@ -154,15 +168,15 @@ nexus self exercise history --weeks 4
 ### Mental Math
 ```
 nexus self math generate
-nexus self math log --time "3:20" --correct 5 --type multiplication --type addition
+nexus self math log --time "3:20" --correct 5 --type multiplication --type addition [--date YYYY-MM-DD]
 nexus self math status
 nexus self math config
 ```
 
 ### Learning
 ```
-nexus self learn log --notes "What was learned"
-nexus self learn log --skip
+nexus self learn log --notes "What was learned" [--date YYYY-MM-DD]
+nexus self learn log --skip [--date YYYY-MM-DD]
 nexus self learn status
 ```
 

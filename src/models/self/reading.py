@@ -6,10 +6,9 @@ from pydantic import BaseModel
 
 class ReadingSession(BaseModel):
     date: date
-    section: str
+    description: str
     summary: str
     takeaway: str
-    agent_questions: list[str] = []
 
 
 class BookConfig(BaseModel):
@@ -18,6 +17,6 @@ class BookConfig(BaseModel):
     slug: str
     started: date
     status: Literal["active", "completed"] = "active"
-    current_section: str = ""
-    total_sections: str = ""
+    completion_summary: str = ""
+    completion_takeaway: str = ""
     sessions: list[ReadingSession] = []

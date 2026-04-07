@@ -87,13 +87,11 @@ def onboard() -> None:
 
                 stale_flag = " ⚠️ STALE" if days_since and days_since > 3 else ""
                 typer.echo(f"📖 {book.name} by {book.author}{stale_flag}")
-                typer.echo(
-                    f"   Section: {book.current_section or 'Not set'} / {book.total_sections or '?'}"
-                )
                 typer.echo(f"   Last session: {last_str}{days_str}")
 
                 if book.sessions:
                     last = book.sessions[-1]
+                    typer.echo(f"   Last read: {last.description}")
                     typer.echo(f"   Last summary: {last.summary[:120]}")
                 typer.echo()
 
@@ -303,8 +301,8 @@ def refresh() -> None:
                     (today - last_session_date).days if last_session_date else None
                 )
                 stale_flag = " ⚠️ STALE" if days_since and days_since > 3 else ""
-                section_str = f" — section {book.current_section or '?'}/{book.total_sections or '?'}"
-                typer.echo(f"  📖 {book.name}{section_str}{stale_flag}")
+                last_read = f" — {book.sessions[-1].description}" if book.sessions else ""
+                typer.echo(f"  📖 {book.name}{last_read}{stale_flag}")
 
             week_reading = get_sessions_this_week(all_reading_sessions)
             reading_days = get_days_with_activity(all_reading_sessions)

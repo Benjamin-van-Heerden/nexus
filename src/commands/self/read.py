@@ -20,8 +20,6 @@ app = typer.Typer(help="Reading habit tracking")
 def new(
     title: str,
     author: Annotated[str, typer.Option("--author")] = "",
-    section: Annotated[str, typer.Option("--section")] = "",
-    total: Annotated[str, typer.Option("--total")] = "",
 ) -> None:
     slug = slugify(title)
     path = get_reading_active_dir() / f"{slug}.toml"
@@ -34,9 +32,6 @@ def new(
         author=author,
         slug=slug,
         started=date.today(),
-        status="active",
-        current_section=section,
-        total_sections=total,
     )
     save_book(book)
     typer.echo(f"Created book: {title} (slug: {slug})")
@@ -55,9 +50,9 @@ def list_books() -> None:
         last_session = (
             book.sessions[-1].date.isoformat() if book.sessions else "No sessions yet"
         )
-        section = book.current_section or "Not set"
+        last_read = book.sessions[-1].description if book.sessions else "Just started"
         typer.echo(
-            f"  {book.name} by {book.author} — section: {section}, last session: {last_session}, sessions: {len(book.sessions)}"
+            f"  {book.name} by {book.author} (slug: {book.slug}) — last: {last_read}, sessions: {len(book.sessions)}"
         )
 
 
@@ -73,9 +68,8 @@ def show(slug: str) -> None:
     typer.echo(f"Author: {book.author}")
     typer.echo(f"Started: {book.started}")
     typer.echo(f"Status: {book.status}")
-    typer.echo(f"Current section: {book.current_section or 'Not set'}")
-    if book.total_sections:
-        typer.echo(f"Total sections: {book.total_sections}")
+    if book.sessions:
+        typer.echo(f"Last read: {book.sessions[-1].description}")
     typer.echo(f"Total sessions: {len(book.sessions)}")
 
     if book.sessions:
@@ -91,7 +85,7 @@ def show(slug: str) -> None:
                 if len(session.takeaway) > 100
                 else session.takeaway
             )
-            typer.echo(f"  [{session.date}] {session.section}")
+            typer.echo(f"  [{session.date}] {session.description}")
             typer.echo(f"    Summary: {summary}")
             typer.echo(f"    Takeaway: {takeaway}")
 
@@ -99,10 +93,9 @@ def show(slug: str) -> None:
 @app.command()
 def log(
     slug: str,
-    section: Annotated[str, typer.Option("--section")],
+    description: Annotated[str, typer.Option("--description")],
     summary: Annotated[str, typer.Option("--summary")],
     takeaway: Annotated[str, typer.Option("--takeaway")],
-    question: Annotated[list[str] | None, typer.Option("--question")] = None,
     log_date: Annotated[str, typer.Option("--date", help="Backdate entry (YYYY-MM-DD)")] = "",
 ) -> None:
     try:
@@ -114,19 +107,21 @@ def log(
     session_date = date.fromisoformat(log_date) if log_date else date.today()
     session = ReadingSession(
         date=session_date,
-        section=section,
+        description=description,
         summary=summary,
         takeaway=takeaway,
-        agent_questions=question or [],
     )
     book.sessions.append(session)
-    book.current_section = section
     save_book(book)
-    typer.echo(f"Logged reading session for '{book.name}' — {section}")
+    typer.echo(f"Logged reading session for '{book.name}' — {description}")
 
 
 @app.command()
-def complete(slug: str) -> None:
+def complete(
+    slug: str,
+    summary: Annotated[str, typer.Option("--summary", help="Overall summary of the book")],
+    takeaway: Annotated[str, typer.Option("--takeaway", help="Key takeaways from the book")],
+) -> None:
     try:
         book = load_book(slug)
     except FileNotFoundError:
@@ -138,6 +133,8 @@ def complete(slug: str) -> None:
         raise typer.Exit(1)
 
     book.status = "completed"
+    book.completion_summary = summary
+    book.completion_takeaway = takeaway
     active_path = get_reading_active_dir() / f"{slug}.toml"
     save_book(book)
     if active_path.exists():
