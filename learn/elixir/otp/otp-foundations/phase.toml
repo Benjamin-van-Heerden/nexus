@@ -45,6 +45,15 @@ relevant_files = [
     "./learn/elixir/otp/otp-foundations/quiz/genserver_quiz.md",
 ]
 
+[[goals.tasks]]
+name = "Read GenServer internals and OTP behaviours - understand call vs cast, when to use Agent vs GenServer vs Task"
+type = "theoretical"
+created = "2026-04-08"
+status = "todo"
+relevant_files = [
+    "./learn/elixir/otp/otp-foundations/theoretical/genserver_internals.md",
+]
+
 [[goals]]
 name = "Functional Cores and the CRC Pattern"
 reference = "./learn/elixir/reference/02-functional-cores-and-crc.md"
