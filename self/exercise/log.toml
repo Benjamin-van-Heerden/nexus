@@ -1,1 +1,6 @@
-
+[[sessions]]
+date = "2026-04-08"
+type = "gym"
+description = "40 min intense gym workout"
+intensity = "hard"
+duration_minutes = 40
