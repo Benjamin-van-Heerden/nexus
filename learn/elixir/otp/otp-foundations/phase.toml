@@ -40,7 +40,8 @@ relevant_files = [
 name = "Complete GenServer and OTP behaviours quiz - test understanding of message handling patterns"
 type = "quiz"
 created = "2026-04-08"
-status = "todo"
+status = "completed"
+completed = "2026-04-08"
 relevant_files = [
     "./learn/elixir/otp/otp-foundations/quiz/genserver_quiz.md",
 ]
