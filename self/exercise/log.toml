@@ -4,3 +4,10 @@ type = "gym"
 description = "40 min intense gym workout"
 intensity = "hard"
 duration_minutes = 40
+
+[[sessions]]
+date = "2026-04-08"
+type = "soccer"
+description = "5-a-side soccer"
+intensity = "hard"
+duration_minutes = 40
