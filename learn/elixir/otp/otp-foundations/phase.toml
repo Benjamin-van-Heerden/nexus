@@ -36,6 +36,15 @@ relevant_files = [
     "./Documents/nexus/learn/elixir/otp/otp-foundations/practical/lib/hangman_server.ex",
 ]
 
+[[goals.tasks]]
+name = "Complete GenServer and OTP behaviours quiz - test understanding of message handling patterns"
+type = "quiz"
+created = "2026-04-08"
+status = "todo"
+relevant_files = [
+    "./learn/elixir/otp/otp-foundations/quiz/genserver_quiz.md",
+]
+
 [[goals]]
 name = "Functional Cores and the CRC Pattern"
 reference = "./learn/elixir/reference/02-functional-cores-and-crc.md"
