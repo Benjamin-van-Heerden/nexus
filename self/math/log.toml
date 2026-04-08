@@ -19,3 +19,10 @@ total = 5
 problem_types = [
     "division",
 ]
+
+[[sessions]]
+date = "2026-04-08"
+time_seconds = 180
+correct = 5
+total = 5
+problem_types = []
