@@ -20,7 +20,8 @@ relevant_files = [
 name = "Build Hangman functional core with CRC pattern"
 type = "practical"
 created = "2026-04-07"
-status = "todo"
+status = "completed"
+completed = "2026-04-08"
 relevant_files = [
     "./Documents/nexus/learn/elixir/otp/otp-foundations/practical/lib/hangman_core.ex",
 ]
