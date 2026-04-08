@@ -12,9 +12,15 @@ Answer these questions without looking at the reading material. Write your answe
 
 **Q1.1:** What is the fundamental difference between a `call` and a `cast` in GenServer?
 
+Call is sync, cast is async
+
 **Q1.2:** Why does the GenServer documentation recommend using `cast` "sparingly"? Name at least two reasons.
 
+Backpressure is not handled and the caller has no indication whether the operation succeeded or not, so when processes crash
+
 **Q1.3:** What does the `@impl true` attribute do? What benefit does it provide?
+
+Indicates to the compiler that a behavior is being explicitly implemented, get warnings if signatures are incorrect.
 
 ---
 
@@ -22,9 +28,15 @@ Answer these questions without looking at the reading material. Write your answe
 
 **Q2.1:** Your `handle_call/3` callback needs to return a value to the caller and update state. What tuple do you return?
 
+{:reply, reply_thing, new_state}
+
 **Q2.2:** Your `handle_cast/2` callback updates state but has nothing to return to the caller. What tuple do you return?
 
+{:noreply, new_state}
+
 **Q2.3:** You want to reply to a `call` later, not immediately. What tuple do you return from `handle_call/3` initially, and what function do you use later to send the reply?
+
+{:noreply, new_state}, though I don't really know why you would do this, maybe there are cases where you want to handle backpressure extremely granularly
 
 ---
 
@@ -32,11 +44,19 @@ Answer these questions without looking at the reading material. Write your answe
 
 **Q3.1:** You're building a simple counter that multiple processes increment. Would you use `Agent` or `GenServer`? Why?
 
+Use Agent, it's abstractions are simpler (Agent is just a wrapper around a GenServer anyway)
+
 **Q3.2:** You need to validate a user's input against a database and return true/false. `call` or `cast`?
+
+Definitely call, since we need the result now
 
 **Q3.3:** You're sending metrics to an analytics service. You don't care if it succeeds, and you don't want to block the caller. `call` or `cast`?
 
+Obviously cast
+
 **Q3.4:** You have a one-off async task: downloading a file. Should you use `GenServer` or `Task`?
+
+Task
 
 ---
 
@@ -44,9 +64,15 @@ Answer these questions without looking at the reading material. Write your answe
 
 **Q4.1:** A message arrives at your GenServer process. It wasn't sent via `GenServer.call` or `GenServer.cast` — it was sent with raw `send(pid, :ping)`. Which callback handles it?
 
+handle_info(whatever, state)
+
 **Q4.2:** In `handle_call(request, from, state)`, what does the `from` argument contain? When would you use it?
 
+{pid, ref}, not sure what ref is, maybe some kind of metadata about the from pid - you would use this e.g. if you want to send messages back to the calling process
+
 **Q4.3:** What happens if your GenServer's mailbox fills up faster than it can process messages?
+
+Pandemonium, eventually things will be dropped or the process will crash. This is where one needs to surgically know when to do synchronous vs async. Other abstractions also help with this e.g. GenStage or Broadway (don't kill flies with sledgehammers though), vertical scaling or horizontal scaling could also be the way to go
 
 ---
 
@@ -61,6 +87,8 @@ def handle_cast(:increment, state) do
 end
 ```
 
+This is a cast, but it is sending a reply, should be a handle_call
+
 **Q5.2:** This code compiles but has a bug. What's wrong?
 
 ```elixir
@@ -70,9 +98,12 @@ def handle_call(:get_user, _from, state) do
 end
 ```
 
+It does nothing, it's effectively a no-op that has a bit of database nonsense mixed in. It should be a {:reply, user, state}
+
 **Q5.3:** Fix this callback to properly use `@impl`:
 
 ```elixir
+@impl true
 def init(initial_state) do
   {:ok, initial_state}
 end
