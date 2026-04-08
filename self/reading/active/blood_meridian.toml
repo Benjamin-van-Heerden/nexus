@@ -3,6 +3,8 @@ author = "Cormac McCarthy"
 slug = "blood_meridian"
 started = "2026-04-06"
 status = "active"
+completion_summary = ""
+completion_takeaway = ""
 
 [[sessions]]
 date = "2026-04-06"
@@ -15,3 +17,9 @@ date = "2026-04-06"
 description = "Chapter 11"
 summary = "The gang travels through mountains; a Delaware is killed by a bear. At camp, the judge tells a parable about a harness maker who dressed as an Indian beggar, killed a traveler who showed him kindness, and buried him in the woods. The judge reveals the harness maker's son became a killer and the traveler left a pregnant wife. The gang argues about details rather than engage with the meaning."
 takeaway = "The harness maker parable is a theological provocation, not a moral lesson. The judge poses questions about evil and inheritance to an audience incapable of answering. His capitalization shifts (Judge/judge) suggest he operates as both man and dark mirror of divine authority — an inhuman presence with knowledge of the true God."
+
+[[sessions]]
+date = "2026-04-08"
+description = "Chapter 12"
+summary = "The Glanton Gang massacres innocent people believing they're hunting Gomez, only to learn it was the wrong group entirely. The judge murders and scalps a child. They ride into Chihuahua hailed as heroes."
+takeaway = "The world of Blood Meridian is extraordinarily violent and less civilized than today—morality is suggestive and good does not always win over evil."
