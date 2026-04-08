@@ -30,7 +30,8 @@ relevant_files = [
 name = "Create GenServer wrapper for Hangman"
 type = "practical"
 created = "2026-04-07"
-status = "todo"
+status = "completed"
+completed = "2026-04-08"
 relevant_files = [
     "./Documents/nexus/learn/elixir/otp/otp-foundations/practical/lib/hangman_server.ex",
 ]
