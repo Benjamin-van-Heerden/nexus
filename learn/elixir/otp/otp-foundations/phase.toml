@@ -56,6 +56,24 @@ relevant_files = [
     "./learn/elixir/otp/otp-foundations/theoretical/genserver_internals.md",
 ]
 
+[[goals.tasks]]
+name = "Implement KVStore Supervisor with restart strategies"
+type = "practical"
+created = "2026-04-09"
+status = "todo"
+relevant_files = [
+    "./learn/elixir/otp/abstractions-and-supervision/practical/lib/kv_store_supervisor.ex",
+]
+
+[[goals.tasks]]
+name = "Read Supervisors and OTP Abstractions"
+type = "theoretical"
+created = "2026-04-09"
+status = "todo"
+relevant_files = [
+    "./learn/elixir/otp/abstractions-and-supervision/theoretical/supervisors_and_abstractions.md",
+]
+
 [[goals]]
 name = "Functional Cores and the CRC Pattern"
 reference = "./learn/elixir/reference/02-functional-cores-and-crc.md"
