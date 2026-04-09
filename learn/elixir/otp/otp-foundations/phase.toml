@@ -70,7 +70,8 @@ relevant_files = [
 name = "Read Supervisors and OTP Abstractions"
 type = "theoretical"
 created = "2026-04-09"
-status = "todo"
+status = "completed"
+completed = "2026-04-09"
 relevant_files = [
     "./learn/elixir/otp/abstractions-and-supervision/theoretical/supervisors_and_abstractions.md",
 ]
