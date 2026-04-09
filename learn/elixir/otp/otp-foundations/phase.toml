@@ -60,7 +60,8 @@ relevant_files = [
 name = "Implement KVStore Supervisor with restart strategies"
 type = "practical"
 created = "2026-04-09"
-status = "todo"
+status = "completed"
+completed = "2026-04-09"
 relevant_files = [
     "./learn/elixir/otp/abstractions-and-supervision/practical/lib/kv_store_supervisor.ex",
 ]
