@@ -7,3 +7,8 @@ notes = "Elixir GenServer basics"
 date = "2026-04-07"
 did_learn = true
 notes = "GenServers with CRC pattern - built Hangman game with functional core"
+
+[[sessions]]
+date = "2026-04-08"
+did_learn = true
+notes = "More on GenServers and Elixir behaviours"
