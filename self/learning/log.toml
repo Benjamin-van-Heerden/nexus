@@ -12,3 +12,8 @@ notes = "GenServers with CRC pattern - built Hangman game with functional core"
 date = "2026-04-08"
 did_learn = true
 notes = "More on GenServers and Elixir behaviours"
+
+[[sessions]]
+date = "2026-04-09"
+did_learn = true
+notes = "OTP Supervisors basics"

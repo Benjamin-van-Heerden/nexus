@@ -26,7 +26,7 @@ members = [
 ]
 
 # Optional: Explicitly point to the uv venv
-python-path = ".venv/bin/python"
+# python-path = ".venv/bin/python"  # Invalid field for workspace config
 
 # If you want type checking / diagnostics on more files
-diagnostic-mode = "workspace"   # or keep "openFilesOnly" if it's too noisy
+# diagnostic-mode = "workspace"   # Invalid field - removed
