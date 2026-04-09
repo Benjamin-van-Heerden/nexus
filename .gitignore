@@ -22,3 +22,7 @@ auth
 .mem/docs/data
 .claude
 .claude/
+
+.elixir_ls/
+.expert/
+_build/

@@ -25,13 +25,6 @@ members = [
     "learn/jax/from-scratch/flax-rebuild/practical",
 ]
 
-[tool.pyrefly]
-# Tell Pyrefly where to look for modules (includes the workspace root + your member)
-search-path = [
-  ".",
-  "learn/jax/foundations",
-]
-
 # Optional: Explicitly point to the uv venv
 python-path = ".venv/bin/python"
 

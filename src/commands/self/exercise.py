@@ -2,6 +2,8 @@ from datetime import date, timedelta
 from typing import Annotated
 
 import typer
+
+from src.models.self.exercise import ExerciseSession
 from src.utils.self import (
     get_current_week_start,
     get_missing_days_this_week,
@@ -10,8 +12,6 @@ from src.utils.self import (
     load_habits_config,
     save_exercise_log,
 )
-
-from src.models.self.exercise import ExerciseSession
 
 app = typer.Typer(help="Exercise habit tracking")
 
@@ -22,7 +22,9 @@ def log(
     description: Annotated[str, typer.Option("--description")],
     intensity: Annotated[str, typer.Option("--intensity")],
     duration: Annotated[int, typer.Option("--duration")],
-    log_date: Annotated[str, typer.Option("--date", help="Backdate entry (YYYY-MM-DD)")] = "",
+    log_date: Annotated[
+        str, typer.Option("--date", help="Backdate entry (YYYY-MM-DD)")
+    ] = "",
 ) -> None:
     if intensity not in ("easy", "moderate", "hard"):
         typer.echo(f"Invalid intensity '{intensity}'. Must be: easy, moderate, hard")
@@ -34,7 +36,7 @@ def log(
         date=session_date,
         type=type,
         description=description,
-        intensity=intensity,
+        intensity=intensity,  # type: ignore
         duration_minutes=duration,
     )
     exercise_log.sessions.append(session)

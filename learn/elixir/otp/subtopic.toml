@@ -48,7 +48,8 @@ Example:
 """
 setup_commands = [
     "mix new practical --app practical_$(echo ${PHASE} | tr '-' '_')",
-    "rm practical/README.md"
+    "rm practical/README.md",
+    "rm practical/.gitignore"
 ]
 
 [theoretical]
