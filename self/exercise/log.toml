@@ -11,3 +11,10 @@ type = "soccer"
 description = "5-a-side soccer"
 intensity = "hard"
 duration_minutes = 40
+
+[[sessions]]
+date = "2026-04-10"
+type = "crossfit"
+description = "CrossFit session"
+intensity = "hard"
+duration_minutes = 50
