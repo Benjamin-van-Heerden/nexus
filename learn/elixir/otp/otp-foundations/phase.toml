@@ -1,5 +1,5 @@
 name = "otp-foundations"
-current_goal = "GenServer Message Callbacks"
+current_goal = ""
 
 [[goals]]
 name = "OTP Basics and Elixir Behaviours"
@@ -85,5 +85,5 @@ tasks = []
 [[goals]]
 name = "GenServer Message Callbacks"
 reference = "./learn/elixir/reference/03-genserver-callbacks.md"
-status = "in_progress"
+status = "completed"
 tasks = []
