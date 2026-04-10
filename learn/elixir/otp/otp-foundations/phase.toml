@@ -17,26 +17,6 @@ relevant_files = [
 ]
 
 [[goals.tasks]]
-name = "Build Hangman functional core with CRC pattern"
-type = "practical"
-created = "2026-04-07"
-status = "completed"
-completed = "2026-04-08"
-relevant_files = [
-    "./Documents/nexus/learn/elixir/otp/otp-foundations/practical/lib/hangman_core.ex",
-]
-
-[[goals.tasks]]
-name = "Create GenServer wrapper for Hangman"
-type = "practical"
-created = "2026-04-07"
-status = "completed"
-completed = "2026-04-08"
-relevant_files = [
-    "./Documents/nexus/learn/elixir/otp/otp-foundations/practical/lib/hangman_server.ex",
-]
-
-[[goals.tasks]]
 name = "Complete GenServer and OTP behaviours quiz - test understanding of message handling patterns"
 type = "quiz"
 created = "2026-04-08"
@@ -56,31 +36,30 @@ relevant_files = [
     "./learn/elixir/otp/otp-foundations/theoretical/genserver_internals.md",
 ]
 
-[[goals.tasks]]
-name = "Implement KVStore Supervisor with restart strategies"
-type = "practical"
-created = "2026-04-09"
-status = "completed"
-completed = "2026-04-09"
-relevant_files = [
-    "./learn/elixir/otp/abstractions-and-supervision/practical/lib/kv_store_supervisor.ex",
-]
-
-[[goals.tasks]]
-name = "Read Supervisors and OTP Abstractions"
-type = "theoretical"
-created = "2026-04-09"
-status = "completed"
-completed = "2026-04-09"
-relevant_files = [
-    "./learn/elixir/otp/abstractions-and-supervision/theoretical/supervisors_and_abstractions.md",
-]
-
 [[goals]]
 name = "Functional Cores and the CRC Pattern"
 reference = "./learn/elixir/reference/02-functional-cores-and-crc.md"
 status = "completed"
-tasks = []
+
+[[goals.tasks]]
+name = "Build Hangman functional core with CRC pattern"
+type = "practical"
+created = "2026-04-07"
+status = "completed"
+completed = "2026-04-08"
+relevant_files = [
+    "./learn/elixir/otp/otp-foundations/practical/lib/hangman_core.ex",
+]
+
+[[goals.tasks]]
+name = "Create GenServer wrapper for Hangman"
+type = "practical"
+created = "2026-04-07"
+status = "completed"
+completed = "2026-04-08"
+relevant_files = [
+    "./learn/elixir/otp/otp-foundations/practical/lib/hangman_server.ex",
+]
 
 [[goals]]
 name = "GenServer Message Callbacks"
