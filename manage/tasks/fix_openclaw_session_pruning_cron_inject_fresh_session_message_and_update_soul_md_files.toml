@@ -1,0 +1,13 @@
+name = "Fix OpenClaw session pruning cron - inject [FRESH SESSION] message and update SOUL.md files"
+slug = "fix_openclaw_session_pruning_cron_inject_fresh_session_message_and_update_soul_md_files"
+description = ""
+status = "todo"
+created = "2026-04-10"
+tags = [
+    "urgent",
+]
+recurrence = ""
+gcal_event_id = ""
+last_modified = "2026-04-10T16:56:52.496407"
+has_subtasks = false
+parent = ""
