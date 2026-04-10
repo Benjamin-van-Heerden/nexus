@@ -131,20 +131,29 @@ Use this to calibrate difficulty and scope. If the user struggled with a concept
 
 ### Step 6: Create the exercise files
 
-Follow the exercise type instructions in the onboard output — they tell you exactly how to structure files for this particular subtopic (naming, directory, format, how to run/test).
+**CRITICAL: File locations.** The PATHS section in the onboard output lists the absolute paths where you MUST create files. Use those exact paths. NEVER create files in your own workspace directory or any other location.
 
-- **practical** — Create files in the phase's `practical/` directory. Always tell the user the absolute file path.
-- **theoretical** — Create a markdown file in the phase's `theoretical/` directory with material from the goal's reference and questions for the user to reflect on.
-- **quiz** — Create two files: the quiz itself in `quiz/YYYY-MM-DD-slug.md` (questions with answer placeholders only, NO answers in this file), and a separate answer key in `quiz/answers/YYYY-MM-DD-slug.md`. This prevents the user from accidentally seeing answers while working. Register the task with `--file` pointing to the quiz file (not the answer key).
+Look at the onboard output for lines like:
+```
+Practical exercises:  /full/absolute/path/to/practical/
+Theoretical reading:  /full/absolute/path/to/theoretical/
+Quizzes:              /full/absolute/path/to/quiz/
+```
+
+Use those paths directly when creating files. Follow the exercise type instructions in the onboard output for naming conventions and file structure.
+
+- **practical** — Create files inside the absolute practical path shown in PATHS.
+- **theoretical** — Create a markdown file inside the absolute theoretical path shown in PATHS.
+- **quiz** — Create the quiz file inside the absolute quiz path, and the answer key inside quiz/answers/. Register the task with `--file` pointing to the quiz file (not the answer key).
 
 ### Step 7: Register the tasks
 
-After creating the exercise files, register them with the CLI:
+After creating the exercise files, register them with the CLI. The `--file` flag uses the `./` prefix (relative to the nexus repo root):
 ```
-nexus learn task new "description" --type practical|theoretical|quiz -f "./path/to/exercise/file"
+nexus learn task new "description" --type practical|theoretical|quiz -f "./learn/<topic>/<subtopic>/<phase>/<type>/filename"
 ```
 
-Always use the `--file` flag so the task is linked to the actual exercise file. All paths use the `./` prefix (relative to repo root).
+The `./` prefix is ONLY for the `--file` flag in CLI commands — it is a storage convention. When telling the user where a file is, or when creating a file, always use the full absolute path from the PATHS section.
 
 ### Step 8: Send the message to the user
 
@@ -259,17 +268,16 @@ After `nexus learn phase new "name"`:
 
 You **cannot** create new tasks if there are incomplete tasks from a previous day. The CLI will block this. If the user has leftover tasks, your job is to report them and ask the user to complete them first (or discuss whether to abandon them).
 
-Every task **must** have at least one relevant file attached via the `--file` flag. The CLI enforces this — task creation will fail without it. Tasks must always be tied to concrete files so the user knows exactly where to find and do the work:
+Every task **must** have at least one relevant file attached via the `--file` flag. The CLI enforces this — task creation will fail without it. The `--file` flag uses the `./` prefix convention (relative to repo root):
 `nexus learn task new "description" --type practical -f "./learn/rust/python-book-track/foundations/practical/examples/2026-03-29.rs"`
-
-All paths use the `./` prefix — relative to the repo root. The CLI resolves them to absolute paths for display.
 
 ## Rules
 
-- Always use absolute paths when telling the user where files are. Use `nexus resolve-path "./path/from/root"` if needed.
+- **NEVER create files in your own workspace directory.** All exercise files go in the absolute paths listed in the PATHS section of the onboard output. This is the most important rule.
+- Always use absolute paths when telling the user where files are.
+- The `./` prefix is ONLY used in CLI `--file` flags and TOML storage. Never use `./` paths when creating files or communicating with the user.
 - Do not create tasks for goals that are not the current goal.
 - Do not skip ahead — work through goals in order.
-- When creating a goal, the reference document must already exist. Provide the full `./` prefixed path.
 - When all goals in a phase are done, run `nexus learn phase complete` immediately.
 - Read the exercise type descriptions in the onboard output — they tell you exactly how to structure exercises for this particular subtopic.
 - Read recent records to understand what the user has been working on, what they struggled with, and how long things take. Calibrate exercise difficulty and scope accordingly.

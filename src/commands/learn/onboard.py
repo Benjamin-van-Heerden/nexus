@@ -281,6 +281,27 @@ def onboard():
                     print(f"    {line}")
             print()
 
+    # --- Paths (printed BEFORE exercise instructions so the agent sees them first) ---
+    practical_abs = resolve_str(f"{phase_base}/practical")
+    theoretical_abs = resolve_str(f"{phase_base}/theoretical")
+    quiz_abs = resolve_str(f"{phase_base}/quiz")
+    reference_abs = resolve_str(f"learn/{topic_name}/reference")
+    records_abs = resolve_str(f"{subtopic_base}/records")
+
+    print("-" * 60)
+    print("PATHS (absolute — use these exactly, do NOT use relative paths)")
+    print("-" * 60)
+    print(f"Phase directory:      {resolve_str(phase_base)}/")
+    print(f"Practical exercises:  {practical_abs}/")
+    print(f"Theoretical reading:  {theoretical_abs}/")
+    print(f"Quizzes:              {quiz_abs}/")
+    print(f"Reference:            {reference_abs}/")
+    print(f"Records:              {records_abs}/")
+    print()
+    print("ALL file creation MUST happen inside these directories.")
+    print("NEVER create files in your own workspace or any other location.")
+    print()
+
     # --- Exercise type descriptions ---
     if (
         subtopic_cfg.practical.description
@@ -291,30 +312,18 @@ def onboard():
         print("EXERCISE TYPE INSTRUCTIONS")
         print("-" * 60)
         if subtopic_cfg.practical.description:
-            print("\n  [PRACTICAL]")
+            print(f"\n  [PRACTICAL] → create files in: {practical_abs}/")
             for line in subtopic_cfg.practical.description.strip().splitlines():
                 print(f"    {line.strip()}")
         if subtopic_cfg.theoretical.description:
-            print("\n  [THEORETICAL]")
+            print(f"\n  [THEORETICAL] → create files in: {theoretical_abs}/")
             for line in subtopic_cfg.theoretical.description.strip().splitlines():
                 print(f"    {line.strip()}")
         if subtopic_cfg.quiz.description:
-            print("\n  [QUIZ]")
+            print(f"\n  [QUIZ] → create files in: {quiz_abs}/")
             for line in subtopic_cfg.quiz.description.strip().splitlines():
                 print(f"    {line.strip()}")
         print()
-
-    # --- Paths ---
-    print("-" * 60)
-    print("PATHS")
-    print("-" * 60)
-    print(f"Phase directory:      {resolve_str(phase_base)}/")
-    print(f"Practical exercises:  {resolve_str(f'{phase_base}/practical')}/")
-    print(f"Theoretical reading:  {resolve_str(f'{phase_base}/theoretical')}/")
-    print(f"Quizzes:              {resolve_str(f'{phase_base}/quiz')}/")
-    print(f"Reference:            {resolve_str(f'learn/{topic_name}/reference')}/")
-    print(f"Records:              {resolve_str(f'{subtopic_base}/records')}/")
-    print()
 
     # --- Agent instructions (from file) ---
     instructions_path = Path(__file__).parent / "agent_instructions.md"
@@ -437,6 +446,22 @@ def refresh():
                 for line in last_body.splitlines()[:10]:
                     print(f"  {line}")
             print()
+
+    # Paths
+    subtopic_base = f"learn/{topic_name}/{subtopic_name}"
+    phase_base = f"{subtopic_base}/{phase_name}"
+
+    print("-" * 60)
+    print("PATHS (absolute — use these exactly, do NOT use relative paths)")
+    print("-" * 60)
+    print(f"  Practical:   {resolve_str(f'{phase_base}/practical')}/")
+    print(f"  Theoretical: {resolve_str(f'{phase_base}/theoretical')}/")
+    print(f"  Quiz:        {resolve_str(f'{phase_base}/quiz')}/")
+    print(f"  Records:     {resolve_str(f'{subtopic_base}/records')}/")
+    print()
+    print("  ALL files MUST be created inside these directories.")
+    print("  NEVER create files in your own workspace or any other location.")
+    print()
 
     # Condensed instructions
     print("-" * 60)
