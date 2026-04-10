@@ -1,5 +1,5 @@
 name = "otp-foundations"
-current_goal = "Functional Cores and the CRC Pattern"
+current_goal = "GenServer Message Callbacks"
 
 [[goals]]
 name = "OTP Basics and Elixir Behaviours"
@@ -79,11 +79,11 @@ relevant_files = [
 [[goals]]
 name = "Functional Cores and the CRC Pattern"
 reference = "./learn/elixir/reference/02-functional-cores-and-crc.md"
-status = "in_progress"
+status = "completed"
 tasks = []
 
 [[goals]]
 name = "GenServer Message Callbacks"
 reference = "./learn/elixir/reference/03-genserver-callbacks.md"
-status = "todo"
+status = "in_progress"
 tasks = []
