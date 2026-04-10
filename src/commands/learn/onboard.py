@@ -334,6 +334,16 @@ def onboard():
         print(instructions_path.read_text().strip())
         print()
 
+    # --- Action required (last thing the agent sees) ---
+    print("=" * 60)
+    print("ACTION REQUIRED")
+    print("=" * 60)
+    print("Follow the wake-up checklist above and send a message to the")
+    print("user NOW. Do not silently process this output — the user is")
+    print("waiting for your response.")
+    print("=" * 60)
+    print()
+
 
 def refresh():
     """Lightweight context refresh — current state with condensed instructions."""
@@ -498,4 +508,12 @@ def refresh():
     print("    without running the command.")
     print()
     print("Commands: task new/complete, goal complete, phase complete, record")
+    print()
+    print("=" * 60)
+    print("ACTION REQUIRED")
+    print("=" * 60)
+    print("Follow the wake-up checklist above and send a message to the")
+    print("user NOW. Do not silently process this output — the user is")
+    print("waiting for your response.")
+    print("=" * 60)
     print()

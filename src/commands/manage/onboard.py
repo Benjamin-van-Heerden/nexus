@@ -391,6 +391,15 @@ def onboard():
         print(instructions_path.read_text().strip())
         print()
 
+    print("=" * 60)
+    print("ACTION REQUIRED")
+    print("=" * 60)
+    print("Read the instructions above and send a message to the user")
+    print("NOW. Do not silently process this output — the user is")
+    print("waiting for your response.")
+    print("=" * 60)
+    print()
+
 
 def refresh():
     """Lightweight context refresh — current state with condensed instructions."""
@@ -457,6 +466,13 @@ def refresh():
     print("  - Parse request → execute command → confirm briefly → stop")
     print("  - Ambiguous? Ask one clarifying question, don't guess")
     print("  - Bulk requests? Execute all, confirm each in one message")
+    print()
+    print("=" * 60)
+    print("ACTION REQUIRED")
+    print("=" * 60)
+    print("Present the information to Benjamin NOW. Do not silently")
+    print("process this output — the user is waiting for your response.")
+    print("=" * 60)
     print()
 
 

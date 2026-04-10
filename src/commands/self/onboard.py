@@ -249,6 +249,15 @@ def onboard() -> None:
     else:
         typer.echo("WARNING: agent_instructions.md not found!")
 
+    typer.echo("=" * 60)
+    typer.echo("ACTION REQUIRED")
+    typer.echo("=" * 60)
+    typer.echo("Read the instructions above and send a message to the user")
+    typer.echo("NOW. Do not silently process this output — the user is")
+    typer.echo("waiting for your response.")
+    typer.echo("=" * 60)
+    typer.echo()
+
 
 def refresh() -> None:
     """Lightweight context refresh — current state with condensed instructions."""
@@ -438,4 +447,11 @@ def refresh() -> None:
         "  - Reading → research the section, provide recap, discuss, THEN log"
     )
     typer.echo("  - Backdated reports → use --date YYYY-MM-DD flag")
+    typer.echo()
+    typer.echo("=" * 60)
+    typer.echo("ACTION REQUIRED")
+    typer.echo("=" * 60)
+    typer.echo("Report the above to Benjamin NOW. Do not silently process")
+    typer.echo("this output — the user is waiting for your response.")
+    typer.echo("=" * 60)
     typer.echo()
