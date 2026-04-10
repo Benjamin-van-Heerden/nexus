@@ -25,8 +25,16 @@ members = [
     "learn/jax/from-scratch/flax-rebuild/practical",
 ]
 
+<<<<<<< HEAD
 # Optional: Explicitly point to the uv venv
 # python-path = ".venv/bin/python"  # Invalid field for workspace config
 
 # If you want type checking / diagnostics on more files
 # diagnostic-mode = "workspace"   # Invalid field - removed
+=======
+# # Optional: Explicitly point to the uv venv
+# python-path = ".venv/bin/python"
+
+# # If you want type checking / diagnostics on more files
+# diagnostic-mode = "workspace"   # or keep "openFilesOnly" if it's too noisy
+>>>>>>> 2608721 (2026-04-10 10:28:28)
