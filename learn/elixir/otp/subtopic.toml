@@ -1,8 +1,8 @@
 name = "OTP Deep Dive"
-current_phase = "otp-foundations"
+current_phase = "abstractions-and-supervision"
 phases = [
-    { name = "otp-foundations", status = "in_progress" },
-    { name = "abstractions-and-supervision", status = "todo" },
+    { name = "otp-foundations", status = "completed" },
+    { name = "abstractions-and-supervision", status = "in_progress" },
     { name = "advanced-patterns", status = "todo" },
     { name = "capstone", status = "todo" },
 ]
@@ -49,7 +49,7 @@ Example:
 setup_commands = [
     "mix new practical --app practical_$(echo ${PHASE} | tr '-' '_')",
     "rm practical/README.md",
-    "rm practical/.gitignore"
+    "rm practical/.gitignore",
 ]
 
 [theoretical]
@@ -84,4 +84,6 @@ Create TWO files for each quiz:
 
 Register the task with --file pointing to the quiz file (not the answer key).
 """
-setup_commands = ["mkdir -p quiz/answers"]
+setup_commands = [
+    "mkdir -p quiz/answers",
+]
