@@ -17,3 +17,8 @@ notes = "More on GenServers and Elixir behaviours"
 date = "2026-04-09"
 did_learn = true
 notes = "OTP Supervisors basics"
+
+[[sessions]]
+date = "2026-04-13"
+did_learn = true
+notes = "Debugging OpenClaw configuration — the struggle is the learning"
