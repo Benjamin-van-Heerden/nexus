@@ -5,7 +5,24 @@ current_goal = "language"
 name = "language"
 reference = "./learn/math-physics/reference/calc_language.md"
 status = "in_progress"
-tasks = []
+
+[[goals.tasks]]
+name = "Read: Calculus Language Foundations"
+type = "theoretical"
+created = "2026-04-13"
+status = "todo"
+relevant_files = [
+    "./learn/math-physics/foundations/calculus/theoretical/2026-04-13-language-foundations.typ",
+]
+
+[[goals.tasks]]
+name = "Quiz: Calculus Language"
+type = "quiz"
+created = "2026-04-13"
+status = "todo"
+relevant_files = [
+    "./learn/math-physics/foundations/calculus/quiz/2026-04-13-language-quiz.typ",
+]
 
 [[goals]]
 name = "change"
