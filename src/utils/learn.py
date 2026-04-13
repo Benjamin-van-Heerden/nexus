@@ -9,7 +9,7 @@ from pathlib import Path
 
 import tomli_w
 
-from src.models.learn.learn import LearnConfig
+from src.models.learn.learn import LearnConfig, TopicHistory
 from src.models.learn.phase import Goal, PhaseConfig
 from src.models.learn.subtopic import SubtopicConfig
 from src.models.learn.topic import TopicConfig
@@ -56,6 +56,19 @@ def load_phase_config(topic: str, subtopic: str, phase: str) -> PhaseConfig:
 def save_learn_config(config: LearnConfig) -> None:
     path = get_learn_dir() / "learn.toml"
     _save_toml(path, config.model_dump(mode="json", exclude_none=True))
+
+
+def load_topic_history() -> TopicHistory:
+    path = get_learn_dir() / "history.toml"
+    if not path.exists():
+        return TopicHistory()
+    raw = _load_toml(path)
+    return TopicHistory(**raw)
+
+
+def save_topic_history(history: TopicHistory) -> None:
+    path = get_learn_dir() / "history.toml"
+    _save_toml(path, history.model_dump(mode="json", exclude_none=True))
 
 
 def save_subtopic_config(topic: str, subtopic: str, config: SubtopicConfig) -> None:

@@ -19,10 +19,13 @@ class TopicWeight(BaseModel):
     active: bool = True
 
 
+class TopicHistory(BaseModel):
+    history: list[TopicEntry] = []
+
+
 class LearnConfig(BaseModel):
     topics: list[TopicWeight] = []
     current_topic: str = ""
-    history: list[TopicEntry] = []
 
     def active_weights(self) -> dict[str, int]:
         return {t.name: t.weight for t in self.topics if t.active}

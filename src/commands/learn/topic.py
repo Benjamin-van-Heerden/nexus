@@ -9,9 +9,9 @@ from datetime import date, timedelta
 
 import typer
 
-from src.models.learn.learn import TopicEntry
+from src.models.learn.learn import TopicEntry, TopicHistory
 from src.models.learn.topic import TopicConfig
-from src.utils.learn import load_learn_config, save_learn_config
+from src.utils.learn import load_learn_config, load_topic_history, save_learn_config, save_topic_history
 from src.utils.path_resolution import resolve_str
 from src.utils.paths import get_learn_dir
 
@@ -86,11 +86,12 @@ def topic(ctx: typer.Context):
 def ensure_topic_for_week() -> str | None:
     """Ensure a topic is selected for the current week. Returns the topic name if a new one was picked, None if already set."""
     config = load_learn_config()
+    hist = load_topic_history()
     today = date.today()
     current_week = get_week_start(today)
 
-    if config.history:
-        last = config.history[-1]
+    if hist.history:
+        last = hist.history[-1]
         if last.week == current_week:
             return None
 
@@ -99,12 +100,13 @@ def ensure_topic_for_week() -> str | None:
         return None
 
     active_names = set(active.keys())
-    active_history = [e for e in config.history if e.topic in active_names]
+    active_history = [e for e in hist.history if e.topic in active_names]
 
     new_topic = pick_topic(active, active_history)
     config.current_topic = new_topic
-    config.history.append(TopicEntry(week=current_week, topic=new_topic))
+    hist.history.append(TopicEntry(week=current_week, topic=new_topic))
     save_learn_config(config)
+    save_topic_history(hist)
     return new_topic
 
 
@@ -131,21 +133,21 @@ def reset():
     typer.confirm("This will clear all topic selection history. Continue?", abort=True)
     config = load_learn_config()
     config.current_topic = ""
-    config.history = []
     save_learn_config(config)
+    save_topic_history(TopicHistory())
     typer.echo("Topic history has been reset.")
 
 
 @app.command()
 def history():
     """Show topic selection history."""
-    config = load_learn_config()
+    hist = load_topic_history()
 
-    if not config.history:
+    if not hist.history:
         typer.echo("No topic history yet.")
         return
 
-    for entry in config.history:
+    for entry in hist.history:
         week_end = entry.week + timedelta(days=6)
         typer.echo(f"  {entry.week} - {week_end}: {entry.topic}")
 
@@ -159,7 +161,8 @@ def weights():
     total_active_weight = sum(active.values())
     active_names = set(active.keys())
     window_size = total_active_weight
-    active_history = [e for e in config.history if e.topic in active_names]
+    hist = load_topic_history()
+    active_history = [e for e in hist.history if e.topic in active_names]
     recent = active_history[-window_size:] if active_history else []
     total_recent = len(recent)
     counts = Counter(entry.topic for entry in recent)
