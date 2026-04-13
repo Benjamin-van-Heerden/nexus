@@ -1,16 +1,16 @@
 name = "calculus"
-current_goal = "change"
+current_goal = "language"
 
 [[goals]]
 name = "language"
 reference = "./learn/math-physics/reference/calc_language.md"
-status = "completed"
+status = "in_progress"
 tasks = []
 
 [[goals]]
 name = "change"
 reference = "./learn/math-physics/reference/calc_change.md"
-status = "in_progress"
+status = "todo"
 tasks = []
 
 [[goals]]

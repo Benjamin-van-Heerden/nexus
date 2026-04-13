@@ -19,15 +19,20 @@ app = typer.Typer()
 
 
 def get_week_start(d: date) -> date:
-    """Get the Sunday that starts the week containing the given date."""
-    days_since_sunday = d.isoweekday() % 7
-    return d - timedelta(days=days_since_sunday)
+    """Get the Monday that starts the week containing the given date."""
+    days_since_monday = d.weekday()
+    return d - timedelta(days=days_since_monday)
 
 
 def pick_topic(
-    weights: dict[str, int], history: list[TopicEntry], window_size: int
+    weights: dict[str, int], history: list[TopicEntry]
 ) -> str:
-    """Pick next topic based on proportional weighting within a sliding window."""
+    """Pick next topic based on proportional weighting within a sliding window.
+
+    Window size is derived from the sum of active weights for perfect resolution.
+    History is pre-filtered to active topics only.
+    """
+    window_size = sum(weights.values())
     recent = history[-window_size:] if history else []
     total_weight = sum(weights.values())
     target_props = {k: v / total_weight for k, v in weights.items()}
@@ -89,7 +94,14 @@ def ensure_topic_for_week() -> str | None:
         if last.week == current_week:
             return None
 
-    new_topic = pick_topic(config.weights, config.history, config.window_size)
+    active = config.active_weights()
+    if not active:
+        return None
+
+    active_names = set(active.keys())
+    active_history = [e for e in config.history if e.topic in active_names]
+
+    new_topic = pick_topic(active, active_history)
     config.current_topic = new_topic
     config.history.append(TopicEntry(week=current_week, topic=new_topic))
     save_learn_config(config)
@@ -143,25 +155,35 @@ def weights():
     """Show current weights and actual vs target proportions."""
     config = load_learn_config()
 
-    total_weight = sum(config.weights.values())
-    recent = config.history[-config.window_size :] if config.history else []
+    active = config.active_weights()
+    total_active_weight = sum(active.values())
+    active_names = set(active.keys())
+    window_size = total_active_weight
+    active_history = [e for e in config.history if e.topic in active_names]
+    recent = active_history[-window_size:] if active_history else []
     total_recent = len(recent)
     counts = Counter(entry.topic for entry in recent)
 
-    typer.echo(f"Window: last {config.window_size} weeks ({total_recent} selections)\n")
+    typer.echo(f"Window: {window_size} weeks (derived from active weights sum, {total_recent} selections)\n")
     typer.echo(
-        f"{'Topic':<12} {'Weight':<8} {'Target':<10} {'Actual':<10} {'Count':<6}"
+        f"{'Topic':<16} {'Weight':<8} {'Active':<8} {'Target':<10} {'Actual':<10} {'Count':<6}"
     )
-    typer.echo("-" * 46)
+    typer.echo("-" * 58)
 
-    for topic_name, weight in sorted(config.weights.items()):
-        target = weight / total_weight
-        actual = counts.get(topic_name, 0) / total_recent if total_recent > 0 else 0.0
-        count = counts.get(topic_name, 0)
-        marker = " *" if actual < target else ""
-        typer.echo(
-            f"{topic_name:<12} {weight:<8} {target:<10.1%} {actual:<10.1%} {count:<6}{marker}"
-        )
+    for tw in sorted(config.topics, key=lambda t: t.name):
+        status = "yes" if tw.active else "no"
+        if tw.active:
+            target = tw.weight / total_active_weight
+            actual = counts.get(tw.name, 0) / total_recent if total_recent > 0 else 0.0
+            count = counts.get(tw.name, 0)
+            marker = " *" if actual < target else ""
+            typer.echo(
+                f"{tw.name:<16} {tw.weight:<8} {status:<8} {target:<10.1%} {actual:<10.1%} {count:<6}{marker}"
+            )
+        else:
+            typer.echo(
+                f"{tw.name:<16} {tw.weight:<8} {status:<8} {'—':<10} {'—':<10} {'—':<6}"
+            )
 
     typer.echo("\n* = under-represented (eligible for selection)")
 
@@ -195,9 +217,11 @@ def new(
         f"# {name.title()}\n\nDescribe this topic and your background with it.\n"
     )
 
-    # Add weight to learn.toml
+    # Add topic to learn.toml
+    from src.models.learn.learn import TopicWeight
+
     config = load_learn_config()
-    config.weights[name] = weight
+    config.topics.append(TopicWeight(name=name, weight=weight))
     save_learn_config(config)
 
     info_path = resolve_str(f"learn/{name}/topic_info.md")
@@ -219,15 +243,16 @@ def list_topics():
     config = load_learn_config()
     learn_dir = get_learn_dir()
 
-    if not config.weights:
+    if not config.topics:
         typer.echo("No topics configured.")
         return
 
-    for name, weight in sorted(config.weights.items()):
-        topic_dir = learn_dir / name
+    for tw in sorted(config.topics, key=lambda t: t.name):
+        topic_dir = learn_dir / tw.name
         exists = "✓" if topic_dir.exists() else "✗"
-        current = " ← current" if name == config.current_topic else ""
-        typer.echo(f"  [{exists}] {name} (weight: {weight}){current}")
+        current = " ← current" if tw.name == config.current_topic else ""
+        active = "" if tw.active else " (inactive)"
+        typer.echo(f"  [{exists}] {tw.name} (weight: {tw.weight}){active}{current}")
 
 
 @app.command()
@@ -239,8 +264,9 @@ def delete(name: str = typer.Argument(help="Topic name to delete")):
     topic_dir = learn_dir / name
 
     config = load_learn_config()
-    if name not in config.weights:
-        typer.echo(f"Topic '{name}' not found in weights.")
+    topic_names = {t.name for t in config.topics}
+    if name not in topic_names:
+        typer.echo(f"Topic '{name}' not found.")
         raise typer.Exit(1)
 
     typer.confirm(
@@ -250,7 +276,7 @@ def delete(name: str = typer.Argument(help="Topic name to delete")):
     if topic_dir.exists():
         shutil.rmtree(topic_dir)
 
-    del config.weights[name]
+    config.topics = [t for t in config.topics if t.name != name]
     if config.current_topic == name:
         config.current_topic = ""
     save_learn_config(config)
