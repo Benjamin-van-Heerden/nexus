@@ -21,7 +21,9 @@ All diagrams and charts in this topic are created with **Typst** — a modern, o
 ### How It Works
 
 1. Write a `.typ` file with markup + code
-2. Compile to PDF: `typst compile file.typ`
+2. Compile to PDF: `typst compile file.typ` - any typst files *must* be compiled to pdfs before they are presented to Benjamin (this ensures they are valid and in working order)
+NB: After creating *any* .typ file, it must be compiled to pdf (just point it at the file, it will create the pdf in the same location as the the .typ file). If it doesn't compile, use the warnings as a guide to fix the file and then compile to pdf again.
+3. Always present the pdf file to the user in output, not the raw .typ file.
 
 ### Packages Used
 
