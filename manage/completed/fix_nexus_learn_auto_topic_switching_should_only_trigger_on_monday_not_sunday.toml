@@ -1,13 +1,14 @@
 name = "Fix Nexus Learn auto topic switching - should only trigger on Monday, not Sunday"
 slug = "fix_nexus_learn_auto_topic_switching_should_only_trigger_on_monday_not_sunday"
 description = ""
-status = "todo"
+status = "completed"
 created = "2026-04-12"
+completed_at = "2026-04-14"
 tags = [
     "nexus-learn",
 ]
 recurrence = ""
 gcal_event_id = ""
-last_modified = "2026-04-12T10:39:07.020220"
+last_modified = "2026-04-14T12:55:45.138595"
 has_subtasks = false
 parent = ""

@@ -3,15 +3,3 @@ slug = "scaffold_nexus_learn_c_course"
 name = "Scaffold Nexus Learn C course"
 path = "./manage/tasks/scaffold_nexus_learn_c_course.toml"
 parent = ""
-
-[[tasks]]
-slug = "fix_openclaw_session_pruning_cron_inject_fresh_session_message_and_update_soul_md_files"
-name = "Fix OpenClaw session pruning cron - inject [FRESH SESSION] message and update SOUL.md files"
-path = "./manage/tasks/fix_openclaw_session_pruning_cron_inject_fresh_session_message_and_update_soul_md_files.toml"
-parent = ""
-
-[[tasks]]
-slug = "fix_nexus_learn_auto_topic_switching_should_only_trigger_on_monday_not_sunday"
-name = "Fix Nexus Learn auto topic switching - should only trigger on Monday, not Sunday"
-path = "./manage/tasks/fix_nexus_learn_auto_topic_switching_should_only_trigger_on_monday_not_sunday.toml"
-parent = ""
