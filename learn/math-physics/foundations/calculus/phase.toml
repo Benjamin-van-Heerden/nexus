@@ -10,7 +10,8 @@ status = "in_progress"
 name = "Read: Calculus Language Foundations"
 type = "theoretical"
 created = "2026-04-13"
-status = "todo"
+status = "completed"
+completed = "2026-04-13"
 relevant_files = [
     "./learn/math-physics/foundations/calculus/theoretical/2026-04-13-language-foundations.typ",
 ]
@@ -19,7 +20,8 @@ relevant_files = [
 name = "Quiz: Calculus Language"
 type = "quiz"
 created = "2026-04-13"
-status = "todo"
+status = "completed"
+completed = "2026-04-13"
 relevant_files = [
     "./learn/math-physics/foundations/calculus/quiz/2026-04-13-language-quiz.typ",
 ]
