@@ -26,5 +26,3 @@ auth
 .elixir_ls/
 .expert/
 _build/
-
-*.pdf
