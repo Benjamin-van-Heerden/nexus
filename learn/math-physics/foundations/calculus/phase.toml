@@ -30,7 +30,15 @@ relevant_files = [
 name = "change"
 reference = "./learn/math-physics/reference/calc_change.md"
 status = "in_progress"
-tasks = []
+
+[[goals.tasks]]
+name = "Limits and Derivatives Practical — 4 problems covering limit techniques, differentiation rules, related rates, and optimization"
+type = "practical"
+created = "2026-04-14"
+status = "todo"
+relevant_files = [
+    "./learn/math-physics/foundations/calculus/practical/2026-04-14-limits-derivatives.typ",
+]
 
 [[goals]]
 name = "accumulation"
