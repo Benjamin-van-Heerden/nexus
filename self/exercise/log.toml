@@ -18,3 +18,10 @@ type = "crossfit"
 description = "CrossFit session"
 intensity = "hard"
 duration_minutes = 50
+
+[[sessions]]
+date = "2026-04-15"
+type = "soccer"
+description = "80 mins of soccer"
+intensity = "hard"
+duration_minutes = 80
