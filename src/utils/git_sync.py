@@ -14,7 +14,7 @@ def _run_git(*args: str) -> subprocess.CompletedProcess[str]:
 
 
 def pre_sync() -> None:
-    _run_git("pull")
+    _run_git("pull", "--rebase")
 
 
 def post_sync() -> None:
