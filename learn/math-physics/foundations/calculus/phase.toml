@@ -59,6 +59,15 @@ relevant_files = [
     "./learn/math-physics/foundations/calculus/practical/2026-04-16-applications-practice.typ",
 ]
 
+[[goals.tasks]]
+name = "Change Concepts Quiz — 10 questions on limits, derivatives, and applications"
+type = "quiz"
+created = "2026-04-15"
+status = "todo"
+relevant_files = [
+    "./learn/math-physics/foundations/calculus/quiz/2026-04-16-change-concepts.typ",
+]
+
 [[goals]]
 name = "accumulation"
 reference = "./learn/math-physics/reference/calc_accumulation.md"
