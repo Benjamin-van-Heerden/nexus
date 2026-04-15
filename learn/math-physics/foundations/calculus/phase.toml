@@ -41,6 +41,24 @@ relevant_files = [
     "./learn/math-physics/foundations/calculus/practical/2026-04-14-limits-derivatives.typ",
 ]
 
+[[goals.tasks]]
+name = "Derivatives Deep Dive Reading — Focus on related rates strategy, optimization procedure, and building intuition for applications"
+type = "theoretical"
+created = "2026-04-15"
+status = "todo"
+relevant_files = [
+    "./learn/math-physics/foundations/calculus/theoretical/2026-04-16-derivatives-deep-dive.typ",
+]
+
+[[goals.tasks]]
+name = "Applications Practice — 5 problems on related rates and optimization with strategy hints"
+type = "practical"
+created = "2026-04-15"
+status = "todo"
+relevant_files = [
+    "./learn/math-physics/foundations/calculus/practical/2026-04-16-applications-practice.typ",
+]
+
 [[goals]]
 name = "accumulation"
 reference = "./learn/math-physics/reference/calc_accumulation.md"
