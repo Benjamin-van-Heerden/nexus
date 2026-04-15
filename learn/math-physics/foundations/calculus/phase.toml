@@ -35,7 +35,8 @@ status = "in_progress"
 name = "Limits and Derivatives Practical — 4 problems covering limit techniques, differentiation rules, related rates, and optimization"
 type = "practical"
 created = "2026-04-14"
-status = "todo"
+status = "completed"
+completed = "2026-04-15"
 relevant_files = [
     "./learn/math-physics/foundations/calculus/practical/2026-04-14-limits-derivatives.typ",
 ]
