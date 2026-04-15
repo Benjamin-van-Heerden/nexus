@@ -22,3 +22,8 @@ notes = "OTP Supervisors basics"
 date = "2026-04-13"
 did_learn = true
 notes = "Debugging OpenClaw configuration — the struggle is the learning"
+
+[[sessions]]
+date = "2026-04-15"
+did_learn = true
+notes = "Calculus foundations (refresher course before jumping into more involved topics)"
