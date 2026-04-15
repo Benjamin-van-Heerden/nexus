@@ -4,10 +4,11 @@ description = ""
 status = "todo"
 created = "2026-04-06"
 tags = [
+    "priority-low",
     "nexus-learn",
 ]
 recurrence = ""
 gcal_event_id = ""
-last_modified = "2026-04-06T19:09:37.755689"
+last_modified = "2026-04-15T12:48:33.491867"
 has_subtasks = false
 parent = ""
