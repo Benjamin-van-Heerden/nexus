@@ -50,11 +50,14 @@ defmodule Hangman.Server do
   @impl true
   def handle_call({:guess, letter}, _from, state) do
     new_state = Core.guess(state, letter)
-    tup_res = case new_state.status do
-      :won -> {:game_over, :won}
-      :lost -> {:game_over, :lost}
-      :ongoing -> {:ok, Core.display(new_state)}
-    end
+
+    tup_res =
+      case new_state.status do
+        :won -> {:game_over, :won}
+        :lost -> {:game_over, :lost}
+        :ongoing -> {:ok, Core.display(new_state)}
+      end
+
     {:reply, tup_res, new_state}
   end
 
