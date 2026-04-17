@@ -1,13 +1,13 @@
 ---
 title: nexus archive command
 status: todo
-assigned_to: null
+assigned_to: Benjamin-van-Heerden
 issue_id: 10
 issue_url: https://github.com/Benjamin-van-Heerden/nexus/issues/10
-branch: null
+branch: dev-benjamin_van_heerden-nexus_archive_command
 pr_url: null
 created_at: '2026-04-17T13:47:00.069833'
-updated_at: '2026-04-17T16:09:16.556202'
+updated_at: '2026-04-17T16:09:49.308020'
 completed_at: null
 last_synced_at: '2026-04-17T16:09:16.555660'
 local_content_hash: ad0b6838af355709b5fafb99899b87d698ecc0896e300c0f3f59de46be5a381c
