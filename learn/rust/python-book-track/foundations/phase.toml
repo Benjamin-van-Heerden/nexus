@@ -40,6 +40,15 @@ relevant_files = [
     "./learn/rust/python-book-track/foundations/practical/examples/2026-04-20-getting-started.rs",
 ]
 
+[[goals.tasks]]
+name = "Reading: Match, borrowing, and ownership concepts"
+type = "theoretical"
+created = "2026-04-20"
+status = "todo"
+relevant_files = [
+    "./learn/rust/python-book-track/foundations/theoretical/2026-04-20-getting-started.md",
+]
+
 [[goals]]
 name = "Built-in Types and Variables"
 reference = "./learn/rust/reference/python-book/ch03-built-in-types-and-variables.md"
