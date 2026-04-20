@@ -1,10 +1,10 @@
 name = "Foundations"
-current_goal = "Introduction and Motivation"
+current_goal = "Getting Started"
 
 [[goals]]
 name = "Introduction and Motivation"
 reference = "./learn/rust/reference/python-book/ch01-introduction-and-motivation.md"
-status = "todo"
+status = "completed"
 
 [[goals.tasks]]
 name = "When to Choose Rust vs Python - theoretical reflection on 5 scenarios"
@@ -29,7 +29,7 @@ relevant_files = [
 [[goals]]
 name = "Getting Started"
 reference = "./learn/rust/reference/python-book/ch02-getting-started.md"
-status = "todo"
+status = "in_progress"
 tasks = []
 
 [[goals]]
