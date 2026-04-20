@@ -27,3 +27,8 @@ notes = "Debugging OpenClaw configuration — the struggle is the learning"
 date = "2026-04-15"
 did_learn = true
 notes = "Calculus foundations (refresher course before jumping into more involved topics)"
+
+[[sessions]]
+date = "2026-04-20"
+did_learn = true
+notes = "Rust type exercises — fixing compilation errors"
