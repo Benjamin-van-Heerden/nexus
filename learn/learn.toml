@@ -1,21 +1,7 @@
-current_topic = "math-physics"
-
-[[topics]]
-name = "rust"
-weight = 4
-active = true
-
-[[topics]]
-name = "jax"
-weight = 4
-active = true
-
-[[topics]]
-name = "elixir"
-weight = 2
-active = true
-
-[[topics]]
-name = "math-physics"
-weight = 2
-active = true
+topics = [
+    { name = "rust", weight = 4, active = true },
+    { name = "jax", weight = 4, active = true },
+    { name = "elixir", weight = 2, active = true },
+    { name = "math-physics", weight = 2, active = true },
+]
+current_topic = "rust"
