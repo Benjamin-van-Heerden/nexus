@@ -3,3 +3,10 @@ slug = "scaffold_nexus_learn_c_course"
 name = "Scaffold Nexus Learn C course"
 path = "./manage/tasks/scaffold_nexus_learn_c_course.toml"
 parent = ""
+
+[[tasks]]
+slug = "add_immediate_charging_stop_when_preauth_increment_loop_reaches_max_retries_on_ev_ledger"
+name = "Add immediate charging stop when preauth increment loop reaches max retries on ev-ledger"
+path = "./manage/tasks/add_immediate_charging_stop_when_preauth_increment_loop_reaches_max_retries_on_ev_ledger.toml"
+due = "2026-04-21"
+parent = ""
