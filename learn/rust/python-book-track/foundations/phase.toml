@@ -30,7 +30,15 @@ relevant_files = [
 name = "Getting Started"
 reference = "./learn/rust/reference/python-book/ch02-getting-started.md"
 status = "in_progress"
-tasks = []
+
+[[goals.tasks]]
+name = "CLI parser exercise - match expressions, borrowing, and ownership"
+type = "practical"
+created = "2026-04-20"
+status = "todo"
+relevant_files = [
+    "./learn/rust/python-book-track/foundations/practical/examples/2026-04-20-getting-started.rs",
+]
 
 [[goals]]
 name = "Built-in Types and Variables"
