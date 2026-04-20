@@ -1,0 +1,57 @@
+name = "Foundations"
+current_goal = "Introduction and Motivation"
+
+[[goals]]
+name = "Introduction and Motivation"
+reference = "./learn/rust/reference/python-book/ch01-introduction-and-motivation.md"
+status = "todo"
+
+[[goals.tasks]]
+name = "When to Choose Rust vs Python - theoretical reflection on 5 scenarios"
+type = "theoretical"
+created = "2026-04-20"
+status = "completed"
+completed = "2026-04-20"
+relevant_files = [
+    "./learn/rust/python-book-track/foundations/theoretical/2026-04-20.md",
+]
+
+[[goals.tasks]]
+name = "Type safety and performance exercise - fix compilation errors and observe timing"
+type = "practical"
+created = "2026-04-20"
+status = "completed"
+completed = "2026-04-20"
+relevant_files = [
+    "./learn/rust/python-book-track/foundations/practical/examples/2026-04-20.rs",
+]
+
+[[goals]]
+name = "Getting Started"
+reference = "./learn/rust/reference/python-book/ch02-getting-started.md"
+status = "todo"
+tasks = []
+
+[[goals]]
+name = "Built-in Types and Variables"
+reference = "./learn/rust/reference/python-book/ch03-built-in-types-and-variables.md"
+status = "todo"
+tasks = []
+
+[[goals]]
+name = "Control Flow"
+reference = "./learn/rust/reference/python-book/ch04-control-flow.md"
+status = "todo"
+tasks = []
+
+[[goals]]
+name = "Data Structures and Collections"
+reference = "./learn/rust/reference/python-book/ch05-data-structures-and-collections.md"
+status = "todo"
+tasks = []
+
+[[goals]]
+name = "Enums and Pattern Matching"
+reference = "./learn/rust/reference/python-book/ch06-enums-and-pattern-matching.md"
+status = "todo"
+tasks = []
