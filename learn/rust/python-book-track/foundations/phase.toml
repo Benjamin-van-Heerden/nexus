@@ -15,6 +15,15 @@ relevant_files = [
     "./learn/rust/python-book-track/foundations/theoretical/2026-04-20.md",
 ]
 
+[[goals.tasks]]
+name = "Type safety and performance exercise - fix compilation errors and observe timing"
+type = "practical"
+created = "2026-04-20"
+status = "todo"
+relevant_files = [
+    "./learn/rust/python-book-track/foundations/practical/examples/2026-04-20.rs",
+]
+
 [[goals]]
 name = "Getting Started"
 reference = "./learn/rust/reference/python-book/ch02-getting-started.md"
