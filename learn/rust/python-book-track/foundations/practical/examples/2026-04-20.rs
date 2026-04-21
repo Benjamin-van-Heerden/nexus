@@ -7,9 +7,9 @@
 // Your task: Make this file compile, then observe the performance difference
 // between debug and release builds.
 
-use std::time::Instant;
 use std::iter::Sum;
 use std::ops::Mul;
+use std::time::Instant;
 
 // TODO 1: `square` takes an i32 and returns its square.
 // Leave this signature alone for now — it's the *caller* that has to adapt.
@@ -33,7 +33,10 @@ fn square_smart<T: Mul<Output = T> + Copy>(n: T) -> T {
 //   - Change `square` to take i64 (but TODO 4 wants an f64 version too…)
 //   - Make `square` generic over numeric types (stretch goal — needs a
 //     trait bound like `std::ops::Mul<Output = T> + Copy`)
-fn sum_of_squares<T>(items: impl IntoIterator<Item = T>) -> T where T: Mul<Output = T> + Copy + Sum<T> {
+fn sum_of_squares<T>(items: impl IntoIterator<Item = T>) -> T
+where
+    T: Mul<Output = T> + Copy + Sum<T>,
+{
     items.into_iter().map(square_smart).sum()
 }
 
