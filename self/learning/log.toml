@@ -32,3 +32,8 @@ notes = "Calculus foundations (refresher course before jumping into more involve
 date = "2026-04-20"
 did_learn = true
 notes = "Rust type exercises — fixing compilation errors"
+
+[[sessions]]
+date = "2026-04-21"
+did_learn = true
+notes = "Rust pattern matching and enums"
