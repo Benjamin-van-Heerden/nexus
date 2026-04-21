@@ -44,7 +44,8 @@ relevant_files = [
 name = "Reading: Match, borrowing, and ownership concepts"
 type = "theoretical"
 created = "2026-04-20"
-status = "todo"
+status = "completed"
+completed = "2026-04-21"
 relevant_files = [
     "./learn/rust/python-book-track/foundations/theoretical/2026-04-20-getting-started.md",
 ]
