@@ -55,7 +55,24 @@ relevant_files = [
 name = "Built-in Types and Variables"
 reference = "./learn/rust/reference/python-book/ch03-built-in-types-and-variables.md"
 status = "in_progress"
-tasks = []
+
+[[goals.tasks]]
+name = "Quiz: Built-in Types and Variables (8 questions)"
+type = "quiz"
+created = "2026-04-22"
+status = "todo"
+relevant_files = [
+    "./learn/rust/python-book-track/foundations/quiz/2026-04-22-built-in-types.md",
+]
+
+[[goals.tasks]]
+name = "Exercise: String manipulation, borrowing, and temperature converter"
+type = "practical"
+created = "2026-04-22"
+status = "todo"
+relevant_files = [
+    "./learn/rust/python-book-track/foundations/practical/examples/2026-04-22-built-in-types.rs",
+]
 
 [[goals]]
 name = "Control Flow"
