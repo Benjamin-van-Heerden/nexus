@@ -25,3 +25,10 @@ type = "soccer"
 description = "80 mins of soccer"
 intensity = "hard"
 duration_minutes = 80
+
+[[sessions]]
+date = "2026-04-22"
+type = "soccer"
+description = "Soccer match/training session"
+intensity = "hard"
+duration_minutes = 40
