@@ -74,6 +74,15 @@ relevant_files = [
     "./learn/rust/python-book-track/foundations/practical/examples/2026-04-22-built-in-types.rs",
 ]
 
+[[goals.tasks]]
+name = "Reading: Built-in Types and Variables - mutability, numeric types, String vs &str distinction"
+type = "theoretical"
+created = "2026-04-22"
+status = "todo"
+relevant_files = [
+    "./learn/rust/python-book-track/foundations/theoretical/2026-04-22-built-in-types.md",
+]
+
 [[goals]]
 name = "Control Flow"
 reference = "./learn/rust/reference/python-book/ch04-control-flow.md"
