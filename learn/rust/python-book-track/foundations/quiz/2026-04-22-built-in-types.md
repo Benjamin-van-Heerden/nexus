@@ -18,7 +18,7 @@ println!("{}", x);
 
 **A)** Compile error on line 2 — cannot reassign immutable variable  
 **B)** Compile error on line 4 — cannot reassign immutable variable  
-**C)** 100  
+**C)** 100 --> this 
 **D)** 30  
 
 ---
@@ -38,7 +38,7 @@ Which of these CANNOT be passed directly to `process()`?
 **A)** `let x = "hello"; process(x);`  
 **B)** `let x = String::from("hello"); process(&x);`  
 **C)** `let x = String::from("hello"); process(x);`  
-**D)** All of the above work  
+**D)** All of the above work --> this  
 
 ---
 
@@ -51,7 +51,7 @@ let x = 42;
 ```
 
 **A)** i64  
-**B)** i32  
+**B)** i32 --> this 
 **C)** usize  
 **D)** The compiler cannot infer — requires explicit type  
 
@@ -63,7 +63,7 @@ Which operation returns a `&str` (no allocation)?
 
 **A)** `"hello".to_uppercase()`  
 **B)** `"  hello  ".trim()`  
-**C)** `"hello".replace("l", "L")`  
+**C)** `"hello".replace("l", "L")` --> this (I think) 
 **D)** `format!("hello {}", "world")`  
 
 ---
@@ -82,7 +82,7 @@ fn main() {
 ```
 
 **A)** No error — compiles and runs  
-**B)** Cannot borrow `s` as mutable because it is also borrowed as immutable  
+**B)** Cannot borrow `s` as mutable because it is also borrowed as immutable --> something like this, but idk what would happen if you start with let mut s = ...  
 **C)** Use of moved value: `s`  
 **D)** Mismatched types  
 
@@ -99,7 +99,7 @@ let i: i32 = 1;
 ```
 
 **A)** `vec[i as i64]`  
-**B)** `vec[i as usize]`  
+**B)** `vec[i as usize]` --> this 
 **C)** `vec[i32::from(i)]`  
 **D)** Change `i` to `let i: usize = 1;`  
 
@@ -117,7 +117,7 @@ let y = x + 1;
 **A)** y equals 256  
 **B)** Compile error — overflow  
 **C)** Panic at runtime  
-**D)** y wraps around to 0 (in release mode)  
+**D)** y wraps around to 0 (in release mode) --> this  
 
 ---
 
@@ -126,9 +126,9 @@ let y = x + 1;
 You're designing a function that takes a name and returns a formatted greeting. What's the best signature?
 
 **A)** `fn greet(name: String) -> String`  
-**B)** `fn greet(name: &str) -> String`  
+**B)** `fn greet(name: &str) -> String` --> this  
 **C)** `fn greet(name: String) -> &str`  
-**D)** `fn greet(name: &str) -> &str`  
+**D)** `fn greet(name: &str) -> &str`
 
 ---
 

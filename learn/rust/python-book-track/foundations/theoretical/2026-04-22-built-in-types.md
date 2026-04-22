@@ -7,15 +7,15 @@ Read the following code snippets and answer the questions below.
 ```rust
 // Snippet A
 let x = 5;
-x = 10;  // What happens here?
+x = 10;  // What happens here? - fails since x is immutable by default
 
 // Snippet B
 let mut y = 5;
-y = 10;  // What happens here?
+y = 10;  // What happens here? - no problems here, y is now just 10
 
 // Snippet C (variable shadowing)
 let z = "hello";
-let z = z.len();  // What type is z now?
+let z = z.len();  // What type is z now? - z is now int8 or usize or something (it is as though the original z never existed)
 ```
 
 **Questions:**
@@ -38,9 +38,9 @@ let e: usize = 0;       // What does usize represent?
 ```
 
 **Questions:**
-1. Why can't you assign a negative value to a `u32` variable? What error would you get?
-2. When would you use `usize` instead of `i32` for indexing?
-3. What happens if you compute `2_i32.pow(31)`? Why?
+1. Why can't you assign a negative value to a `u32` variable? What error would you get? - some kind of underflow error, not 100% sure, but the question kind of answers itself
+2. When would you use `usize` instead of `i32` for indexing? - not sure, maybe there are obscure cases where this is relevant. I am trying to learn Rust, not arbitrary crap.
+3. What happens if you compute `2_i32.pow(31)`? Why? would underflow to the smallest possible i32 (bottom is inclusive, top is exclusive since 0 needs a space)
 
 ---
 
@@ -68,10 +68,10 @@ greeting.push_str(", Alice!");
 | Use in functions | `fn greet(name: &str)` — preferred | `fn create() -> String` — when returning |
 
 **Questions:**
-1. Why does `fn greet(name: &str)` accept both `&str` AND `&String`? (Hint: Deref coercion)
-2. You have a `String` and need to pass it to a function expecting `&str`. What do you do?
+1. Why does `fn greet(name: &str)` accept both `&str` AND `&String`? (Hint: Deref coercion) - don't know, tell me 
+2. You have a `String` and need to pass it to a function expecting `&str`. What do you do? You can take it as a slice, idk - ffs, this is supposed to be a *THEORETICAL* reading, not a quiz - you should fucking tell me!
 3. You need to modify a string (push characters, concatenate). Which type must you use?
-4. What's the difference between `"hello".to_string()` and `String::from("hello")`?
+4. What's the difference between `"hello".to_string()` and `String::from("hello")`? - again, just fucking tell me
 
 ---
 
