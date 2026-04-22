@@ -70,7 +70,8 @@ relevant_files = [
 name = "Exercise: String manipulation, borrowing, and temperature converter"
 type = "practical"
 created = "2026-04-22"
-status = "todo"
+status = "completed"
+completed = "2026-04-22"
 relevant_files = [
     "./learn/rust/python-book-track/foundations/practical/examples/2026-04-22-built-in-types.rs",
 ]
