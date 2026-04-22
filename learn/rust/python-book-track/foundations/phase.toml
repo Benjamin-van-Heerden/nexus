@@ -1,5 +1,5 @@
 name = "Foundations"
-current_goal = "Built-in Types and Variables"
+current_goal = "Control Flow"
 
 [[goals]]
 name = "Introduction and Motivation"
@@ -54,7 +54,7 @@ relevant_files = [
 [[goals]]
 name = "Built-in Types and Variables"
 reference = "./learn/rust/reference/python-book/ch03-built-in-types-and-variables.md"
-status = "in_progress"
+status = "completed"
 
 [[goals.tasks]]
 name = "Quiz: Built-in Types and Variables (8 questions)"
@@ -89,7 +89,7 @@ relevant_files = [
 [[goals]]
 name = "Control Flow"
 reference = "./learn/rust/reference/python-book/ch04-control-flow.md"
-status = "todo"
+status = "in_progress"
 tasks = []
 
 [[goals]]
