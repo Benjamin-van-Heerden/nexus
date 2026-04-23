@@ -109,6 +109,15 @@ relevant_files = [
     "./learn/rust/python-book-track/foundations/quiz/2026-04-23-control-flow-quiz.md",
 ]
 
+[[goals.tasks]]
+name = "Read theoretical material on control flow - expressions vs statements, semicolon rule, loop variants"
+type = "theoretical"
+created = "2026-04-23"
+status = "todo"
+relevant_files = [
+    "./learn/rust/python-book-track/foundations/theoretical/2026-04-23-control-flow-theory.md",
+]
+
 [[goals]]
 name = "Data Structures and Collections"
 reference = "./learn/rust/reference/python-book/ch05-data-structures-and-collections.md"
