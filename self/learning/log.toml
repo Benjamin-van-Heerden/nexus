@@ -37,3 +37,8 @@ notes = "Rust type exercises — fixing compilation errors"
 date = "2026-04-21"
 did_learn = true
 notes = "Rust pattern matching and enums"
+
+[[sessions]]
+date = "2026-04-22"
+did_learn = true
+notes = "Rust built-in types"
