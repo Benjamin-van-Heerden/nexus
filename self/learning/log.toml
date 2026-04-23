@@ -42,3 +42,8 @@ notes = "Rust pattern matching and enums"
 date = "2026-04-22"
 did_learn = true
 notes = "Rust built-in types"
+
+[[sessions]]
+date = "2026-04-23"
+did_learn = true
+notes = "Rust control flow"
