@@ -1,0 +1,11 @@
+name = "Modify nexus task system to support times in due dates"
+slug = "modify_nexus_task_system_to_support_times_in_due_dates"
+description = ""
+status = "todo"
+created = "2026-04-23"
+tags = []
+recurrence = ""
+gcal_event_id = ""
+last_modified = "2026-04-23T16:33:55.845846"
+has_subtasks = false
+parent = ""

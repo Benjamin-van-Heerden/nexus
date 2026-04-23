@@ -1,0 +1,12 @@
+name = "Lunch with Mike"
+slug = "lunch_with_mike"
+description = ""
+status = "todo"
+created = "2026-04-23"
+due = "2026-04-29T13:00:00"
+tags = []
+recurrence = ""
+gcal_event_id = ""
+last_modified = "2026-04-23T16:33:55.845555"
+has_subtasks = false
+parent = ""

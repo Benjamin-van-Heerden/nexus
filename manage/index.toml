@@ -3,3 +3,16 @@ slug = "scaffold_nexus_learn_c_course"
 name = "Scaffold Nexus Learn C course"
 path = "./manage/tasks/scaffold_nexus_learn_c_course.toml"
 parent = ""
+
+[[tasks]]
+slug = "modify_nexus_task_system_to_support_times_in_due_dates"
+name = "Modify nexus task system to support times in due dates"
+path = "./manage/tasks/modify_nexus_task_system_to_support_times_in_due_dates.toml"
+parent = ""
+
+[[tasks]]
+slug = "lunch_with_mike"
+name = "Lunch with Mike"
+path = "./manage/tasks/lunch_with_mike.toml"
+due = "2026-04-29T13:00:00"
+parent = ""
