@@ -1,0 +1,14 @@
+name = "Scaffold Elixir Agent Jido course"
+slug = "scaffold_elixir_agent_jido_course"
+description = ""
+status = "todo"
+created = "2026-04-23"
+tags = [
+    "priority-low",
+    "nexus-learn",
+]
+recurrence = ""
+gcal_event_id = ""
+last_modified = "2026-04-23T22:30:58.373829"
+has_subtasks = false
+parent = ""
