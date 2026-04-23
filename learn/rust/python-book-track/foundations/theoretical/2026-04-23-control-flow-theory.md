@@ -87,7 +87,7 @@ let evens: Vec<i32> = (0..100).filter(|x| x % 2 == 0).collect();
 
 ## Check Your Understanding
 
-1. What does this return? `let x = { 5; };` → _______
-2. What's the difference between `0..5` and `0..=5`? → _______
-3. Can a `while` loop return a value with `break`? → _______
-4. How do you check if a string is empty in an `if` condition? → _______
+1. What does this return? `let x = { 5; };` → x - 5
+2. What's the difference between `0..5` and `0..=5`? → exclusive vs inclusive
+3. Can a `while` loop return a value with `break`? → in python no, in rust, yes
+4. How do you check if a string is empty in an `if` condition? → if let Some(val) = expression
