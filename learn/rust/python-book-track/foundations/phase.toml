@@ -90,7 +90,24 @@ relevant_files = [
 name = "Control Flow"
 reference = "./learn/rust/reference/python-book/ch04-control-flow.md"
 status = "in_progress"
-tasks = []
+
+[[goals.tasks]]
+name = "Complete practical coding exercises - if expressions, loops, match, iterator chains"
+type = "practical"
+created = "2026-04-23"
+status = "todo"
+relevant_files = [
+    "./learn/rust/python-book-track/foundations/practical/examples/2026-04-23-control-flow-practical.rs",
+]
+
+[[goals.tasks]]
+name = "Take the control flow quiz - multiple choice, fill in blank, code correction"
+type = "quiz"
+created = "2026-04-23"
+status = "todo"
+relevant_files = [
+    "./learn/rust/python-book-track/foundations/quiz/2026-04-23-control-flow-quiz.md",
+]
 
 [[goals]]
 name = "Data Structures and Collections"
