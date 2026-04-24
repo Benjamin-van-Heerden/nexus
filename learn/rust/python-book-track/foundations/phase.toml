@@ -95,7 +95,8 @@ status = "in_progress"
 name = "Complete practical coding exercises - if expressions, loops, match, iterator chains"
 type = "practical"
 created = "2026-04-23"
-status = "todo"
+status = "completed"
+completed = "2026-04-24"
 relevant_files = [
     "./learn/rust/python-book-track/foundations/practical/examples/2026-04-23-control-flow-practical.rs",
 ]
