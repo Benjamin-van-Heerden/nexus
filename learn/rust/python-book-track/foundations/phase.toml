@@ -105,7 +105,8 @@ relevant_files = [
 name = "Take the control flow quiz - multiple choice, fill in blank, code correction"
 type = "quiz"
 created = "2026-04-23"
-status = "todo"
+status = "completed"
+completed = "2026-04-24"
 relevant_files = [
     "./learn/rust/python-book-track/foundations/quiz/2026-04-23-control-flow-quiz.md",
 ]
