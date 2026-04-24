@@ -113,7 +113,8 @@ relevant_files = [
 name = "Read theoretical material on control flow - expressions vs statements, semicolon rule, loop variants"
 type = "theoretical"
 created = "2026-04-23"
-status = "todo"
+status = "completed"
+completed = "2026-04-24"
 relevant_files = [
     "./learn/rust/python-book-track/foundations/theoretical/2026-04-23-control-flow-theory.md",
 ]
