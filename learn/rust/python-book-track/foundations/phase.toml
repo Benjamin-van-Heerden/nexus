@@ -1,5 +1,5 @@
 name = "Foundations"
-current_goal = "Data Structures and Collections"
+current_goal = "Enums and Pattern Matching"
 
 [[goals]]
 name = "Introduction and Motivation"
@@ -124,7 +124,7 @@ relevant_files = [
 [[goals]]
 name = "Data Structures and Collections"
 reference = "./learn/rust/reference/python-book/ch05-data-structures-and-collections.md"
-status = "in_progress"
+status = "completed"
 
 [[goals.tasks]]
 name = "Read theoretical material on data structures - tuples, arrays, structs, Vec, HashMap, and Python→Rust mapping"
@@ -149,5 +149,5 @@ relevant_files = [
 [[goals]]
 name = "Enums and Pattern Matching"
 reference = "./learn/rust/reference/python-book/ch06-enums-and-pattern-matching.md"
-status = "todo"
+status = "in_progress"
 tasks = []
