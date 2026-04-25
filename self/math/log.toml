@@ -100,3 +100,16 @@ problem_types = [
     "addition",
     "division",
 ]
+
+[[sessions]]
+date = "2026-04-25"
+time_seconds = 180
+correct = 5
+total = 5
+problem_types = [
+    "addition",
+    "multiplication",
+    "subtraction",
+    "addition",
+    "division",
+]
