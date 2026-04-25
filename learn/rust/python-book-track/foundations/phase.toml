@@ -135,6 +135,15 @@ relevant_files = [
     "./learn/rust/python-book-track/foundations/theoretical/2026-04-25-data-structures-theory.md",
 ]
 
+[[goals.tasks]]
+name = "Build Student Gradebook mini-project - implement structs with methods, Vec, HashMap, and analysis functions"
+type = "practical"
+created = "2026-04-25"
+status = "todo"
+relevant_files = [
+    "./learn/rust/python-book-track/foundations/practical/examples/2026-04-25-gradebook-project.rs",
+]
+
 [[goals]]
 name = "Enums and Pattern Matching"
 reference = "./learn/rust/reference/python-book/ch06-enums-and-pattern-matching.md"
