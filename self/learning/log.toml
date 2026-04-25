@@ -47,3 +47,8 @@ notes = "Rust built-in types"
 date = "2026-04-23"
 did_learn = true
 notes = "Rust control flow"
+
+[[sessions]]
+date = "2026-04-25"
+did_learn = true
+notes = "Rust data structures and collections"
