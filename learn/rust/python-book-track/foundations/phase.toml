@@ -1,5 +1,5 @@
 name = "Foundations"
-current_goal = "Control Flow"
+current_goal = "Data Structures and Collections"
 
 [[goals]]
 name = "Introduction and Motivation"
@@ -89,7 +89,7 @@ relevant_files = [
 [[goals]]
 name = "Control Flow"
 reference = "./learn/rust/reference/python-book/ch04-control-flow.md"
-status = "in_progress"
+status = "completed"
 
 [[goals.tasks]]
 name = "Complete practical coding exercises - if expressions, loops, match, iterator chains"
@@ -124,7 +124,7 @@ relevant_files = [
 [[goals]]
 name = "Data Structures and Collections"
 reference = "./learn/rust/reference/python-book/ch05-data-structures-and-collections.md"
-status = "todo"
+status = "in_progress"
 tasks = []
 
 [[goals]]
