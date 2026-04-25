@@ -125,7 +125,15 @@ relevant_files = [
 name = "Data Structures and Collections"
 reference = "./learn/rust/reference/python-book/ch05-data-structures-and-collections.md"
 status = "in_progress"
-tasks = []
+
+[[goals.tasks]]
+name = "Read theoretical material on data structures - tuples, arrays, structs, Vec, HashMap, and Python→Rust mapping"
+type = "theoretical"
+created = "2026-04-25"
+status = "todo"
+relevant_files = [
+    "./learn/rust/python-book-track/foundations/theoretical/2026-04-25-data-structures-theory.md",
+]
 
 [[goals]]
 name = "Enums and Pattern Matching"
