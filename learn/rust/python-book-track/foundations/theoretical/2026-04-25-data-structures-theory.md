@@ -175,8 +175,8 @@ for word in words {
 
 ## Check Your Understanding
 
-1. How do you access the 3rd element of a tuple in Rust? → _______
-2. What's the difference between `[i32; 5]` and `Vec<i32>`? → _______
-3. What does `vec.get(100)` return if the vec has 3 elements? → _______
-4. What's the Rust equivalent of Python's `Counter(words)`? → _______
-5. What does `#[derive(Debug)]` do? → _______
+1. How do you access the 3rd element of a tuple in Rust? → _______ -> tup.3
+2. What's the difference between `[i32; 5]` and `Vec<i32>`? → _______ -> array and vec, stack vs heap, fixed size vs dynamic size (if mut) 
+3. What does `vec.get(100)` return if the vec has 3 elements? → _______ -> None
+4. What's the Rust equivalent of Python's `Counter(words)`? → _______ -> don't know
+5. What does `#[derive(Debug)]` do? → _______ -> makes the struct representable in a string ("{:?}")
