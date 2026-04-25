@@ -140,7 +140,8 @@ relevant_files = [
 name = "Build Student Gradebook mini-project - implement structs with methods, Vec, HashMap, and analysis functions"
 type = "practical"
 created = "2026-04-25"
-status = "todo"
+status = "completed"
+completed = "2026-04-25"
 relevant_files = [
     "./learn/rust/python-book-track/foundations/practical/examples/2026-04-25-gradebook-project.rs",
 ]
