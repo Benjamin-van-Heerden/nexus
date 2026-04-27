@@ -1,3 +1,6 @@
+import time
+from functools import partial
+
 import jax
 import jax.numpy as jnp
 
@@ -33,6 +36,10 @@ def slow_function(x):
     return result
 
 
+def proper(x):
+    return jnp.sum(x**2)
+
+
 def demonstrate_jit_speedup():
     """
     TODO: Implement this function to demonstrate jit speedup.
@@ -46,7 +53,23 @@ def demonstrate_jit_speedup():
 
     HINT: Use .block_until_ready() for accurate timing
     """
-    raise NotImplementedError("Implement demonstrate_jit_speedup()")
+    key = jax.random.PRNGKey(0)
+    key1, key2 = jax.random.split(key)
+    arr1 = jax.random.normal(key1, (100, 100))
+    arr2 = jax.random.normal(key2, (10000, 10000))
+    jitted_fn = jax.jit(slow_function)
+    now = time.time()
+    r1 = slow_function(arr1)
+    print(f"Slow function took {time.time() - now:.4f}s; r = {r1:.3f}")
+    _ = jitted_fn(arr1).block_until_ready()
+    now = time.time()
+    r2 = jitted_fn(arr1).block_until_ready()
+    print(f"Jitted function took {time.time() - now:.4f}s; r = {r2:.3f}")
+    now = time.time()
+    r3 = proper(arr2)
+    print(
+        f"Proper function (on *much* larger array) took {time.time() - now:.4f}s; r = {r3:.3f}"
+    )
 
 
 def safe_exp(x, threshold=5.0):
@@ -66,9 +89,8 @@ def safe_exp(x, threshold=5.0):
     Returns:
         Capped exponential
     """
-    # TODO: Implement using regular Python if statement
-    # This will demonstrate the tracing issue!
-    raise NotImplementedError("Implement safe_exp()")
+    return jnp.exp(jnp.minimum(x, threshold))
+    # return jnp.where(x < threshold, jnp.exp(x), jnp.exp(threshold))
 
 
 def safe_exp_jax(x, threshold=5.0):
@@ -84,7 +106,13 @@ def safe_exp_jax(x, threshold=5.0):
     Returns:
         Capped exponential
     """
-    raise NotImplementedError("Implement safe_exp_jax()")
+
+    def scalar_version(xi):
+        return jax.lax.cond(
+            xi < threshold, lambda: jnp.exp(xi), lambda: jnp.exp(threshold)
+        )
+
+    return jax.vmap(scalar_version)(x)
 
 
 def quadratic(x):
@@ -109,7 +137,8 @@ def compute_gradient():
     Returns:
         The gradient value (should be 32.0)
     """
-    raise NotImplementedError("Implement compute_gradient()")
+    grad_quad = jax.grad(quadratic)
+    return grad_quad(5.0)
 
 
 def compute_second_derivative():
@@ -123,7 +152,9 @@ def compute_second_derivative():
     Returns:
         The second derivative value (should be 6.0)
     """
-    raise NotImplementedError("Implement compute_second_derivative()")
+    d1 = jax.grad(quadratic)
+    d2 = jax.grad(d1)
+    return d2(5.0)
 
 
 def mse_loss(params, x, y):
@@ -160,7 +191,9 @@ def training_step(params, x, y, lr=0.01):
     Returns:
         Tuple of (loss_value, new_params)
     """
-    raise NotImplementedError("Implement training_step()")
+    loss, grads = jax.value_and_grad(mse_loss)(params, x, y)
+    new_params = (params[0] - lr * grads[0], params[1] - lr * grads[1])
+    return loss, new_params
 
 
 def create_fast_training_step(lr=0.01):
@@ -176,7 +209,7 @@ def create_fast_training_step(lr=0.01):
     Returns:
         Jitted training step function
     """
-    raise NotImplementedError("Implement create_fast_training_step()")
+    return jax.jit(partial(training_step, lr=lr))
 
 
 if __name__ == "__main__":
@@ -289,17 +322,17 @@ if __name__ == "__main__":
     # Test 6: Fast training step (jitted)
     print("\n6. Testing jitted training step...")
     try:
-        fast_step = create_fast_training_step(lr=0.1)
+        fast_step = create_fast_training_step(lr=0.01)
 
         # Run multiple steps
         params = (jnp.array(0.0), jnp.array(0.0))
         losses = []
 
         for i in range(5):
-            loss, params = fast_step(params, x_data, y_data)  # type: ignore
+            loss, params = fast_step(params, x_data, y_data)
             losses.append(float(loss))
 
-        print(f"   Loss trajectory: {[f'{l:.4f}' for l in losses]}")
+        print(f"   Loss trajectory: {[f'{loss:.4f}' for loss in losses]}")
 
         # Loss should generally decrease
         assert losses[0] > losses[-1], "Loss should decrease over training"
