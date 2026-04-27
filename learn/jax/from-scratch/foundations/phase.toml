@@ -85,7 +85,8 @@ status = "in_progress"
 name = "JAX jit and grad transformations exercise"
 type = "practical"
 created = "2026-04-02"
-status = "todo"
+status = "completed"
+completed = "2026-04-27"
 relevant_files = [
     "./jax/from-scratch/foundations/practical/examples/2026-04-02.py",
 ]
