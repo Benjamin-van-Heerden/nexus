@@ -1,5 +1,5 @@
 name = "foundations"
-current_goal = "Transformations: jit and grad"
+current_goal = "Transformations: vmap and pmap"
 
 [[goals]]
 name = "JAX Mental Model and jax.numpy"
@@ -79,7 +79,7 @@ relevant_files = [
 [[goals]]
 name = "Transformations: jit and grad"
 reference = "./learn/jax/reference/foundations-02-jit-and-grad.md"
-status = "in_progress"
+status = "completed"
 
 [[goals.tasks]]
 name = "JAX jit and grad transformations exercise"
@@ -94,7 +94,7 @@ relevant_files = [
 [[goals]]
 name = "Transformations: vmap and pmap"
 reference = "./learn/jax/reference/foundations-03-vmap-and-pmap.md"
-status = "todo"
+status = "in_progress"
 tasks = []
 
 [[goals]]
