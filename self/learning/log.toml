@@ -52,3 +52,8 @@ notes = "Rust control flow"
 date = "2026-04-25"
 did_learn = true
 notes = "Rust data structures and collections"
+
+[[sessions]]
+date = "2026-04-27"
+did_learn = true
+notes = "Jax — exercise on jit and grad"
