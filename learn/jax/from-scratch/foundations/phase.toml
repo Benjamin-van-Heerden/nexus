@@ -95,7 +95,15 @@ relevant_files = [
 name = "Transformations: vmap and pmap"
 reference = "./learn/jax/reference/foundations-03-vmap-and-pmap.md"
 status = "in_progress"
-tasks = []
+
+[[goals.tasks]]
+name = "Read vmap and pmap theoretical overview"
+type = "theoretical"
+created = "2026-04-28"
+status = "todo"
+relevant_files = [
+    "./learn/jax/from-scratch/foundations/theoretical/2026-04-28-vmap-pmap.md",
+]
 
 [[goals]]
 name = "PRNG and Randomness"
