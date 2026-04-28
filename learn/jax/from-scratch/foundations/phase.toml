@@ -105,6 +105,15 @@ relevant_files = [
     "./learn/jax/from-scratch/foundations/theoretical/2026-04-28-vmap-pmap.md",
 ]
 
+[[goals.tasks]]
+name = "Complete vmap and pmap practical exercise with jit/grad composition"
+type = "practical"
+created = "2026-04-28"
+status = "todo"
+relevant_files = [
+    "./learn/jax/from-scratch/foundations/practical/examples/2026-04-28.py",
+]
+
 [[goals]]
 name = "PRNG and Randomness"
 reference = "./learn/jax/reference/foundations-04-prng.md"
