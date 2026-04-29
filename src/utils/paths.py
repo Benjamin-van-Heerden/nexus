@@ -33,3 +33,7 @@ def get_self_dir() -> Path:
 
 def get_manage_dir() -> Path:
     return get_project_root() / "manage"
+
+
+def get_archive_dir() -> Path:
+    return get_project_root() / "archive"

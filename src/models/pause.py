@@ -18,3 +18,4 @@ class PauseConfig(BaseModel):
     learn: PauseEntry = PauseEntry()
     self: PauseEntry = PauseEntry()
     manage: PauseEntry = PauseEntry()
+    archive: PauseEntry = PauseEntry()

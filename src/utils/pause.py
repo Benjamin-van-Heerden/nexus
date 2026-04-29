@@ -30,7 +30,7 @@ def save_pause_config(config: PauseConfig) -> None:
         tomli_w.dump(config.model_dump(mode="json", exclude_none=True), f)
 
 
-def check_pause(feature: Literal["learn", "self", "manage"]) -> PauseEntry | None:
+def check_pause(feature: Literal["learn", "self", "manage", "archive"]) -> PauseEntry | None:
     config = load_pause_config()
     entry = getattr(config, feature)
 
@@ -46,7 +46,7 @@ def check_pause(feature: Literal["learn", "self", "manage"]) -> PauseEntry | Non
 
 
 def pause_feature(
-    feature: Literal["learn", "self", "manage"],
+    feature: Literal["learn", "self", "manage", "archive"],
     resume_date: date,
     reason: str | None = None,
 ) -> None:
@@ -58,7 +58,7 @@ def pause_feature(
     save_pause_config(config)
 
 
-def resume_feature(feature: Literal["learn", "self", "manage"]) -> None:
+def resume_feature(feature: Literal["learn", "self", "manage", "archive"]) -> None:
     config = load_pause_config()
     entry = getattr(config, feature)
     entry.active = False
