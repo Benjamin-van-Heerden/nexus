@@ -10,7 +10,7 @@ import subprocess
 import tomllib
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterator
 
 import tomli_w
 import yaml
@@ -326,6 +326,51 @@ def save_doc(frontmatter: DocFrontmatter, body: str) -> None:
     fm_dict = frontmatter.model_dump(mode="json", exclude_none=True)
     text = serialize_doc(fm_dict, body)
     _atomic_write_text(get_doc_path(frontmatter.slug), text)
+
+
+def doc_exists(slug: str) -> bool:
+    return get_doc_path(slug).is_file()
+
+
+def list_all_doc_slugs() -> set[str]:
+    wiki_dir = get_wiki_dir()
+    if not wiki_dir.is_dir():
+        return set()
+    return {p.stem for p in wiki_dir.glob("*.md")}
+
+
+def list_all_docs_with_frontmatter() -> Iterator[tuple[str, DocFrontmatter, str]]:
+    """Iterate (slug, frontmatter, body) over every wiki doc on disk."""
+    wiki_dir = get_wiki_dir()
+    if not wiki_dir.is_dir():
+        return
+    for path in sorted(wiki_dir.glob("*.md")):
+        try:
+            fm, body = load_doc(path.stem)
+        except Exception:
+            continue
+        yield path.stem, fm, body
+
+
+def list_all_outputs_with_frontmatter() -> Iterator[tuple[str, OutputFrontmatter, str]]:
+    """Iterate (slug, frontmatter, body) over every output on disk."""
+    out_dir = get_outputs_dir()
+    if not out_dir.is_dir():
+        return
+    for path in sorted(out_dir.glob("*.md")):
+        try:
+            fm, body = load_output(path.stem)
+        except Exception:
+            continue
+        yield path.stem, fm, body
+
+
+def mark_pending_qmd_update() -> None:
+    """Set state.toml's pending_qmd_update flag. Phase 5 turns this into an actual qmd update."""
+    state = load_archive_state()
+    if not state.pending_qmd_update:
+        state.pending_qmd_update = True
+        save_archive_state(state)
 
 
 # -- Outputs --
