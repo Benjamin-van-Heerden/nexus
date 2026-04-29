@@ -1,10 +1,17 @@
-generated = "2026-04-29T13:58:35.019186Z"
+generated = "2026-04-29T13:58:39.801857Z"
 doc_count = 0
-topic_count = 1
+topic_count = 2
 pending_outputs = 0
 orphan_count = 0
 stale_count = 0
 broken_link_count = 0
+
+[[topics]]
+slug = "foundational-papers"
+summary_line = "Seminal papers in ML."
+doc_count = 0
+related = []
+children = []
 
 [[topics]]
 slug = "ml-architectures"
