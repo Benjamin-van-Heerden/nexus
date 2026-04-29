@@ -1,8 +1,0 @@
-slug = "this-topic-doesnt-exist"
-title = "This Topic Doesnt Exist"
-summary = "Auto-created during write of 'strict-test'. Refine via `nexus archive topic update`."
-related = []
-created = "2026-04-29"
-updated = "2026-04-29"
-last_maintained = "2026-04-29"
-docs = []

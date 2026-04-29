@@ -1,14 +1,8 @@
-generated = "2026-04-29T14:04:42.526238Z"
+generated = "2026-04-29T14:04:45.680308Z"
 doc_count = 0
-topic_count = 1
+topic_count = 0
 pending_outputs = 0
 orphan_count = 0
 stale_count = 0
 broken_link_count = 0
-
-[[topics]]
-slug = "this-topic-doesnt-exist"
-summary_line = "Auto-created during write of 'strict-test'. Refine via `nexus archive topic update`."
-doc_count = 0
-related = []
-children = []
+topics = []
