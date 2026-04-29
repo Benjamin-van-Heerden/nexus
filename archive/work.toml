@@ -1,5 +1,5 @@
 [[items]]
 kind = "broken_link"
 slug = "transformer-impl"
-detail = "link target 'nonexistent-target' does not exist (relation: references)"
-created = "2026-04-29T13:59:19.552472Z"
+detail = "'attention-paper' was deleted; 'transformer-impl' referenced it"
+created = "2026-04-29T14:03:16.764774Z"
