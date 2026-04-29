@@ -57,3 +57,8 @@ notes = "Rust data structures and collections"
 date = "2026-04-27"
 did_learn = true
 notes = "Jax — exercise on jit and grad"
+
+[[sessions]]
+date = "2026-04-29"
+did_learn = true
+notes = "Jax — vmap and pmap"
