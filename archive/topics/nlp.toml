@@ -9,4 +9,5 @@ last_maintained = "2026-04-29"
 docs = [
     { slug = "transformer", hook = "" },
     { slug = "bert", hook = "" },
+    { slug = "vit", hook = "" },
 ]
