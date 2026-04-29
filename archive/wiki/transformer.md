@@ -18,7 +18,7 @@ provenance:
   ingested_from: add
   origin_outputs: []
 broken_links: []
-last_maintained: '2026-04-29'
+last_maintained: '2026-01-19'
 tags:
 - paper
 - seminal
