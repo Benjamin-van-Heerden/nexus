@@ -9,7 +9,7 @@ from src.models.archive.doc import LinkRef, LinkRelation
 from src.utils.archive import (
     doc_exists,
     load_doc,
-    mark_pending_qmd_update,
+    trigger_qmd_update_after_mutation,
     regenerate_index,
     save_doc,
 )
@@ -66,7 +66,7 @@ def add(
     fm.updated = date.today()
     save_doc(fm, body)
     regenerate_index()
-    mark_pending_qmd_update()
+    trigger_qmd_update_after_mutation(typer.echo)
 
     typer.echo(f"Linked '{from_slug}' --[{relation}]--> '{to_slug}'.")
 
@@ -94,6 +94,6 @@ def remove(
     fm.updated = date.today()
     save_doc(fm, body)
     regenerate_index()
-    mark_pending_qmd_update()
+    trigger_qmd_update_after_mutation(typer.echo)
 
     typer.echo(f"Removed {removed} link(s) from '{from_slug}' to '{to_slug}'.")

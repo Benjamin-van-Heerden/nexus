@@ -15,13 +15,13 @@ from src.utils.archive import (
     extract_mentions,
     get_doc_path,
     is_valid_slug,
-    mark_pending_qmd_update,
     parse_frontmatter,
     regenerate_index,
     save_doc,
     save_topic,
     sync_topic_membership,
     topic_exists,
+    trigger_qmd_update_after_mutation,
 )
 from src.utils.paths import get_archive_dir
 
@@ -161,7 +161,7 @@ def write(
     save_doc(fm, body)
     sync_topic_membership(fm.slug, new_topics=fm.topics, old_topics=[])
     regenerate_index()
-    mark_pending_qmd_update()
+    trigger_qmd_update_after_mutation(typer.echo)
 
     typer.echo(f"Wrote doc '{slug}'.")
     typer.echo(f"  Path: {get_doc_path(slug)}")
@@ -175,4 +175,3 @@ def write(
     typer.echo()
     typer.echo("ACTION REQUIRED:")
     typer.echo(f"  Inspect via: nexus archive doc show {slug}")
-    typer.echo("  QMD update is queued (will run during phase 5 wiring).")

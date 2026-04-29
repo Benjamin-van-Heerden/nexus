@@ -21,8 +21,10 @@ from src.commands.archive.doc import app as doc_app
 from src.commands.archive.index_cmd import index_cmd
 from src.commands.archive.link import app as link_app
 from src.commands.archive.neighborhood import neighborhood
+from src.commands.archive.query import query
 from src.commands.archive.recent import recent
 from src.commands.archive.related import related
+from src.commands.archive.search import search
 from src.commands.archive.setup import setup
 from src.commands.archive.tag import tag
 from src.commands.archive.topic import app as topic_app
@@ -42,3 +44,5 @@ app.command(name="recent", help="List recently updated docs")(recent)
 app.command(name="tag", help="List docs by tag")(tag)
 app.command(name="related", help="Show direct neighbours for a doc")(related)
 app.command(name="neighborhood", help="Multi-hop subgraph dump")(neighborhood)
+app.command(name="search", help="Raw QMD search hits (no enrichment)")(search)
+app.command(name="query", help="Recall mode: QMD hits with frontmatter-summary enrichment")(query)
