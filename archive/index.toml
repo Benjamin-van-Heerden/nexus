@@ -1,6 +1,6 @@
-generated = "2026-04-29T13:45:49.228634Z"
+generated = "2026-04-29T13:45:52.294397Z"
 doc_count = 0
-topic_count = 2
+topic_count = 3
 pending_outputs = 0
 orphan_count = 0
 stale_count = 0
@@ -21,4 +21,13 @@ summary_line = "Architectural patterns in ML models — RNNs, CNNs, transformers
 doc_count = 0
 parent = "machine-learning"
 related = []
+children = []
+
+[[topics]]
+slug = "nlp"
+summary_line = "Natural language processing."
+doc_count = 0
+related = [
+    "ml-architectures",
+]
 children = []
