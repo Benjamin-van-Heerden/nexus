@@ -15,8 +15,8 @@ class SourceEntry(BaseModel):
 
 class NewsConfig(BaseModel):
     sources: list[SourceEntry] = []
-    xai_model: str = "grok-3"
-    synthesis_model: str = ""
+    xai_model: str = "grok-4.20-reasoning"
+    synthesis_model: str = "grok-4.20-reasoning"
     history_days: int = 3
     categories: list[str] = [
         "science",

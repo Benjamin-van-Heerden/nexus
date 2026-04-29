@@ -28,3 +28,4 @@ auth
 _build/
 
 .DS_Store
+.env
