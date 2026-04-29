@@ -1,6 +1,6 @@
-generated = "2026-04-29T14:12:10.641190Z"
+generated = "2026-04-29T14:12:13.717133Z"
 doc_count = 0
-topic_count = 3
+topic_count = 2
 pending_outputs = 0
 orphan_count = 0
 stale_count = 0
@@ -21,13 +21,4 @@ doc_count = 0
 related = []
 children = [
     "cv",
-    "nlp",
 ]
-
-[[topics]]
-slug = "nlp"
-summary_line = "Natural language processing."
-doc_count = 0
-parent = "ml"
-related = []
-children = []
