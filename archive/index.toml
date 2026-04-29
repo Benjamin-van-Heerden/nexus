@@ -1,9 +1,9 @@
-generated = "2026-04-29T14:11:59.572874Z"
-doc_count = 3
+generated = "2026-04-29T14:12:03.056579Z"
+doc_count = 2
 topic_count = 3
 pending_outputs = 0
-orphan_count = 2
-stale_count = 0
+orphan_count = 1
+stale_count = 1
 broken_link_count = 0
 
 [[topics]]
@@ -27,7 +27,7 @@ children = [
 [[topics]]
 slug = "nlp"
 summary_line = "Natural language processing."
-doc_count = 3
+doc_count = 2
 parent = "ml"
 related = []
 children = []
