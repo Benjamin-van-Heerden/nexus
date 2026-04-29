@@ -5,6 +5,4 @@ related = []
 created = "2026-04-29"
 updated = "2026-04-29"
 last_maintained = "2026-04-29"
-docs = [
-    { slug = "transformer-impl", hook = "" },
-]
+docs = []
