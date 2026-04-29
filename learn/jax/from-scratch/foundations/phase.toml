@@ -116,6 +116,15 @@ relevant_files = [
     "./learn/jax/from-scratch/foundations/practical/examples/2026-04-28.py",
 ]
 
+[[goals.tasks]]
+name = "Practical: Write for one, batch with vmap — core philosophy drill"
+type = "practical"
+created = "2026-04-29"
+status = "todo"
+relevant_files = [
+    "./learn/jax/from-scratch/foundations/practical/examples/2026-04-29.py",
+]
+
 [[goals]]
 name = "PRNG and Randomness"
 reference = "./learn/jax/reference/foundations-04-prng.md"
