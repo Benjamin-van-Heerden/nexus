@@ -120,7 +120,8 @@ relevant_files = [
 name = "Practical: Write for one, batch with vmap — core philosophy drill"
 type = "practical"
 created = "2026-04-29"
-status = "todo"
+status = "completed"
+completed = "2026-04-29"
 relevant_files = [
     "./learn/jax/from-scratch/foundations/practical/examples/2026-04-29.py",
 ]
