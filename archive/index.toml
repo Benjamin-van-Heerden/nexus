@@ -1,24 +1,15 @@
-generated = "2026-04-29T13:46:05.789890Z"
-doc_count = 0
-topic_count = 3
+generated = "2026-04-29T13:46:34.587427Z"
+doc_count = 1
+topic_count = 2
 pending_outputs = 0
 orphan_count = 0
 stale_count = 0
 broken_link_count = 0
 
 [[topics]]
-slug = "machine-learning"
-summary_line = "Umbrella — algorithms, theory, systems."
-doc_count = 0
-related = []
-children = [
-    "ml-architectures",
-]
-
-[[topics]]
 slug = "ml-architectures"
 summary_line = "Architectural patterns in ML models — RNNs, CNNs, transformers."
-doc_count = 0
+doc_count = 1
 parent = "machine-learning"
 related = []
 children = []
