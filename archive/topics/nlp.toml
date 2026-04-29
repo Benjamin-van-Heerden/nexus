@@ -1,6 +1,7 @@
 slug = "nlp"
 title = "NLP"
 summary = "Natural language processing."
+parent = "machine-learning"
 related = [
     "ml-architectures",
 ]
