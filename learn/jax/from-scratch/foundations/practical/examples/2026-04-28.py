@@ -15,7 +15,7 @@ import time
 
 import jax
 import jax.numpy as jnp
-from jax import grad, jit, pmap, random, vmap
+from jax import random, vmap
 
 # =============================================================================
 # PART 1: vmap Fundamentals
