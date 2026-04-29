@@ -1,5 +1,0 @@
-[[items]]
-kind = "needs_topic_review"
-slug = "dummy-doc"
-detail = "topic 'test-topic' was deleted; reassign or accept"
-created = "2026-04-29T13:47:37.241669Z"
