@@ -1,10 +1,10 @@
-generated = "2026-04-29T14:57:35.188447Z"
-doc_count = 1
+generated = "2026-04-29T14:58:25.738359Z"
+doc_count = 0
 topic_count = 1
 pending_outputs = 0
-orphan_count = 1
+orphan_count = 0
 stale_count = 0
 broken_link_count = 0
 topics = [
-    { slug = "test-qmd", summary_line = "x", doc_count = 1, related = [], children = [] },
+    { slug = "test-qmd", summary_line = "x", doc_count = 0, related = [], children = [] },
 ]
