@@ -1,9 +1,9 @@
 ---
 title: 'Traversal primitives: index, recent, tag, related, neighborhood'
-status: todo
+status: completed
 created_at: '2026-04-17T14:02:51.963349'
-updated_at: '2026-04-17T14:02:51.963349'
-completed_at: null
+updated_at: '2026-04-29T16:18:08.265360'
+completed_at: '2026-04-29T16:18:08.265351'
 ---
 Phase 4 of the implementation plan in spec.md. Implements the structural-entry and traversal primitives the librarian uses to walk the archive.
 
@@ -61,3 +61,53 @@ Done criteria:
 - `uv run nexus archive tag paper` returns paper-tagged docs.
 - `uv run nexus archive related <slug>` shows forward + backward + mention + sibling neighbours.
 - `uv run nexus archive neighborhood <slug> --hops 2` returns a 2-hop subgraph blob.
+
+## Completion Notes
+
+Implemented Phase 4: structural-entry and traversal primitives.
+
+Utils additions (src/utils/archive.py):
+- compute_backlinks(target_slug) -> list[(source_slug, relation)]: walks docs, finds inbound links.
+- compute_mentioned_by(target_slug) -> list[str]: walks docs, finds [[target]] in body or in mentions list.
+- compute_topic_siblings(slug, limit_per_topic=5) -> dict[topic_slug, list[doc_slug]]: per-topic neighbour list excluding self.
+- Enhanced regenerate_index(): now computes orphan_count (no topics OR zero inbound refs), stale_count (last_maintained older than archive.toml's staleness_days), broken_link_count (sum across docs), pending_outputs. Builds inbound-ref index in O(n).
+
+Commands (src/commands/archive/):
+
+index_cmd.py — `index [--regenerate] [--json]`:
+- Default reads archive/index.toml; --regenerate rebuilds first.
+- Human form prints counts + topics sorted by doc-count desc, with summary line, parent, children, related.
+
+recent.py — `recent [--days N=7] [-n M=20] [--json]`:
+- Walks wiki, filters updated >= today - days, sorts desc, caps at M. Per-doc: slug, title, first-line summary, topics, status, updated date.
+
+tag.py — `tag <tag> [--json]`:
+- Exact-match filter on tags[]. Output: slug, title, first-line summary, topics, all tags, status.
+
+related.py — `related <slug> [--siblings-per-topic N=5] [--json]`:
+- Five sections: forward links (with relation), backlinks (with inverse relation), mentions, mentioned-by, topic siblings (per topic, capped).
+- Each item enriched with title + summary first line.
+- Missing link/mention targets flagged with `(missing)` marker.
+
+neighborhood.py — `neighborhood <slug> [--hops N=1, 0..3] [--siblings-per-topic N=3] [--json]`:
+- BFS-style expansion through links, backlinks, mentions, mentioned-by, topic siblings.
+- Returns {center, hops, node_count, edge_count, nodes: [{slug, title, summary, topics, hop, via}], edges: [{from, to, kind, relation/topic}]}.
+- kind in {"link", "mention", "topic-sibling"}.
+- Edges may include nodes already in the graph; node deduplication is by slug.
+
+Wiring (src/commands/archive/main.py): added index, recent, tag, related, neighborhood as top-level archive commands.
+
+Smoke tests verified end-to-end:
+- Built a 3-topic / 3-doc graph (ml parent of nlp, cv; transformer/bert/vit with cross-doc links and mentions).
+- `index` correctly reports 3 docs, 3 topics, 2 orphans (bert + vit have zero inbound refs); --regenerate rebuilds; --json emits structured form.
+- `recent --days 1` returns all docs sorted by updated desc.
+- `tag paper` returns 3 docs; `tag seminal` returns 1.
+- `related transformer` correctly surfaces 2 backlinks (bert depends_on, vit extends), 2 mentioned-by, 2 topic siblings under nlp; --json includes full enrichment.
+- `neighborhood --hops 0/1/2/3` work; --hops 5 rejected; missing slug rejected.
+- Stale detection: aging a doc's last_maintained by 100 days bumps stale_count to 1.
+
+Conventions:
+- All commands are pure reads — no mutation, no QMD calls (deferred to phase 5).
+- All paths displayed are absolute via existing path helpers.
+- --json structured form available across all five commands.
+- O(n) walks acceptable for v1; can cache later if needed.

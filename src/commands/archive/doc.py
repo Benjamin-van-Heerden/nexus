@@ -21,7 +21,7 @@ from src.utils.archive import (
     list_all_topics,
     load_archive_state,
     load_doc,
-    mark_pending_qmd_update,
+    trigger_qmd_update_after_mutation,
     regenerate_index,
     save_archive_state,
     save_doc,
@@ -79,7 +79,7 @@ def update(
         old_topics=existing_fm.topics,
     )
     regenerate_index()
-    mark_pending_qmd_update()
+    trigger_qmd_update_after_mutation(typer.echo)
 
     added = sorted(set(fm.topics) - set(existing_fm.topics))
     removed = sorted(set(existing_fm.topics) - set(fm.topics))
@@ -208,7 +208,7 @@ def rename(
     save_archive_state(state)
 
     regenerate_index()
-    mark_pending_qmd_update()
+    trigger_qmd_update_after_mutation(typer.echo)
 
     typer.echo(f"Renamed '{old_slug}' → '{new_slug}'.")
     typer.echo(f"  Docs touched: {len(doc_writes)}")
@@ -285,7 +285,7 @@ def delete(
 
     get_doc_path(slug).unlink()
     regenerate_index()
-    mark_pending_qmd_update()
+    trigger_qmd_update_after_mutation(typer.echo)
 
     typer.echo(f"Deleted doc '{slug}'.")
     typer.echo(f"  Docs flagged with broken_links: {len(affected_docs)}")

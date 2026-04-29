@@ -550,3 +550,101 @@ def qmd_run(args: list[str], parse_json: bool = False) -> Any:
     if parse_json:
         return json.loads(result.stdout) if result.stdout.strip() else None
     return result.stdout
+
+
+def _qmd_unwrap_hits(payload: Any) -> list[dict]:
+    """Coerce qmd JSON output to a list of hit dicts.
+
+    qmd may return either a bare list of hits or a dict with a 'results' /
+    'hits' key. Be defensive — third-party tools change shapes.
+    """
+    if payload is None:
+        return []
+    if isinstance(payload, list):
+        return [h for h in payload if isinstance(h, dict)]
+    if isinstance(payload, dict):
+        for key in ("results", "hits", "data"):
+            if key in payload and isinstance(payload[key], list):
+                return [h for h in payload[key] if isinstance(h, dict)]
+    return []
+
+
+def qmd_search(q: str, n: int) -> list[dict]:
+    """Raw qmd search hits. Reads collection name from archive.toml."""
+    config = load_archive_config()
+    payload = qmd_run(
+        [
+            "search",
+            q,
+            "-c",
+            config.qmd.collection_name,
+            "--json",
+            "-n",
+            str(n),
+        ],
+        parse_json=True,
+    )
+    return _qmd_unwrap_hits(payload)
+
+
+def qmd_query(q: str, n: int) -> list[dict]:
+    """Raw qmd query hits (BM25 + vector + reranker). Reads collection name from archive.toml."""
+    config = load_archive_config()
+    payload = qmd_run(
+        [
+            "query",
+            q,
+            "-c",
+            config.qmd.collection_name,
+            "--json",
+            "-n",
+            str(n),
+        ],
+        parse_json=True,
+    )
+    return _qmd_unwrap_hits(payload)
+
+
+def qmd_path_to_slug(path: str | None) -> str | None:
+    """Map a qmd hit's path to a wiki slug. Returns None if the slug can't be resolved."""
+    if not path:
+        return None
+    p = Path(path)
+    if p.suffix != ".md":
+        return None
+    slug = p.stem
+    return slug if doc_exists(slug) else None
+
+
+def qmd_update_collection() -> None:
+    """Run `qmd update --collections <name>` and stamp state.toml's last_qmd_update.
+
+    Clears state.toml's pending_qmd_update flag on success. Raises
+    QmdNotInstalledError or RuntimeError on failure (caller decides how
+    to handle).
+    """
+    config = load_archive_config()
+    qmd_run(["update", "--collections", config.qmd.collection_name])
+    state = load_archive_state()
+    state.last_qmd_update = datetime.now(timezone.utc)
+    state.pending_qmd_update = False
+    save_archive_state(state)
+
+
+def trigger_qmd_update_after_mutation(echo) -> None:
+    """Run a qmd update after a mutation. Marks pending first; clears on success.
+
+    Mutation commands MUST succeed even if qmd is unavailable, so this
+    function always swallows qmd failures and just emits a warning via
+    the supplied `echo` callable (typically typer.echo).
+    """
+    mark_pending_qmd_update()
+    try:
+        qmd_update_collection()
+    except QmdNotInstalledError:
+        echo(
+            "Warning: qmd is not installed; skipped index update. "
+            "Run `nexus archive reindex` after installing qmd."
+        )
+    except RuntimeError as e:
+        echo(f"Warning: qmd update failed (state remains pending): {e}")
