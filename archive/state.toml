@@ -1,3 +1,7 @@
 schema_version = 1
 pending_qmd_update = true
-renames = []
+
+[[renames]]
+old = "attention-is-all-you-need"
+new = "attention-paper"
+at = "2026-04-29T14:02:47.396413Z"
