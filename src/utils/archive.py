@@ -8,6 +8,7 @@ import json
 import re
 import subprocess
 import tomllib
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -16,9 +17,9 @@ import yaml
 
 from src.models.archive.archive import ArchiveConfig, ArchiveState
 from src.models.archive.doc import DocFrontmatter
-from src.models.archive.index import IndexFile
+from src.models.archive.index import IndexFile, IndexTopicEntry
 from src.models.archive.output import OutputFrontmatter
-from src.models.archive.topic import TopicConfig
+from src.models.archive.topic import TopicConfig, TopicMember
 from src.models.archive.work import WorkItem, WorkQueue
 from src.utils.paths import get_archive_dir
 
@@ -191,8 +192,6 @@ def sync_topic_membership(
             continue
         topic = load_topic(topic_slug)
         if not any(d.slug == doc_slug for d in topic.docs):
-            from src.models.archive.topic import TopicMember
-
             topic.docs.append(
                 TopicMember(slug=doc_slug, hook=overrides.get(topic_slug, ""))
             )
@@ -239,10 +238,6 @@ def regenerate_index() -> IndexFile:
     Walks topics/ and wiki/. Phase 2 implementation; later phases enrich
     counts (orphans, stales, broken_links, pending_outputs).
     """
-    from datetime import datetime, timezone
-
-    from src.models.archive.index import IndexFile, IndexTopicEntry
-
     topics = list_all_topics()
     wiki_dir = get_wiki_dir()
     doc_count = (
