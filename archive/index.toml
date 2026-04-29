@@ -1,5 +1,5 @@
-generated = "2026-04-29T14:02:47.397319Z"
-doc_count = 2
+generated = "2026-04-29T14:03:16.766403Z"
+doc_count = 1
 topic_count = 2
 pending_outputs = 0
 orphan_count = 0
@@ -9,13 +9,13 @@ broken_link_count = 0
 [[topics]]
 slug = "foundational-papers"
 summary_line = "Seminal papers in ML."
-doc_count = 2
+doc_count = 1
 related = []
 children = []
 
 [[topics]]
 slug = "ml-architectures"
 summary_line = "Architectural patterns in ML."
-doc_count = 1
+doc_count = 0
 related = []
 children = []

@@ -7,16 +7,14 @@ updated: '2026-04-29'
 status: stable
 topics:
 - foundational-papers
-links:
-- slug: attention-paper
-  relation: depends_on
-mentions:
-- attention-paper
+links: []
+mentions: []
 sources: []
 provenance:
   ingested_from: add
   origin_outputs: []
-broken_links: []
+broken_links:
+- attention-paper
 last_maintained: '2026-04-29'
 tags: []
 ---
