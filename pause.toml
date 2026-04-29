@@ -8,6 +8,4 @@ active = false
 active = false
 
 [archive]
-active = true
-resume_date = "2026-05-01"
-reason = "smoke test"
+active = false
