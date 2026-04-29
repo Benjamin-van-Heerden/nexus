@@ -61,4 +61,4 @@ notes = "Jax — exercise on jit and grad"
 [[sessions]]
 date = "2026-04-29"
 did_learn = true
-notes = "Jax — vmap and pmap"
+notes = "More on vmap"
