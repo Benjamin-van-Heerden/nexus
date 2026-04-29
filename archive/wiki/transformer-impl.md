@@ -8,10 +8,10 @@ status: stable
 topics:
 - foundational-papers
 links:
-- slug: attention-is-all-you-need
+- slug: attention-paper
   relation: depends_on
 mentions:
-- attention-is-all-you-need
+- attention-paper
 sources: []
 provenance:
   ingested_from: add
@@ -21,4 +21,4 @@ last_maintained: '2026-04-29'
 tags: []
 ---
 
-Refreshed body. Still references [[attention-is-all-you-need]] but no broken link.
+Refreshed body. Still references [[attention-paper]] but no broken link.

@@ -1,5 +1,5 @@
 ---
-slug: attention-is-all-you-need
+slug: attention-paper
 title: Attention Is All You Need
 summary: 'Introduces the Transformer — built on self-attention.
 
@@ -15,7 +15,7 @@ topics:
 links: []
 mentions:
 - some-future-doc
-- attention-is-all-you-need
+- attention-paper
 sources: []
 provenance:
   ingested_from: add
@@ -28,4 +28,4 @@ tags:
 - '2017'
 ---
 
-This paper [[some-future-doc]] is referenced. So is [[attention-is-all-you-need]] (self-mention, weird but tested).
+This paper [[some-future-doc]] is referenced. So is [[attention-paper]] (self-mention, weird but tested).
