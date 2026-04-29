@@ -1,14 +1,8 @@
-generated = "2026-04-29T13:48:22.491990Z"
+generated = "2026-04-29T13:48:26.854667Z"
 doc_count = 0
-topic_count = 1
+topic_count = 0
 pending_outputs = 0
 orphan_count = 0
 stale_count = 0
 broken_link_count = 0
-
-[[topics]]
-slug = "sanity"
-summary_line = "verifying after refactor"
-doc_count = 0
-related = []
-children = []
+topics = []
