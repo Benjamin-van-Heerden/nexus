@@ -32,7 +32,7 @@ def _print_status() -> None:
 
     typer.echo("\nPause status:")
     has_paused = False
-    for feature in ["learn", "self", "manage"]:
+    for feature in ["learn", "self", "manage", "archive"]:
         entry = getattr(config, feature)
         if entry.active:
             has_paused = True
@@ -85,12 +85,27 @@ def self(
 
 
 @app.command()
+def archive(
+    until: str = typer.Option(..., "--until", "-u", help="Date to resume (YYYY-MM-DD)"),
+    reason: str | None = typer.Option(
+        None, "--reason", "-r", help="Reason for pausing"
+    ),
+):
+    """Pause the archive subsystem until a date."""
+    resume_date = _parse_date(until)
+    pause_feature("archive", resume_date, reason)
+    typer.echo(f"Archive paused until {resume_date}.")
+    if reason:
+        typer.echo(f"Reason: {reason}")
+
+
+@app.command()
 def resume(
-    feature: str = typer.Argument(..., help="Feature to resume (learn, self, manage)"),
+    feature: str = typer.Argument(..., help="Feature to resume (learn, self, manage, archive)"),
 ):
     """Manually resume a paused subsystem."""
-    if feature not in ["learn", "self", "manage"]:
-        typer.echo(f"Unknown feature: {feature}. Choose from: learn, self, manage")
+    if feature not in ["learn", "self", "manage", "archive"]:
+        typer.echo(f"Unknown feature: {feature}. Choose from: learn, self, manage, archive")
         raise typer.Exit(1)
 
     resume_feature(feature)  # type: ignore[arg-type]

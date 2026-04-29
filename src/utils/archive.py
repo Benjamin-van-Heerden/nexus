@@ -1,0 +1,328 @@
+"""Archive system utilities.
+
+Handles TOML/YAML I/O, frontmatter parsing, slug helpers, mention
+extraction, and the QMD subprocess wrapper for the archive system.
+"""
+
+import json
+import re
+import subprocess
+import tomllib
+from pathlib import Path
+from typing import Any
+
+import tomli_w
+import yaml
+
+from src.models.archive.archive import ArchiveConfig, ArchiveState
+from src.models.archive.doc import DocFrontmatter
+from src.models.archive.index import IndexFile
+from src.models.archive.output import OutputFrontmatter
+from src.models.archive.topic import TopicConfig
+from src.models.archive.work import WorkItem, WorkQueue
+from src.utils.paths import get_archive_dir
+
+# -- Path getters --
+
+
+def get_wiki_dir() -> Path:
+    return get_archive_dir() / "wiki"
+
+
+def get_topics_dir() -> Path:
+    return get_archive_dir() / "topics"
+
+
+def get_raw_dir() -> Path:
+    return get_archive_dir() / "raw"
+
+
+def get_outputs_dir() -> Path:
+    return get_archive_dir() / "outputs"
+
+
+def get_archive_config_path() -> Path:
+    return get_archive_dir() / "archive.toml"
+
+
+def get_archive_state_path() -> Path:
+    return get_archive_dir() / "state.toml"
+
+
+def get_work_path() -> Path:
+    return get_archive_dir() / "work.toml"
+
+
+def get_index_path() -> Path:
+    return get_archive_dir() / "index.toml"
+
+
+def get_agent_instructions_path() -> Path:
+    return Path(__file__).resolve().parent.parent / "commands" / "archive" / "agent_instructions.md"
+
+
+# -- Atomic write helper --
+
+
+def _atomic_write_bytes(path: Path, data: bytes) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_bytes(data)
+    tmp.replace(path)
+
+
+def _atomic_write_text(path: Path, text: str) -> None:
+    _atomic_write_bytes(path, text.encode("utf-8"))
+
+
+# -- TOML I/O --
+
+
+def _load_toml(path: Path) -> dict:
+    with open(path, "rb") as f:
+        return tomllib.load(f)
+
+
+def _dump_toml_bytes(data: dict) -> bytes:
+    return tomli_w.dumps(data, multiline_strings=True).encode("utf-8")
+
+
+def _save_toml(path: Path, data: dict) -> None:
+    _atomic_write_bytes(path, _dump_toml_bytes(data))
+
+
+# -- Config / state --
+
+
+def load_archive_config() -> ArchiveConfig:
+    path = get_archive_config_path()
+    if not path.exists() or path.stat().st_size == 0:
+        return ArchiveConfig()
+    return ArchiveConfig(**_load_toml(path))
+
+
+def save_archive_config(config: ArchiveConfig) -> None:
+    _save_toml(get_archive_config_path(), config.model_dump(mode="json", exclude_none=True))
+
+
+def load_archive_state() -> ArchiveState:
+    path = get_archive_state_path()
+    if not path.exists() or path.stat().st_size == 0:
+        return ArchiveState()
+    return ArchiveState(**_load_toml(path))
+
+
+def save_archive_state(state: ArchiveState) -> None:
+    _save_toml(get_archive_state_path(), state.model_dump(mode="json", exclude_none=True))
+
+
+# -- Work queue --
+
+
+def load_work_queue() -> WorkQueue:
+    path = get_work_path()
+    if not path.exists() or path.stat().st_size == 0:
+        return WorkQueue()
+    return WorkQueue(**_load_toml(path))
+
+
+def save_work_queue(queue: WorkQueue) -> None:
+    _save_toml(get_work_path(), queue.model_dump(mode="json", exclude_none=True))
+
+
+def enqueue_work(item: WorkItem) -> None:
+    queue = load_work_queue()
+    queue.items.append(item)
+    save_work_queue(queue)
+
+
+# -- Topics --
+
+
+def get_topic_path(slug: str) -> Path:
+    return get_topics_dir() / f"{slug}.toml"
+
+
+def load_topic(slug: str) -> TopicConfig:
+    return TopicConfig(**_load_toml(get_topic_path(slug)))
+
+
+def save_topic(topic: TopicConfig) -> None:
+    _save_toml(get_topic_path(topic.slug), topic.model_dump(mode="json", exclude_none=True))
+
+
+# -- Index --
+
+
+def load_index() -> IndexFile | None:
+    path = get_index_path()
+    if not path.exists() or path.stat().st_size == 0:
+        return None
+    return IndexFile(**_load_toml(path))
+
+
+def save_index(index: IndexFile) -> None:
+    _save_toml(get_index_path(), index.model_dump(mode="json", exclude_none=True))
+
+
+# -- Frontmatter parse / serialize --
+
+_FRONTMATTER_RE = re.compile(r"^---\n(.*?)\n---\n?(.*)$", re.DOTALL)
+
+
+def parse_frontmatter(text: str) -> tuple[dict[str, Any], str]:
+    """Split a markdown file with YAML frontmatter into (frontmatter_dict, body).
+
+    Raises ValueError if the file does not start with a `---` block.
+    """
+    match = _FRONTMATTER_RE.match(text)
+    if not match:
+        raise ValueError("File does not start with a YAML frontmatter block (---)")
+    raw_yaml, body = match.group(1), match.group(2)
+    data = yaml.safe_load(raw_yaml) or {}
+    if not isinstance(data, dict):
+        raise ValueError("Frontmatter must be a YAML mapping")
+    return data, body
+
+
+def serialize_doc(frontmatter: dict[str, Any], body: str) -> str:
+    """Serialize a frontmatter dict + body into the wiki-doc string format."""
+    yaml_text = yaml.safe_dump(
+        frontmatter,
+        sort_keys=False,
+        default_flow_style=False,
+        allow_unicode=True,
+    ).rstrip()
+    body = body.lstrip("\n")
+    return f"---\n{yaml_text}\n---\n\n{body}" if body else f"---\n{yaml_text}\n---\n"
+
+
+# -- Wiki docs --
+
+
+def get_doc_path(slug: str) -> Path:
+    return get_wiki_dir() / f"{slug}.md"
+
+
+def load_doc(slug: str) -> tuple[DocFrontmatter, str]:
+    text = get_doc_path(slug).read_text(encoding="utf-8")
+    fm_dict, body = parse_frontmatter(text)
+    return DocFrontmatter(**fm_dict), body
+
+
+def save_doc(frontmatter: DocFrontmatter, body: str) -> None:
+    fm_dict = frontmatter.model_dump(mode="json", exclude_none=True)
+    text = serialize_doc(fm_dict, body)
+    _atomic_write_text(get_doc_path(frontmatter.slug), text)
+
+
+# -- Outputs --
+
+
+def get_output_path(slug: str) -> Path:
+    return get_outputs_dir() / f"{slug}.md"
+
+
+def load_output(slug: str) -> tuple[OutputFrontmatter, str]:
+    text = get_output_path(slug).read_text(encoding="utf-8")
+    fm_dict, body = parse_frontmatter(text)
+    return OutputFrontmatter(**fm_dict), body
+
+
+def save_output(frontmatter: OutputFrontmatter, body: str) -> None:
+    fm_dict = frontmatter.model_dump(mode="json", exclude_none=True)
+    text = serialize_doc(fm_dict, body)
+    _atomic_write_text(get_output_path(frontmatter.slug), text)
+
+
+# -- Slug helpers --
+
+_SLUG_VALID_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+
+
+def slugify(title: str) -> str:
+    """Convert a title to a kebab-case slug suitable for archive identifiers."""
+    s = title.lower().strip()
+    s = re.sub(r"[^a-z0-9]+", "-", s)
+    s = s.strip("-")
+    return s
+
+
+def is_valid_slug(slug: str) -> bool:
+    return bool(_SLUG_VALID_RE.match(slug))
+
+
+def ensure_unique_slug(candidate: str, existing: set[str]) -> str:
+    """Return candidate if unused, otherwise append -2, -3, ... until unique."""
+    if candidate not in existing:
+        return candidate
+    i = 2
+    while f"{candidate}-{i}" in existing:
+        i += 1
+    return f"{candidate}-{i}"
+
+
+# -- Mention extraction --
+
+_MENTION_RE = re.compile(r"\[\[([a-z0-9]+(?:-[a-z0-9]+)*)\]\]")
+
+
+def extract_mentions(body: str) -> list[str]:
+    """Extract unique [[slug]] mentions from a doc body, preserving first-seen order."""
+    seen: list[str] = []
+    seen_set: set[str] = set()
+    for m in _MENTION_RE.finditer(body):
+        slug = m.group(1)
+        if slug not in seen_set:
+            seen.append(slug)
+            seen_set.add(slug)
+    return seen
+
+
+# -- QMD wrapper --
+
+
+class QmdNotInstalledError(RuntimeError):
+    """Raised when the qmd binary is not available on PATH."""
+
+
+_QMD_INSTALL_HINT = (
+    "qmd is not installed. Install it with one of:\n"
+    "  npm install -g @tobilu/qmd\n"
+    "  bun install -g @tobilu/qmd"
+)
+
+
+def qmd_check() -> str:
+    """Return qmd's version string. Raises QmdNotInstalledError if not on PATH."""
+    try:
+        result = subprocess.run(
+            ["qmd", "--version"], capture_output=True, text=True, check=False
+        )
+    except FileNotFoundError as e:
+        raise QmdNotInstalledError(_QMD_INSTALL_HINT) from e
+    if result.returncode != 0:
+        raise QmdNotInstalledError(
+            f"qmd --version exited {result.returncode}: {result.stderr.strip()}"
+        )
+    return result.stdout.strip()
+
+
+def qmd_run(args: list[str], parse_json: bool = False) -> Any:
+    """Run a qmd subcommand. Returns parsed JSON if requested, else stdout string.
+
+    Raises QmdNotInstalledError if qmd is missing; RuntimeError on non-zero exit.
+    """
+    try:
+        result = subprocess.run(
+            ["qmd", *args], capture_output=True, text=True, check=False
+        )
+    except FileNotFoundError as e:
+        raise QmdNotInstalledError(_QMD_INSTALL_HINT) from e
+    if result.returncode != 0:
+        raise RuntimeError(
+            f"qmd {' '.join(args)} exited {result.returncode}: {result.stderr.strip()}"
+        )
+    if parse_json:
+        return json.loads(result.stdout) if result.stdout.strip() else None
+    return result.stdout
