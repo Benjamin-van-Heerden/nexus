@@ -1,0 +1,9 @@
+interests = []
+
+[maintenance]
+staleness_days = 90
+batch_size = 10
+
+[qmd]
+collection_name = "nexus-archive"
+default_recall_n = 10
