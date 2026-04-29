@@ -19,3 +19,4 @@ class PauseConfig(BaseModel):
     self: PauseEntry = PauseEntry()
     manage: PauseEntry = PauseEntry()
     archive: PauseEntry = PauseEntry()
+    news: PauseEntry = PauseEntry()
