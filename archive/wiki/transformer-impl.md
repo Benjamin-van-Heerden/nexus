@@ -12,6 +12,8 @@ links:
   relation: depends_on
 - slug: nonexistent-target
   relation: references
+- slug: attention-is-all-you-need
+  relation: extends
 mentions:
 - attention-is-all-you-need
 sources: []
