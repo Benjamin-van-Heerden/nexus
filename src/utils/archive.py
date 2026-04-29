@@ -151,6 +151,74 @@ def save_topic(topic: TopicConfig) -> None:
     _save_toml(get_topic_path(topic.slug), topic.model_dump(mode="json", exclude_none=True))
 
 
+def topic_exists(slug: str) -> bool:
+    return get_topic_path(slug).is_file()
+
+
+def list_all_topics() -> list[TopicConfig]:
+    topics_dir = get_topics_dir()
+    if not topics_dir.is_dir():
+        return []
+    out: list[TopicConfig] = []
+    for path in sorted(topics_dir.glob("*.toml")):
+        try:
+            out.append(TopicConfig(**_load_toml(path)))
+        except Exception:
+            continue
+    return out
+
+
+def sync_topic_membership(
+    doc_slug: str,
+    new_topics: list[str],
+    old_topics: list[str],
+    hook_overrides: dict[str, str] | None = None,
+) -> None:
+    """Reconcile a doc's topic membership across all referenced topic files.
+
+    For each topic in (new - old): add the doc to its [[docs]] list with empty
+    hook (or the override if provided). For each topic in (old - new): remove
+    the doc from its [[docs]] list. Existing hooks on no-op topics are
+    preserved. Topics that don't exist on disk are skipped silently — caller
+    is responsible for validation.
+    """
+    new_set = set(new_topics)
+    old_set = set(old_topics)
+    overrides = hook_overrides or {}
+
+    for topic_slug in new_set - old_set:
+        if not topic_exists(topic_slug):
+            continue
+        topic = load_topic(topic_slug)
+        if not any(d.slug == doc_slug for d in topic.docs):
+            from src.models.archive.topic import TopicMember
+
+            topic.docs.append(
+                TopicMember(slug=doc_slug, hook=overrides.get(topic_slug, ""))
+            )
+            save_topic(topic)
+
+    for topic_slug in old_set - new_set:
+        if not topic_exists(topic_slug):
+            continue
+        topic = load_topic(topic_slug)
+        before = len(topic.docs)
+        topic.docs = [d for d in topic.docs if d.slug != doc_slug]
+        if len(topic.docs) != before:
+            save_topic(topic)
+
+
+def get_or_create_topic_member_hook(topic_slug: str, doc_slug: str) -> str:
+    """Return the existing hook for a doc in a topic, or empty string."""
+    if not topic_exists(topic_slug):
+        return ""
+    topic = load_topic(topic_slug)
+    for d in topic.docs:
+        if d.slug == doc_slug:
+            return d.hook
+    return ""
+
+
 # -- Index --
 
 
@@ -163,6 +231,55 @@ def load_index() -> IndexFile | None:
 
 def save_index(index: IndexFile) -> None:
     _save_toml(get_index_path(), index.model_dump(mode="json", exclude_none=True))
+
+
+def regenerate_index() -> IndexFile:
+    """Rebuild archive/index.toml from the current on-disk state.
+
+    Walks topics/ and wiki/. Phase 2 implementation; later phases enrich
+    counts (orphans, stales, broken_links, pending_outputs).
+    """
+    from datetime import datetime, timezone
+
+    from src.models.archive.index import IndexFile, IndexTopicEntry
+
+    topics = list_all_topics()
+    wiki_dir = get_wiki_dir()
+    doc_count = (
+        len(list(wiki_dir.glob("*.md"))) if wiki_dir.is_dir() else 0
+    )
+
+    children_by_parent: dict[str, list[str]] = {}
+    for t in topics:
+        if t.parent:
+            children_by_parent.setdefault(t.parent, []).append(t.slug)
+
+    entries: list[IndexTopicEntry] = []
+    for t in topics:
+        summary_line = (t.summary or "").strip().splitlines()[0] if t.summary else ""
+        entries.append(
+            IndexTopicEntry(
+                slug=t.slug,
+                summary_line=summary_line,
+                doc_count=len(t.docs),
+                parent=t.parent,
+                related=list(t.related),
+                children=sorted(children_by_parent.get(t.slug, [])),
+            )
+        )
+
+    index = IndexFile(
+        generated=datetime.now(timezone.utc),
+        doc_count=doc_count,
+        topic_count=len(topics),
+        pending_outputs=0,
+        orphan_count=0,
+        stale_count=0,
+        broken_link_count=0,
+        topics=entries,
+    )
+    save_index(index)
+    return index
 
 
 # -- Frontmatter parse / serialize --
