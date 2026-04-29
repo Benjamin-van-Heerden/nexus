@@ -1,9 +1,9 @@
 ---
 title: 'Foundations: models, utils, setup, pause integration'
-status: todo
+status: completed
 created_at: '2026-04-17T14:01:20.082970'
-updated_at: '2026-04-17T14:01:20.082970'
-completed_at: null
+updated_at: '2026-04-29T15:38:37.876841'
+completed_at: '2026-04-29T15:38:37.876831'
 ---
 Phase 1 of the implementation plan in spec.md. Implements the foundational layer that everything else builds on.
 
@@ -56,3 +56,57 @@ Done criteria:
 - `uv run nexus archive setup` creates all dirs, writes defaults, registers QMD collection (if installed), and prints absolute paths.
 - `uv run nexus pause archive --until <date> --reason <r>` followed by `uv run nexus archive setup` shows the pause and exits early.
 - All models round-trip cleanly via tomllib + tomli_w (and PyYAML for frontmatter).
+
+## Completion Notes
+
+Implemented Phase 1 foundations for nexus archive.
+
+Models created (src/models/archive/):
+- archive.py: ArchiveConfig (interests, MaintenanceConfig {staleness_days=90, batch_size=10}, QmdConfig {collection_name=nexus-archive, default_recall_n=10}) and ArchiveState (last_reindex, last_qmd_update, schema_version=1, pending_qmd_update, renames list).
+- doc.py: DocFrontmatter with all spec fields, LinkRef, Provenance, status/relation enums via Literal types.
+- topic.py: TopicConfig with TopicMember.
+- output.py: OutputFrontmatter with status enum.
+- work.py: WorkItem (kind enum: broken_link, pending_output, orphan, stale, contradiction, needs_topic_review), WorkQueue.
+- index.py: IndexFile with IndexTopicEntry.
+
+Utils (src/utils/archive.py):
+- Path getters: get_wiki_dir, get_topics_dir, get_raw_dir, get_outputs_dir, get_archive_config_path, get_archive_state_path, get_work_path, get_index_path, get_agent_instructions_path.
+- TOML I/O via tomllib + tomli_w with atomic writes (temp file + rename).
+- Loaders/savers for archive config/state, work queue, topics, docs, outputs, index.
+- enqueue_work helper.
+- Frontmatter helpers: parse_frontmatter (regex split + yaml.safe_load), serialize_doc (yaml.safe_dump).
+- Slug helpers: slugify (kebab-case), is_valid_slug, ensure_unique_slug.
+- extract_mentions: regex-based [[slug]] extraction with first-seen ordering.
+- QMD wrapper: qmd_check, qmd_run with QmdNotInstalledError surfaced with install hints.
+
+Setup command (src/commands/archive/setup.py):
+1. Pause check (mirrors learn/self/manage pattern via check_pause("archive")).
+2. Creates archive/, raw/, wiki/, topics/, outputs/.
+3. Writes default archive.toml, state.toml, empty work.toml.
+4. Runs qmd --version; on failure prints install instructions and exits 1.
+5. Registers wiki dir as QMD collection 'nexus-archive', adds context, runs qmd embed.
+6. Prints absolute PATHS section + ACTION REQUIRED footer.
+
+Plumbing:
+- src/commands/archive/main.py wires the archive Typer app (currently exposing only `setup`).
+- main.py at project root now registers the archive_app: `app.add_typer(archive_app, name='archive', ...)`.
+- src/models/pause.py: added archive: PauseEntry to PauseConfig.
+- src/utils/pause.py: extended Literal type to include 'archive'.
+- src/commands/pause/main.py: added `pause archive` subcommand and updated `resume` to accept 'archive'.
+- src/utils/paths.py: added get_archive_dir().
+
+Dependencies:
+- Added pyyaml (6.0.3) to project deps for YAML frontmatter parsing/serialization.
+
+Smoke tests verified:
+- `uv run python main.py archive --help` shows the archive subapp with `setup`.
+- `uv run python main.py archive setup` creates all directories and config files; cleanly exits 1 with install instructions when qmd is missing.
+- `uv run python main.py pause archive --until 2026-05-01 --reason "smoke test"` pauses; subsequent `archive setup` detects pause and exits early; `pause resume archive` clears the pause.
+- Helpers exercised in a Python REPL: slugify, is_valid_slug, ensure_unique_slug, extract_mentions (skips invalid slug forms, dedupes), parse_frontmatter + DocFrontmatter round-trip across nested links/provenance.
+
+Conventions followed:
+- No __init__.py files (per no-init-py memory).
+- Pause integration mirrors learn/self/manage exactly.
+- All path display in setup output is absolute.
+- Atomic writes throughout to avoid partial-write corruption.
+- All TOML/YAML I/O routed through helpers; no direct subprocess.run outside the qmd_run wrapper.
