@@ -5,4 +5,6 @@ related = []
 created = "2026-04-29"
 updated = "2026-04-29"
 last_maintained = "2026-04-29"
-docs = []
+docs = [
+    { slug = "attention-is-all-you-need", hook = "" },
+]
