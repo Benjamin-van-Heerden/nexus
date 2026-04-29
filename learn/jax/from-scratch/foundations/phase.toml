@@ -110,7 +110,8 @@ relevant_files = [
 name = "Complete vmap and pmap practical exercise with jit/grad composition"
 type = "practical"
 created = "2026-04-28"
-status = "todo"
+status = "completed"
+completed = "2026-04-29"
 relevant_files = [
     "./learn/jax/from-scratch/foundations/practical/examples/2026-04-28.py",
 ]
