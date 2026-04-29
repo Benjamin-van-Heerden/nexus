@@ -1,24 +1,14 @@
-generated = "2026-04-29T14:12:13.717133Z"
+generated = "2026-04-29T14:12:18.492867Z"
 doc_count = 0
-topic_count = 2
+topic_count = 1
 pending_outputs = 0
 orphan_count = 0
 stale_count = 0
 broken_link_count = 0
 
 [[topics]]
-slug = "cv"
-summary_line = "Computer vision."
-doc_count = 0
-parent = "ml"
-related = []
-children = []
-
-[[topics]]
 slug = "ml"
 summary_line = "Machine learning umbrella."
 doc_count = 0
 related = []
-children = [
-    "cv",
-]
+children = []
