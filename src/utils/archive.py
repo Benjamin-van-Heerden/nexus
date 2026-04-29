@@ -8,7 +8,7 @@ import json
 import re
 import subprocess
 import tomllib
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Iterator
 
@@ -235,14 +235,39 @@ def save_index(index: IndexFile) -> None:
 def regenerate_index() -> IndexFile:
     """Rebuild archive/index.toml from the current on-disk state.
 
-    Walks topics/ and wiki/. Phase 2 implementation; later phases enrich
-    counts (orphans, stales, broken_links, pending_outputs).
+    Walks topics/, wiki/, and outputs/. Computes topic doc-counts plus
+    archive-wide totals: orphan/stale/broken_link/pending_output counts.
     """
     topics = list_all_topics()
-    wiki_dir = get_wiki_dir()
-    doc_count = (
-        len(list(wiki_dir.glob("*.md"))) if wiki_dir.is_dir() else 0
-    )
+    docs = list(list_all_docs_with_frontmatter())
+    outputs = list(list_all_outputs_with_frontmatter())
+
+    # Inbound reference index — for orphan detection
+    inbound: dict[str, set[str]] = {}
+    for slug, fm, body in docs:
+        for link in fm.links:
+            inbound.setdefault(link.slug, set()).add(slug)
+        for m in fm.mentions:
+            inbound.setdefault(m, set()).add(slug)
+
+    # Counts
+    config = load_archive_config()
+    threshold = date.today() - timedelta(days=config.maintenance.staleness_days)
+
+    orphan_count = 0
+    stale_count = 0
+    broken_link_count = 0
+    for slug, fm, _body in docs:
+        broken_link_count += len(fm.broken_links)
+        no_topics = not fm.topics
+        no_inbound = not inbound.get(slug)
+        if no_topics or no_inbound:
+            orphan_count += 1
+        last = fm.last_maintained or fm.updated
+        if last < threshold:
+            stale_count += 1
+
+    pending_outputs = sum(1 for _, fm, _ in outputs if fm.status == "pending_review")
 
     children_by_parent: dict[str, list[str]] = {}
     for t in topics:
@@ -265,16 +290,58 @@ def regenerate_index() -> IndexFile:
 
     index = IndexFile(
         generated=datetime.now(timezone.utc),
-        doc_count=doc_count,
+        doc_count=len(docs),
         topic_count=len(topics),
-        pending_outputs=0,
-        orphan_count=0,
-        stale_count=0,
-        broken_link_count=0,
+        pending_outputs=pending_outputs,
+        orphan_count=orphan_count,
+        stale_count=stale_count,
+        broken_link_count=broken_link_count,
         topics=entries,
     )
     save_index(index)
     return index
+
+
+# -- Graph computation primitives --
+
+
+def compute_backlinks(target_slug: str) -> list[tuple[str, str]]:
+    """Return [(source_slug, relation), ...] for every doc linking to target_slug."""
+    out: list[tuple[str, str]] = []
+    for slug, fm, _body in list_all_docs_with_frontmatter():
+        if slug == target_slug:
+            continue
+        for link in fm.links:
+            if link.slug == target_slug:
+                out.append((slug, link.relation))
+    return out
+
+
+def compute_mentioned_by(target_slug: str) -> list[str]:
+    """Return slugs of docs whose body or mentions list contains target_slug."""
+    pattern = re.compile(r"\[\[" + re.escape(target_slug) + r"\]\]")
+    out: list[str] = []
+    for slug, fm, body in list_all_docs_with_frontmatter():
+        if slug == target_slug:
+            continue
+        if target_slug in fm.mentions or pattern.search(body):
+            out.append(slug)
+    return out
+
+
+def compute_topic_siblings(slug: str, limit_per_topic: int = 5) -> dict[str, list[str]]:
+    """Map topic_slug -> sibling doc slugs (up to limit_per_topic, excluding slug itself)."""
+    if not doc_exists(slug):
+        return {}
+    fm, _ = load_doc(slug)
+    out: dict[str, list[str]] = {}
+    for topic_slug in fm.topics:
+        if not topic_exists(topic_slug):
+            continue
+        topic = load_topic(topic_slug)
+        siblings = [d.slug for d in topic.docs if d.slug != slug][:limit_per_topic]
+        out[topic_slug] = siblings
+    return out
 
 
 # -- Frontmatter parse / serialize --
