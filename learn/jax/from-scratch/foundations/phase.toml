@@ -1,5 +1,5 @@
 name = "foundations"
-current_goal = "Transformations: vmap and pmap"
+current_goal = "PRNG and Randomness"
 
 [[goals]]
 name = "JAX Mental Model and jax.numpy"
@@ -94,7 +94,7 @@ relevant_files = [
 [[goals]]
 name = "Transformations: vmap and pmap"
 reference = "./learn/jax/reference/foundations-03-vmap-and-pmap.md"
-status = "in_progress"
+status = "completed"
 
 [[goals.tasks]]
 name = "Read vmap and pmap theoretical overview"
@@ -129,7 +129,7 @@ relevant_files = [
 [[goals]]
 name = "PRNG and Randomness"
 reference = "./learn/jax/reference/foundations-04-prng.md"
-status = "todo"
+status = "in_progress"
 tasks = []
 
 [[goals]]
