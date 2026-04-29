@@ -1,8 +1,14 @@
-generated = "2026-04-29T13:48:26.854667Z"
+generated = "2026-04-29T13:58:35.019186Z"
 doc_count = 0
-topic_count = 0
+topic_count = 1
 pending_outputs = 0
 orphan_count = 0
 stale_count = 0
 broken_link_count = 0
-topics = []
+
+[[topics]]
+slug = "ml-architectures"
+summary_line = "Architectural patterns in ML."
+doc_count = 0
+related = []
+children = []
