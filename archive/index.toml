@@ -1,4 +1,4 @@
-generated = "2026-04-29T13:45:59.996781Z"
+generated = "2026-04-29T13:46:05.789890Z"
 doc_count = 0
 topic_count = 3
 pending_outputs = 0
@@ -13,7 +13,6 @@ doc_count = 0
 related = []
 children = [
     "ml-architectures",
-    "nlp",
 ]
 
 [[topics]]
@@ -28,7 +27,6 @@ children = []
 slug = "nlp"
 summary_line = "Natural language processing."
 doc_count = 0
-parent = "machine-learning"
 related = [
     "ml-architectures",
 ]
