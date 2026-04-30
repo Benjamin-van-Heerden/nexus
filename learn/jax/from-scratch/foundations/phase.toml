@@ -149,6 +149,15 @@ relevant_files = [
     "./learn/jax/from-scratch/foundations/practical/prng-randomness.py",
 ]
 
+[[goals.tasks]]
+name = "Read theoretical reference on JAX PRNG: explicit keys, splitting patterns, Threefry, and common pitfalls"
+type = "theoretical"
+created = "2026-04-30"
+status = "todo"
+relevant_files = [
+    "./learn/jax/from-scratch/foundations/theoretical/prng-randomness.md",
+]
+
 [[goals]]
 name = "Pytrees"
 reference = "./learn/jax/reference/foundations-05-pytrees.md"
