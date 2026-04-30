@@ -47,16 +47,18 @@ def log(
 
     existing = [s for s in learning_log.sessions if s.date == session_date]
     if existing:
-        if not typer.confirm(f"A session for {session_date} already exists. Overwrite?"):
-            raise typer.Exit(0)
-        learning_log.sessions = [s for s in learning_log.sessions if s.date != session_date]
-
-    session = LearningSession(
-        date=session_date,
-        did_learn=not skip,
-        notes=notes,
-    )
-    learning_log.sessions.append(session)
+        session = existing[0]
+        if notes:
+            session.notes = f"{session.notes}\n{notes}".strip() if session.notes else notes
+        if not skip:
+            session.did_learn = True
+    else:
+        session = LearningSession(
+            date=session_date,
+            did_learn=not skip,
+            notes=notes,
+        )
+        learning_log.sessions.append(session)
     save_learning_log(learning_log)
 
     streak = _calculate_streak(learning_log.sessions)
