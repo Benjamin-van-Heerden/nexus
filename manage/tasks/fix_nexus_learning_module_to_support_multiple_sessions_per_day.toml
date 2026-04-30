@@ -1,0 +1,13 @@
+name = "Fix nexus learning module to support multiple sessions per day"
+slug = "fix_nexus_learning_module_to_support_multiple_sessions_per_day"
+description = "Currently overwrites previous session entries for the same day. Need to either store multiple entries per day or append notes instead of overwriting."
+status = "todo"
+created = "2026-04-30"
+tags = [
+    "nexus-learn",
+]
+recurrence = ""
+gcal_event_id = ""
+last_modified = "2026-04-30T13:21:27.429989"
+has_subtasks = false
+parent = ""
