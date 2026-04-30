@@ -151,6 +151,3 @@ name = "XLA and Sharp Bits"
 reference = "./learn/jax/reference/foundations-06-xla-sharp-bits.md"
 status = "todo"
 tasks = []
-.md"
-status = "todo"
-tasks = []
