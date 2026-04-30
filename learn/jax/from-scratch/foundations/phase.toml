@@ -130,7 +130,15 @@ relevant_files = [
 name = "PRNG and Randomness"
 reference = "./learn/jax/reference/foundations-04-prng.md"
 status = "in_progress"
-tasks = []
+
+[[goals.tasks]]
+name = "Answer quiz questions on JAX PRNG behavior, key splitting patterns, and best practices"
+type = "quiz"
+created = "2026-04-30"
+status = "todo"
+relevant_files = [
+    "./learn/jax/from-scratch/foundations/quiz/prng-randomness.md",
+]
 
 [[goals]]
 name = "Pytrees"
@@ -141,5 +149,8 @@ tasks = []
 [[goals]]
 name = "XLA and Sharp Bits"
 reference = "./learn/jax/reference/foundations-06-xla-sharp-bits.md"
+status = "todo"
+tasks = []
+.md"
 status = "todo"
 tasks = []
