@@ -140,6 +140,15 @@ relevant_files = [
     "./learn/jax/from-scratch/foundations/quiz/prng-randomness.md",
 ]
 
+[[goals.tasks]]
+name = "Complete practical exercise: key basics, MLP initialization, batch splitting, augmentation, dropout, and training step key management"
+type = "practical"
+created = "2026-04-30"
+status = "todo"
+relevant_files = [
+    "./learn/jax/from-scratch/foundations/practical/prng-randomness.py",
+]
+
 [[goals]]
 name = "Pytrees"
 reference = "./learn/jax/reference/foundations-05-pytrees.md"
