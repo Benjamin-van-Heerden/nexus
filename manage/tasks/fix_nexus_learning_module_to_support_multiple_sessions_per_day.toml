@@ -1,6 +1,34 @@
 name = "Fix nexus learning module to support multiple sessions per day"
 slug = "fix_nexus_learning_module_to_support_multiple_sessions_per_day"
-description = "Currently overwrites previous session entries for the same day. Need to either store multiple entries per day or append notes instead of overwriting."
+description = """
+Currently overwrites previous session entries for the same day. Need to either store multiple entries per day or append notes instead of overwriting.
+
+FINDINGS FROM INVESTIGATION:
+
+1. Entry point: src/commands/self/learn.py — log() function
+   - Prompts 'A session for {date} already exists. Overwrite?' when a session for the same date exists
+   - If confirmed, removes ALL existing sessions for that date and creates a new one
+
+2. Data model: src/models/self/learning.py
+   - LearningSession: date, did_learn (bool), notes (str)
+   - LearningLog: flat list of LearningSession objects
+
+3. Storage: src/utils/self.py
+   - Saved as TOML at {self_dir}/learning/log.toml
+   - load_learning_log() / save_learning_log()
+
+4. Streak calculation: _calculate_streak() in learn.py
+   - Uses a SET of unique dates (learned_dates), so multiple sessions per day do NOT help streak count
+   - Streak is just consecutive days with any learning, not session count
+
+5. Weekly summary: get_sessions_this_week() in utils/self.py
+   - Returns all sessions in current week, so multiple per day WOULD inflate the count
+   - But status() command truncates notes to 60 chars, so long appended notes get cut off
+
+OPTIONS TO FIX:
+  a) Allow multiple LearningSession entries per date (change model/logic to not dedupe by date)
+  b) Append notes to existing session instead of overwriting (preserves single entry per day)
+  c) Add a separate session list/entries field to LearningSession to track multiple activities per day"""
 status = "todo"
 created = "2026-04-30"
 tags = [
@@ -8,6 +36,6 @@ tags = [
 ]
 recurrence = ""
 gcal_event_id = ""
-last_modified = "2026-04-30T13:21:27.429989"
+last_modified = "2026-04-30T13:24:55.630860"
 has_subtasks = false
 parent = ""
