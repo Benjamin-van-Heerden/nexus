@@ -17,6 +17,40 @@ from src.utils.path_resolution import resolve, resolve_str
 from src.utils.pause import check_pause
 
 
+def _print_table(headers: list[str], rows: list[list[str]]) -> None:
+    """Print a compact ASCII table for human-facing CLI output."""
+    if not rows:
+        return
+
+    widths = [
+        max(len(headers[i]), *(len(row[i]) for row in rows))
+        for i in range(len(headers))
+    ]
+    border = "+-" + "-+-".join("-" * width for width in widths) + "-+"
+    header = "| " + " | ".join(
+        headers[i].ljust(widths[i]) for i in range(len(headers))
+    ) + " |"
+
+    print(border)
+    print(header)
+    print(border)
+    for row in rows:
+        print(
+            "| "
+            + " | ".join(row[i].ljust(widths[i]) for i in range(len(headers)))
+            + " |"
+        )
+    print(border)
+
+
+def _status_marker(status: str) -> str:
+    return {
+        "todo": "todo",
+        "in_progress": "current",
+        "completed": "done",
+    }.get(status, status)
+
+
 def _parse_duration_minutes(duration_str: str) -> int | None:
     """Parse a duration string like '20min', '1h', '1h30min' into minutes."""
     if not duration_str or duration_str == "not recorded":
@@ -516,4 +550,116 @@ def refresh():
     print("user NOW. Do not silently process this output — the user is")
     print("waiting for your response.")
     print("=" * 60)
+    print()
+
+
+def status():
+    """Print a human-friendly summary of the current learning state."""
+    paused = check_pause("learn")
+
+    ctx = get_active_context()
+    if not ctx:
+        typer.echo("No active learning context. Run `nexus learn topic update` first.")
+        raise typer.Exit(1)
+
+    topic_name, _topic_cfg, subtopic_name, subtopic_cfg, phase_name, phase_cfg = ctx
+    current_goal = get_current_goal(phase_cfg)
+
+    today = date.today()
+    current_week = get_week_start(today)
+    week_end = current_week + timedelta(days=6)
+
+    print()
+    print("Nexus Learn Status")
+    print("=" * 60)
+    if paused:
+        print(
+            f"Paused: {paused.reason or 'no reason provided'} "
+            f"(resumes {paused.resume_date})"
+        )
+        print()
+
+    _print_table(
+        ["Field", "Value"],
+        [
+            ["Topic", topic_name],
+            ["Subtopic", f"{subtopic_cfg.name} ({subtopic_name})"],
+            ["Phase", f"{phase_cfg.name} ({phase_name})"],
+            ["Goal", current_goal.name if current_goal else "No current goal"],
+            [
+                "Week",
+                f"{current_week.strftime('%b %d')} - {week_end.strftime('%b %d, %Y')}",
+            ],
+        ],
+    )
+    print()
+
+    if subtopic_cfg.phases:
+        print("Phases")
+        phase_rows = []
+        for phase in subtopic_cfg.phases:
+            current = "yes" if phase.name == phase_name else ""
+            phase_rows.append([_status_marker(phase.status), phase.name, current])
+        _print_table(["Status", "Phase", "Current"], phase_rows)
+        print()
+
+    if phase_cfg.goals:
+        print("Goals In Current Phase")
+        goal_rows = []
+        for goal in phase_cfg.goals:
+            done_count = sum(1 for task in goal.tasks if task.status == "completed")
+            total_count = len(goal.tasks)
+            current = "yes" if goal.name == phase_cfg.current_goal else ""
+            goal_rows.append(
+                [
+                    _status_marker(goal.status),
+                    goal.name,
+                    f"{done_count}/{total_count}",
+                    resolve_str(goal.reference),
+                    current,
+                ]
+            )
+        _print_table(["Status", "Goal", "Tasks", "Reference", "Current"], goal_rows)
+        print()
+
+    if not current_goal:
+        print("No current goal is set for this phase.")
+        print()
+        return
+
+    print(f"Current Goal: {current_goal.name}")
+    print("-" * 60)
+    print(f"Reference: {resolve_str(current_goal.reference)}")
+    print()
+
+    if not current_goal.tasks:
+        print("No tasks yet for this goal.")
+        print()
+        return
+
+    print("Tasks")
+    task_rows = []
+    for task in current_goal.tasks:
+        completed = task.completed.isoformat() if task.completed else ""
+        task_rows.append(
+            [
+                "done" if task.status == "completed" else "todo",
+                task.type,
+                task.name,
+                task.created.isoformat(),
+                completed,
+            ]
+        )
+    _print_table(["Status", "Type", "Task", "Created", "Completed"], task_rows)
+    print()
+
+    print("Relevant Files")
+    file_rows = []
+    for task in current_goal.tasks:
+        if not task.relevant_files:
+            file_rows.append([task.name, "(none)"])
+            continue
+        for file_path in task.relevant_files:
+            file_rows.append([task.name, resolve_str(file_path)])
+    _print_table(["Task", "File"], file_rows)
     print()
