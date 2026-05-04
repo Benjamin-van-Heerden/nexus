@@ -32,6 +32,12 @@ def _status_marker(status: str) -> str:
     }.get(status, status)
 
 
+def _display_path(path: str) -> str:
+    if path.startswith("./"):
+        return path[2:]
+    return path
+
+
 def _parse_duration_minutes(duration_str: str) -> int | None:
     """Parse a duration string like '20min', '1h', '1h30min' into minutes."""
     if not duration_str or duration_str == "not recorded":
@@ -609,7 +615,7 @@ def status():
 
     goal_details = Text()
     goal_details.append("Reference: ", style="bold cyan")
-    goal_details.append(resolve_str(current_goal.reference))
+    goal_details.append(_display_path(current_goal.reference))
     console.print(
         Panel(
             goal_details,
@@ -642,10 +648,10 @@ def status():
 
     files_table = Table(title="📎 Relevant Files", show_lines=True)
     files_table.add_column("Task", style="bold", overflow="fold", ratio=1)
-    files_table.add_column("Files", overflow="fold", ratio=2)
+    files_table.add_column("Files", overflow="fold", ratio=3)
     for task in current_goal.tasks:
         marker = "✅" if task.status == "completed" else "⬜"
-        files = "\n".join(resolve_str(file_path) for file_path in task.relevant_files)
+        files = "\n".join(_display_path(file_path) for file_path in task.relevant_files)
         files_table.add_row(f"{marker} {task.name}", files or "[dim](none)[/dim]")
     console.print(files_table)
     console.print()
