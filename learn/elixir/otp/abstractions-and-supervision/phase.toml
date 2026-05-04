@@ -20,7 +20,8 @@ relevant_files = [
 name = "Read links, monitors, and trapped exits reference"
 type = "theoretical"
 created = "2026-05-04"
-status = "todo"
+status = "completed"
+completed = "2026-05-04"
 relevant_files = [
     "./learn/elixir/otp/abstractions-and-supervision/theoretical/links_monitors_reference.md",
 ]
