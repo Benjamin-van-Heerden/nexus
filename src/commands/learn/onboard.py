@@ -580,12 +580,12 @@ def status():
     context_table = Table.grid(padding=(0, 2))
     context_table.add_column(style="bold cyan", no_wrap=True)
     context_table.add_column()
-    context_table.add_row("📚 Topic", topic_name)
-    context_table.add_row("🧵 Subtopic", f"{subtopic_cfg.name} [dim]({subtopic_name})[/dim]")
-    context_table.add_row("🧱 Phase", f"{phase_cfg.name} [dim]({phase_name})[/dim]")
-    context_table.add_row("🎯 Goal", current_goal.name if current_goal else "[yellow]No current goal[/yellow]")
+    context_table.add_row("Topic", topic_name)
+    context_table.add_row("Subtopic", f"{subtopic_cfg.name} [dim]({subtopic_name})[/dim]")
+    context_table.add_row("Phase", f"{phase_cfg.name} [dim]({phase_name})[/dim]")
+    context_table.add_row("Goal", current_goal.name if current_goal else "[yellow]No current goal[/yellow]")
     context_table.add_row(
-        "🗓️ Week",
+        "Week",
         f"{current_week.strftime('%b %d')} - {week_end.strftime('%b %d, %Y')}",
     )
     console.print(Panel(context_table, title="📍 Current Context", border_style="cyan"))
