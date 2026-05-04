@@ -43,11 +43,16 @@ def _print_table(headers: list[str], rows: list[list[str]]) -> None:
     print(border)
 
 
+def _section(icon: str, title: str) -> None:
+    print(f"{icon} {title}")
+    print("-" * 60)
+
+
 def _status_marker(status: str) -> str:
     return {
-        "todo": "todo",
-        "in_progress": "current",
-        "completed": "done",
+        "todo": "⬜ todo",
+        "in_progress": "🔄 current",
+        "completed": "✅ done",
     }.get(status, status)
 
 
@@ -570,56 +575,56 @@ def status():
     week_end = current_week + timedelta(days=6)
 
     print()
-    print("Nexus Learn Status")
+    print("🎓 Nexus Learn Status")
     print("=" * 60)
     if paused:
         print(
-            f"Paused: {paused.reason or 'no reason provided'} "
+            f"⏸️  Paused: {paused.reason or 'no reason provided'} "
             f"(resumes {paused.resume_date})"
         )
         print()
 
+    _section("📍", "Current Context")
     _print_table(
         ["Field", "Value"],
         [
-            ["Topic", topic_name],
-            ["Subtopic", f"{subtopic_cfg.name} ({subtopic_name})"],
-            ["Phase", f"{phase_cfg.name} ({phase_name})"],
-            ["Goal", current_goal.name if current_goal else "No current goal"],
+            ["Topic", f"📚 {topic_name}"],
+            ["Subtopic", f"🧵 {subtopic_cfg.name} ({subtopic_name})"],
+            ["Phase", f"🧱 {phase_cfg.name} ({phase_name})"],
+            ["Goal", f"🎯 {current_goal.name}" if current_goal else "No current goal"],
             [
                 "Week",
-                f"{current_week.strftime('%b %d')} - {week_end.strftime('%b %d, %Y')}",
+                f"🗓️  {current_week.strftime('%b %d')} - {week_end.strftime('%b %d, %Y')}",
             ],
         ],
     )
     print()
 
     if subtopic_cfg.phases:
-        print("Phases")
+        _section("🧭", "Phase Roadmap")
         phase_rows = []
         for phase in subtopic_cfg.phases:
-            current = "yes" if phase.name == phase_name else ""
-            phase_rows.append([_status_marker(phase.status), phase.name, current])
-        _print_table(["Status", "Phase", "Current"], phase_rows)
+            pointer = "➜" if phase.name == phase_name else ""
+            phase_rows.append([pointer, _status_marker(phase.status), phase.name])
+        _print_table(["", "Status", "Phase"], phase_rows)
         print()
 
     if phase_cfg.goals:
-        print("Goals In Current Phase")
+        _section("🎯", "Goals In Current Phase")
         goal_rows = []
         for goal in phase_cfg.goals:
             done_count = sum(1 for task in goal.tasks if task.status == "completed")
             total_count = len(goal.tasks)
-            current = "yes" if goal.name == phase_cfg.current_goal else ""
+            pointer = "➜" if goal.name == phase_cfg.current_goal else ""
             goal_rows.append(
                 [
+                    pointer,
                     _status_marker(goal.status),
                     goal.name,
                     f"{done_count}/{total_count}",
-                    resolve_str(goal.reference),
-                    current,
                 ]
             )
-        _print_table(["Status", "Goal", "Tasks", "Reference", "Current"], goal_rows)
+        _print_table(["", "Status", "Goal", "Tasks"], goal_rows)
         print()
 
     if not current_goal:
@@ -627,23 +632,22 @@ def status():
         print()
         return
 
-    print(f"Current Goal: {current_goal.name}")
-    print("-" * 60)
+    _section("📌", f"Current Goal: {current_goal.name}")
     print(f"Reference: {resolve_str(current_goal.reference)}")
     print()
 
     if not current_goal.tasks:
-        print("No tasks yet for this goal.")
+        print("📝 No tasks yet for this goal.")
         print()
         return
 
-    print("Tasks")
+    _section("📋", "Tasks")
     task_rows = []
     for task in current_goal.tasks:
         completed = task.completed.isoformat() if task.completed else ""
         task_rows.append(
             [
-                "done" if task.status == "completed" else "todo",
+                "✅ done" if task.status == "completed" else "⬜ todo",
                 task.type,
                 task.name,
                 task.created.isoformat(),
@@ -653,13 +657,14 @@ def status():
     _print_table(["Status", "Type", "Task", "Created", "Completed"], task_rows)
     print()
 
-    print("Relevant Files")
-    file_rows = []
+    _section("📎", "Relevant Files")
     for task in current_goal.tasks:
+        marker = "✅" if task.status == "completed" else "⬜"
+        print(f"{marker} {task.name}")
         if not task.relevant_files:
-            file_rows.append([task.name, "(none)"])
+            print("  (none)")
             continue
         for file_path in task.relevant_files:
-            file_rows.append([task.name, resolve_str(file_path)])
-    _print_table(["Task", "File"], file_rows)
+            print(f"  • {resolve_str(file_path)}")
+        print()
     print()
