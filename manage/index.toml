@@ -1,10 +1,4 @@
 [[tasks]]
-slug = "scaffold_nexus_learn_c_course"
-name = "Scaffold Nexus Learn C course"
-path = "./manage/tasks/scaffold_nexus_learn_c_course.toml"
-parent = ""
-
-[[tasks]]
 slug = "lunch_with_mike"
 name = "Lunch with Mike"
 path = "./manage/tasks/lunch_with_mike.toml"
