@@ -12,12 +12,6 @@ due = "2026-05-06T13:00:00"
 parent = ""
 
 [[tasks]]
-slug = "scaffold_elixir_agent_jido_course"
-name = "Scaffold Elixir Agent Jido course"
-path = "./manage/tasks/scaffold_elixir_agent_jido_course.toml"
-parent = ""
-
-[[tasks]]
 slug = "fix_nexus_learning_module_to_support_multiple_sessions_per_day"
 name = "Fix nexus learning module to support multiple sessions per day"
 path = "./manage/tasks/fix_nexus_learning_module_to_support_multiple_sessions_per_day.toml"

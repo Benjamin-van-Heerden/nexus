@@ -1,14 +1,15 @@
 name = "Scaffold Elixir Agent Jido course"
 slug = "scaffold_elixir_agent_jido_course"
 description = ""
-status = "todo"
+status = "completed"
 created = "2026-04-23"
+completed_at = "2026-05-04"
 tags = [
     "priority-low",
     "nexus-learn",
 ]
 recurrence = ""
 gcal_event_id = ""
-last_modified = "2026-04-23T22:30:58.373829"
+last_modified = "2026-05-04T21:54:22.705234"
 has_subtasks = false
 parent = ""
