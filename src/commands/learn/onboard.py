@@ -10,6 +10,7 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 from rich.text import Text
+from rich.tree import Tree
 
 from src.commands.learn.topic import ensure_topic_for_week, get_week_start
 from src.utils.learn import (
@@ -646,12 +647,14 @@ def status():
         )
     console.print(task_table)
 
-    files_table = Table(title="📎 Relevant Files", show_lines=True)
-    files_table.add_column("Task", style="bold", overflow="fold", ratio=1)
-    files_table.add_column("Files", overflow="fold", ratio=3)
+    files_tree = Tree("📎 [bold]Relevant Files[/bold]")
     for task in current_goal.tasks:
         marker = "✅" if task.status == "completed" else "⬜"
-        files = "\n".join(_display_path(file_path) for file_path in task.relevant_files)
-        files_table.add_row(f"{marker} {task.name}", files or "[dim](none)[/dim]")
-    console.print(files_table)
+        task_node = files_tree.add(f"{marker} [bold]{task.name}[/bold]")
+        if not task.relevant_files:
+            task_node.add("[dim](none)[/dim]")
+            continue
+        for file_path in task.relevant_files:
+            task_node.add(f"[cyan]{_display_path(file_path)}[/cyan]")
+    console.print(files_tree)
     console.print()
