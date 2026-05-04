@@ -5,7 +5,16 @@ current_goal = "OTP Abstractions, Links, and Monitors"
 name = "OTP Abstractions, Links, and Monitors"
 reference = "./learn/elixir/reference/04-abstractions-links-monitors.md"
 status = "in_progress"
-tasks = []
+
+[[goals.tasks]]
+name = "Implement links, monitors, and trapped exit observations"
+type = "practical"
+created = "2026-05-04"
+status = "todo"
+relevant_files = [
+    "./learn/elixir/otp/abstractions-and-supervision/practical/lib/link_monitor_lab.ex",
+    "./learn/elixir/otp/abstractions-and-supervision/practical/test/link_monitor_lab_test.exs",
+]
 
 [[goals]]
 name = "Supervisors, Child Specs, and Restart Strategies"
