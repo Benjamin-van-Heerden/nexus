@@ -26,3 +26,5 @@ auth
 .elixir_ls/
 .expert/
 _build/
+
+.DS_Store
