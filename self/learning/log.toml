@@ -62,3 +62,8 @@ notes = "Jax — exercise on jit and grad"
 date = "2026-04-29"
 did_learn = true
 notes = "More on vmap"
+
+[[sessions]]
+date = "2026-05-04"
+did_learn = true
+notes = "Elixir learning session: process links and monitors"
