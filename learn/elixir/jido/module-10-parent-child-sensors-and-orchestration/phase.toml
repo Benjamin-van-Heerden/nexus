@@ -1,7 +1,0 @@
-name = "module-10-parent-child-sensors-and-orchestration"
-current_goal = "Parent-child hierarchies, sensors, and orchestration"
-
-[[goals]]
-name = "Parent-child hierarchies, sensors, and orchestration"
-reference = "./learn/elixir/reference/jido-10-parent-child-sensors-and-orchestration.md"
-status = "todo"

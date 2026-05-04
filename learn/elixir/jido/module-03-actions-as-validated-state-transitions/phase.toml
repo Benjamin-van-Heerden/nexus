@@ -1,7 +1,0 @@
-name = "module-03-actions-as-validated-state-transitions"
-current_goal = "Actions as validated state transitions"
-
-[[goals]]
-name = "Actions as validated state transitions"
-reference = "./learn/elixir/reference/jido-03-actions-as-validated-state-transitions.md"
-status = "todo"

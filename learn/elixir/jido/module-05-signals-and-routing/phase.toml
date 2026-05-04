@@ -1,7 +1,0 @@
-name = "module-05-signals-and-routing"
-current_goal = "Signals and routing"
-
-[[goals]]
-name = "Signals and routing"
-reference = "./learn/elixir/reference/jido-05-signals-and-routing.md"
-status = "todo"

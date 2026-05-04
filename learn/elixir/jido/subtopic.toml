@@ -1,19 +1,9 @@
 name = "Jido Agent Framework"
-current_phase = "module-01-setup-and-mental-model"
+current_phase = "foundations"
 phases = [
-    { name = "module-01-setup-and-mental-model", status = "in_progress" },
-    { name = "module-02-agents-as-immutable-data", status = "todo" },
-    { name = "module-03-actions-as-validated-state-transitions", status = "todo" },
-    { name = "module-04-workflows-with-action-chains", status = "todo" },
-    { name = "module-05-signals-and-routing", status = "todo" },
-    { name = "module-06-directives-and-side-effect-boundaries", status = "todo" },
-    { name = "module-07-agentserver-and-supervised-runtime", status = "todo" },
-    { name = "module-08-plugins-and-reusable-capabilities", status = "todo" },
-    { name = "module-09-fsms-planning-and-resumable-workflows", status = "todo" },
-    { name = "module-10-parent-child-sensors-and-orchestration", status = "todo" },
-    { name = "module-11-ai-agents-tools-chat-and-reasoning", status = "todo" },
-    { name = "module-12-memory-rag-production-readiness", status = "todo" },
-    { name = "capstone-research-execution-system", status = "todo" },
+    { name = "foundations", status = "in_progress" },
+    { name = "advanced", status = "todo" },
+    { name = "capstone", status = "todo" },
 ]
 
 [practical]

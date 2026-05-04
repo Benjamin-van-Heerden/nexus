@@ -1,7 +1,0 @@
-name = "module-01-setup-and-mental-model"
-current_goal = "Setup and Jido mental model"
-
-[[goals]]
-name = "Setup and Jido mental model"
-reference = "./learn/elixir/reference/jido-01-setup-and-mental-model.md"
-status = "in_progress"

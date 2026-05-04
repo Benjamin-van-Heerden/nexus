@@ -1,7 +1,0 @@
-name = "module-06-directives-and-side-effect-boundaries"
-current_goal = "Directives and side-effect boundaries"
-
-[[goals]]
-name = "Directives and side-effect boundaries"
-reference = "./learn/elixir/reference/jido-06-directives-and-side-effect-boundaries.md"
-status = "todo"

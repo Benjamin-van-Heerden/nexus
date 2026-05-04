@@ -1,4 +1,4 @@
-name = "capstone-research-execution-system"
+name = "capstone"
 current_goal = "Supervised research-and-execution agent system"
 
 [[goals]]

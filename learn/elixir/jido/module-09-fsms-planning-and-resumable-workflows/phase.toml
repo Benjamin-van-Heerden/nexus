@@ -1,7 +1,0 @@
-name = "module-09-fsms-planning-and-resumable-workflows"
-current_goal = "FSMs, planning, and resumable workflows"
-
-[[goals]]
-name = "FSMs, planning, and resumable workflows"
-reference = "./learn/elixir/reference/jido-09-fsms-planning-and-resumable-workflows.md"
-status = "todo"

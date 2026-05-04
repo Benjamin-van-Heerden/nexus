@@ -1,0 +1,27 @@
+name = "advanced"
+current_goal = "Plugins and reusable capabilities"
+
+[[goals]]
+name = "Plugins and reusable capabilities"
+reference = "./learn/elixir/reference/jido-08-plugins-and-reusable-capabilities.md"
+status = "todo"
+
+[[goals]]
+name = "FSMs, planning, and resumable workflows"
+reference = "./learn/elixir/reference/jido-09-fsms-planning-and-resumable-workflows.md"
+status = "todo"
+
+[[goals]]
+name = "Parent-child hierarchies, sensors, and orchestration"
+reference = "./learn/elixir/reference/jido-10-parent-child-sensors-and-orchestration.md"
+status = "todo"
+
+[[goals]]
+name = "AI agents, tools, chat, and reasoning strategies"
+reference = "./learn/elixir/reference/jido-11-ai-agents-tools-chat-and-reasoning.md"
+status = "todo"
+
+[[goals]]
+name = "Memory, threads, RAG, and production readiness"
+reference = "./learn/elixir/reference/jido-12-memory-rag-production-readiness.md"
+status = "todo"
