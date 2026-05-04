@@ -16,6 +16,15 @@ relevant_files = [
     "./learn/elixir/otp/abstractions-and-supervision/practical/test/link_monitor_lab_test.exs",
 ]
 
+[[goals.tasks]]
+name = "Read links, monitors, and trapped exits reference"
+type = "theoretical"
+created = "2026-05-04"
+status = "todo"
+relevant_files = [
+    "./learn/elixir/otp/abstractions-and-supervision/theoretical/links_monitors_reference.md",
+]
+
 [[goals]]
 name = "Supervisors, Child Specs, and Restart Strategies"
 reference = "./learn/elixir/reference/05-supervisors-and-child-specs.md"
