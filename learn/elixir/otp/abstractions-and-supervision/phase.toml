@@ -1,10 +1,10 @@
 name = "abstractions-and-supervision"
-current_goal = "OTP Abstractions, Links, and Monitors"
+current_goal = "Supervisors, Child Specs, and Restart Strategies"
 
 [[goals]]
 name = "OTP Abstractions, Links, and Monitors"
 reference = "./learn/elixir/reference/04-abstractions-links-monitors.md"
-status = "in_progress"
+status = "completed"
 
 [[goals.tasks]]
 name = "Implement links, monitors, and trapped exit observations"
@@ -30,7 +30,7 @@ relevant_files = [
 [[goals]]
 name = "Supervisors, Child Specs, and Restart Strategies"
 reference = "./learn/elixir/reference/05-supervisors-and-child-specs.md"
-status = "todo"
+status = "in_progress"
 
 [[goals.tasks]]
 name = "Implement KVStore Supervisor with restart strategies"
