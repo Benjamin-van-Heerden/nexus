@@ -39,6 +39,14 @@ def _display_path(path: str) -> str:
     return path
 
 
+def _display_phase_path(path: str, phase_base: str) -> str:
+    display = _display_path(path)
+    prefix = f"{phase_base}/"
+    if display.startswith(prefix):
+        return display.removeprefix(prefix)
+    return display
+
+
 def _parse_duration_minutes(duration_str: str) -> int | None:
     """Parse a duration string like '20min', '1h', '1h30min' into minutes."""
     if not duration_str or duration_str == "not recorded":
@@ -552,6 +560,7 @@ def status():
 
     topic_name, _topic_cfg, subtopic_name, subtopic_cfg, phase_name, phase_cfg = ctx
     current_goal = get_current_goal(phase_cfg)
+    phase_base = f"learn/{topic_name}/{subtopic_name}/{phase_name}"
 
     today = date.today()
     current_week = get_week_start(today)
@@ -655,6 +664,6 @@ def status():
             task_node.add("[dim](none)[/dim]")
             continue
         for file_path in task.relevant_files:
-            task_node.add(f"[cyan]{_display_path(file_path)}[/cyan]")
+            task_node.add(f"[cyan]{_display_phase_path(file_path, phase_base)}[/cyan]")
     console.print(files_tree)
     console.print()
