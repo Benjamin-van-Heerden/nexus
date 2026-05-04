@@ -10,7 +10,8 @@ status = "in_progress"
 name = "Implement links, monitors, and trapped exit observations"
 type = "practical"
 created = "2026-05-04"
-status = "todo"
+status = "completed"
+completed = "2026-05-04"
 relevant_files = [
     "./learn/elixir/otp/abstractions-and-supervision/practical/lib/link_monitor_lab.ex",
     "./learn/elixir/otp/abstractions-and-supervision/practical/test/link_monitor_lab_test.exs",
