@@ -1,37 +1,17 @@
 name = "foundations"
-current_goal = "Setup and Jido mental model"
+current_goal = "Core mental model and agent data"
 
 [[goals]]
-name = "Setup and Jido mental model"
-reference = "./learn/elixir/reference/jido-01-setup-and-mental-model.md"
+name = "Core mental model and agent data"
+reference = "./learn/elixir/reference/jido-foundations-core.md"
 status = "in_progress"
 
 [[goals]]
-name = "Agents as immutable data"
-reference = "./learn/elixir/reference/jido-02-agents-as-immutable-data.md"
+name = "Actions and deterministic workflows"
+reference = "./learn/elixir/reference/jido-foundations-actions-workflows.md"
 status = "todo"
 
 [[goals]]
-name = "Actions as validated state transitions"
-reference = "./learn/elixir/reference/jido-03-actions-as-validated-state-transitions.md"
-status = "todo"
-
-[[goals]]
-name = "Workflows with action chains"
-reference = "./learn/elixir/reference/jido-04-workflows-with-action-chains.md"
-status = "todo"
-
-[[goals]]
-name = "Signals and routing"
-reference = "./learn/elixir/reference/jido-05-signals-and-routing.md"
-status = "todo"
-
-[[goals]]
-name = "Directives and side-effect boundaries"
-reference = "./learn/elixir/reference/jido-06-directives-and-side-effect-boundaries.md"
-status = "todo"
-
-[[goals]]
-name = "AgentServer and supervised runtime"
-reference = "./learn/elixir/reference/jido-07-agentserver-and-supervised-runtime.md"
+name = "Signals, directives, and supervised runtime"
+reference = "./learn/elixir/reference/jido-foundations-runtime.md"
 status = "todo"

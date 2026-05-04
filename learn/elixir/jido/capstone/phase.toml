@@ -1,7 +1,12 @@
 name = "capstone"
-current_goal = "Supervised research-and-execution agent system"
+current_goal = "Design the research-and-execution system"
 
 [[goals]]
-name = "Supervised research-and-execution agent system"
-reference = "./learn/elixir/reference/jido-13-capstone-research-execution-system.md"
+name = "Design the research-and-execution system"
+reference = "./learn/elixir/reference/jido-capstone-design.md"
+status = "todo"
+
+[[goals]]
+name = "Build and harden the research-and-execution system"
+reference = "./learn/elixir/reference/jido-capstone-build-and-harden.md"
 status = "todo"

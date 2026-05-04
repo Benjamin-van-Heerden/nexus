@@ -42,11 +42,23 @@ Scaffold a new Elixir learning track for Jido using the course outline in `.mem/
 - Added `rich` as a project dependency for better terminal tables, panels, and tree output.
 - Registered the command in the learn CLI wiring.
 
+### Collapsed Jido course phases
+
+- Reworked the Jido subtopic from one phase per course module into three phases:
+  - `foundations`
+  - `advanced`
+  - `capstone`
+- Moved the former module topics into goals within those phases.
+- Kept all existing Jido reference documents and updated phase goal references to point at them.
+- Removed the old empty module phase directories.
+
 ## Key Files Affected
 
 - `learn/elixir/jido/subtopic.toml` — new Jido subtopic configuration and exercise type instructions.
-- `learn/elixir/jido/subtopic_info.md` — new learning plan and phase list.
-- `learn/elixir/jido/*/phase.toml` — new phase metadata for each module and capstone.
+- `learn/elixir/jido/subtopic_info.md` — new learning plan and three-phase structure.
+- `learn/elixir/jido/foundations/phase.toml` — foundational Jido goals.
+- `learn/elixir/jido/advanced/phase.toml` — advanced Jido goals.
+- `learn/elixir/jido/capstone/phase.toml` — capstone goal.
 - `learn/elixir/reference/jido-*.md` — new Jido course reference docs.
 - `learn/elixir/topic_info.md` — added Jido to the Elixir learning approach.
 - `pyproject.toml` / `uv.lock` — added `rich`.

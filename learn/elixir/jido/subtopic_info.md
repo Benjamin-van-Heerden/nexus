@@ -28,6 +28,25 @@ The course should preserve this order:
 2. `advanced` — Plugins, FSMs, planning, parent-child orchestration, sensors, AI agents, tools, chat, memory, RAG, testing, and production readiness
 3. `capstone` — Supervised research-and-execution agent system
 
+## Goals
+
+### Foundations
+
+1. Core mental model and agent data
+2. Actions and deterministic workflows
+3. Signals, directives, and supervised runtime
+
+### Advanced
+
+1. Plugins and reusable capabilities
+2. Planning, FSMs, and orchestration
+3. AI agents, memory, RAG, and production readiness
+
+### Capstone
+
+1. Design the research-and-execution system
+2. Build and harden the research-and-execution system
+
 ## Resources
 
 - Jido: https://jido.run/
