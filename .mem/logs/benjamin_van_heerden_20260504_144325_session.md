@@ -60,6 +60,7 @@ Scaffold a new Elixir learning track for Jido using the course outline in `.mem/
   - `capstone`: 2 goals
 - Added consolidated reference docs for the broader goals instead of using one module-level reference per goal.
 - Updated the Jido subtopic overview to document the new goal structure.
+- Removed the obsolete module-level Jido reference docs (`jido-01` through `jido-13`) after verifying no current goals referenced them.
 
 ## Key Files Affected
 
@@ -71,7 +72,7 @@ Scaffold a new Elixir learning track for Jido using the course outline in `.mem/
 - `learn/elixir/reference/jido-foundations-*.md` — consolidated foundations references.
 - `learn/elixir/reference/jido-advanced-*.md` — consolidated advanced references.
 - `learn/elixir/reference/jido-capstone-*.md` — consolidated capstone references.
-- `learn/elixir/reference/jido-*.md` — new Jido course reference docs.
+- `learn/elixir/reference/jido-01-*.md` through `jido-13-*.md` — removed obsolete module-level references.
 - `learn/elixir/topic_info.md` — added Jido to the Elixir learning approach.
 - `pyproject.toml` / `uv.lock` — added `rich`.
 - `src/commands/learn/onboard.py` — added human-facing `status()` command with Rich panels, tables, and file tree.
