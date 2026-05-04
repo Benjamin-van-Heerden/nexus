@@ -38,7 +38,8 @@ Scaffold a new Elixir learning track for Jido using the course outline in `.mem/
 
 - Added `nexus learn status` for Benjamin-facing status output.
 - The command prints the current topic, subtopic, phase, current goal, phase roadmap, goals in the current phase, task status, and relevant files.
-- Output is intentionally distinct from `onboard` and `refresh`: concise, table-based, emoji-labeled, and free of agent instructions.
+- Output is intentionally distinct from `onboard` and `refresh`: concise, Rich-rendered, emoji-labeled, and free of agent instructions.
+- Added `rich` as a project dependency for better terminal tables, panels, and tree output.
 - Registered the command in the learn CLI wiring.
 
 ## Key Files Affected
@@ -48,12 +49,15 @@ Scaffold a new Elixir learning track for Jido using the course outline in `.mem/
 - `learn/elixir/jido/*/phase.toml` — new phase metadata for each module and capstone.
 - `learn/elixir/reference/jido-*.md` — new Jido course reference docs.
 - `learn/elixir/topic_info.md` — added Jido to the Elixir learning approach.
-- `src/commands/learn/onboard.py` — added human-facing `status()` command and table helpers.
+- `pyproject.toml` / `uv.lock` — added `rich`.
+- `src/commands/learn/onboard.py` — added human-facing `status()` command with Rich panels, tables, and file tree.
 - `src/commands/learn/main.py` — registered `nexus learn status`.
 
 ## Errors and Barriers
 
 - `uv run nexus learn onboard`, `uv run python ...`, and `mem log` initially failed in the sandbox because uv could not read `/Users/benjamin/.cache/uv/sdists-v9/.git`. Each command succeeded after rerunning with approval outside the sandbox.
+- `uv run ty check src` failed because `ty` is not installed in the project environment. `uvx ty check ...` is the correct way to run it here.
+- Full `uvx ty check src` reports pre-existing diagnostics outside this change. `uvx ty check src/commands/learn/onboard.py src/commands/learn/main.py` passes.
 - The first directory creation command briefly created exercise subdirectories under `learn/elixir/jido/records/`; those empty directories were removed immediately.
 - A project memory was added to avoid running git commands unless explicitly requested, especially when a tool prints git suggestions to stdout. `mem memory new` internally committed and pushed that memory as part of its own behaviour.
 
