@@ -6,6 +6,10 @@ from datetime import date, timedelta
 from pathlib import Path
 
 import typer
+from rich.console import Console
+from rich.panel import Panel
+from rich.table import Table
+from rich.text import Text
 
 from src.commands.learn.topic import ensure_topic_for_week, get_week_start
 from src.utils.learn import (
@@ -17,35 +21,7 @@ from src.utils.path_resolution import resolve, resolve_str
 from src.utils.pause import check_pause
 
 
-def _print_table(headers: list[str], rows: list[list[str]]) -> None:
-    """Print a compact ASCII table for human-facing CLI output."""
-    if not rows:
-        return
-
-    widths = [
-        max(len(headers[i]), *(len(row[i]) for row in rows))
-        for i in range(len(headers))
-    ]
-    border = "+-" + "-+-".join("-" * width for width in widths) + "-+"
-    header = "| " + " | ".join(
-        headers[i].ljust(widths[i]) for i in range(len(headers))
-    ) + " |"
-
-    print(border)
-    print(header)
-    print(border)
-    for row in rows:
-        print(
-            "| "
-            + " | ".join(row[i].ljust(widths[i]) for i in range(len(headers)))
-            + " |"
-        )
-    print(border)
-
-
-def _section(icon: str, title: str) -> None:
-    print(f"{icon} {title}")
-    print("-" * 60)
+console = Console()
 
 
 def _status_marker(status: str) -> str:
@@ -574,97 +550,102 @@ def status():
     current_week = get_week_start(today)
     week_end = current_week + timedelta(days=6)
 
-    print()
-    print("🎓 Nexus Learn Status")
-    print("=" * 60)
+    console.print()
+    console.rule("[bold cyan]🎓 Nexus Learn Status[/bold cyan]")
     if paused:
-        print(
-            f"⏸️  Paused: {paused.reason or 'no reason provided'} "
-            f"(resumes {paused.resume_date})"
+        console.print(
+            Panel(
+                f"{paused.reason or 'no reason provided'}\nResumes: {paused.resume_date}",
+                title="⏸️ Paused",
+                border_style="yellow",
+            )
         )
-        print()
 
-    _section("📍", "Current Context")
-    _print_table(
-        ["Field", "Value"],
-        [
-            ["Topic", f"📚 {topic_name}"],
-            ["Subtopic", f"🧵 {subtopic_cfg.name} ({subtopic_name})"],
-            ["Phase", f"🧱 {phase_cfg.name} ({phase_name})"],
-            ["Goal", f"🎯 {current_goal.name}" if current_goal else "No current goal"],
-            [
-                "Week",
-                f"🗓️  {current_week.strftime('%b %d')} - {week_end.strftime('%b %d, %Y')}",
-            ],
-        ],
+    context_table = Table.grid(padding=(0, 2))
+    context_table.add_column(style="bold cyan", no_wrap=True)
+    context_table.add_column()
+    context_table.add_row("📚 Topic", topic_name)
+    context_table.add_row("🧵 Subtopic", f"{subtopic_cfg.name} [dim]({subtopic_name})[/dim]")
+    context_table.add_row("🧱 Phase", f"{phase_cfg.name} [dim]({phase_name})[/dim]")
+    context_table.add_row("🎯 Goal", current_goal.name if current_goal else "[yellow]No current goal[/yellow]")
+    context_table.add_row(
+        "🗓️ Week",
+        f"{current_week.strftime('%b %d')} - {week_end.strftime('%b %d, %Y')}",
     )
-    print()
+    console.print(Panel(context_table, title="📍 Current Context", border_style="cyan"))
 
     if subtopic_cfg.phases:
-        _section("🧭", "Phase Roadmap")
-        phase_rows = []
+        phase_table = Table(title="🧭 Phase Roadmap", show_lines=False)
+        phase_table.add_column("", width=2, no_wrap=True)
+        phase_table.add_column("Status", no_wrap=True)
+        phase_table.add_column("Phase", overflow="fold")
         for phase in subtopic_cfg.phases:
             pointer = "➜" if phase.name == phase_name else ""
-            phase_rows.append([pointer, _status_marker(phase.status), phase.name])
-        _print_table(["", "Status", "Phase"], phase_rows)
-        print()
+            phase_table.add_row(pointer, _status_marker(phase.status), phase.name)
+        console.print(phase_table)
 
     if phase_cfg.goals:
-        _section("🎯", "Goals In Current Phase")
-        goal_rows = []
+        goal_table = Table(title="🎯 Goals In Current Phase", show_lines=False)
+        goal_table.add_column("", width=2, no_wrap=True)
+        goal_table.add_column("Status", no_wrap=True)
+        goal_table.add_column("Goal", overflow="fold")
+        goal_table.add_column("Tasks", justify="right", no_wrap=True)
         for goal in phase_cfg.goals:
             done_count = sum(1 for task in goal.tasks if task.status == "completed")
             total_count = len(goal.tasks)
             pointer = "➜" if goal.name == phase_cfg.current_goal else ""
-            goal_rows.append(
-                [
-                    pointer,
-                    _status_marker(goal.status),
-                    goal.name,
-                    f"{done_count}/{total_count}",
-                ]
+            goal_table.add_row(
+                pointer,
+                _status_marker(goal.status),
+                goal.name,
+                f"{done_count}/{total_count}",
             )
-        _print_table(["", "Status", "Goal", "Tasks"], goal_rows)
-        print()
+        console.print(goal_table)
 
     if not current_goal:
-        print("No current goal is set for this phase.")
-        print()
+        console.print("[yellow]No current goal is set for this phase.[/yellow]")
+        console.print()
         return
 
-    _section("📌", f"Current Goal: {current_goal.name}")
-    print(f"Reference: {resolve_str(current_goal.reference)}")
-    print()
+    goal_details = Text()
+    goal_details.append("Reference: ", style="bold cyan")
+    goal_details.append(resolve_str(current_goal.reference))
+    console.print(
+        Panel(
+            goal_details,
+            title=f"📌 Current Goal: {current_goal.name}",
+            border_style="green",
+        )
+    )
 
     if not current_goal.tasks:
-        print("📝 No tasks yet for this goal.")
-        print()
+        console.print("[yellow]📝 No tasks yet for this goal.[/yellow]")
+        console.print()
         return
 
-    _section("📋", "Tasks")
-    task_rows = []
+    task_table = Table(title="📋 Tasks", show_lines=False)
+    task_table.add_column("Status", no_wrap=True)
+    task_table.add_column("Type", no_wrap=True)
+    task_table.add_column("Task", overflow="fold")
+    task_table.add_column("Created", no_wrap=True)
+    task_table.add_column("Completed", no_wrap=True)
     for task in current_goal.tasks:
         completed = task.completed.isoformat() if task.completed else ""
-        task_rows.append(
-            [
-                "✅ done" if task.status == "completed" else "⬜ todo",
-                task.type,
-                task.name,
-                task.created.isoformat(),
-                completed,
-            ]
+        task_table.add_row(
+            "✅ done" if task.status == "completed" else "⬜ todo",
+            task.type,
+            task.name,
+            task.created.isoformat(),
+            completed,
         )
-    _print_table(["Status", "Type", "Task", "Created", "Completed"], task_rows)
-    print()
+    console.print(task_table)
 
-    _section("📎", "Relevant Files")
+    files_table = Table(title="📎 Relevant Files", show_lines=True)
+    files_table.add_column("Task", style="bold", overflow="fold", ratio=1)
+    files_table.add_column("Files", overflow="fold", ratio=2)
     for task in current_goal.tasks:
         marker = "✅" if task.status == "completed" else "⬜"
-        print(f"{marker} {task.name}")
-        if not task.relevant_files:
-            print("  (none)")
-            continue
-        for file_path in task.relevant_files:
-            print(f"  • {resolve_str(file_path)}")
-        print()
-    print()
+        files = "\n".join(resolve_str(file_path) for file_path in task.relevant_files)
+        files_table.add_row(f"{marker} {task.name}", files or "[dim](none)[/dim]")
+    console.print(files_table)
+    console.print()

@@ -16,6 +16,7 @@ dependencies = [
     "httpx>=0.28.1",
     "optax>=0.2.8",
     "flax>=0.12.7",
+    "rich>=14.3.3",
 ]
 
 [tool.uv.workspace]
