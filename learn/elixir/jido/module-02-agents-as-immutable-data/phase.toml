@@ -1,0 +1,7 @@
+name = "module-02-agents-as-immutable-data"
+current_goal = "Agents as immutable data"
+
+[[goals]]
+name = "Agents as immutable data"
+reference = "./learn/elixir/reference/jido-02-agents-as-immutable-data.md"
+status = "todo"

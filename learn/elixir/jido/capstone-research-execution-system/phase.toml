@@ -1,0 +1,7 @@
+name = "capstone-research-execution-system"
+current_goal = "Supervised research-and-execution agent system"
+
+[[goals]]
+name = "Supervised research-and-execution agent system"
+reference = "./learn/elixir/reference/jido-13-capstone-research-execution-system.md"
+status = "todo"

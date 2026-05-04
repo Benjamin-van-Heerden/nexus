@@ -1,0 +1,7 @@
+name = "module-08-plugins-and-reusable-capabilities"
+current_goal = "Plugins and reusable capabilities"
+
+[[goals]]
+name = "Plugins and reusable capabilities"
+reference = "./learn/elixir/reference/jido-08-plugins-and-reusable-capabilities.md"
+status = "todo"

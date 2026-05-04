@@ -1,0 +1,71 @@
+name = "Jido Agent Framework"
+current_phase = "module-01-setup-and-mental-model"
+phases = [
+    { name = "module-01-setup-and-mental-model", status = "in_progress" },
+    { name = "module-02-agents-as-immutable-data", status = "todo" },
+    { name = "module-03-actions-as-validated-state-transitions", status = "todo" },
+    { name = "module-04-workflows-with-action-chains", status = "todo" },
+    { name = "module-05-signals-and-routing", status = "todo" },
+    { name = "module-06-directives-and-side-effect-boundaries", status = "todo" },
+    { name = "module-07-agentserver-and-supervised-runtime", status = "todo" },
+    { name = "module-08-plugins-and-reusable-capabilities", status = "todo" },
+    { name = "module-09-fsms-planning-and-resumable-workflows", status = "todo" },
+    { name = "module-10-parent-child-sensors-and-orchestration", status = "todo" },
+    { name = "module-11-ai-agents-tools-chat-and-reasoning", status = "todo" },
+    { name = "module-12-memory-rag-production-readiness", status = "todo" },
+    { name = "capstone-research-execution-system", status = "todo" },
+]
+
+[practical]
+description = """
+Each phase uses practical/ as a Mix project workspace for Jido exercises.
+Create exercise modules in practical/lib/ and corresponding ExUnit tests in
+practical/test/. If practical/mix.exs is missing, initialize it before adding
+exercise files.
+
+Jido exercises should be test-first and mostly deterministic:
+- Core modules use `Jido.Agent`, `Jido.Action`, `Jido.Signal`, directives,
+  plugins, or `Jido.AgentServer` depending on the current goal.
+- Prefer pure action and agent-transition tests before runtime tests.
+- Keep live LLM/provider calls out of required tests. Mock at the boundary or
+  test tool/action conversion separately.
+
+Naming: lib/<slug>.ex and test/<slug>_test.exs, where slug describes the
+exercise. Stub functions should raise \"implement me\" and @doc strings should
+state the behaviour to implement.
+"""
+setup_commands = [
+    "mix new practical --app practical_$(echo ${PHASE} | tr '-' '_')",
+    "rm practical/README.md",
+    "rm practical/.gitignore",
+]
+
+[theoretical]
+description = """
+Create a markdown reading assignment in theoretical/ named
+YYYY-MM-DD-<slug>.md.
+
+Use the current goal's Jido reference document as the backbone. Focus on the
+mental model: how Jido maps to ordinary OTP habits, where state lives, where
+effects happen, what should stay deterministic, and when the runtime layer is
+actually needed. Include small code snippets and checkpoint questions.
+"""
+setup_commands = []
+
+[quiz]
+description = """
+Create TWO files for each quiz:
+
+1. quiz/YYYY-MM-DD-<slug>.md
+   - 3-5 questions mixing concept checks, code prediction, design tradeoffs,
+     and testing strategy.
+   - Do NOT include answers in this file.
+
+2. quiz/answers/YYYY-MM-DD-<slug>.md
+   - Answer key with short explanations.
+
+Register the quiz task with --file pointing to the quiz file, not the answer key.
+"""
+setup_commands = [
+    "mkdir -p quiz/answers",
+]

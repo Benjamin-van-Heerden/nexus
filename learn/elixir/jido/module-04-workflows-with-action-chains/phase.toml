@@ -1,0 +1,7 @@
+name = "module-04-workflows-with-action-chains"
+current_goal = "Workflows with action chains"
+
+[[goals]]
+name = "Workflows with action chains"
+reference = "./learn/elixir/reference/jido-04-workflows-with-action-chains.md"
+status = "todo"

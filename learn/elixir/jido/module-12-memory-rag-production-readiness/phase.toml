@@ -1,0 +1,7 @@
+name = "module-12-memory-rag-production-readiness"
+current_goal = "Memory, threads, RAG, and production readiness"
+
+[[goals]]
+name = "Memory, threads, RAG, and production readiness"
+reference = "./learn/elixir/reference/jido-12-memory-rag-production-readiness.md"
+status = "todo"

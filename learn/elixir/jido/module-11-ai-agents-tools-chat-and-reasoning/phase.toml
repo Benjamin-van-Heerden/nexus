@@ -1,0 +1,7 @@
+name = "module-11-ai-agents-tools-chat-and-reasoning"
+current_goal = "AI agents, tools, chat, and reasoning strategies"
+
+[[goals]]
+name = "AI agents, tools, chat, and reasoning strategies"
+reference = "./learn/elixir/reference/jido-11-ai-agents-tools-chat-and-reasoning.md"
+status = "todo"

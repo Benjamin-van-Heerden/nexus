@@ -10,12 +10,13 @@ Build real systems using OTP patterns — GenServers, supervision trees, dynamic
 
 ## Learning Approach
 
-Two-track curriculum:
+Tracks:
 1. **otp track** — Deep dive into OTP: behaviours, GenServer, supervision, dynamic supervisors, tasks/agents, and a capstone word ladder project.
-2. **redis track** (future) — Build Redis in Elixir, based on a CodeCrafters project. Applies OTP patterns to a real networked system.
+2. **jido track** — Learn Jido as a BEAM-native agent framework: agents as data, actions, signals, directives, supervised runtimes, plugins, memory, AI tools, and orchestration.
+3. **redis track** (future) — Build Redis in Elixir, based on a CodeCrafters project. Applies OTP patterns to a real networked system.
 
-The OTP track comes first to build fluency with the concurrency model. The redis track applies it.
+The OTP track comes first to build fluency with the concurrency model. The Jido track builds on that OTP foundation to model production agent systems. The redis track applies OTP patterns to a networked system.
 
 ## Reference Material
 
-- `./learn/elixir/reference/` — OTP course material organized by topic
+- `./learn/elixir/reference/` — OTP and Jido course material organized by topic

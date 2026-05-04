@@ -1,0 +1,7 @@
+name = "module-07-agentserver-and-supervised-runtime"
+current_goal = "AgentServer and supervised runtime"
+
+[[goals]]
+name = "AgentServer and supervised runtime"
+reference = "./learn/elixir/reference/jido-07-agentserver-and-supervised-runtime.md"
+status = "todo"
