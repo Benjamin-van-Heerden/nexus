@@ -17,7 +17,20 @@ defmodule LinkMonitorLab do
   the monitored process exits.
   """
   def monitor_worker(reason \\ :normal) do
-    raise "implement me"
+    pid =
+      spawn(fn ->
+        receive do
+          :stop -> exit(reason)
+        end
+      end)
+
+    ref = Process.monitor(pid)
+    send(pid, :stop)
+
+    receive do
+      {:DOWN, ^ref, :process, ^pid, _exit_reason} = down ->
+        down
+    end
   end
 
   @doc """
@@ -34,7 +47,39 @@ defmodule LinkMonitorLab do
   For an abnormal child exit such as `:boom`, the linked observer should also die.
   """
   def linked_worker_crash(reason \\ :boom) do
-    raise "implement me"
+    caller = self()
+
+    observer =
+      spawn(fn ->
+        child =
+          spawn_link(fn ->
+            receive do
+              :stop -> exit(reason)
+            end
+          end)
+
+        send(child, :stop)
+
+        receive do
+        after
+          50 -> send(caller, {:observer_survived, reason})
+        end
+      end)
+
+    ref = Process.monitor(observer)
+
+    receive do
+      {:DOWN, ^ref, :process, ^observer, :normal} ->
+        receive do
+          {:observer_survived, ^reason} = msg -> msg
+        end
+
+      {:DOWN, ^ref, :process, ^observer, _reason} = down ->
+        down
+
+      {:observer_survived, ^reason} = msg ->
+        msg
+    end
   end
 
   @doc """
@@ -51,7 +96,30 @@ defmodule LinkMonitorLab do
   Return the trapped EXIT message.
   """
   def trapped_link_exit(reason \\ :boom) do
-    raise "implement me"
+    caller = self()
+
+    spawn(fn ->
+      Process.flag(:trap_exit, true)
+
+      child =
+        spawn_link(fn ->
+          receive do
+            :stop -> exit(reason)
+          end
+        end)
+
+      send(child, :stop)
+
+      receive do
+        {:EXIT, ^child, ^reason} = msg ->
+          send(caller, msg)
+      end
+    end)
+
+    receive do
+      {:EXIT, _child, _reason} = msg ->
+        msg
+    end
   end
 
   @doc """
@@ -67,7 +135,8 @@ defmodule LinkMonitorLab do
   - `:two_halves_of_one_protocol`
   - `:background_job_notification`
   """
-  def choose_primitive(scenario) do
-    raise "implement me"
-  end
+  def choose_primitive(:supervisor_child), do: :link
+  def choose_primitive(:two_halves_of_one_protocol), do: :link
+  def choose_primitive(:request_timeout_tracker), do: :monitor
+  def choose_primitive(:background_job_notification), do: :monitor
 end
