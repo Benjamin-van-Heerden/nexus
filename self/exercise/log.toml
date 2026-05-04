@@ -39,3 +39,10 @@ type = "soccer"
 description = "Intense soccer match"
 intensity = "hard"
 duration_minutes = 40
+
+[[sessions]]
+date = "2026-05-04"
+type = "gym"
+description = "Gym session"
+intensity = "moderate"
+duration_minutes = 40
