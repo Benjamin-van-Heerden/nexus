@@ -1,5 +1,7 @@
+last_reindex = "2026-05-05T08:35:20.531342Z"
+last_qmd_update = "2026-05-05T08:37:24.497120Z"
 schema_version = 1
-pending_qmd_update = true
+pending_qmd_update = false
 
 [[renames]]
 old = "attention-is-all-you-need"
