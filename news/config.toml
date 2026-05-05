@@ -1,0 +1,96 @@
+xai_model = "grok-4.3"
+synthesis_model = "grok-4.3"
+history_days = 3
+max_entries_per_source = 30
+max_total_entries = 250
+max_entry_age_hours = 72
+editorial_profile = """
+Benjamin wants broad source coverage, but treats some modern left-leaning coverage as prone to anti-Trump, anti-West, and anti-American framing. Do not discard those sources, but actively distinguish reported facts from interpretive framing. Flag loaded language, selective context, activist premises, and emotionally charged anti-Trump or anti-West assumptions when they materially affect a story.
+"""
+categories = [
+  "science",
+  "technology",
+  "economics",
+  "us_politics",
+  "international",
+  "entertainment",
+  "sa_local",
+]
+
+[[sources]]
+name = "NPR News"
+url = "https://feeds.npr.org/1014/rss.xml"
+category = "us_politics"
+lean = "center-left"
+
+[[sources]]
+name = "The Guardian US"
+url = "https://www.theguardian.com/us-news/us-politics/rss"
+category = "us_politics"
+lean = "left"
+
+[[sources]]
+name = "Fox News Politics"
+url = "https://moxie.foxnews.com/google-publisher/politics.xml"
+category = "us_politics"
+lean = "right"
+
+[[sources]]
+name = "The Hill News"
+url = "https://thehill.com/homenews/feed/"
+category = "us_politics"
+lean = "center-right"
+
+[[sources]]
+name = "BBC World"
+url = "http://feeds.bbci.co.uk/news/world/rss.xml"
+category = "international"
+lean = "international"
+
+[[sources]]
+name = "Al Jazeera"
+url = "https://www.aljazeera.com/xml/rss/all.xml"
+category = "international"
+lean = "international"
+
+[[sources]]
+name = "Deutsche Welle"
+url = "https://rss.dw.com/rdf/rss-en-all"
+category = "international"
+lean = "international"
+
+[[sources]]
+name = "MarketWatch"
+url = "https://feeds.marketwatch.com/marketwatch/topstories/"
+category = "economics"
+lean = "center"
+
+[[sources]]
+name = "Ars Technica"
+url = "https://feeds.arstechnica.com/arstechnica/index"
+category = "technology"
+lean = "center"
+
+[[sources]]
+name = "Hacker News"
+url = "https://news.ycombinator.com/rss"
+category = "technology"
+lean = "center"
+
+[[sources]]
+name = "ScienceDaily"
+url = "https://www.sciencedaily.com/rss/top.xml"
+category = "science"
+lean = "center"
+
+[[sources]]
+name = "Variety"
+url = "https://variety.com/feed/"
+category = "entertainment"
+lean = "center"
+
+[[sources]]
+name = "Daily Maverick"
+url = "https://www.dailymaverick.co.za/dmrss/"
+category = "sa_local"
+lean = "center-left"

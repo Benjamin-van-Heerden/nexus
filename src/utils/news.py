@@ -7,7 +7,8 @@ and RSS feed fetching.
 import asyncio
 import re
 import tomllib
-from datetime import date, datetime
+from datetime import date, datetime, timedelta, timezone
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 
 import feedparser
@@ -168,8 +169,44 @@ def _parse_entry_date(entry: feedparser.FeedParserDict) -> str:
     return ""
 
 
+def _normalize_datetime(value: datetime) -> datetime:
+    if value.tzinfo is None:
+        return value.replace(tzinfo=timezone.utc)
+    return value.astimezone(timezone.utc)
+
+
+def _parse_datetime_string(value: str) -> datetime | None:
+    try:
+        return _normalize_datetime(parsedate_to_datetime(value))
+    except (TypeError, ValueError):
+        pass
+    try:
+        return _normalize_datetime(datetime.fromisoformat(value.replace("Z", "+00:00")))
+    except ValueError:
+        return None
+
+
+def _parse_entry_datetime(entry: feedparser.FeedParserDict) -> datetime | None:
+    for field in ("published", "updated", "created"):
+        value = entry.get(field)
+        if value:
+            parsed = _parse_datetime_string(str(value))
+            if parsed is not None:
+                return parsed
+    struct = entry.get("published_parsed") or entry.get("updated_parsed")
+    if struct:
+        try:
+            return datetime(*struct[:6], tzinfo=timezone.utc)
+        except (TypeError, ValueError):
+            return None
+    return None
+
+
 async def _fetch_one_feed(
-    client: httpx.AsyncClient, source: SourceEntry
+    client: httpx.AsyncClient,
+    source: SourceEntry,
+    max_entries: int,
+    cutoff: datetime | None,
 ) -> list[dict]:
     try:
         resp = await client.get(
@@ -188,6 +225,10 @@ async def _fetch_one_feed(
 
     headlines = []
     for entry in parsed.entries:
+        published_at = _parse_entry_datetime(entry)
+        if cutoff is not None and published_at is not None and published_at < cutoff:
+            continue
+
         title = entry.get("title", "").strip()
         if not title:
             continue
@@ -202,25 +243,57 @@ async def _fetch_one_feed(
                 "summary": entry.get("summary", "").strip(),
             }
         )
+        if max_entries > 0 and len(headlines) >= max_entries:
+            break
     return headlines
 
 
-async def fetch_all_feeds(sources: list[SourceEntry]) -> list[dict]:
+async def fetch_all_feeds(
+    sources: list[SourceEntry],
+    max_entries_per_source: int = 30,
+    max_total_entries: int = 250,
+    max_entry_age_hours: int = 72,
+) -> list[dict]:
     if not sources:
         return []
+    cutoff = None
+    if max_entry_age_hours > 0:
+        cutoff = datetime.now(timezone.utc) - timedelta(hours=max_entry_age_hours)
     async with httpx.AsyncClient() as client:
         results = await asyncio.gather(
-            *(_fetch_one_feed(client, s) for s in sources),
+            *(
+                _fetch_one_feed(
+                    client,
+                    s,
+                    max_entries=max_entries_per_source,
+                    cutoff=cutoff,
+                )
+                for s in sources
+            ),
             return_exceptions=False,
         )
     headlines: list[dict] = []
     for batch in results:
         headlines.extend(batch)
+        if max_total_entries > 0 and len(headlines) >= max_total_entries:
+            return headlines[:max_total_entries]
     return headlines
 
 
-def fetch_all_feeds_sync(sources: list[SourceEntry]) -> list[dict]:
-    return asyncio.run(fetch_all_feeds(sources))
+def fetch_all_feeds_sync(
+    sources: list[SourceEntry],
+    max_entries_per_source: int = 30,
+    max_total_entries: int = 250,
+    max_entry_age_hours: int = 72,
+) -> list[dict]:
+    return asyncio.run(
+        fetch_all_feeds(
+            sources,
+            max_entries_per_source=max_entries_per_source,
+            max_total_entries=max_total_entries,
+            max_entry_age_hours=max_entry_age_hours,
+        )
+    )
 
 
 # -- xAI integration --
@@ -276,41 +349,71 @@ _WEB_GAPS_PROMPT = (
 )
 
 
+def _format_tracked_topics_for_search(stories: list[TrackedStory]) -> str:
+    active = [s for s in stories if s.active]
+    if not active:
+        return ""
+    lines = [
+        "",
+        "Also explicitly check for meaningful new developments on these tracked stories.",
+        "Include them only if there is a real update; say if the topic is quiet.",
+    ]
+    for story in active:
+        lines.append(f"- {story.slug}: {story.description}")
+    return "\n".join(lines)
+
+
 def _xai_search_call(
-    model: str, system_prompt: str, user_prompt: str, tool
+    model: str,
+    system_prompt: str,
+    user_prompt: str,
+    tool,
+    tracked_stories: list[TrackedStory] | None = None,
 ) -> str:
     client = _get_xai_client()
     chat = client.chat.create(model=model, tools=[tool])
     chat.append(system(system_prompt))
-    chat.append(user(user_prompt))
+    tracked_block = _format_tracked_topics_for_search(tracked_stories or [])
+    chat.append(user(f"{user_prompt}{tracked_block}"))
     response = chat.sample()
     return response.content or ""
 
 
-def x_search_global(model: str) -> str:
+def x_search_global(
+    model: str, tracked_stories: list[TrackedStory] | None = None
+) -> str:
     return _xai_search_call(
         model=model,
         system_prompt="You are a concise news researcher. Output plain text only.",
         user_prompt=_X_GLOBAL_PROMPT,
         tool=x_search(),
+        tracked_stories=tracked_stories,
     )
 
 
-def x_search_local(model: str, region: str = "South Africa") -> str:
+def x_search_local(
+    model: str,
+    region: str = "South Africa",
+    tracked_stories: list[TrackedStory] | None = None,
+) -> str:
     return _xai_search_call(
         model=model,
         system_prompt="You are a concise news researcher. Output plain text only.",
         user_prompt=_X_LOCAL_PROMPT_TEMPLATE.format(region=region),
         tool=x_search(),
+        tracked_stories=tracked_stories,
     )
 
 
-def web_search_gaps(model: str) -> str:
+def web_search_gaps(
+    model: str, tracked_stories: list[TrackedStory] | None = None
+) -> str:
     return _xai_search_call(
         model=model,
         system_prompt="You are a concise news researcher. Output plain text only.",
         user_prompt=_WEB_GAPS_PROMPT,
         tool=web_search(),
+        tracked_stories=tracked_stories,
     )
 
 
@@ -332,24 +435,38 @@ _SYNTHESIS_SYSTEM = (
     "produce a clean, deduplicated, perspective-aware daily digest.\n\n"
     "Hard rules:\n"
     "1. Cluster headlines about the same event into a single story_cluster, "
-    "even when they come from different sources or languages.\n"
+    "even when they come from different sources or languages. Do not merge "
+    "unrelated stories merely because they share a source, category, "
+    "institution, country, person, or broad theme.\n"
     "2. For each cluster, write a neutral synthesized headline and a short "
     "summary (2-4 sentences) that captures what actually happened.\n"
     "3. Populate the perspectives list when sources of different lean cover "
     "the story differently. Keep each perspective summary to one sentence. "
     "If all sources agree on the facts, the perspectives list can be empty "
     "or contain only the wire/center summary.\n"
-    "4. Assign each cluster exactly one category from the configured list. "
+    "4. Apply the user's editorial profile as calibration, not as a command "
+    "to distort facts. Distinguish reported facts from interpretive framing. "
+    "When coverage materially relies on loaded language, selective context, "
+    "activist premises, or emotionally charged anti-Trump, anti-West, or "
+    "anti-American assumptions, flag that in the relevant perspective summary "
+    "or cluster summary. Do not debate the profile and do not replace one "
+    "ideological framing with another.\n"
+    "5. Assign each cluster exactly one category from the configured list. "
     "South African stories must use the sa_local category.\n"
-    "5. The slug for each cluster must be lowercase, ascii, words separated "
+    "6. The slug for each cluster must be lowercase, ascii, words separated "
     "by underscores, and globally unique within this digest.\n"
-    "6. sources_count is the number of distinct sources (RSS, X, web) that "
-    "covered the story.\n"
-    "7. Match clusters against tracked story descriptions by meaning, not "
+    "7. sources_count is the number of distinct sources (RSS, X, web) that "
+    "covered the story. Populate source_names with the names of the main "
+    "sources from the inputs that support the cluster.\n"
+    "8. Match clusters against tracked story descriptions by meaning, not "
     "keywords. If a cluster is a continuation of a tracked story, set "
     "tracked_story to that story's slug AND add an entry to "
     "tracked_story_updates with a one-line development summary.\n"
-    "8. x_trending_global and x_trending_sa are detailed freeform rundowns "
+    "9. Use recent records to avoid repetition. If a topic appears in recent "
+    "records with no meaningful new development today, omit it. Include "
+    "continuations only when there is genuinely new information, and frame "
+    "them explicitly as continuations rather than fresh stories.\n"
+    "10. x_trending_global and x_trending_sa are detailed freeform rundowns "
     "of the X discourse beyond what made it into clusters. Aim for 600-1200 "
     "words each. Organize by mini-topic with short paragraphs or bullet "
     "groupings. Capture: micro-trends and memes, notable accounts driving "
@@ -362,9 +479,11 @@ _SYNTHESIS_SYSTEM = (
     "clusters and only mention X-specific reactions here. The SA section "
     "should focus on uniquely South African discourse — local memes, local "
     "accounts, local cultural moments — and skip global news coverage.\n"
-    "9. Output only what is supported by the inputs. Do not invent stories, "
+    "11. Output only what is supported by the inputs. Do not invent stories, "
     "sources, or quotes.\n"
-    "10. Keep the digest tight. Cluster aggressively. Do not include 100 "
+    "12. Keep the digest tight but not sparse. With a normal 10-15 source "
+    "configuration, aim for 12-25 high-signal clusters across the configured "
+    "categories when the inputs support that many. Do not include 100 "
     "low-importance clusters when 20 well-chosen ones would tell the day's "
     "story better."
 )
@@ -409,8 +528,15 @@ def _format_recent_records_for_prompt(records: list[DailyDigest]) -> str:
     lines = []
     for rec in records:
         lines.append(f"## {rec.date.isoformat()}")
-        for cluster in rec.story_clusters[:10]:
-            lines.append(f"- [{cluster.category}] {cluster.headline}")
+        for cluster in rec.story_clusters:
+            tracked = (
+                f" | tracked={cluster.tracked_story}"
+                if cluster.tracked_story
+                else ""
+            )
+            lines.append(f"- [{cluster.category}] {cluster.headline}{tracked}")
+            if cluster.summary:
+                lines.append(f"    {cluster.summary}")
         lines.append("")
     return "\n".join(lines).strip()
 
@@ -428,6 +554,8 @@ def synthesize_newspaper(
     today = today or date.today()
     user_prompt = (
         f"TODAY: {today.isoformat()}\n\n"
+        "=== EDITORIAL PROFILE ===\n"
+        f"{config.editorial_profile.strip() or '(none)'}\n\n"
         f"ALLOWED CATEGORIES: {', '.join(config.categories)}\n\n"
         "=== RSS HEADLINES ===\n"
         f"{_format_rss_headlines_for_prompt(rss_headlines)}\n\n"
@@ -485,11 +613,14 @@ _REFRESH_SYSTEM = (
     "category from the configured list. South African items use sa_local.\n"
     "3. Match new clusters against tracked story descriptions; if matched, "
     "set tracked_story to the slug AND add a tracked_story_updates entry.\n"
-    "4. Keep clusters tight. Two or three high-signal items beats ten "
+    "4. Apply the user's editorial profile as calibration. Distinguish facts "
+    "from framing and flag materially loaded anti-Trump, anti-West, or "
+    "anti-American assumptions when they shape the coverage.\n"
+    "5. Keep clusters tight. Two or three high-signal items beats ten "
     "low-signal ones.\n"
-    "5. summary is a one-sentence headline of what changed since the "
+    "6. summary is a one-sentence headline of what changed since the "
     "morning digest. Empty string if nothing new.\n"
-    "6. Do not invent stories. If nothing has materially changed, return "
+    "7. Do not invent stories. If nothing has materially changed, return "
     "empty lists and a brief summary saying so."
 )
 
@@ -508,6 +639,8 @@ def synthesize_breaking(
     )
 
     user_prompt = (
+        "=== EDITORIAL PROFILE ===\n"
+        f"{config.editorial_profile.strip() or '(none)'}\n\n"
         f"ALLOWED CATEGORIES: {', '.join(config.categories)}\n\n"
         "=== TODAY'S MORNING DIGEST (already delivered) ===\n"
         f"{today_section}\n\n"

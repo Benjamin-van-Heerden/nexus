@@ -22,6 +22,7 @@ class StoryCluster(BaseModel):
     perspectives: list[PerspectiveEntry] = []
     tracked_story: str | None = None
     sources_count: int = 1
+    source_names: list[str] = []
 
 
 class TrackedStoryUpdate(BaseModel):
