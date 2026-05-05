@@ -1,14 +1,14 @@
 ---
 title: nexus news command
-status: merge_ready
+status: completed
 assigned_to: Benjamin-van-Heerden
 issue_id: 9
 issue_url: https://github.com/Benjamin-van-Heerden/nexus/issues/9
 branch: dev-benjamin_van_heerden-nexus_news_command
 pr_url: https://github.com/Benjamin-van-Heerden/nexus/pull/11
 created_at: '2026-04-07T15:17:39.642178'
-updated_at: '2026-05-05T11:06:10.579768'
-completed_at: null
+updated_at: '2026-05-05T11:12:31.762586'
+completed_at: '2026-05-05T11:12:31.761175'
 last_synced_at: '2026-04-07T15:22:14.853853'
 local_content_hash: 3e7d5d3a9efe841b94b1312bf5d940b971e884d46c543111da014a2c58084e7a
 remote_content_hash: 3e7d5d3a9efe841b94b1312bf5d940b971e884d46c543111da014a2c58084e7a
