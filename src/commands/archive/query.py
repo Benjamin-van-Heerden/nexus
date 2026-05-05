@@ -82,7 +82,7 @@ def query(
     seen_slugs: set[str] = set()
     skipped_paths: list[str] = []
     for hit in hits:
-        path = hit.get("path")
+        path = hit.get("path") or hit.get("file")
         slug = qmd_path_to_slug(path)
         if slug is None or slug in seen_slugs:
             if slug is None and path:

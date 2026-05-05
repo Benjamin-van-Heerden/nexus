@@ -4,14 +4,19 @@ Handles TOML/YAML I/O, frontmatter parsing, slug helpers, mention
 extraction, and the QMD subprocess wrapper for the archive system.
 """
 
+import hashlib
 import json
 import re
+import shutil
 import subprocess
+import tempfile
 import tomllib
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Iterator
+from urllib.parse import urlparse
 
+import httpx
 import tomli_w
 import yaml
 
@@ -62,6 +67,14 @@ def get_agent_instructions_path() -> Path:
     return Path(__file__).resolve().parent.parent / "commands" / "archive" / "agent_instructions.md"
 
 
+def get_raw_markdown_path(content_hash: str) -> Path:
+    return get_raw_dir() / f"{content_hash}.md"
+
+
+def get_raw_sidecar_path(content_hash: str) -> Path:
+    return get_raw_dir() / f"{content_hash}.toml"
+
+
 # -- Atomic write helper --
 
 
@@ -90,6 +103,147 @@ def _dump_toml_bytes(data: dict) -> bytes:
 
 def _save_toml(path: Path, data: dict) -> None:
     _atomic_write_bytes(path, _dump_toml_bytes(data))
+
+
+# -- Raw ingestion helpers --
+
+_MARKDOWN_SOURCE_ERROR = (
+    "Only markdown sources supported for v1; PDFs/HTML belong in raw/unprocessed/ "
+    "(future spec)."
+)
+
+
+def hash_file(path: Path) -> str:
+    """Return the first 12 chars of the SHA256 hash for a file's bytes."""
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()[:12]
+
+
+def fetch_url_to_temp(url: str) -> Path:
+    """Fetch a markdown URL to a temp .md file and return its path."""
+    parsed = urlparse(url)
+    if parsed.scheme not in {"http", "https"}:
+        raise ValueError("URL must start with http:// or https://")
+
+    response = httpx.get(url, follow_redirects=True, timeout=30.0)
+    response.raise_for_status()
+
+    content_type = response.headers.get("content-type", "").split(";")[0].strip().lower()
+    path_suffix = Path(parsed.path).suffix.lower()
+    markdown_content_types = {"text/markdown", "text/x-markdown", "text/plain"}
+    if content_type == "text/html" or (
+        content_type not in markdown_content_types and path_suffix != ".md"
+    ):
+        raise ValueError(_MARKDOWN_SOURCE_ERROR)
+
+    with tempfile.NamedTemporaryFile("wb", suffix=".md", delete=False) as tmp:
+        tmp.write(response.content)
+        return Path(tmp.name)
+
+
+def read_first_h1(markdown_text: str) -> str | None:
+    """Return the first markdown H1 title, if present."""
+    for line in markdown_text.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("# ") and stripped[2:].strip():
+            return stripped[2:].strip()
+    return None
+
+
+_EXCERPT_STOPWORDS = {"a", "an", "and", "of", "the", "to", "in", "across"}
+
+
+def extract_excerpt(markdown_text: str, word_count: int = 500) -> str:
+    """Return the first word_count plain words from markdown text."""
+    words = [
+        word
+        for word in re.findall(r"[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*", markdown_text)
+        if word.lower() not in _EXCERPT_STOPWORDS
+    ]
+    return " ".join(words[:word_count])
+
+
+def save_raw(
+    source_path: Path,
+    content_hash: str,
+    original_path: str | None = None,
+) -> tuple[Path, Path]:
+    """Copy source_path into raw/<hash>.md and write raw/<hash>.toml metadata."""
+    raw_path = get_raw_markdown_path(content_hash)
+    sidecar_path = get_raw_sidecar_path(content_hash)
+    raw_path.parent.mkdir(parents=True, exist_ok=True)
+
+    tmp_path = raw_path.with_suffix(".md.tmp")
+    shutil.copyfile(source_path, tmp_path)
+    tmp_path.replace(raw_path)
+
+    data = source_path.read_bytes()
+    text = data.decode("utf-8", errors="replace")
+    metadata = {
+        "hash": content_hash,
+        "filename": raw_path.name,
+        "original_path": original_path or str(source_path),
+        "fetched_at": datetime.now(timezone.utc).isoformat(),
+        "title_guess": read_first_h1(text) or "",
+        "byte_size": len(data),
+        "line_count": len(text.splitlines()),
+    }
+    _save_toml(sidecar_path, metadata)
+    return raw_path, sidecar_path
+
+
+_KEYWORD_STOPWORDS = {
+    "about",
+    "after",
+    "again",
+    "also",
+    "because",
+    "before",
+    "between",
+    "from",
+    "have",
+    "into",
+    "more",
+    "over",
+    "such",
+    "that",
+    "their",
+    "then",
+    "there",
+    "these",
+    "this",
+    "through",
+    "with",
+    "without",
+}
+
+
+def _keywords(text: str) -> set[str]:
+    return {
+        word
+        for word in re.findall(r"[a-z0-9]+", text.lower())
+        if len(word) >= 4 and word not in _KEYWORD_STOPWORDS
+    }
+
+
+def find_candidate_topics_by_keywords(text: str) -> list[TopicConfig]:
+    """Rank topics by simple keyword overlap against title + summary."""
+    query_words = _keywords(text)
+    if not query_words:
+        return []
+
+    scored: list[tuple[int, str, TopicConfig]] = []
+    for topic in list_all_topics():
+        topic_words = _keywords(f"{topic.title} {topic.summary}")
+        score = len(query_words & topic_words)
+        if score:
+            scored.append((score, topic.slug, topic))
+
+    scored.sort(key=lambda item: (-item[0], item[1]))
+    return [topic for _score, _slug, topic in scored]
 
 
 # -- Config / state --
@@ -134,6 +288,15 @@ def save_work_queue(queue: WorkQueue) -> None:
 def enqueue_work(item: WorkItem) -> None:
     queue = load_work_queue()
     queue.items.append(item)
+    save_work_queue(queue)
+
+
+def mark_work_item_resolved(kind: str, slug: str) -> None:
+    """Remove persisted work items matching kind + slug."""
+    queue = load_work_queue()
+    queue.items = [
+        item for item in queue.items if not (item.kind == kind and item.slug == slug)
+    ]
     save_work_queue(queue)
 
 
@@ -242,13 +405,7 @@ def regenerate_index() -> IndexFile:
     docs = list(list_all_docs_with_frontmatter())
     outputs = list(list_all_outputs_with_frontmatter())
 
-    # Inbound reference index — for orphan detection
-    inbound: dict[str, set[str]] = {}
-    for slug, fm, body in docs:
-        for link in fm.links:
-            inbound.setdefault(link.slug, set()).add(slug)
-        for m in fm.mentions:
-            inbound.setdefault(m, set()).add(slug)
+    inbound = _inbound_ref_index(docs)
 
     # Counts
     config = load_archive_config()
@@ -300,6 +457,70 @@ def regenerate_index() -> IndexFile:
     )
     save_index(index)
     return index
+
+
+def _inbound_ref_index(
+    docs: list[tuple[str, DocFrontmatter, str]] | None = None,
+) -> dict[str, set[str]]:
+    """Map target slug -> source slugs for links and mentions."""
+    docs = docs if docs is not None else list(list_all_docs_with_frontmatter())
+    inbound: dict[str, set[str]] = {}
+    for slug, fm, _body in docs:
+        for link in fm.links:
+            inbound.setdefault(link.slug, set()).add(slug)
+        for mention in fm.mentions:
+            inbound.setdefault(mention, set()).add(slug)
+    return inbound
+
+
+def compute_orphans() -> list[str]:
+    """Return doc slugs with no topics or no inbound links/mentions."""
+    docs = list(list_all_docs_with_frontmatter())
+    inbound = _inbound_ref_index(docs)
+    out: list[str] = []
+    for slug, fm, _body in docs:
+        if not fm.topics or not inbound.get(slug):
+            out.append(slug)
+    return sorted(out)
+
+
+def compute_stales(staleness_days: int) -> list[str]:
+    """Return stale doc slugs, oldest maintained first."""
+    threshold = date.today() - timedelta(days=staleness_days)
+    stale: list[tuple[date, str]] = []
+    for slug, fm, _body in list_all_docs_with_frontmatter():
+        last = fm.last_maintained or fm.updated
+        if last < threshold:
+            stale.append((last, slug))
+    return [slug for _last, slug in sorted(stale)]
+
+
+def compute_contradictions() -> list[tuple[str, str]]:
+    """Return best-effort contradiction candidates.
+
+    v1 keeps this conservative. QMD-backed contradiction discovery is surfaced
+    as manual maintenance guidance rather than automated flags.
+    """
+    return []
+
+
+def get_topic_member_freshness(topic_slug: str) -> bool:
+    """Return True if a topic likely needs summary/member freshness review."""
+    if not topic_exists(topic_slug):
+        return False
+    topic = load_topic(topic_slug)
+    if topic.last_maintained is None:
+        return True
+    for member in topic.docs:
+        if not doc_exists(member.slug):
+            return True
+        try:
+            fm, _body = load_doc(member.slug)
+        except Exception:
+            return True
+        if fm.updated > topic.last_maintained:
+            return True
+    return False
 
 
 # -- Graph computation primitives --
@@ -447,6 +668,10 @@ def get_output_path(slug: str) -> Path:
     return get_outputs_dir() / f"{slug}.md"
 
 
+def output_exists(slug: str) -> bool:
+    return get_output_path(slug).is_file()
+
+
 def load_output(slug: str) -> tuple[OutputFrontmatter, str]:
     text = get_output_path(slug).read_text(encoding="utf-8")
     fm_dict, body = parse_frontmatter(text)
@@ -457,6 +682,16 @@ def save_output(frontmatter: OutputFrontmatter, body: str) -> None:
     fm_dict = frontmatter.model_dump(mode="json", exclude_none=True)
     text = serialize_doc(fm_dict, body)
     _atomic_write_text(get_output_path(frontmatter.slug), text)
+
+
+def list_all_outputs(
+    status_filter: str | None = None,
+) -> list[OutputFrontmatter]:
+    outputs: list[OutputFrontmatter] = []
+    for _slug, fm, _body in list_all_outputs_with_frontmatter():
+        if status_filter is None or fm.status == status_filter:
+            outputs.append(fm)
+    return outputs
 
 
 # -- Slug helpers --

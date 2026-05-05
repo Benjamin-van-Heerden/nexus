@@ -1,9 +1,9 @@
 ---
 title: Onboard command and agent_instructions.md
-status: todo
+status: completed
 created_at: '2026-04-17T16:05:15.853313'
-updated_at: '2026-04-17T16:05:15.853313'
-completed_at: null
+updated_at: '2026-05-05T10:58:33.473053'
+completed_at: '2026-05-05T10:58:33.473046'
 ---
 Phase 9 of the implementation plan in spec.md. Implements the archivist's session entry point — the onboard command and the full agent_instructions.md spec the archivist reads.
 
@@ -126,3 +126,7 @@ Done criteria:
 - `uv run nexus archive onboard --task maintain` runs and (at minimum) prints the full instructions; the task-relevant slicer is best-effort for v1.
 - `uv run nexus pause archive --until <date> --reason r` then onboard shows the pause and exits early.
 - agent_instructions.md is comprehensive enough that a fresh archivist agent can perform any documented workflow without additional context.
+
+## Completion Notes
+
+Implemented nexus archive onboard and archivist instructions. Added src/commands/archive/onboard.py with pause handling, task framing for add/ingest/query/maintain, archive state summary, output status counts, orphan/stale/broken-link counts, last reindex and QMD update, top-level index summary, recent docs, scoped work queue summary, absolute paths, references to archive_run_cycle.md and scripts/install-qmd.sh, full agent instructions, and ACTION REQUIRED footer. Added src/commands/archive/agent_instructions.md covering identity, graph model, state rules, ephemeral session model, invocation modes, add/query/maintenance workflows, output triage, topic management, command reference, and QMD deployment. Wired onboard into archive main. Verified py_compile, onboard variants, pause early-exit and resume behavior, command help, and no temporary archive content left behind.

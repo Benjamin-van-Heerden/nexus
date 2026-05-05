@@ -1,9 +1,9 @@
 ---
 title: 'Maintenance and integrity: work, maintain, integrity, reindex'
-status: todo
+status: completed
 created_at: '2026-04-17T14:05:00.778441'
-updated_at: '2026-04-17T14:05:00.778441'
-completed_at: null
+updated_at: '2026-05-05T10:42:25.772384'
+completed_at: '2026-05-05T10:42:25.772377'
 ---
 Phase 8 of the implementation plan in spec.md. Implements the maintenance scaffolding — surfacing pending work, scanning integrity, and rebuilding caches.
 
@@ -68,3 +68,7 @@ Done criteria:
 - `uv run nexus archive integrity` runs cleanly on a healthy archive (no new items); on a manually-corrupted archive (e.g. delete a topic file by hand), it detects the orphan members and enqueues fixes.
 - `uv run nexus archive reindex` rebuilds index.toml and triggers qmd update.
 - `uv run nexus archive maintain` surfaces the work queue in the documented order with actionable next-step instructions.
+
+## Completion Notes
+
+Implemented archive maintenance and integrity commands. Added work list command combining persisted work.toml items with computed orphan and stale items, with kind filtering and JSON output. Added maintain command as read-only archivist scaffold in recommended order: output triage, broken links, orphans, stale docs, topic summaries, contradictions, with concrete next-step commands per item. Added integrity scan that detects missing link targets, missing topics, missing mentions, orphan topic members, and broken output cites; it enqueues persisted work items, adds broken_links to docs, strips invalid topic members, and regenerates the index. Added reindex command that regenerates index.toml, updates state.last_reindex, refreshes QMD, and reports timings/status. Added reusable utilities compute_orphans, compute_stales, compute_contradictions minimal v1, and get_topic_member_freshness. Wired all commands into archive main. Verified healthy archive behavior and a controlled corrupted fixture, including work queue surfacing, integrity repair/enqueueing, maintain recommendations, reindex, and cleanup. Final py_compile passed.

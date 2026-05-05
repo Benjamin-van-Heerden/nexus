@@ -1,9 +1,9 @@
 ---
 title: 'Outputs: save, list, show, integrate, split, archive'
-status: todo
+status: completed
 created_at: '2026-04-17T14:04:24.225292'
-updated_at: '2026-04-17T14:04:24.225292'
-completed_at: null
+updated_at: '2026-05-05T10:32:55.221797'
+completed_at: '2026-05-05T10:32:55.221791'
 ---
 Phase 7 of the implementation plan in spec.md. Implements the outputs sub-app — persisted syntheses produced by agents and integrated back into the wiki during maintenance.
 
@@ -65,3 +65,7 @@ Done criteria:
 - `uv run nexus archive output integrate my-synthesis --into some-doc` updates provenance, status, and removes the work item.
 - `uv run nexus archive output split my-synthesis --create new-a,new-b` prints the next-step guidance.
 - `uv run nexus archive output archive my-synthesis` cleanly marks archived.
+
+## Completion Notes
+
+Implemented the archive outputs sub-app in src/commands/archive/output.py and wired it into src/commands/archive/main.py. Added utility helpers in src/utils/archive.py for output_exists, list_all_outputs, and mark_work_item_resolved. Implemented output save/list/show/integrate/split/archive. Save validates YAML frontmatter, slug match, non-empty cites and novelty, cite resolution against wiki docs, persists to archive/outputs, enqueues pending_output work, and regenerates index. List and show support human and JSON output. Integrate validates pending_review status and target doc existence, appends provenance.origin_outputs to the target doc, bumps updated/last_maintained, marks the output integrated, resolves pending_output work, and regenerates index without modifying doc body. Split validates new doc slugs, marks integrated for v1, resolves pending work, and prints exact write commands. Archive marks archived and resolves pending work. Verified py_compile and exercised save/list/show/integrate/split/archive through Typer CliRunner with temporary topic/doc/output fixtures; confirmed work queue creation/resolution and provenance update, then cleaned all fixtures and stale test work items.

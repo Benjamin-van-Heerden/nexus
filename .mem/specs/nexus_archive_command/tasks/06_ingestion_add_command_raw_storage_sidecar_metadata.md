@@ -1,9 +1,9 @@
 ---
 title: 'Ingestion: add command, raw storage, sidecar metadata'
-status: todo
+status: completed
 created_at: '2026-04-17T14:03:52.866297'
-updated_at: '2026-04-17T14:03:52.866297'
-completed_at: null
+updated_at: '2026-05-05T10:22:22.829158'
+completed_at: '2026-05-05T10:22:22.829148'
 ---
 Phase 6 of the implementation plan in spec.md. Implements `nexus archive add` — the entry point for new source material.
 
@@ -79,3 +79,7 @@ Done criteria:
 - `uv run nexus archive add https://example.com/article.md` fetches and stores.
 - The printed instructions include QMD recall hits, candidate topics, suggested slug, and the exact follow-up command.
 - Re-adding the same source surfaces a duplicate warning with the existing sidecar's origin info.
+
+## Completion Notes
+
+Implemented nexus archive add for local markdown paths and markdown URLs. Added raw ingestion helpers in src/utils/archive.py for SHA256 hashing, URL fetch to temp markdown via httpx, raw/sidecar atomic persistence, H1 title extraction, cleaned excerpt generation for QMD recall, and keyword-based candidate topic matching. Added src/commands/archive/add.py to stage sources in archive/raw, detect duplicate hashes with previous sidecar metadata, run best-effort QMD recall, surface candidate topics, suggest a slug, and print exact archivist next steps without writing to wiki/. Wired add into src/commands/archive/main.py. Installed and tested QMD 2.1.0 locally, registered the nexus-archive collection, completed first-run model warmup, and verified archive add surfaces a QMD recall hit from an indexed temporary wiki doc. Patched QMD hit handling to accept both path and file fields for QMD 2.1.0 compatibility. Verified syntax with uv run python -m py_compile and cleaned up temporary test fixtures.
