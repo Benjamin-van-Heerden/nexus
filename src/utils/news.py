@@ -300,6 +300,8 @@ def fetch_all_feeds_sync(
 
 
 def _get_xai_client() -> XAIClient:
+    if not ENV_SETTINGS.xai_api_key:
+        raise RuntimeError("XAI_API_KEY must be set to use nexus news.")
     return XAIClient(api_key=ENV_SETTINGS.xai_api_key)
 
 

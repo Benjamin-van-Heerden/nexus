@@ -9,8 +9,6 @@ class EnvSettings(BaseSettings):
 
 def get_env_or_die() -> EnvSettings:
     settings = EnvSettings()
-    if not settings.xai_api_key:
-        raise Exception("XAI_API_KEY must be set")
     return settings
 
 

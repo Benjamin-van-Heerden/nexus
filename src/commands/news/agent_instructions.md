@@ -34,14 +34,20 @@ Presentation order:
 
 ## Refresh
 
-Use this for follow-up sessions after the full onboard already ran:
+Use this for warm-context sessions:
 
 ```bash
 nexus news refresh
 ```
 
-Relay only the new or developing material. If the command says nothing material
-changed, say so briefly and stop. Do not restate the morning newspaper.
+If today's daily digest does not exist yet, `refresh` automatically runs the
+full daily newspaper pipeline and saves today's record. In that case, present
+the full newspaper.
+
+If today's daily digest already exists, `refresh` performs the lighter breaking
+news check. Relay only the new or developing material. If the command says
+nothing material changed, say so briefly and stop. Do not restate the morning
+newspaper.
 
 ## Story tracking
 
