@@ -3,6 +3,7 @@ import typer
 from src.commands.archive.main import app as archive_app
 from src.commands.learn.main import app as learn_app
 from src.commands.manage.main import app as manage_app
+from src.commands.news.main import app as news_app
 from src.commands.pause.main import app as pause_app
 from src.commands.self.main import app as self_app
 from src.utils.git_sync import post_sync, pre_sync
@@ -13,6 +14,7 @@ app = typer.Typer(help="Nexus - Personal learning and self-improvement CLI")
 app.add_typer(archive_app, name="archive", help="Personal knowledge base / second brain")
 app.add_typer(learn_app, name="learn", help="Learning system commands")
 app.add_typer(manage_app, name="manage", help="Personal management commands")
+app.add_typer(news_app, name="news", help="Daily news aggregation")
 app.add_typer(pause_app, name="pause", help="Pause and resume subsystems")
 app.add_typer(self_app, name="self", help="Self-improvement and habit tracking")
 

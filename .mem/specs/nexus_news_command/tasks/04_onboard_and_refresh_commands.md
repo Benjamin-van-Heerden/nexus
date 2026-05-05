@@ -1,9 +1,9 @@
 ---
 title: Onboard and refresh commands
-status: todo
+status: completed
 created_at: '2026-04-07T15:20:54.666984'
-updated_at: '2026-04-07T15:20:54.666984'
-completed_at: null
+updated_at: '2026-05-05T10:00:40.763291'
+completed_at: '2026-05-05T10:00:40.763285'
 ---
 Create the core onboard and refresh commands that generate the newspaper.
 
@@ -43,3 +43,7 @@ refresh() function:
 The output formatting should use the same style as manage onboard (print('=' * 60), print('-' * 60) for sections, 2-space indentation).
 
 The xAI calls (steps 7-10 in onboard) should be done with appropriate timeouts since they involve network calls. Use httpx timeouts of 30-60 seconds.
+
+## Completion Notes
+
+Finished the remaining onboard/refresh correctness gaps. Active tracked stories are now injected into global X search, local X search, web gap search, and refresh X searches so tracked topics are actively checked during sourcing rather than only passively matched during synthesis. Added an explicit synthesis hard rule to omit topics from recent records when there is no meaningful new development, and to frame genuine continuations as continuations. Verified with uvx ty check on src/utils/news.py and src/commands/news/onboard.py, plus a uv run python import/signature check for the tracked-topic prompt helper and updated search functions. Ruff was attempted but uvx stalled downloading ruff; the hung process was stopped.

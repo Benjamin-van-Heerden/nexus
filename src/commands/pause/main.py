@@ -1,6 +1,7 @@
 """Nexus pause command — pause and resume subsystems."""
 
 from datetime import date
+from typing import Literal, cast
 
 import typer
 
@@ -10,6 +11,10 @@ from src.utils.pause import (
     pause_feature,
     resume_feature,
 )
+
+FeatureName = Literal["learn", "self", "manage", "archive", "news"]
+
+FEATURES: tuple[FeatureName, ...] = ("learn", "self", "manage", "archive", "news")
 
 
 def _parse_date(date_str: str) -> date:
@@ -32,7 +37,7 @@ def _print_status() -> None:
 
     typer.echo("\nPause status:")
     has_paused = False
-    for feature in ["learn", "self", "manage", "archive"]:
+    for feature in FEATURES:
         entry = getattr(config, feature)
         if entry.active:
             has_paused = True
@@ -100,13 +105,32 @@ def archive(
 
 
 @app.command()
+def news(
+    until: str = typer.Option(..., "--until", "-u", help="Date to resume (YYYY-MM-DD)"),
+    reason: str | None = typer.Option(
+        None, "--reason", "-r", help="Reason for pausing"
+    ),
+):
+    """Pause the news subsystem until a date."""
+    resume_date = _parse_date(until)
+    pause_feature("news", resume_date, reason)
+    typer.echo(f"News paused until {resume_date}.")
+    if reason:
+        typer.echo(f"Reason: {reason}")
+
+
+@app.command()
 def resume(
-    feature: str = typer.Argument(..., help="Feature to resume (learn, self, manage, archive)"),
+    feature: str = typer.Argument(
+        ..., help="Feature to resume (learn, self, manage, archive, news)"
+    ),
 ):
     """Manually resume a paused subsystem."""
-    if feature not in ["learn", "self", "manage", "archive"]:
-        typer.echo(f"Unknown feature: {feature}. Choose from: learn, self, manage, archive")
+    if feature not in FEATURES:
+        typer.echo(
+            f"Unknown feature: {feature}. Choose from: {', '.join(FEATURES)}"
+        )
         raise typer.Exit(1)
 
-    resume_feature(feature)  # type: ignore[arg-type]
+    resume_feature(cast(FeatureName, feature))
     typer.echo(f"{feature} resumed.")

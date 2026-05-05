@@ -1,9 +1,9 @@
 ---
 title: Agent instructions and default sources config
-status: todo
+status: completed
 created_at: '2026-04-07T15:21:26.242654'
-updated_at: '2026-04-07T15:21:26.242654'
-completed_at: null
+updated_at: '2026-05-05T10:36:44.931571'
+completed_at: '2026-05-05T10:36:44.931562'
 ---
 Create the agent instructions file and seed the default sources configuration.
 
@@ -41,3 +41,7 @@ Use real, working RSS feed URLs. Research correct URLs for each source. Some kno
 Set xai_model = 'grok-3' as default. The user will configure XAI_API_KEY separately.
 
 Also create empty directories: news/records/ and news/stories/ (with .gitkeep files if needed).
+
+## Completion Notes
+
+Added src/commands/news/agent_instructions.md covering daily onboard, refresh, story tracking/untracking, direct news/config.toml source management, editorial calibration, and the present-then-stop response pattern. Seeded news/config.toml with live-tested RSS sources across US left/right politics, international, economics, technology, science, entertainment, and South Africa; configured grok-4.3, RSS entry caps, freshness filtering, and the user's editorial profile. Verified with uvx ty check across the touched news/root/pause files, plus a focused uv run python check that loads config, performs a capped RSS fetch, confirms agent instructions exist, and validates news/pause CLI help.

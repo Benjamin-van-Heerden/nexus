@@ -41,6 +41,8 @@ def _print_cluster(cluster: StoryCluster) -> None:
         f"  ({cluster.sources_count} sources)" if cluster.sources_count > 1 else ""
     )
     print(f"  ▸ {cluster.headline}{sources_marker}{tracked_marker}")
+    if cluster.source_names:
+        print(f"      Sources: {', '.join(cluster.source_names)}")
     print(f"      {cluster.summary}")
     if cluster.perspectives:
         for p in cluster.perspectives:
@@ -151,22 +153,33 @@ def onboard():
     print()
 
     print("Fetching RSS feeds…")
-    rss_headlines = fetch_all_feeds_sync(config.sources)
+    rss_headlines = fetch_all_feeds_sync(
+        config.sources,
+        max_entries_per_source=config.max_entries_per_source,
+        max_total_entries=config.max_total_entries,
+        max_entry_age_hours=config.max_entry_age_hours,
+    )
     print(f"  → {len(rss_headlines)} headlines")
     print()
 
     print("Searching X for global discourse…")
-    x_global = x_search_global(model=config.xai_model)
+    x_global = x_search_global(
+        model=config.xai_model, tracked_stories=tracked_stories
+    )
     print(f"  → {len(x_global)} chars")
     print()
 
     print("Searching X for South African discourse…")
-    x_local = x_search_local(model=config.xai_model)
+    x_local = x_search_local(
+        model=config.xai_model, tracked_stories=tracked_stories
+    )
     print(f"  → {len(x_local)} chars")
     print()
 
     print("Web search for under-covered stories…")
-    web_results = web_search_gaps(model=config.xai_model)
+    web_results = web_search_gaps(
+        model=config.xai_model, tracked_stories=tracked_stories
+    )
     print(f"  → {len(web_results)} chars")
     print()
 
@@ -235,12 +248,16 @@ def refresh():
     print()
 
     print("Searching X for fresh global discourse…")
-    x_global = x_search_global(model=config.xai_model)
+    x_global = x_search_global(
+        model=config.xai_model, tracked_stories=tracked_stories
+    )
     print(f"  → {len(x_global)} chars")
     print()
 
     print("Searching X for fresh South African discourse…")
-    x_local = x_search_local(model=config.xai_model)
+    x_local = x_search_local(
+        model=config.xai_model, tracked_stories=tracked_stories
+    )
     print(f"  → {len(x_local)} chars")
     print()
 
