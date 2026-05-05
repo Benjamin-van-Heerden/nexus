@@ -51,3 +51,12 @@ completed = "2026-04-09"
 relevant_files = [
     "./learn/elixir/otp/abstractions-and-supervision/theoretical/supervisors_and_abstractions.md",
 ]
+
+[[goals.tasks]]
+name = "Read supervisor restart semantics reference"
+type = "theoretical"
+created = "2026-05-05"
+status = "todo"
+relevant_files = [
+    "./learn/elixir/otp/abstractions-and-supervision/theoretical/supervisor_restart_semantics_reference.md",
+]
