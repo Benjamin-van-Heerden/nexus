@@ -5,7 +5,7 @@ assigned_to: Benjamin-van-Heerden
 issue_id: 9
 issue_url: https://github.com/Benjamin-van-Heerden/nexus/issues/9
 branch: dev-benjamin_van_heerden-nexus_news_command
-pr_url: null
+pr_url: https://github.com/Benjamin-van-Heerden/nexus/pull/11
 created_at: '2026-04-07T15:17:39.642178'
 updated_at: '2026-05-05T11:06:10.579768'
 completed_at: null
