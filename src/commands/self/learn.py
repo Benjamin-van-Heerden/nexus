@@ -12,7 +12,7 @@ from src.utils.self import (
 
 from src.models.self.learning import LearningSession
 
-app = typer.Typer(help="Daily learning check-in")
+app = typer.Typer(help="Learning habit tracking")
 
 
 def _calculate_streak(sessions: list[LearningSession]) -> int:
@@ -45,20 +45,12 @@ def log(
     learning_log = load_learning_log()
     session_date = date.fromisoformat(log_date) if log_date else date.today()
 
-    existing = [s for s in learning_log.sessions if s.date == session_date]
-    if existing:
-        session = existing[0]
-        if notes:
-            session.notes = f"{session.notes}\n{notes}".strip() if session.notes else notes
-        if not skip:
-            session.did_learn = True
-    else:
-        session = LearningSession(
-            date=session_date,
-            did_learn=not skip,
-            notes=notes,
-        )
-        learning_log.sessions.append(session)
+    session = LearningSession(
+        date=session_date,
+        did_learn=not skip,
+        notes=notes,
+    )
+    learning_log.sessions.append(session)
     save_learning_log(learning_log)
 
     streak = _calculate_streak(learning_log.sessions)
@@ -78,13 +70,13 @@ def status() -> None:
 
     week_sessions = get_sessions_this_week(learning_log.sessions)
     if week_sessions:
-        typer.echo(f"\nThis week ({len(week_sessions)} check-ins):")
+        typer.echo(f"\nThis week ({len(week_sessions)} sessions):")
         for s in sorted(week_sessions, key=lambda x: x.date):
             status_str = "learned" if s.did_learn else "skipped"
             notes_str = f" — {s.notes[:60]}" if s.notes else ""
             typer.echo(f"  [{s.date}] {status_str}{notes_str}")
     else:
-        typer.echo("\nNo check-ins this week.")
+        typer.echo("\nNo learning sessions this week.")
 
     streak = _calculate_streak(learning_log.sessions)
     typer.echo(f"\nStreak: {streak} day(s)")

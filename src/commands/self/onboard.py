@@ -186,7 +186,7 @@ def onboard() -> None:
                 notes_str = f" — {s.notes[:60]}" if s.notes else ""
                 typer.echo(f"  [{s.date}] {status_str}{notes_str}")
         else:
-            typer.echo("No check-ins this week.")
+            typer.echo("No learning sessions this week.")
 
         learned_dates = sorted(
             {s.date for s in learning_log.sessions if s.did_learn}, reverse=True
@@ -375,7 +375,7 @@ def refresh() -> None:
                 notes_str = f" — {s.notes[:60]}" if s.notes else ""
                 typer.echo(f"  [{s.date}] {status_str}{notes_str}")
         else:
-            typer.echo("  No check-ins this week.")
+            typer.echo("  No learning sessions this week.")
 
         learned_dates = sorted(
             {s.date for s in learning_log.sessions if s.did_learn}, reverse=True
