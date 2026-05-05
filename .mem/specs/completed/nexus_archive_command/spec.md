@@ -1,14 +1,14 @@
 ---
 title: nexus archive command
-status: merge_ready
+status: completed
 assigned_to: Benjamin-van-Heerden
 issue_id: 10
 issue_url: https://github.com/Benjamin-van-Heerden/nexus/issues/10
 branch: dev-benjamin_van_heerden-nexus_archive_command
 pr_url: https://github.com/Benjamin-van-Heerden/nexus/pull/12
 created_at: '2026-04-17T13:47:00.069833'
-updated_at: '2026-05-05T11:05:16.034349'
-completed_at: null
+updated_at: '2026-05-05T11:06:10.582462'
+completed_at: '2026-05-05T11:06:10.581421'
 last_synced_at: '2026-04-17T16:09:16.555660'
 local_content_hash: ad0b6838af355709b5fafb99899b87d698ecc0896e300c0f3f59de46be5a381c
 remote_content_hash: ad0b6838af355709b5fafb99899b87d698ecc0896e300c0f3f59de46be5a381c
