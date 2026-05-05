@@ -60,3 +60,13 @@ status = "todo"
 relevant_files = [
     "./learn/elixir/otp/abstractions-and-supervision/theoretical/supervisor_restart_semantics_reference.md",
 ]
+
+[[goals.tasks]]
+name = "Implement supervisor strategy semantics lab"
+type = "practical"
+created = "2026-05-05"
+status = "todo"
+relevant_files = [
+    "./learn/elixir/otp/abstractions-and-supervision/practical/lib/supervisor_strategy_lab.ex",
+    "./learn/elixir/otp/abstractions-and-supervision/practical/test/supervisor_strategy_lab_test.exs",
+]
