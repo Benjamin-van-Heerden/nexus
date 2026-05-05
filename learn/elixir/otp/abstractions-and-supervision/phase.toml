@@ -70,3 +70,12 @@ relevant_files = [
     "./learn/elixir/otp/abstractions-and-supervision/practical/lib/supervisor_strategy_lab.ex",
     "./learn/elixir/otp/abstractions-and-supervision/practical/test/supervisor_strategy_lab_test.exs",
 ]
+
+[[goals.tasks]]
+name = "Complete supervisor restart semantics quiz"
+type = "quiz"
+created = "2026-05-05"
+status = "todo"
+relevant_files = [
+    "./learn/elixir/otp/abstractions-and-supervision/quiz/supervisor_restart_semantics_quiz.md",
+]
