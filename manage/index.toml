@@ -16,3 +16,9 @@ slug = "integrate_nexus_news_and_nexus_archive_agents_into_openclaw_setup"
 name = "Integrate nexus news and nexus archive agents into OpenClaw setup"
 path = "./manage/tasks/integrate_nexus_news_and_nexus_archive_agents_into_openclaw_setup.toml"
 parent = ""
+
+[[tasks]]
+slug = "add_typst_soft_type_system_to_praxis"
+name = "Add Typst soft type system to Praxis"
+path = "./manage/tasks/add_typst_soft_type_system_to_praxis.toml"
+parent = ""
