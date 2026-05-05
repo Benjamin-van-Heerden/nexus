@@ -125,28 +125,18 @@ def _print_action_required() -> None:
     print()
 
 
-# -- Commands --
-
-
-def onboard():
-    """Generate today's full newspaper: RSS + xAI sourcing + synthesis."""
-    paused = check_pause("news")
-    if paused:
-        print(
-            f"Nexus news is paused. Reason: {paused.reason or 'no reason provided'}. "
-            f"Will resume on {paused.resume_date}. Nothing further to do."
-        )
-        raise typer.Exit(0)
-
+def _run_full_daily_pipeline(command_name: str, prefix_message: str | None = None) -> None:
     today = date.today()
     config = load_news_config()
     recent_records = load_recent_records(n=config.history_days)
     tracked_stories = list_tracked_stories(active_only=True)
 
     print("=" * 60)
-    print("NEXUS NEWS ONBOARD")
+    print(command_name)
     print("=" * 60)
     print(f"Date: {today.strftime('%A, %B %d, %Y')}")
+    if prefix_message:
+        print(prefix_message)
     print(f"Sources: {len(config.sources)} RSS feeds configured")
     print(f"Tracked: {len(tracked_stories)} active stories")
     print(f"History: last {len(recent_records)} record(s) loaded for continuity")
@@ -217,6 +207,22 @@ def onboard():
     _print_action_required()
 
 
+# -- Commands --
+
+
+def onboard():
+    """Generate today's full newspaper: RSS + xAI sourcing + synthesis."""
+    paused = check_pause("news")
+    if paused:
+        print(
+            f"Nexus news is paused. Reason: {paused.reason or 'no reason provided'}. "
+            f"Will resume on {paused.resume_date}. Nothing further to do."
+        )
+        raise typer.Exit(0)
+
+    _run_full_daily_pipeline("NEXUS NEWS ONBOARD")
+
+
 def refresh():
     """Lighter pass: fresh X discourse only, surface what's new since onboard."""
     paused = check_pause("news")
@@ -232,18 +238,24 @@ def refresh():
     today_record = load_daily_digest(today)
     tracked_stories = list_tracked_stories(active_only=True)
 
+    if today_record is None:
+        _run_full_daily_pipeline(
+            "NEXUS NEWS REFRESH",
+            prefix_message=(
+                "No daily digest exists for today. Running the full daily "
+                "newspaper pipeline now."
+            ),
+        )
+        return
+
     print("=" * 60)
     print("NEXUS NEWS REFRESH")
     print("=" * 60)
     print(f"Date: {today.strftime('%A, %B %d, %Y')}")
-    if today_record is None:
-        print("No morning digest yet — refresh will surface everything as new.")
-        print("(Consider running `nexus news onboard` for the full pipeline.)")
-    else:
-        print(
-            f"Morning digest: {len(today_record.story_clusters)} clusters, "
-            f"generated {today_record.generated_at}"
-        )
+    print(
+        f"Morning digest: {len(today_record.story_clusters)} clusters, "
+        f"generated {today_record.generated_at}"
+    )
     print(f"Tracked: {len(tracked_stories)} active stories")
     print()
 
