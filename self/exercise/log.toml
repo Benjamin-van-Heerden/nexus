@@ -46,3 +46,10 @@ type = "gym"
 description = "Gym session"
 intensity = "moderate"
 duration_minutes = 40
+
+[[sessions]]
+date = "2026-05-06"
+type = "gym"
+description = "Gym session"
+intensity = "moderate"
+duration_minutes = 40
