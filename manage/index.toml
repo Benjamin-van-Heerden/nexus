@@ -1,11 +1,4 @@
 [[tasks]]
-slug = "lunch_with_mike"
-name = "Lunch with Mike"
-path = "./manage/tasks/lunch_with_mike.toml"
-due = "2026-05-06T13:00:00"
-parent = ""
-
-[[tasks]]
 slug = "fix_nexus_learning_module_to_support_multiple_sessions_per_day"
 name = "Fix nexus learning module to support multiple sessions per day"
 path = "./manage/tasks/fix_nexus_learning_module_to_support_multiple_sessions_per_day.toml"
