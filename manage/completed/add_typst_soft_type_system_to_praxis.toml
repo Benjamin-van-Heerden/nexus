@@ -1,11 +1,12 @@
 name = "Add Typst soft type system to Praxis"
 slug = "add_typst_soft_type_system_to_praxis"
 description = ""
-status = "todo"
+status = "completed"
 created = "2026-05-05"
+completed_at = "2026-05-08"
 tags = []
 recurrence = ""
 gcal_event_id = ""
-last_modified = "2026-05-05T17:23:27.050026"
+last_modified = "2026-05-08T09:45:22.075343"
 has_subtasks = false
 parent = ""
