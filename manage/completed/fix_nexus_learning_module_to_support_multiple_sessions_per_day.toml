@@ -29,13 +29,14 @@ OPTIONS TO FIX:
   a) Allow multiple LearningSession entries per date (change model/logic to not dedupe by date)
   b) Append notes to existing session instead of overwriting (preserves single entry per day)
   c) Add a separate session list/entries field to LearningSession to track multiple activities per day"""
-status = "todo"
+status = "completed"
 created = "2026-04-30"
+completed_at = "2026-05-08"
 tags = [
     "nexus-learn",
 ]
 recurrence = ""
 gcal_event_id = ""
-last_modified = "2026-04-30T13:24:55.630860"
+last_modified = "2026-05-08T09:45:19.000447"
 has_subtasks = false
 parent = ""
