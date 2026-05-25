@@ -29,3 +29,9 @@ _build/
 
 .DS_Store
 .env
+
+.agent_core/tmp/
+
+# Agent Core worktree symlinks
+.agent_core/docs/data
+.agent_core/docs/data/
