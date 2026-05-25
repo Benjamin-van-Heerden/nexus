@@ -4,4 +4,4 @@ topics = [
     { name = "elixir", weight = 2, active = true },
     { name = "math-physics", weight = 2, active = true },
 ]
-current_topic = "jax"
+current_topic = "rust"

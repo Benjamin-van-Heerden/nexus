@@ -8,4 +8,5 @@ history = [
     { week = "2026-05-04", topic = "elixir" },
     { week = "2026-05-11", topic = "math-physics" },
     { week = "2026-05-18", topic = "jax" },
+    { week = "2026-05-25", topic = "rust" },
 ]
